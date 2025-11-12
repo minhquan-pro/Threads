@@ -1,7 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "./components/ui/button";
 
 function App() {
-  return <Button className="mt-0 flex items-center">CLICK ME</Button>;
+  const { t, i18n } = useTranslation();
+
+  return <h1>{t("Welcome to React")}</h1>;
 }
 
 export default App;
