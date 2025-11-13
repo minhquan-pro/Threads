@@ -3,58 +3,84 @@ import { Link, NavLink } from "react-router";
 import threads_logo from "@/assets/logo/threads_logo.png";
 import { Heart, Home, Plus, Search, User } from "lucide-react";
 import classNames from "classnames";
-import CreatePostDialog from "@/components/ui/CreatePostDialog";
+import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
+import AuthRequiredDialog from "@/components/AuthRequiredDialog";
+import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 
 const navItems = [
   {
+    id: "home",
     path: "/",
     component: Home,
+    requireAuth: false,
   },
   {
+    id: "search",
     path: "/search",
     component: Search,
+    requireAuth: false,
   },
   {
+    id: "create",
     component: Plus,
+    requireAuth: true,
+    dialogTitle: "Đăng nhập để đăng",
+    dialogDescription:
+      "Tham gia Threads để chia sẻ ý tưởng, đặt câu hỏi, đăng những suy nghĩ bất chợt và hơn thế nữa.",
   },
   {
+    id: "activity",
     path: "/activity",
     component: Heart,
+    requireAuth: true,
+    dialogTitle: "Bày tỏ nhiều hơn qua Threads",
+    dialogDescription:
+      "Tham gia Threads để chia sẻ suy nghĩ, nắm bắt những gì đang diễn ra, theo dõi những người bạn yêu mến và hơn thế nữa.",
   },
   {
-    path: "/:userId",
+    id: "profile",
+    path: "/profile",
     component: User,
+    requireAuth: true,
+    dialogTitle: "Bày tỏ nhiều hơn qua Threads",
+    dialogDescription:
+      "Tham gia Threads để chia sẻ suy nghĩ, nắm bắt những gì đang diễn ra, theo dõi những người bạn yêu mến và hơn thế nữa.",
   },
 ];
 
 const buttonClasses =
-  "inline-block rounded-md px-4 py-2 text-gray-500 hover:bg-gray-100";
+  "inline-block rounded-md px-5 py-3 text-gray-500 hover:bg-gray-100 cursor-pointer";
 
 const Sidebar = () => {
+  const currentUser = "Minquan";
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <Link to={"/"}>
-          <img src={threads_logo} alt="" className="h-10 w-10" />
+          <img src={threads_logo} alt="" className="h-12 w-10" />
         </Link>
       </div>
-      <div className="flex flex-col gap-6">
-        {navItems.map((nav, index) => {
+      <div className="flex flex-col gap-8">
+        {navItems.map((nav) => {
+          const currentUser = null;
           const Component = nav.component;
 
-          if (Component === Plus) {
+          if (nav.requireAuth && !currentUser) {
             return (
-              <CreatePostDialog
-                key={index}
-                index={index}
+              <AuthRequiredDialog
+                id={nav.id}
+                key={nav.id}
+                title={nav.dialogTitle}
+                description={nav.dialogDescription}
                 buttonClasses={buttonClasses}
                 Component={Component}
               />
             );
           }
+
           return (
             <NavLink
-              key={index}
+              key={nav.id}
               to={nav.path}
               className={classNames(buttonClasses)}
             >
@@ -63,7 +89,11 @@ const Sidebar = () => {
           );
         })}
       </div>
-      <div></div>
+      {currentUser ? (
+        <AuthenticatedMenu buttonClasses={buttonClasses} />
+      ) : (
+        <UnauthenticatedMenu buttonClasses={buttonClasses} />
+      )}
     </div>
   );
 };

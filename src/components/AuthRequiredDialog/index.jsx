@@ -9,27 +9,30 @@ import {
 import classNames from "classnames";
 import { Link } from "react-router";
 
-const CreatePostDialog = ({ index, buttonClasses, Component }) => {
+const AuthRequiredDialog = ({
+  id,
+  title,
+  description,
+  buttonClasses,
+  // eslint-disable-next-line no-unused-vars
+  Component,
+}) => {
   return (
     <Dialog>
       <DialogTrigger>
         <div
-          className={classNames(
-            buttonClasses,
-            "cursor-pointer bg-gray-100 hover:text-black",
-          )}
+          className={classNames(buttonClasses, "hover:text-black", {
+            "bg-gray-100": id === "create",
+          })}
         >
           <Component size={26} />
         </div>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[380px] max-w-[450px] flex-col justify-center">
+      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center">
         <DialogHeader>
-          <DialogTitle className="text-center text-3xl">
-            Đăng nhập để đăng
-          </DialogTitle>
+          <DialogTitle className="text-center text-3xl">{title}</DialogTitle>
           <DialogDescription className="text-center">
-            Tham gia Threads để chia sẻ ý tưởng, đặt câu hỏi, đăng những suy
-            nghĩ bất chợt và hơn thế nữa.
+            {description}
           </DialogDescription>
         </DialogHeader>
         <Link
@@ -43,4 +46,4 @@ const CreatePostDialog = ({ index, buttonClasses, Component }) => {
   );
 };
 
-export default CreatePostDialog;
+export default AuthRequiredDialog;
