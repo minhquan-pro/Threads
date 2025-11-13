@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Dialog,
   DialogContent,
@@ -8,38 +9,44 @@ import {
 } from "@/components/ui/dialog";
 import classNames from "classnames";
 import { Link } from "react-router";
+import { Button } from "../ui/button";
 
 const AuthRequiredDialog = ({
+  type,
   id,
   title,
   description,
   buttonClasses,
-  // eslint-disable-next-line no-unused-vars
   Component,
+  count,
 }) => {
+  const ElementType = type ? Button : "div";
+
   return (
     <Dialog>
-      <DialogTrigger>
-        <div
-          className={classNames(buttonClasses, "hover:text-black", {
-            "bg-gray-100": id === "create",
+      <DialogTrigger asChild>
+        <ElementType
+          variant="outline"
+          className={classNames(buttonClasses, {
+            "bg-gray-100 hover:text-black": id === "create",
           })}
         >
-          <Component size={26} />
-        </div>
+          <Component />
+          {count ? <span>{count}</span> : null}
+        </ElementType>
       </DialogTrigger>
       <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center">
         <DialogHeader>
-          <DialogTitle className="text-center text-3xl">{title}</DialogTitle>
+          <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
           <DialogDescription className="text-center">
             {description}
           </DialogDescription>
         </DialogHeader>
         <Link
           to={"/login"}
-          className="rounded-md border border-gray-400 p-3 text-center text-lg font-semibold shadow-sm hover:opacity-80"
+          className="rounded-md border bg-black p-3 text-center text-lg font-semibold text-white shadow-sm hover:opacity-80"
         >
-          Nhấn vào đây để đăng nhập
+          Đăng nhập
         </Link>
       </DialogContent>
     </Dialog>

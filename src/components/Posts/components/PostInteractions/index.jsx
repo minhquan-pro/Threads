@@ -1,29 +1,32 @@
+import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
-import classNames from "classnames";
-import { Heart, MessageCircle, Plus, Repeat2, Send } from "lucide-react";
 
-const PostInteractions = ({
-  likes = [],
-  comments = [],
-  reports = [],
-  shares = [],
-  onLikes = () => {},
-  onComments = () => {},
-  onReports = () => {},
-  onShares = () => {},
-}) => {
+const buttonClasses = `m-auto cursor-pointer border-none text-gray-500 shadow-none`;
+
+const PostInteractions = ({ onClick, count, Icon, title, description }) => {
+  const currentUser = null;
+
+  if (currentUser) {
+    return (
+      <div>
+        <Button onClick={onClick} variant="outline" className={buttonClasses}>
+          <Icon />
+          {count ? <span>{count}</span> : null}
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Button
-        onClick={onLikes}
-        variant="outline"
-        className={classNames("m-auto border-none text-gray-500 shadow-none", {
-          "rounded-full": !likes.length,
-        })}
-      >
-        <Heart />
-        {likes.length ? <span>{likes.length}</span> : null}
-      </Button>
+      <AuthRequiredDialog
+        type="button"
+        title={title}
+        description={description}
+        Component={Icon}
+        count={count}
+        buttonClasses={buttonClasses}
+      />
     </div>
   );
 };

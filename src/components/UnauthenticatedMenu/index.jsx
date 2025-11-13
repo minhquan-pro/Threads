@@ -3,9 +3,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ArrowRight, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const UnauthenticatedMenu = ({ buttonClasses }) => {
   return (
@@ -21,10 +23,11 @@ const UnauthenticatedMenu = ({ buttonClasses }) => {
         className="w-56"
         alignOffset={20}
       >
-        <DropdownMenuItem className="text-md flex w-full items-center justify-between p-3 font-semibold">
-          Giao diện
-          <ArrowRight color="gray" />
-        </DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="text-md p-3 font-semibold">
+            Giao diện
+          </DropdownMenuSubTrigger>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-md p-3 font-semibold">
           Báo cáo sự cố
