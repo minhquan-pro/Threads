@@ -12,11 +12,12 @@ import { Link } from "react-router";
 import { Button } from "../ui/button";
 
 const AuthRequiredDialog = ({
+  children,
   type,
   id,
-  title,
-  description,
-  buttonClasses,
+  title = "",
+  description = "",
+  buttonClasses = "",
   Component,
   count,
 }) => {
@@ -31,8 +32,9 @@ const AuthRequiredDialog = ({
             "bg-gray-100 hover:text-black": id === "create",
           })}
         >
-          <Component />
+          {Component && <Component />}
           {count ? <span>{count}</span> : null}
+          {children}
         </ElementType>
       </DialogTrigger>
       <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center">

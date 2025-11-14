@@ -1,13 +1,12 @@
 import Posts from "@/components/Posts";
 import CreatePost from "@/components/Posts/components/CreatePost";
 
-const Home = () => {
-  const currentUser = null;
+const FollowingFeed = () => {
   return (
     <div>
-      {!currentUser && <CreatePost />}
+      <CreatePost />
       <Posts />
     </div>
   );
 };
-export default Home;
+export default FollowingFeed;

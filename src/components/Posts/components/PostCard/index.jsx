@@ -1,13 +1,15 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Ellipsis, Link, Plus } from "lucide-react";
-import PostInteractions from "../PostInteractions";
-import { Heart, MessageCircle, Repeat2, Send } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Ellipsis, Link } from "lucide-react";
+import { Heart, MessageCircle, Repeat2, Send } from "lucide-react";
+
+import PostInteractions from "../PostInteractions";
+import PostHeader from "../PostHeader";
+import UserProfileDialog from "@/components/UserProfileDialog";
 
 const PostCard = () => {
   const handleLike = () => {};
@@ -17,24 +19,9 @@ const PostCard = () => {
 
   return (
     <div className="flex max-w-[650px] items-start gap-2 border-t p-4 first-of-type:border-t-0">
-      <div className="relative cursor-pointer">
-        <Avatar>
-          <AvatarImage
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHNjYXBlfGVufDB8fDB8fHww"
-            className="h-10 w-10 rounded-full"
-          />
-        </Avatar>
-        <div className="absolute right-0 bottom-0 rounded-full bg-black p-0.5 hover:scale-120">
-          <Plus size={11} color="white" />
-        </div>
-      </div>
+      <UserProfileDialog />
       <div>
-        <div className="flex items-center justify-between">
-          <div className="flex gap-1 text-sm">
-            <span className="font-bold">Leminhquan022</span>
-            <span className="text-gray-400">1 giờ</span>
-          </div>
-        </div>
+        <PostHeader userName="Leminhquan" timeAgo="5 gio" />
         <p className="text-md mb-2 text-black">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae
           cupiditate laborum harum labore in? Expedita rem culpa deserunt,
@@ -46,30 +33,30 @@ const PostCard = () => {
           alt=""
           className="max-h-[430px] rounded-md object-cover"
         />
-        <div className="mt-2 flex">
+        <div className="mt-2 flex items-center">
           <PostInteractions
-            count={6}
+            count={0}
             onClick={handleLike}
             Icon={Heart}
             title="Bạn thích nội dung này ư? Bạn sẽ thích mê Threads."
             description="Hãy đăng ký để thích, trả lời và hơn thế nữa."
           />
           <PostInteractions
-            count={6}
+            count={0}
             onClick={handleComment}
             Icon={MessageCircle}
             title="Đăng ký để trả lời"
             description="Chỉ còn một bước nữa là bạn có thể tham gia cuộc trò chuyện rồi."
           />
           <PostInteractions
-            count={6}
+            count={0}
             onClick={handleRepost}
             Icon={Repeat2}
             title="Đăng ký để đăng lại"
             description="Bạn đã tiến thêm được một bước trong hành trình khơi mào cuộc trò chuyện."
           />
           <PostInteractions
-            count={6}
+            count={0}
             onClick={handleSend}
             Icon={Send}
             title="Bày tỏ nhiều hơn qua Threads"
@@ -78,7 +65,7 @@ const PostCard = () => {
         </div>
       </div>
       <DropdownMenu>
-        <DropdownMenuTrigger className="outline-none">
+        <DropdownMenuTrigger className="cursor-pointer outline-none">
           <Ellipsis size={18} color="gray" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

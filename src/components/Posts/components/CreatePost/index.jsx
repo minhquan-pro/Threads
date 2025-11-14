@@ -1,21 +1,41 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import UserAvatar from "@/components/UserAvatar";
+import { Link } from "react-router";
 
 const CreatePost = () => {
   return (
     <div className="flex items-center justify-between gap-2 border-b p-4">
       <div className="flex w-full items-center">
-        <Avatar>
-          <AvatarImage
-            src="https://scontent.cdninstagram.com/v/t51.75761-19/491498645_17844893745466395_895862236767368793_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=104&ccb=7-5&_nc_sid=07cfa3&_nc_ohc=lAp4D7PJnSMQ7kNvwFpAiiX&_nc_oc=AdkxPvLsESoAh1OaIZIz_oqvxjCavS0_Si0YRFxW9D60yC7lRLV8Cp7s0GnKQXH8NjE&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=gwORtzYbpStfSSap9y9z5Q&oh=00_AfjAARlurQiprwZ8q-Xb383ZD2mQfjp5gntnezoK_8Fd9g&oe=691AEA04"
-            className="h-10 w-10 rounded-full border p-0.5"
+        <Link to={"/đ"}>
+          <UserAvatar
+            imgSize="w-9 h-9 border"
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHNjYXBlfGVufDB8fDB8fHww"
           />
-        </Avatar>
-        <div className="text-md w-full rounded-md p-2 text-gray-400">
+        </Link>
+        <div className="w-full rounded-md p-2 text-sm text-gray-400">
           Có gì mới?
         </div>
       </div>
-      <Button variant="outline">Đăng</Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline">Đăng</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <div className="flex justify-between">
+              <p>Hủy</p>
+              <span className="font-bold">Thread mới</span>
+              <div></div>
+            </div>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

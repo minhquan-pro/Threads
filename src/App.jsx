@@ -7,6 +7,8 @@ import Profile from "./pages/Profile";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import FollowingFeed from "./pages/FollowingFeed";
+import GhostPosts from "./pages/GhostPosts";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/activity" element={<Activity />} />
+          <Route path="/following" element={<FollowingFeed />} />
+          <Route path="/ghost_posts" element={<GhostPosts />} />
           <Route path="/:userId" element={<Profile />} />
         </Route>
       </Routes>
