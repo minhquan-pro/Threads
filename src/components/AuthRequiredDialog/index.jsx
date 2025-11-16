@@ -10,6 +10,7 @@ import {
 import classNames from "classnames";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AuthRequiredDialog = ({
   children,
@@ -18,8 +19,9 @@ const AuthRequiredDialog = ({
   title = "",
   description = "",
   buttonClasses = "",
-  Component,
   count,
+  Icon,
+  sizeIcon,
 }) => {
   const ElementType = type ? Button : "div";
 
@@ -32,8 +34,8 @@ const AuthRequiredDialog = ({
             "bg-gray-100 hover:text-black": id === "create",
           })}
         >
-          {Component && <Component />}
-          {count ? <span>{count}</span> : null}
+          {Icon && <Icon size={sizeIcon} />}
+          {count ? count : null}
           {children}
         </ElementType>
       </DialogTrigger>

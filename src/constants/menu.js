@@ -1,3 +1,5 @@
+import { Monitor, Moon, Sun } from "lucide-react";
+
 export const MENU_OFFSET = {
   side: 10,
   align: 20,
@@ -7,7 +9,7 @@ export const MENU_ITEMS = {
   appearance: {
     label: "Giao diện",
     hasSubmenu: true,
-    action: "appearance",
+    action: "interface",
   },
   details: {
     label: "Thông tin chi tiết",
@@ -46,3 +48,21 @@ export const MENU_GROUPS = {
   content: ["feed", "saved", "liked"],
   actions: ["report", "logout"],
 };
+
+export const THEMES = [
+  {
+    value: "light",
+    icon: Sun,
+    label: "Sáng",
+  },
+  {
+    value: "dark",
+    icon: Moon,
+    label: "Tối",
+  },
+  {
+    value: "auto",
+    icon: Monitor,
+    label: "Tự động",
+  },
+];

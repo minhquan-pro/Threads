@@ -13,7 +13,7 @@ const UserProfileMenu = ({ children, delay = 500 }) => {
       <NavigationMenuItem>
         <NavigationMenuTrigger
           showChevronDown={false}
-          className="cursor-pointer p-0! hover:underline"
+          className="text-md cursor-pointer p-0! hover:underline"
         >
           {children}
         </NavigationMenuTrigger>
@@ -28,15 +28,17 @@ const UserProfileMenu = ({ children, delay = 500 }) => {
               imgSize="h-14 w-14"
             />
           </div>
-          <p className="mt-3 text-sm font-semibold text-black">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum
-          </p>
-          <span className="text-sm text-gray-500">23 người theo dõi</span>
+          <div className="mt-3">
+            <p className="text-foreground mb-2 text-sm font-semibold">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum
+            </p>
+            <span className="text-sm text-gray-500">23 người theo dõi</span>
+          </div>
           <AuthRequiredDialog
             type="button"
             title="Đăng ký để theo dõi"
             description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-            buttonClasses="w-full mt-3 bg-black text-white"
+            buttonClasses="w-full mt-3 bg-foreground text-button-foreground"
           >
             Theo dõi
           </AuthRequiredDialog>

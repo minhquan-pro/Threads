@@ -25,7 +25,7 @@ const UserProfileDialog = () => {
               imgSize="h-14 w-14"
             />
           </div>
-          <p className="text-sm font-semibold text-black">
+          <p className="text-foreground text-sm font-semibold">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum
           </p>
           <span className="text-sm text-gray-500">23 người theo dõi</span>
