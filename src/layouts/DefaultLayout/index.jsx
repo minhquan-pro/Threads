@@ -1,60 +1,57 @@
-import { Link, Outlet, useLocation, useNavigate } from "react-router";
-import Sidebar from "./components/Sidebar";
+import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
+import { Plus } from "lucide-react";
+import Sidebar from "./components/Sidebar";
+import { useNavigation, useTitle } from "@/hooks/useNavigation";
+import HomeTabs from "@/pages/Home/components/HomeTabs";
 
 const DefaultLayout = () => {
-  const currentUser = "MINHQUAN";
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const currentTab =
-    location.pathname === "/" ? "for-you" : location.pathname.replace("/", "");
-
-  const handleValueChange = (e) => {
-    if (e === "for-you") {
-      return navigate("/");
-    }
-    return navigate(e);
-  };
+  const currentUser = null;
+  const { currentTab, handleValueChange, isHomeFeedRoute } = useNavigation();
+  const showTabs = isHomeFeedRoute && currentUser;
+  const title = useTitle(currentTab);
 
   return (
     <div className="flex">
-      <div className="fixed left-0 h-full p-2">
+      <div className="fixed left-0 h-full">
         <Sidebar />
       </div>
-      <div className="mr-auto ml-auto flex items-start gap-3 p-3">
+      <div className="mx-auto flex items-start gap-3 pb-3">
         <div>
           <div className="flex flex-1 flex-col items-center">
-            {currentUser ? (
-              <Tabs
-                value={currentTab}
-                defaultValue={"for-you"}
-                onValueChange={handleValueChange}
+            {showTabs ? (
+              <HomeTabs
+                currentTab={currentTab}
+                handleValueChange={handleValueChange}
               >
-                <TabsList className="mb-3 flex gap-5 bg-transparent">
-                  <TabsTrigger value="for-you">Dành cho bạn</TabsTrigger>
-                  <TabsTrigger value="following">Đang theo dõi</TabsTrigger>
-                  <TabsTrigger value="ghost_posts">Bài viết tự hủy</TabsTrigger>
-                </TabsList>
-                <TabsContent
-                  value={currentTab}
-                  className="min-w-[640px] rounded-4xl border border-gray-300"
-                >
+                <div className="z-50 bg-transparent!">
                   <Outlet />
-                </TabsContent>
-              </Tabs>
+                </div>
+              </HomeTabs>
             ) : (
-              <div>
-                <h1 className="text-md mb-3 font-semibold">Trang chủ</h1>
-                <Outlet />
+              <div className="">
+                <div className="sticky top-0 z-50 bg-white p-4">
+                  <h1 className="text-md text-center font-semibold">{title}</h1>
+
+                  <div className="absolute bottom-0 h-1 w-[calc(100%-60px)] border-b border-gray-300" />
+                  <div className="absolute -bottom-[35px] left-0 h-9 w-9 bg-white">
+                    <div className="absolute left-0 h-12 w-12 rounded-tl-[36px] border-t border-l border-gray-300" />
+                  </div>
+                  <div className="absolute right-0 -bottom-[35px] h-9 w-9 bg-white">
+                    <div className="absolute right-0 h-12 w-12 rounded-tr-[36px] border-t border-r border-gray-300" />
+                  </div>
+                </div>
+                <div>
+                  <div className="min-w-[640px] overflow-y-auto border px-5">
+                    <Outlet />
+                  </div>
+                </div>
               </div>
             )}
           </div>
         </div>
         {!currentUser && (
-          <div className="mt-9 max-w-[300px] rounded-2xl border bg-[#f5f5f5] p-3 text-center">
+          <div className="sticky top-14 mt-9 max-w-[300px] rounded-2xl border bg-[#f5f5f5] p-3 text-center">
             <h2 className="text-lg font-bold">Đăng nhập threads</h2>
             <p className="mt-2 text-gray-500">
               Xem mọi người đang nói về điều gì và tham gia cuộc trò chuyện.
@@ -67,6 +64,11 @@ const DefaultLayout = () => {
             </Button>
           </div>
         )}
+      </div>
+      <div className="fixed right-8 bottom-8">
+        <Button variant="outline" className="h-16 w-20">
+          <Plus strokeWidth={2.5} className="size-7" />
+        </Button>
       </div>
     </div>
   );
