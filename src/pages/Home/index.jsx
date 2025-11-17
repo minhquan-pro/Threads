@@ -5,7 +5,7 @@ const Home = () => {
   const currentUser = null;
   return (
     <div>
-      {!currentUser && <CreatePost />}
+      {currentUser && <CreatePost />}
       <Posts />
     </div>
   );

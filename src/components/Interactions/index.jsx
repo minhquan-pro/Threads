@@ -4,7 +4,14 @@ import classNames from "classnames";
 
 const buttonClasses = `m-auto cursor-pointer border-none shadow-none`;
 
-const Interactions = ({ onClick, isLike, count, Icon, title, description }) => {
+const Interactions = ({
+  onClick,
+  isLiked,
+  count,
+  Icon,
+  title,
+  description,
+}) => {
   const currentUser = "Minhquan";
 
   if (!currentUser) {
@@ -28,10 +35,10 @@ const Interactions = ({ onClick, isLike, count, Icon, title, description }) => {
         onClick={onClick}
         variant="outline"
         className={classNames(buttonClasses, {
-          "text-red-500": isLike,
+          "text-red-500": isLiked,
         })}
       >
-        {Icon && <Icon className={`${isLike && "fill-current"}`} />}
+        {Icon && <Icon className={`${isLiked && "fill-current"}`} />}
         {count ? <span>{count}</span> : null}
       </Button>
     </div>

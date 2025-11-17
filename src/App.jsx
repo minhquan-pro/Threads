@@ -26,7 +26,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/activity" element={<Activity />} />
           <Route path="/following" element={<FollowingFeed />} />
-          <Route path="/ghost_posts" element={<GhostPosts />} />
+          <Route path="/ghost-posts" element={<GhostPosts />} />
           <Route path="/:userId" element={<Profile />} />
         </Route>
       </Routes>

@@ -2,13 +2,15 @@ import { Home, Search, Plus, Heart, User } from "lucide-react";
 
 export const NAV_ITEMS = [
   {
-    id: "home",
+    id: "for-you",
+    title: "Trang chủ",
     path: "/",
     component: Home,
     requireAuth: false,
   },
   {
     id: "search",
+    title: "Tìm kiếm",
     path: "/search",
     component: Search,
     requireAuth: false,
@@ -23,6 +25,7 @@ export const NAV_ITEMS = [
   },
   {
     id: "activity",
+    title: "Hoạt động",
     path: "/activity",
     component: Heart,
     requireAuth: true,
@@ -32,6 +35,7 @@ export const NAV_ITEMS = [
   },
   {
     id: "profile",
+    title: "Trang cá nhân",
     path: "/profile",
     component: User,
     requireAuth: true,

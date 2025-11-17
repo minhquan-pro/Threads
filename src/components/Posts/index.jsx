@@ -9,7 +9,6 @@ const Posts = () => {
       <PostCard />
       <PostCard />
       <PostCard />
-      <PostCard />
     </div>
   );
 };
