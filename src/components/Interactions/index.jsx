@@ -1,5 +1,6 @@
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
+import { useCurrentUser } from "@/features/auth";
 import classNames from "classnames";
 
 const buttonClasses = `m-auto cursor-pointer border-none shadow-none`;
@@ -7,12 +8,12 @@ const buttonClasses = `m-auto cursor-pointer border-none shadow-none`;
 const Interactions = ({
   onClick,
   isLiked,
-  count,
+  count = 0,
   Icon,
   title,
   description,
 }) => {
-  const currentUser = "Minhquan";
+  const currentUser = useCurrentUser();
 
   if (!currentUser) {
     return (

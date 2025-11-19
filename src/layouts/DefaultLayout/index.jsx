@@ -1,12 +1,14 @@
 import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+
 import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
+import { useCurrentUser } from "@/features/auth";
 
 const DefaultLayout = () => {
-  const currentUser = null;
+  const currentUser = useCurrentUser();
   const { currentTab, handleValueChange, isHomeFeedRoute } = useNavigation();
   const showTabs = isHomeFeedRoute && currentUser;
   const title = useTitle(currentTab);
@@ -24,27 +26,26 @@ const DefaultLayout = () => {
                 currentTab={currentTab}
                 handleValueChange={handleValueChange}
               >
-                <div className="z-50 bg-transparent!">
+                <div className="overflow-visible bg-transparent!">
                   <Outlet />
                 </div>
               </HomeTabs>
             ) : (
-              <div className="">
+              <div>
                 <div className="sticky top-0 z-50 bg-white p-4">
                   <h1 className="text-md text-center font-semibold">{title}</h1>
-
-                  <div className="absolute bottom-0 h-1 w-[calc(100%-60px)] border-b border-gray-300" />
-                  <div className="absolute -bottom-[35px] left-0 h-9 w-9 bg-white">
-                    <div className="absolute left-0 h-12 w-12 rounded-tl-[36px] border-t border-l border-gray-300" />
-                  </div>
-                  <div className="absolute right-0 -bottom-[35px] h-9 w-9 bg-white">
-                    <div className="absolute right-0 h-12 w-12 rounded-tr-[36px] border-t border-r border-gray-300" />
+                  <div className="">
+                    <div className="absolute bottom-0 h-1 w-[calc(100%-60px)] border-b border-gray-300" />
+                    <div className="absolute -bottom-[35px] left-0 h-9 w-9 bg-white">
+                      <div className="absolute left-0 h-12 w-12 rounded-tl-[36px] border-t border-l border-gray-300" />
+                    </div>
+                    <div className="absolute right-0 -bottom-[35px] h-9 w-9 bg-white">
+                      <div className="absolute right-0 h-12 w-12 rounded-tr-[36px] border-t border-r border-gray-300" />
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <div className="min-w-[640px] overflow-y-auto border px-5">
-                    <Outlet />
-                  </div>
+                <div className="min-w-[640px] overflow-y-auto border border-t-transparent">
+                  <Outlet />
                 </div>
               </div>
             )}

@@ -10,7 +10,7 @@ import { Link } from "react-router";
 
 const CreatePost = () => {
   return (
-    <div className="flex items-center justify-between gap-2 border-b p-4">
+    <div className="flex items-center justify-between gap-2 p-4">
       <div className="flex w-full items-center">
         <Link to={"/đ"}>
           <UserAvatar

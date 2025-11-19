@@ -1,12 +1,8 @@
-import UserProfileMenu from "@/components/UserProfileMenu";
-
-const PostHeader = ({ userName, timeAgo }) => {
+const PostHeader = ({ user }) => {
   return (
-    <div className="flex items-center gap-1">
-      <div>
-        <UserProfileMenu>{userName}</UserProfileMenu>
-      </div>
-      <span className="text-gray-400">{timeAgo}</span>
+    <div className="z-50 flex items-center gap-1">
+      <span className="text-md font-semibold">{user.name}</span>
+      <span className="text-gray-400">{user.created_at}</span>
     </div>
   );
 };

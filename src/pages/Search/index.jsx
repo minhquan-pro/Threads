@@ -1,4 +1,6 @@
+import Posts from "@/components/Posts";
+
 const Search = () => {
-  return <div>Search</div>;
+  return <Posts />;
 };
 export default Search;

@@ -11,18 +11,29 @@ import { useMenuSubmenu } from "@/hooks";
 import classNames from "classnames";
 import { ArrowRight, Menu } from "lucide-react";
 import ThemeSubmenu from "../ThemeSubmenu";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/services/auth/authService";
+import { loadingSelector as authLoadingSelector } from "@/features/auth";
+import { Spinner } from "../ui/spinner";
 
 const AuthenticatedMenu = ({ buttonClasses }) => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
+  const dispatch = useDispatch();
+  const loading = useSelector(authLoadingSelector);
 
-  const handleClickMenuItem = (action) => {
+  const handleClickMenuItem = async (action) => {
+    if (action === "logout") {
+      await dispatch(logout()).unwrap();
+    }
+
     handleActiveSubmenu(action);
   };
 
   const renderMenuItem = (menu) => {
     return (
       <DropdownMenuItem
-        key={MENU_ITEMS[menu].label}
+        disabled={loading}
+        key={menu}
         onClick={(e) => {
           e.preventDefault();
           handleClickMenuItem(MENU_ITEMS[menu].action);
@@ -33,6 +44,7 @@ const AuthenticatedMenu = ({ buttonClasses }) => {
         )}
       >
         {MENU_ITEMS[menu].label}
+        {MENU_ITEMS[menu].action === "logout" && loading && <Spinner />}
         {MENU_ITEMS[menu].hasSubmenu && <ArrowRight color="gray" />}
       </DropdownMenuItem>
     );

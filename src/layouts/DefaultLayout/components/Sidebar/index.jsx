@@ -6,12 +6,13 @@ import threads_logo from "@/assets/logo/threads_logo.png";
 import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
+import { useCurrentUser } from "@/features/auth";
 
 const BUTTON_CLASSES =
   "inline-block rounded-md px-5 py-3 text-gray-400 hover:bg-gray-100 cursor-pointer";
 
 const Sidebar = () => {
-  const currentUser = null;
+  const currentUser = useCurrentUser();
   return (
     <div className="flex h-full flex-col justify-between">
       <div>

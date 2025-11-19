@@ -5,7 +5,7 @@ const FollowingFeed = () => {
   return (
     <div>
       <CreatePost />
-      <Posts />
+      <Posts type="following" />
     </div>
   );
 };

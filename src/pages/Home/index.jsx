@@ -1,12 +1,13 @@
 import Posts from "@/components/Posts";
 import CreatePost from "@/components/Posts/components/CreatePost";
+import { useCurrentUser } from "@/features/auth";
 
 const Home = () => {
-  const currentUser = null;
+  const currentUser = useCurrentUser();
   return (
     <div>
       {currentUser && <CreatePost />}
-      <Posts />
+      <Posts type="for_you" />
     </div>
   );
 };

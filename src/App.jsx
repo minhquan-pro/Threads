@@ -9,10 +9,13 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import FollowingFeed from "./pages/FollowingFeed";
 import GhostPosts from "./pages/GhostPosts";
+import PrivateRoute from "./components/PrivateRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         {/* AuthLayout */}
         <Route element={<AuthLayout />}>
@@ -22,12 +25,16 @@ function App() {
 
         {/* DefaultLayout */}
         <Route element={<DefaultLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route index path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/activity" element={<Activity />} />
-          <Route path="/following" element={<FollowingFeed />} />
-          <Route path="/ghost-posts" element={<GhostPosts />} />
-          <Route path="/:userId" element={<Profile />} />
+
+          {/* PrivateRoute */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/activity" element={<Activity />} />
+            <Route path="/following" element={<FollowingFeed />} />
+            <Route path="/ghost-posts" element={<GhostPosts />} />
+            <Route path="/:userId" element={<Profile />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

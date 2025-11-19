@@ -1,11 +1,10 @@
 import { Send } from "lucide-react";
 import Interactions from "../Interactions";
 
-const ShareButton = ({ count }) => {
+const ShareButton = () => {
   const handleShare = () => {};
   return (
     <Interactions
-      count={count}
       Icon={Send}
       onClick={handleShare}
       title="Bày tỏ nhiều hơn qua Threads"

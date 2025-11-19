@@ -1,3 +1,4 @@
+// ...existing code...
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,30 +8,29 @@ import {
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import UserAvatar from "../UserAvatar";
 
-const UserProfileMenu = ({ children, delay = 500 }) => {
+const UserProfileMenu = ({ children, user, delay = 500 }) => {
   return (
-    <NavigationMenu delayDuration={delay}>
+    /* ensure parent allows overflow so the content can appear above other elements */
+    <NavigationMenu delayDuration={delay} className="absolute overflow-visible">
       <NavigationMenuItem>
         <NavigationMenuTrigger
           showChevronDown={false}
-          className="text-md cursor-pointer p-0! hover:underline"
+          className="text-md relative z-10 cursor-pointer p-0! hover:underline"
         >
           {children}
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="w-80! p-5">
+        {/* raise content above trigger and others */}
+        <NavigationMenuContent className="z-[9999] w-80! p-5">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-lg font-bold">Leminhquan</span>
-              <span>leminhquan022_</span>
+              <span className="text-lg font-bold">{user.name}</span>
+              <span>{user.username}</span>
             </div>
-            <UserAvatar
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHNjYXBlfGVufDB8fDB8fHww"
-              imgSize="h-14 w-14"
-            />
+            <UserAvatar src={user.avatar_url} imgSize="h-14 w-14" />
           </div>
           <div className="mt-3">
             <p className="text-foreground mb-2 text-sm font-semibold">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum
+              {user.bio}
             </p>
             <span className="text-sm text-gray-500">23 người theo dõi</span>
           </div>
@@ -49,3 +49,4 @@ const UserProfileMenu = ({ children, delay = 500 }) => {
 };
 
 export default UserProfileMenu;
+// ...existing code...
