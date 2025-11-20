@@ -4,6 +4,7 @@ import LikeButton from "@/components/LikeButton";
 import CommentButton from "@/components/CommentButton";
 import RepostButton from "@/components/RepostButton";
 import ShareButton from "@/components/ShareButton";
+import defaultImageUser from "@/assets/image/defaultImageUser.png";
 
 import useEmblaCarousel from "embla-carousel-react";
 

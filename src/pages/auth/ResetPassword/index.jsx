@@ -5,11 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 
 import { loadingSelector } from "@/features/auth";
 import { validateToken } from "@/services/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { resetSchema } from "@/schemas/auth";
+import FormField from "@/components/FormField";
 
 const ResetPassword = () => {
   const [validating, setValidating] = useState(true);
@@ -20,11 +22,12 @@ const ResetPassword = () => {
   const [prams] = useSearchParams();
   const token = prams.get("token");
 
-  const { handleSubmit, register } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       password: "",
       password_confirmation: "",
     },
+    resolver: yupResolver(resetSchema),
   });
 
   useEffect(() => {
@@ -51,7 +54,9 @@ const ResetPassword = () => {
   }, [token]);
 
   // Submit Form
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
 
   if (validating) {
     return (
@@ -85,19 +90,17 @@ const ResetPassword = () => {
     <>
       {isValidToken && (
         <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            {...register("password")}
+          <FormField
             name="password"
             type="password"
+            control={control}
             placeholder="Mật khẩu"
-            className="auth-input"
           />
-          <Input
-            {...register("password_confirmation")}
+          <FormField
             name="password_confirmation"
-            type="password"
+            control={control}
             placeholder="Xác nhận mật khẩu"
-            className="auth-input"
+            type="password"
           />
 
           <Button

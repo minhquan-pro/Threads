@@ -15,7 +15,11 @@ const UserProfileDialog = ({ user }) => {
     <div className="relative">
       <Dialog>
         <DialogTrigger>
-          <UserAvatar src={user.avatar_url} imgSize="h-10 w-10" Icon={Plus} />
+          <UserAvatar
+            src={user.avatar_url || defaultImageUser}
+            imgSize="h-10 w-10"
+            Icon={Plus}
+          />
         </DialogTrigger>
         <DialogContent className="w-80" aria-describedby="user-dialog-desc">
           <div className="flex items-center justify-between">

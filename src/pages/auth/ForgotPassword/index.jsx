@@ -2,20 +2,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 
 import { loadingSelector } from "@/features/auth";
 import { forgotPassword } from "@/services/auth";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
+import FormField from "@/components/FormField";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { forgotPasswordSchema } from "@/schemas/auth";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
-  const { handleSubmit, register, watch, reset } = useForm({
+  const { handleSubmit, control, watch, reset } = useForm({
     defaultValues: {
       email: "",
     },
+    resolver: yupResolver(forgotPasswordSchema),
   });
   const loading = useSelector(loadingSelector);
   const email = watch("email");
@@ -29,13 +32,13 @@ const ForgotPassword = () => {
         toast.success(
           response.message ||
             "Liên kết đặt lại mật khẩu đã được gửi tới email của bạn",
-          { autoClose: 3000, theme: "colored", position: "top-center" },
+          { autoClose: 1000, theme: "colored", position: "top-center" },
         );
         reset({ email: "" });
       }
     } catch (error) {
       toast.error(error?.message || "Có lỗi xảy ra. Vui lòng thử lại sau.", {
-        autoClose: 3000,
+        autoClose: 1000,
         theme: "colored",
         position: "top-center",
       });
@@ -45,12 +48,7 @@ const ForgotPassword = () => {
   return (
     <>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register("email")}
-          name="email"
-          placeholder="Email"
-          className="auth-input"
-        />
+        <FormField name="email" placeholder="Email" control={control} />
         <Button
           disabled={!isValid || loading}
           size="lg"

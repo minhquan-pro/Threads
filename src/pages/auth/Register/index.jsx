@@ -4,28 +4,46 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 
 import { loadingSelector } from "@/features/auth";
 import { register as registerService } from "@/services/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "@/schemas/auth";
+import FormField from "@/components/FormField";
+import { useEffect } from "react";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { handleSubmit, register } = useForm({
+  const { handleSubmit, control, trigger, watch } = useForm({
     defaultValues: {
       username: "",
       email: "",
       password: "",
       password_confirmation: "",
     },
+    resolver: yupResolver(registerSchema),
   });
   const loading = useSelector(loadingSelector);
+
+  const email = watch("email");
+  const username = watch("username");
+
+  useEffect(() => {
+    if (email) {
+      trigger("email");
+    }
+  }, [email, trigger]);
+
+  useEffect(() => {
+    if (username) {
+      trigger("username");
+    }
+  }, [username, trigger]);
 
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(registerService(data)).unwrap();
-
       if (response.success) {
         toast.success(response.message, {
           autoClose: 1000,
@@ -41,31 +59,23 @@ const Register = () => {
   return (
     <>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register("username")}
+        <FormField
           name="username"
+          control={control}
           placeholder="Tên hiển thị"
-          className="auth-input"
         />
-        <Input
-          {...register("email")}
-          name="email"
-          placeholder="Email"
-          className="auth-input"
-        />
-        <Input
-          {...register("password")}
+        <FormField name="email" control={control} placeholder="Email" />
+        <FormField
           name="password"
           type="password"
+          control={control}
           placeholder="Mật khẩu"
-          className="auth-input"
         />
-        <Input
-          {...register("password_confirmation")}
+        <FormField
           name="password_confirmation"
-          type="password"
+          control={control}
           placeholder="Xác nhận mật khẩu"
-          className="auth-input"
+          type="password"
         />
 
         <Button size="lg" className="text-md cursor-pointer p-6 font-bold">

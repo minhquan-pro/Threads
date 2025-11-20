@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import classNames from "classnames";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,15 +9,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
+import { ArrowRight, Menu } from "lucide-react";
+import { Spinner } from "../ui/spinner";
+
 import { MENU_GROUPS, MENU_ITEMS, MENU_OFFSET } from "@/constants";
 import { useMenuSubmenu } from "@/hooks";
-import classNames from "classnames";
-import { ArrowRight, Menu } from "lucide-react";
 import ThemeSubmenu from "../ThemeSubmenu";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/services/auth/authService";
 import { loadingSelector as authLoadingSelector } from "@/features/auth";
-import { Spinner } from "../ui/spinner";
+import { logout } from "@/services/auth";
 
 const AuthenticatedMenu = ({ buttonClasses }) => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
