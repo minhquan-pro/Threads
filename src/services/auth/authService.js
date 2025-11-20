@@ -60,3 +60,13 @@ export const logout = createAsyncThunk("auth/logout", async () => {
     return Promise.reject(error);
   }
 });
+
+export const checkExistEmail = async (email) => {
+  const response = await http.post("auth/validate/email", { email });
+  return response.data.available;
+};
+
+export const checkExistUsername = async (userName) => {
+  const response = await http.post("auth/validate/username", { userName });
+  return response.data.available;
+};
