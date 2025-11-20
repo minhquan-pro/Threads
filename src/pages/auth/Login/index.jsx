@@ -1,24 +1,28 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
+import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 
 import { loadingSelector, useCurrentUser } from "@/features/auth";
 import { login } from "@/services/auth/authService";
+import { loginSchema } from "@/utils/validators";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { handleSubmit, register, watch } = useForm({
+  const { handleSubmit, register, watch, control, setError } = useForm({
     defaultValues: {
       login: "",
       password: "",
     },
+    resolver: yupResolver(loginSchema),
   });
   const loading = useSelector(loadingSelector);
   const currentUser = useCurrentUser();
@@ -41,6 +45,10 @@ const Login = () => {
       localStorage.setItem("refreshToken", refresh_token);
     } catch (error) {
       console.log(error);
+      setError("password", {
+        type: "invalid",
+        message: "Tên đăng nhập hoặc mật khẩu không chính xác",
+      });
     }
   };
 
@@ -53,19 +61,52 @@ const Login = () => {
   return (
     <>
       <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register("login")}
-          name="login"
-          placeholder="Tên người dùng, số điện thoại hoặc email"
-          className="auth-input"
-        />
-        <Input
-          {...register("password")}
-          name="password"
-          type="password"
-          placeholder="Mật khẩu"
-          className="auth-input"
-        />
+        <FieldGroup>
+          <Controller
+            name="login"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <Input
+                  {...field}
+                  {...register("login")}
+                  aria-invalid={fieldState.invalid}
+                  placeholder="Tên người dùng, số điện thoại hoặc email"
+                  className="auth-input"
+                />
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-start font-semibold"
+                  />
+                )}
+              </Field>
+            )}
+          />
+
+          <Controller
+            name="password"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <Input
+                  {...field}
+                  {...register("password")}
+                  aria-invalid={fieldState.invalid}
+                  type="password"
+                  placeholder="Mật khẩu"
+                  className="auth-input"
+                />
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-start font-semibold"
+                  />
+                )}
+              </Field>
+            )}
+          />
+        </FieldGroup>
 
         <Button
           disabled={!isValid || loading}

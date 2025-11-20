@@ -6,10 +6,10 @@ export const login = createAsyncThunk(
   "auth/login",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await http.post("/auth/loginn", data);
+      const response = await http.post("/auth/login", data);
       return response;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   },
 );
@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
       const response = await http.post("/auth/register", data);
       return response;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   },
 );
@@ -35,7 +35,7 @@ export const forgotPassword = createAsyncThunk(
       const response = await http.post("/auth/forgot-password", data);
       return response;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error.response?.data || error.message);
     }
   },
 );
@@ -52,11 +52,14 @@ export const validateToken = async ({ token }) => {
 };
 
 // Logout
-export const logout = createAsyncThunk("auth/logout", async () => {
-  try {
-    const response = await http.post("/auth/logout");
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-});
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async ({ rejectWithValue }) => {
+    try {
+      const response = await http.post("/auth/logout");
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  },
+);

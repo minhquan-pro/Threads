@@ -7,6 +7,7 @@ export const AUTH_PAGES = [
   {
     id: "register",
     title: "Đăng ký",
+    description: "Tạo tài khoản mới để bắt đầu",
     route: "/register",
   },
   {

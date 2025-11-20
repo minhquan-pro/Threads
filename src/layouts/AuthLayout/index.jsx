@@ -13,10 +13,7 @@ const AuthLayout = () => {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <img
-        src={decorImg}
-        className="absolute top-[-10%] right-0 left-0 -z-10"
-      />
+      <img src={decorImg} className="absolute top-[-10%] left-0 -z-10" />
       <div className="w-[350px] text-center">
         <h1 className="mb-3 text-3xl font-bold">{title}</h1>
         <p className="mb-3 text-sm font-medium text-gray-600">{description}</p>
