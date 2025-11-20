@@ -29,6 +29,7 @@
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
     "embla-carousel-react": "^8.6.0",
     "i18next": "^25.6.2",
     "lucide-react": "^0.553.0",

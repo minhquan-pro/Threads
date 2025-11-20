@@ -39,7 +39,7 @@ const AuthRequiredDialog = ({
           {children}
         </ElementType>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center">
+      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
           <DialogDescription className="text-center">

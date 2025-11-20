@@ -11,6 +11,8 @@ import FollowingFeed from "./pages/FollowingFeed";
 import GhostPosts from "./pages/GhostPosts";
 import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from "react-toastify";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
         {/* DefaultLayout */}

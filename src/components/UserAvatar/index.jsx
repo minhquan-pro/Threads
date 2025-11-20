@@ -1,10 +1,16 @@
 import classNames from "classnames";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
-const UserAvatar = ({ imgSize, src, Icon }) => {
+const UserAvatar = ({ imgSize, className, src, Icon }) => {
   return (
-    <div className="relative cursor-pointer">
-      <Avatar className={classNames(imgSize, "hover:scale-100")}>
+    <div className="relative cursor-pointer overflow-hidden">
+      <Avatar
+        className={classNames(
+          imgSize,
+          className,
+          "border-2 border-gray-300 bg-white shadow hover:scale-100",
+        )}
+      >
         <AvatarImage src={src} />
       </Avatar>
       {Icon && (

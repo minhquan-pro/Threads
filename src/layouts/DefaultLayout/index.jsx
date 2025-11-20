@@ -32,19 +32,10 @@ const DefaultLayout = () => {
               </HomeTabs>
             ) : (
               <div>
-                <div className="sticky top-0 z-50 bg-white p-4">
+                <div className="sticky top-0 z-50 border-b border-gray-300 bg-white p-4">
                   <h1 className="text-md text-center font-semibold">{title}</h1>
-                  <div className="">
-                    <div className="absolute bottom-0 h-1 w-[calc(100%-60px)] border-b border-gray-300" />
-                    <div className="absolute -bottom-[35px] left-0 h-9 w-9 bg-white">
-                      <div className="absolute left-0 h-12 w-12 rounded-tl-[36px] border-t border-l border-gray-300" />
-                    </div>
-                    <div className="absolute right-0 -bottom-[35px] h-9 w-9 bg-white">
-                      <div className="absolute right-0 h-12 w-12 rounded-tr-[36px] border-t border-r border-gray-300" />
-                    </div>
-                  </div>
                 </div>
-                <div className="min-w-[640px] overflow-y-auto border border-t-transparent">
+                <div className="min-w-[640px] overflow-y-auto border border-gray-300 border-t-transparent">
                   <Outlet />
                 </div>
               </div>
@@ -52,16 +43,18 @@ const DefaultLayout = () => {
           </div>
         </div>
         {!currentUser && (
-          <div className="sticky top-14 mt-9 max-w-[300px] rounded-2xl border bg-[#f5f5f5] p-3 text-center">
-            <h2 className="text-lg font-bold">Đăng nhập threads</h2>
+          <div className="sticky top-14 mt-9 max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center">
+            <h2 className="text-lg font-bold">
+              Đăng nhập hoặc đăng ký threads
+            </h2>
             <p className="mt-2 text-gray-500">
               Xem mọi người đang nói về điều gì và tham gia cuộc trò chuyện.
             </p>
             <Button
-              className="text-md mt-3 w-full rounded-xl py-5"
+              className="text-md mt-3 w-full rounded-xl py-8"
               variant="outline"
             >
-              <Link to={"/login"}>Đăng nhập để xem thêm</Link>
+              <Link to={"/login"}>Đăng nhập bằng tên người dùng</Link>
             </Button>
           </div>
         )}

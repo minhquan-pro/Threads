@@ -125,3 +125,7 @@ body {
     "Helvetica Neue",
     sans-serif;
 }
+
+.auth-input {
+  @apply rounded-xl bg-gray-100 py-7 font-semibold shadow-none placeholder:font-semibold;
+}

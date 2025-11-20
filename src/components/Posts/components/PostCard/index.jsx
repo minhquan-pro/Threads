@@ -19,9 +19,9 @@ const PostCard = ({ post }) => {
   } = post;
 
   return (
-    <div className="flex w-[650px] flex-col items-start overflow-hidden border-t p-3 first-of-type:border-t-0">
+    <div className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-t-0">
       <div className="flex gap-2">
-        <UserProfileDialog avatarUrl={user.avatar_url} />
+        <UserProfileDialog user={user} />
         <div className="min-w-0 flex-1">
           <PostHeader user={user} />
           <p className="text-[15px] wrap-break-word">{content}</p>

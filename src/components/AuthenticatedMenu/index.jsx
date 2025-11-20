@@ -60,7 +60,7 @@ const AuthenticatedMenu = ({ buttonClasses }) => {
       <DropdownMenuContent
         sideOffset={MENU_OFFSET.side}
         align="start"
-        className="w-60 overflow-hidden"
+        className="w-60 overflow-hidden border border-gray-300"
         alignOffset={MENU_OFFSET.align}
       >
         <div className="relative">
