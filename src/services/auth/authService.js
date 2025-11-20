@@ -52,14 +52,11 @@ export const validateToken = async ({ token }) => {
 };
 
 // Logout
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async ({ rejectWithValue }) => {
-    try {
-      const response = await http.post("/auth/logout");
-      return response;
-    } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  },
-);
+export const logout = createAsyncThunk("auth/logout", async () => {
+  try {
+    const response = await http.post("/auth/logout");
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+});

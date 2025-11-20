@@ -32,7 +32,7 @@ const AuthenticatedMenu = ({ buttonClasses }) => {
   const renderMenuItem = (menu) => {
     return (
       <DropdownMenuItem
-        disabled={loading}
+        disabled={loading && MENU_ITEMS[menu].action === "logout"}
         key={menu}
         onClick={(e) => {
           e.preventDefault();
