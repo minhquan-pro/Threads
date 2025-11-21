@@ -106,7 +106,7 @@ const ResetPassword = () => {
           <Button
             disabled={loading}
             size="lg"
-            className="text-md cursor-pointer p-6 font-bold"
+            className="text-md p-6 font-bold"
           >
             {loading && <Spinner />}
             Tạo mật khẩu mới

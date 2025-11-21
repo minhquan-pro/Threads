@@ -3,7 +3,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 
 const UserAvatar = ({ imgSize, className, src, Icon }) => {
   return (
-    <div className="relative cursor-pointer overflow-hidden">
+    <div className="relative overflow-hidden">
       <Avatar
         className={classNames(
           imgSize,
@@ -14,11 +14,9 @@ const UserAvatar = ({ imgSize, className, src, Icon }) => {
         <AvatarImage src={src} />
       </Avatar>
       {Icon && (
-        <Icon
-          size={14}
-          color="white"
-          className="absolute right-0 bottom-0 rounded-full bg-black p-0.5 hover:scale-125"
-        />
+        <div className="absolute right-0 bottom-0 flex h-3 w-3 items-center justify-center rounded-full bg-black hover:scale-125">
+          <Icon size={8} strokeWidth={2} color="white" />
+        </div>
       )}
     </div>
   );

@@ -9,8 +9,12 @@ import {
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import UserAvatar from "../UserAvatar";
 import defaultImageUser from "@/assets/image/defaultImageUser.png";
+import { useCurrentUser } from "@/features/auth";
+import { Button } from "../ui/button";
 
 const UserProfileDialog = ({ user }) => {
+  const currentUser = useCurrentUser();
+
   return (
     <div className="relative">
       <Dialog>
@@ -41,14 +45,19 @@ const UserProfileDialog = ({ user }) => {
             {user.bio}
           </p>
           <span className="text-sm text-gray-500">23 người theo dõi</span>
-          <AuthRequiredDialog
-            type="button"
-            title="Đăng ký để theo dõi"
-            description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-            buttonClasses="w-full  bg-black text-white"
-          >
-            Theo dõi
-          </AuthRequiredDialog>
+
+          {currentUser ? (
+            <Button>Theo dõi</Button>
+          ) : (
+            <AuthRequiredDialog
+              type="button"
+              title="Đăng ký để theo dõi"
+              description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
+              buttonClasses="w-full  bg-black text-white"
+            >
+              Theo dõi
+            </AuthRequiredDialog>
+          )}
         </DialogContent>
       </Dialog>
     </div>

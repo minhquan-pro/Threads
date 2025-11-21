@@ -4,7 +4,6 @@ import LikeButton from "@/components/LikeButton";
 import CommentButton from "@/components/CommentButton";
 import RepostButton from "@/components/RepostButton";
 import ShareButton from "@/components/ShareButton";
-import defaultImageUser from "@/assets/image/defaultImageUser.png";
 
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -37,7 +36,7 @@ const PostCard = ({ post }) => {
                   key={url}
                   src={url}
                   alt=""
-                  className="min-h-52 min-w-40 cursor-pointer rounded-md object-cover"
+                  className="min-h-52 min-w-40 rounded-md object-cover"
                 />
               );
             })}

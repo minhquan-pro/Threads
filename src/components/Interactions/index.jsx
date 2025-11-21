@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/features/auth";
 import classNames from "classnames";
 
-const buttonClasses = `m-auto cursor-pointer border-none shadow-none`;
+const buttonClasses = `m-auto  border-none shadow-none`;
 
 const Interactions = ({
   onClick,

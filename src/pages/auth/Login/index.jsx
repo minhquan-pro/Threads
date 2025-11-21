@@ -36,7 +36,7 @@ const Login = () => {
         toast.success(response.message, {
           autoClose: 1000,
           theme: "colored",
-          position: "top-right",
+          position: "top-center",
         });
       }
       const { access_token, refresh_token } = response.data;
@@ -77,7 +77,7 @@ const Login = () => {
         <Button
           disabled={!isValid || loading}
           size="lg"
-          className="text-md cursor-pointer p-6 font-bold"
+          className="text-md p-6 font-bold"
         >
           {loading && <Spinner />}
           Đăng nhập

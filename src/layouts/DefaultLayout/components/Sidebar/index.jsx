@@ -9,7 +9,7 @@ import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 
 const BUTTON_CLASSES =
-  "inline-block rounded-md px-5 py-3 text-gray-400 hover:bg-gray-100 cursor-pointer";
+  "inline-block rounded-md px-5 py-3 text-gray-400 hover:bg-gray-100";
 
 const Sidebar = () => {
   const currentUser = useCurrentUser();

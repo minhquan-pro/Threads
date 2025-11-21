@@ -1,4 +1,4 @@
-import { http } from "@/utils/http";
+import { http } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Login
@@ -66,7 +66,7 @@ export const checkExistEmail = async (email) => {
   return response.data.available;
 };
 
-export const checkExistUsername = async (userName) => {
-  const response = await http.post("auth/validate/username", { userName });
+export const checkExistUsername = async (username) => {
+  const response = await http.post("auth/validate/username", { username });
   return response.data.available;
 };

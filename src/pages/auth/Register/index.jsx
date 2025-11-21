@@ -78,7 +78,7 @@ const Register = () => {
           type="password"
         />
 
-        <Button size="lg" className="text-md cursor-pointer p-6 font-bold">
+        <Button size="lg" className="text-md p-6 font-bold">
           {loading && <Spinner />}
           Đăng ký
         </Button>
