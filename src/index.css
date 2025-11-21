@@ -129,3 +129,10 @@ body {
 .auth-input {
   @apply rounded-xl bg-gray-100 py-7 font-semibold shadow-none placeholder:font-semibold;
 }
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
