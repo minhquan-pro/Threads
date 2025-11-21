@@ -40,14 +40,28 @@ export const forgotPassword = createAsyncThunk(
   },
 );
 
+// Reset password
+export const resetPassword = createAsyncThunk(
+  "auth/reset-password",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await http.post("/auth/reset-password", data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  },
+);
+
 export const validateToken = async ({ token }) => {
   try {
     const response = await http.get(
-      `auth/reset-password/validate?token=${token}`,
+      `/auth/reset-password/validate?token=${token}`,
     );
     return response;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 

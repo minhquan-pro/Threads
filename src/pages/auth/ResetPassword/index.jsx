@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
 import { loadingSelector } from "@/features/auth";
-import { validateToken } from "@/services/auth";
+import { resetPassword, validateToken } from "@/services/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
@@ -21,6 +21,7 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const [prams] = useSearchParams();
   const token = prams.get("token");
+  const email = localStorage.getItem("resetEmail");
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -55,7 +56,14 @@ const ResetPassword = () => {
 
   // Submit Form
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      const response = await dispatch(
+        resetPassword({ token, email, ...data }),
+      ).unwrap();
+      console.log(response);
+    } catch (error) {
+      setIsValidToken(false);
+    }
   };
 
   if (validating) {
@@ -77,7 +85,7 @@ const ResetPassword = () => {
           Liên kết không hợp lệ
         </h2>
         <p className="mb-6 text-gray-600">
-          Liên kết đặt lại mật khẩu đã hết hạn hoặc không đúng.
+          Liên kết đã hết hạn hoặc không hợp lệ
         </p>
         <Link to="/forgot-password">
           <Button variant="outline">Yêu cầu liên kết mới</Button>
@@ -98,9 +106,9 @@ const ResetPassword = () => {
           />
           <FormField
             name="password_confirmation"
+            type="password"
             control={control}
             placeholder="Xác nhận mật khẩu"
-            type="password"
           />
 
           <Button

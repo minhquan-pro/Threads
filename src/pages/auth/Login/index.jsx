@@ -17,7 +17,7 @@ import FormField from "@/components/FormField";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { handleSubmit, watch, control, setError } = useForm({
+  const { handleSubmit, control, setError } = useForm({
     defaultValues: {
       login: "",
       password: "",
@@ -26,8 +26,6 @@ const Login = () => {
   });
   const loading = useSelector(loadingSelector);
   const currentUser = useCurrentUser();
-  const [value, password] = watch(["login", "password"]);
-  const isValid = Boolean(value && password);
 
   const onSubmit = async (data) => {
     try {
@@ -74,11 +72,7 @@ const Login = () => {
           />
         </FieldGroup>
 
-        <Button
-          disabled={!isValid || loading}
-          size="lg"
-          className="text-md p-6 font-bold"
-        >
+        <Button size="lg" className="text-md p-6 font-bold">
           {loading && <Spinner />}
           Đăng nhập
         </Button>

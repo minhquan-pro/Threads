@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
 import { loadingSelector } from "@/features/auth";
 import { forgotPassword } from "@/services/auth";
-import { toast } from "react-toastify";
-import { Link } from "react-router";
 import FormField from "@/components/FormField";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPasswordSchema } from "@/schemas/auth";
 
 const ForgotPassword = () => {
@@ -35,6 +35,7 @@ const ForgotPassword = () => {
           { autoClose: 1000, theme: "colored", position: "top-center" },
         );
         reset({ email: "" });
+        localStorage.setItem("resetEmail", data.email);
       }
     } catch (error) {
       toast.error(error?.message || "Có lỗi xảy ra. Vui lòng thử lại sau.", {
