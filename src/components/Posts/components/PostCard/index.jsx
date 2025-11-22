@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
   } = post;
 
   return (
-    <div className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-t-0">
+    <>
       <div className="flex gap-2">
         <UserProfileDialog user={user} />
         <div className="min-w-0 flex-1">
@@ -49,7 +49,7 @@ const PostCard = ({ post }) => {
           <ShareButton />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default PostCard;

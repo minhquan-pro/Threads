@@ -1,22 +1,41 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+
 import PostCard from "./components/PostCard";
-import { useEffect } from "react";
-import { getPosts } from "@/services/Posts";
+import { useInfiniteScroll } from "@/hooks";
+import {
+  selectorLoading as selectorLoadingPost,
+  selectorPagination,
+  useFetchPostsList,
+  usePostsList,
+} from "@/features/posts";
 
 const Posts = ({ type }) => {
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.items);
+  const [page, setPage] = useState(1);
+  const lastElementRef = useRef(null);
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(getPosts({ type, page: 1, per_page: 10 }));
-    })();
-  }, [dispatch, type]);
+  useFetchPostsList({ type, page, per_page: 10 });
+  const posts = usePostsList();
+
+  const loading = useSelector(selectorLoadingPost);
+  const pagination = useSelector(selectorPagination);
+
+  const onEnd = useCallback(() => setPage((prevState) => prevState + 1), []);
+
+  useInfiniteScroll({ lastElementRef, page, loading, pagination, onEnd });
 
   return (
     <div>
       {posts.map((post) => {
-        return <PostCard post={post} key={post.id} />;
+        return (
+          <div
+            ref={lastElementRef}
+            key={post.id}
+            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-t-0"
+          >
+            <PostCard post={post} />
+          </div>
+        );
       })}
     </div>
   );

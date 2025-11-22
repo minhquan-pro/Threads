@@ -23,8 +23,14 @@ const postsSlice = createSlice({
       .addCase(getPosts.fulfilled, (state, action) => {
         const { data, pagination } = action.payload;
         state.loading = false;
-        state.items = [...state.items, ...data];
         state.pagination = pagination;
+
+        const newPosts = data.filter((newPost) => {
+          const isNewPost = state.items.some((p) => p.id === newPost.id);
+          return !isNewPost;
+        });
+
+        state.items = [...state.items, ...newPosts];
       });
   },
 });
