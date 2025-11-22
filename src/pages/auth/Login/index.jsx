@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +15,7 @@ import { loginSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
 
 const Login = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { handleSubmit, control, setError } = useForm({
@@ -26,6 +27,8 @@ const Login = () => {
   });
   const loading = useSelector(loadingSelector);
   const currentUser = useCurrentUser();
+
+  console.log(location);
 
   const onSubmit = async (data) => {
     try {
@@ -48,6 +51,16 @@ const Login = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (location.state) {
+      toast.success(location.state.message, {
+        autoClose: 1000,
+        theme: "colored",
+        position: "top-center",
+      });
+    }
+  }, [location]);
 
   useEffect(() => {
     if (currentUser) {

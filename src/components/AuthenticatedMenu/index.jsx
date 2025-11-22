@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
+import { useNavigate } from "react-router";
 
 import {
   DropdownMenu,
@@ -15,17 +16,29 @@ import { Spinner } from "../ui/spinner";
 import { MENU_GROUPS, MENU_ITEMS, MENU_OFFSET } from "@/constants";
 import { useMenuSubmenu } from "@/hooks";
 import ThemeSubmenu from "../ThemeSubmenu";
-import { loadingSelector as authLoadingSelector } from "@/features/auth";
+import {
+  loadingSelector as authLoadingSelector,
+  setCurrentUser,
+} from "@/features/auth";
 import { logout } from "@/services/auth";
 
 const AuthenticatedMenu = ({ buttonClasses }) => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loading = useSelector(authLoadingSelector);
 
   const handleClickMenuItem = async (action) => {
     if (action === "logout") {
-      await dispatch(logout()).unwrap();
+      try {
+        await dispatch(logout()).unwrap();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        localStorage.clear();
+        dispatch(setCurrentUser(null));
+        navigate("/login");
+      }
     }
 
     handleActiveSubmenu(action);

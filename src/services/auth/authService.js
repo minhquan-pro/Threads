@@ -53,18 +53,6 @@ export const resetPassword = createAsyncThunk(
   },
 );
 
-export const validateToken = async ({ token }) => {
-  try {
-    const response = await http.get(
-      `/auth/reset-password/validate?token=${token}`,
-    );
-    return response;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
   try {
@@ -74,6 +62,17 @@ export const logout = createAsyncThunk("auth/logout", async () => {
     return Promise.reject(error);
   }
 });
+
+export const validateToken = async ({ token }) => {
+  try {
+    const response = await http.get(
+      `/auth/reset-password/validate?token=${token}`,
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const checkExistEmail = async (email) => {
   const response = await http.post("auth/validate/email", { email });
