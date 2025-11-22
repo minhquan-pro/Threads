@@ -19,9 +19,7 @@ const Posts = ({ type }) => {
 
   const loading = useSelector(selectorLoadingPost);
   const pagination = useSelector(selectorPagination);
-
   const onEnd = useCallback(() => setPage((prevState) => prevState + 1), []);
-
   useInfiniteScroll({ lastElementRef, page, loading, pagination, onEnd });
 
   return (
@@ -31,7 +29,7 @@ const Posts = ({ type }) => {
           <div
             ref={lastElementRef}
             key={post.id}
-            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-t-0"
+            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3"
           >
             <PostCard post={post} />
           </div>

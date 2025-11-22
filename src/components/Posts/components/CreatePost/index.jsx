@@ -14,10 +14,8 @@ import defaultImageUser from "@/assets/image/defaultImageUser.png";
 
 const CreatePost = () => {
   const currentUser = useCurrentUser();
-  console.log(currentUser);
-
   return (
-    <div className="flex items-center justify-between gap-2 border-b border-gray-300 p-4">
+    <div className="flex items-center justify-between gap-2 p-4">
       <div className="flex w-full items-center">
         <Link to={"/profile"}>
           <UserAvatar

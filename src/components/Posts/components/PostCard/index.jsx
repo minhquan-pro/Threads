@@ -10,12 +10,14 @@ import useEmblaCarousel from "embla-carousel-react";
 const PostCard = ({ post }) => {
   const [emblaRef] = useEmblaCarousel();
   const {
+    id,
     content,
     user,
     replies_count,
     likes_count,
     media_urls,
     reposts_and_quotes_count,
+    is_liked_by_auth,
   } = post;
 
   return (
@@ -43,7 +45,11 @@ const PostCard = ({ post }) => {
           </div>
         </div>
         <div className="flex items-center justify-start">
-          <LikeButton count={likes_count} />
+          <LikeButton
+            postId={id}
+            count={likes_count}
+            isLiked={is_liked_by_auth}
+          />
           <CommentButton count={replies_count} />
           <RepostButton count={reposts_and_quotes_count} />
           <ShareButton />

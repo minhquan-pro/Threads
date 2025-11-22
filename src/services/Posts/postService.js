@@ -10,3 +10,15 @@ export const getPosts = createAsyncThunk(
     return response;
   },
 );
+
+export const likePost = createAsyncThunk(
+  "posts/like",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await http.post(`/posts/${postId}/like`);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);

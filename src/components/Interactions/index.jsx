@@ -1,13 +1,13 @@
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/features/auth";
-import classNames from "classnames";
 
-const buttonClasses = `m-auto  border-none shadow-none`;
+const buttonClasses = `m-auto border-none shadow-none`;
 
 const Interactions = ({
   onClick,
-  isLiked,
+  isActive,
+  activeClass,
   count = 0,
   Icon,
   title,
@@ -35,11 +35,9 @@ const Interactions = ({
       <Button
         onClick={onClick}
         variant="outline"
-        className={classNames(buttonClasses, {
-          "text-red-500": isLiked,
-        })}
+        className={`${buttonClasses} ${isActive && activeClass}`}
       >
-        {Icon && <Icon className={`${isLiked && "fill-current"}`} />}
+        {Icon && <Icon className={`${isActive && "fill-current"}`} />}
         {count ? <span>{count}</span> : null}
       </Button>
     </div>

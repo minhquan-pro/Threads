@@ -26,9 +26,7 @@ const DefaultLayout = () => {
                 currentTab={currentTab}
                 handleValueChange={handleValueChange}
               >
-                <div className="overflow-visible bg-transparent!">
-                  <Outlet />
-                </div>
+                <Outlet />
               </HomeTabs>
             ) : (
               <div>
