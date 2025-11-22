@@ -10,7 +10,7 @@ import {
 
 import UserAvatar from "@/components/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
-import defaultImageUser from "@/assets/image/defaultImageUser.png";
+import defaultImageUser from "@/assets/images/defaultImageUser.png";
 
 const CreatePost = () => {
   const currentUser = useCurrentUser();

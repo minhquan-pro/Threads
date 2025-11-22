@@ -8,7 +8,7 @@ import {
 
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import UserAvatar from "../UserAvatar";
-import defaultImageUser from "@/assets/image/defaultImageUser.png";
+import defaultImageUser from "@/assets/images/defaultImageUser.png";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../ui/button";
 

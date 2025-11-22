@@ -41,8 +41,8 @@ const processQueue = (error) => {
 
 const refreshToken = async () => {
   try {
-    const result = await axios.post(`${baseURL}refresh-token`, {
-      refreshToken: localStorage.getItem("refreshToken"),
+    const result = await axios.post(`${baseURL}/auth/refresh`, {
+      refresh_token: localStorage.getItem("refreshToken"),
     });
     localStorage.setItem("accessToken", result.data.accessToken);
     processQueue(null);

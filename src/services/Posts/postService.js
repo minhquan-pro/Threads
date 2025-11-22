@@ -22,3 +22,15 @@ export const likePost = createAsyncThunk(
     }
   },
 );
+
+export const repostPost = createAsyncThunk(
+  "posts/repost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await http.post(`/posts/${postId}/repost`);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);

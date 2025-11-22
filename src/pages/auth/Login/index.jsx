@@ -28,8 +28,6 @@ const Login = () => {
   const loading = useSelector(loadingSelector);
   const currentUser = useCurrentUser();
 
-  console.log(location);
-
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data)).unwrap();

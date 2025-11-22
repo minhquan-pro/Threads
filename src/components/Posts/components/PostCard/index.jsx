@@ -6,6 +6,7 @@ import RepostButton from "@/components/RepostButton";
 import ShareButton from "@/components/ShareButton";
 
 import useEmblaCarousel from "embla-carousel-react";
+import { useCurrentUser } from "@/features/auth";
 
 const PostCard = ({ post }) => {
   const [emblaRef] = useEmblaCarousel();
@@ -18,7 +19,10 @@ const PostCard = ({ post }) => {
     media_urls,
     reposts_and_quotes_count,
     is_liked_by_auth,
+    is_reposted_by_auth,
   } = post;
+
+  const currentUser = useCurrentUser();
 
   return (
     <>
@@ -51,7 +55,12 @@ const PostCard = ({ post }) => {
             isLiked={is_liked_by_auth}
           />
           <CommentButton count={replies_count} />
-          <RepostButton count={reposts_and_quotes_count} />
+          <RepostButton
+            postId={id}
+            count={reposts_and_quotes_count}
+            isReposted={is_reposted_by_auth}
+            hasMenu={currentUser}
+          />
           <ShareButton />
         </div>
       </div>

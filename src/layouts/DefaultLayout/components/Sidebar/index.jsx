@@ -8,9 +8,6 @@ import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 
-const BUTTON_CLASSES =
-  "inline-block rounded-md px-5 py-3 text-gray-400 hover:bg-gray-100";
-
 const Sidebar = () => {
   const currentUser = useCurrentUser();
   return (
@@ -30,9 +27,8 @@ const Sidebar = () => {
                 key={nav.id}
                 title={nav.dialogTitle}
                 description={nav.dialogDescription}
-                buttonClasses={BUTTON_CLASSES}
                 Icon={Icon}
-                sizeIcon={26}
+                iconSize={{ width: 26, height: 26 }}
               />
             );
           }
@@ -41,9 +37,12 @@ const Sidebar = () => {
             <NavLink
               key={nav.id}
               to={nav.path}
-              className={classNames(BUTTON_CLASSES, {
-                "bg-gray-100 hover:text-black": nav.id === "create",
-              })}
+              className={classNames(
+                "inline-block rounded-md px-5 py-3 text-gray-600 hover:bg-gray-100",
+                {
+                  "bg-gray-100 hover:text-black": nav.id === "create",
+                },
+              )}
             >
               {({ isActive }) => {
                 return (
@@ -57,11 +56,9 @@ const Sidebar = () => {
           );
         })}
       </div>
-      {currentUser ? (
-        <AuthenticatedMenu buttonClasses={BUTTON_CLASSES} />
-      ) : (
-        <UnauthenticatedMenu buttonClasses={BUTTON_CLASSES} />
-      )}
+      <div className="px-4 py-5">
+        {currentUser ? <AuthenticatedMenu /> : <UnauthenticatedMenu />}
+      </div>
     </div>
   );
 };

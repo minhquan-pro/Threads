@@ -9,14 +9,14 @@ import { ArrowRight, Menu } from "lucide-react";
 import ThemeSubmenu from "../ThemeSubmenu";
 import { useMenuSubmenu } from "@/hooks";
 
-const UnauthenticatedMenu = ({ buttonClasses }) => {
+const UnauthenticatedMenu = () => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
 
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none">
-          <div className={buttonClasses}>
+          <div>
             <Menu />
           </div>
         </DropdownMenuTrigger>

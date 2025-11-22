@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Instagram, Plus } from "lucide-react";
 
 import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
@@ -49,11 +49,21 @@ const DefaultLayout = () => {
               Xem mọi người đang nói về điều gì và tham gia cuộc trò chuyện.
             </p>
             <Button
-              className="text-md mt-3 w-full rounded-xl py-8"
+              asChild
+              className="mt-3 mb-4 w-full rounded-xl py-8"
               variant="outline"
             >
-              <Link to={"/login"}>Đăng nhập bằng tên người dùng</Link>
+              <Link to={"/login"} className="flex items-center gap-3">
+                <Instagram />
+                <div className="flex flex-col items-start">
+                  <span className="text-gray-500">Tiếp tục bằng instagram</span>
+                  <span className="font-bold">quanlm02227</span>
+                </div>
+              </Link>
             </Button>
+            <Link to={"/login"} className="text-sm font-semibold text-gray-400">
+              Đăng nhập bằng tên người dùng
+            </Link>
           </div>
         )}
       </div>

@@ -22,7 +22,7 @@ import {
 } from "@/features/auth";
 import { logout } from "@/services/auth";
 
-const AuthenticatedMenu = ({ buttonClasses }) => {
+const AuthenticatedMenu = () => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const AuthenticatedMenu = ({ buttonClasses }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div className={buttonClasses}>
+        <div>
           <Menu />
         </div>
       </DropdownMenuTrigger>

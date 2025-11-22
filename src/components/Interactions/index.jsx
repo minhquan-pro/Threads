@@ -2,8 +2,6 @@ import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/features/auth";
 
-const buttonClasses = `m-auto border-none shadow-none`;
-
 const Interactions = ({
   onClick,
   isActive,
@@ -17,30 +15,25 @@ const Interactions = ({
 
   if (!currentUser) {
     return (
-      <div>
-        <AuthRequiredDialog
-          type="button"
-          title={title}
-          description={description}
-          Icon={Icon}
-          count={count}
-          buttonClasses={buttonClasses}
-        />
-      </div>
+      <AuthRequiredDialog
+        type="button"
+        title={title}
+        description={description}
+        Icon={Icon}
+        count={count}
+      />
     );
   }
 
   return (
-    <div>
-      <Button
-        onClick={onClick}
-        variant="outline"
-        className={`${buttonClasses} ${isActive && activeClass}`}
-      >
-        {Icon && <Icon className={`${isActive && "fill-current"}`} />}
-        {count ? <span>{count}</span> : null}
-      </Button>
-    </div>
+    <Button
+      onClick={onClick}
+      variant="outline"
+      className={`border-none shadow-none ${isActive && activeClass}`}
+    >
+      {Icon && <Icon className={`${isActive && "fill-current"}`} />}
+      {count ? <span>{count}</span> : null}
+    </Button>
   );
 };
 export default Interactions;

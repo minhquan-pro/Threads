@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router";
 import { AUTH_PAGES } from "@/constants/auth";
-import decorImg from "@/assets/image/decor.jpg";
+import decorImg from "@/assets/images/decor.jpg";
 
 const AuthLayout = () => {
   const location = useLocation();
