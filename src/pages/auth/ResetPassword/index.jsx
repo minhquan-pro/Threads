@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -19,6 +19,7 @@ const ResetPassword = () => {
 
   const loading = useSelector(loadingSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [prams] = useSearchParams();
   const token = prams.get("token");
   const email = localStorage.getItem("resetEmail");
@@ -57,10 +58,11 @@ const ResetPassword = () => {
   // Submit Form
   const onSubmit = async (data) => {
     try {
-      const response = await dispatch(
-        resetPassword({ token, email, ...data }),
-      ).unwrap();
-      console.log(response);
+      await dispatch(resetPassword({ token, email, ...data })).unwrap();
+      localStorage.removeItem("resetEmail");
+      navigate("/login", {
+        state: { message: "Tạo mật khẩu mới thành công, vui lòng đăng nhập" },
+      });
     } catch (error) {
       setIsValidToken(false);
     }
