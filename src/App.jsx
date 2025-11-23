@@ -13,11 +13,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import AuthProvider from "./components/AuthProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
+      <AuthProvider />
       <Routes>
         {/* AuthLayout */}
         <Route element={<AuthLayout />}>

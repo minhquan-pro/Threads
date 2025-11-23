@@ -70,6 +70,8 @@ httpClient.interceptors.response.use(
     return response;
   },
   async (error) => {
+    console.log(error);
+
     const originalRequest = error.config;
     if (error.status === 400 && error.response.data) {
       return Promise.reject(error);

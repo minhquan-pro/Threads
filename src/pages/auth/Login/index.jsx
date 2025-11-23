@@ -10,7 +10,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { FieldGroup } from "@/components/ui/field";
 
 import { loadingSelector, useCurrentUser } from "@/features/auth";
-import { login } from "@/services/auth/authService";
+import { getCurrentUser, login } from "@/services/auth/authService";
 import { loginSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
 
@@ -18,6 +18,7 @@ const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { handleSubmit, control, setError } = useForm({
     defaultValues: {
       login: "",
@@ -25,6 +26,7 @@ const Login = () => {
     },
     resolver: yupResolver(loginSchema),
   });
+
   const loading = useSelector(loadingSelector);
   const currentUser = useCurrentUser();
 
@@ -41,6 +43,7 @@ const Login = () => {
       const { access_token, refresh_token } = response.data;
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("refreshToken", refresh_token);
+      dispatch(getCurrentUser());
     } catch (error) {
       console.log(error);
       setError("password", {

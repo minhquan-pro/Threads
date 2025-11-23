@@ -1,5 +1,6 @@
 import {
   forgotPassword,
+  getCurrentUser,
   login,
   logout,
   register,
@@ -22,16 +23,27 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // GetCurrentUser
     builder
-      // Login
+      .addCase(getCurrentUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.currentUser = action.payload;
+      });
+
+    // Login
+    builder
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
-        state.currentUser = action.payload.data.user;
       })
       .addCase(login.rejected, (state, action) => {
         console.log(action);
