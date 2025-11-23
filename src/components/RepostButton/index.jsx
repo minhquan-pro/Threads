@@ -7,12 +7,27 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useOptimisticRepost } from "@/hooks/useOptimisticRepost";
+import { toast } from "react-toastify";
 
 const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
   const { toggleRepost } = useOptimisticRepost("post");
 
   const handleRepost = () => {
-    toggleRepost({ postId, isReposted });
+    try {
+      toggleRepost({ postId, isReposted }).unwrap();
+      toast(isReposted ? "Đã gỡ" : "Đã đăng lại", {
+        autoClose: 1000,
+        position: "bottom-center",
+        theme: "dark",
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error("Có lỗi xảy ra! Vui lòng thử lại", {
+        autoClose: 1000,
+        position: "bottom-center",
+        theme: "colored",
+      });
+    }
   };
 
   if (!hasMenu) {
