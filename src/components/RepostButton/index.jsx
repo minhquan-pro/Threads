@@ -8,13 +8,16 @@ import {
 } from "../ui/dropdown-menu";
 import { useOptimisticRepost } from "@/hooks/useOptimisticRepost";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import QuoteModal from "../Posts/components/QuoteModal";
 
 const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
+  const [isOpenQuote, setIsOpenQuote] = useState(false);
   const { toggleRepost } = useOptimisticRepost("post");
 
   const handleRepost = () => {
     try {
-      toggleRepost({ postId, isReposted }).unwrap();
+      toggleRepost({ postId, isReposted });
       toast(isReposted ? "Đã gỡ" : "Đã đăng lại", {
         autoClose: 1000,
         position: "bottom-center",
@@ -28,6 +31,10 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
         theme: "colored",
       });
     }
+  };
+
+  const handleQuote = () => {
+    setIsOpenQuote(!isOpenQuote);
   };
 
   if (!hasMenu) {
@@ -45,34 +52,41 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <div>
-          <Interactions
-            count={count}
-            Icon={Repeat}
-            isActive={isReposted}
-            activeClass="text-blue-600"
-          />
-        </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="start"
-        className="w-56 border border-gray-300"
-      >
-        <DropdownMenuItem
-          onClick={handleRepost}
-          className="text-md flex justify-between p-3 font-semibold"
+    <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div>
+            <Interactions
+              count={count}
+              Icon={Repeat}
+              isActive={isReposted}
+              activeClass="text-blue-600"
+            />
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="start"
+          className="w-56 border border-gray-300"
         >
-          <span>{isReposted ? "Bỏ đăng lại" : "Đăng lại"}</span>
-          <Repeat className="mr-2 h-4 w-4" />
-        </DropdownMenuItem>
-        <DropdownMenuItem className="text-md flex justify-between p-3 font-semibold">
-          <span>Trích dẫn</span>
-          <MessageSquareQuote className="mr-2 h-4 w-4" />
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuItem
+            onClick={handleRepost}
+            className="text-md flex justify-between p-3 font-semibold"
+          >
+            <span>{isReposted ? "Bỏ đăng lại" : "Đăng lại"}</span>
+            <Repeat className="mr-2 h-4 w-4" />
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={handleQuote}
+            className="text-md flex justify-between p-3 font-semibold"
+          >
+            <span>Trích dẫn</span>
+            <MessageSquareQuote className="mr-2 h-4 w-4" />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <QuoteModal handleQuote={handleQuote} isOpen={isOpenQuote} />
+    </div>
   );
 };
 export default RepostButton;
