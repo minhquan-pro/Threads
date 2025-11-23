@@ -1,24 +1,14 @@
 import { Heart } from "lucide-react";
 import Interactions from "../Interactions";
-import { useDispatch } from "react-redux";
-import { likePost } from "@/services/Posts";
-import { optimisticUpdateLikePost } from "@/features/posts/postSlice";
+import { useOptimisticLike } from "@/hooks";
 
 const LikeButton = ({ postId, count, isLiked }) => {
-  const previousLikePost = isLiked;
+  const { toggleLike } = useOptimisticLike("post");
 
-  const dispatch = useDispatch();
-  const handleLike = async () => {
-    dispatch(optimisticUpdateLikePost({ postId, isLiked }));
-    try {
-      await dispatch(likePost(postId)).unwrap();
-    } catch (error) {
-      dispatch(
-        optimisticUpdateLikePost({ postId, isLiked: !previousLikePost }),
-      );
-      console.log(error);
-    }
+  const handleLike = () => {
+    toggleLike({ postId, isLiked });
   };
+
   return (
     <Interactions
       count={count}

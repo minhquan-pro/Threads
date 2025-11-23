@@ -11,26 +11,20 @@ export const getPosts = createAsyncThunk(
   },
 );
 
-export const likePost = createAsyncThunk(
-  "posts/like",
-  async (postId, { rejectWithValue }) => {
-    try {
-      const response = await http.post(`/posts/${postId}/like`);
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+export const likePost = async (postId) => {
+  try {
+    const response = await http.post(`/posts/${postId}/like`);
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
-export const repostPost = createAsyncThunk(
-  "posts/repost",
-  async (postId, { rejectWithValue }) => {
-    try {
-      const response = await http.post(`/posts/${postId}/repost`);
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  },
-);
+export const repostPost = async (postId) => {
+  try {
+    const response = await http.post(`/posts/${postId}/repost`);
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

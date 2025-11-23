@@ -1,22 +1,18 @@
 import { MessageSquareQuote, Repeat } from "lucide-react";
 import Interactions from "../Interactions";
-import { useDispatch } from "react-redux";
-import { repostPost } from "@/services/Posts";
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useOptimisticRepost } from "@/hooks/useOptimisticRepost";
 
 const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
-  const dispatch = useDispatch();
-  const handleRepost = async () => {
-    try {
-      await dispatch(repostPost(postId)).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
+  const { toggleRepost } = useOptimisticRepost("post");
+
+  const handleRepost = () => {
+    toggleRepost({ postId, isReposted });
   };
 
   if (!hasMenu) {
@@ -56,10 +52,7 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
           <span>{isReposted ? "Bỏ đăng lại" : "Đăng lại"}</span>
           <Repeat className="mr-2 h-4 w-4" />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={handleRepost}
-          className="text-md flex justify-between p-3 font-semibold"
-        >
+        <DropdownMenuItem className="text-md flex justify-between p-3 font-semibold">
           <span>Trích dẫn</span>
           <MessageSquareQuote className="mr-2 h-4 w-4" />
         </DropdownMenuItem>

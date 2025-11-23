@@ -10,17 +10,38 @@ const initialState = {
   },
 };
 
+const optimisticActionPost = (state, postId, isAction, countKey, authKey) => {
+  const post = state.items.find((post) => post.id === postId);
+  if (!post) return;
+
+  post[countKey] += isAction ? -1 : 1;
+  post[authKey] = !isAction;
+};
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
     optimisticUpdateLikePost: (state, action) => {
       const { postId, isLiked } = action.payload;
-      const post = state.items.find((post) => post.id === postId);
-      if (post) {
-        post.likes_count += isLiked ? -1 : 1;
-        post.is_liked_by_auth = !isLiked;
-      }
+      optimisticActionPost(
+        state,
+        postId,
+        isLiked,
+        "likes_count",
+        "is_liked_by_auth",
+      );
+    },
+
+    optimisticUpdateRepostPost: (state, action) => {
+      const { postId, isReposted } = action.payload;
+      optimisticActionPost(
+        state,
+        postId,
+        isReposted,
+        "reposts_and_quotes_count",
+        "is_reposted_by_auth",
+      );
     },
   },
   extraReducers: (builder) => {
@@ -48,6 +69,7 @@ const postsSlice = createSlice({
   },
 });
 
-export const { optimisticUpdateLikePost } = postsSlice.actions;
+export const { optimisticUpdateLikePost, optimisticUpdateRepostPost } =
+  postsSlice.actions;
 
 export default postsSlice;
