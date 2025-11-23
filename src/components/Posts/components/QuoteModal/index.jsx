@@ -9,11 +9,35 @@ import {
 import PostHeader from "../PostHeader";
 import { useCurrentUser } from "@/features/auth";
 import UserProfileDialog from "@/components/UserProfileDialog";
-import { Gift, GiftIcon, Image } from "lucide-react";
-import PostCard from "../PostCard";
+import { Image } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getPostById } from "@/services/Posts";
+import Loading from "@/components/Loading";
+import FeedItem from "@/components/FeedItem";
 
-const QuoteModal = ({ isOpen, handleQuote }) => {
+const QuoteModal = ({ postId, isOpen, handleQuote }) => {
+  const dispatch = useDispatch();
   const currentUser = useCurrentUser();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const response = await getPostById(postId);
+        setPost(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [dispatch, postId]);
+
+  if (!post) return;
+
   return (
     <Dialog open={isOpen} onOpenChange={handleQuote} className="border-none">
       <DialogContent className="max-w-[600px] min-w-[500px]">
@@ -25,9 +49,9 @@ const QuoteModal = ({ isOpen, handleQuote }) => {
             <DialogTitle className="m-auto">Thread mới</DialogTitle>
           </div>
         </DialogHeader>
-        <div className="flex gap-3 p-2">
+        <div className="flex w-full gap-3 p-2">
           <UserProfileDialog user={currentUser} />
-          <div>
+          <div className="w-full">
             <PostHeader user={currentUser} hideDate />
             <input
               className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
@@ -41,28 +65,17 @@ const QuoteModal = ({ isOpen, handleQuote }) => {
               <Image color="gray" size={20} />
               <Image color="gray" size={20} />
             </div>
-            <div className="mt-5 rounded-md border border-gray-400 p-2">
-              <PostCard
-                post={{
-                  id: 12906,
-                  content:
-                    "Là một sinh viên Bách Khoa Hai đôi mắt của t vẫn 10/10. T biết vị xôi, vị phở, vị bánh cuốn, vị dookki, vị bò, vị gà, vị cơm, vị bánh tiramisu, vị bánh mì,... như nào. Điểm Văn hồi thi THPTQG của t là 8,5. T rất lười sửa đồ đạc trong nhà. T coi việc giảng giải tích đại số vật lý như là một hình thức khẩu dâm.T không bao giờ có ý định đối xử tệ bạc với ai. ",
-                  user: currentUser,
-                  replies_count: 12,
-                  likes_count: 12,
-                  media_urls: [
-                    "https://thanhnien.mediacdn.vn/Uploaded/quyhien/2021_04_07/svbkhn_BBRI.jpg",
-                    "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/8/28/1385990/Dai-Hoc-Bach-Khoa-Ha-01.jpg",
-                  ],
-                  reposts_and_quotes_count: 12,
-                  is_liked_by_auth: true,
-                  is_reposted_by_auth: true,
-                }}
-                disableInteractions={false}
-              />
-            </div>
+
+            {loading ? (
+              <Loading size={"w-6 h-6"} />
+            ) : (
+              <div className="mt-5 w-full rounded-md border border-gray-400 p-3">
+                <FeedItem post={post} variant="quote" />
+              </div>
+            )}
           </div>
         </div>
+
         <DialogFooter>
           <Button>Đăng</Button>
         </DialogFooter>

@@ -85,7 +85,13 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <QuoteModal handleQuote={handleQuote} isOpen={isOpenQuote} />
+      {isOpenQuote && (
+        <QuoteModal
+          postId={postId}
+          handleQuote={handleQuote}
+          isOpen={isOpenQuote}
+        />
+      )}
     </div>
   );
 };

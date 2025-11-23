@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import PostCard from "./components/PostCard";
 import { useInfiniteScroll } from "@/hooks";
 import {
   selectorLoading as selectorLoadingPost,
@@ -9,6 +8,7 @@ import {
   useFetchPostsList,
   usePostsList,
 } from "@/features/posts";
+import FeedItem from "../FeedItem";
 
 const Posts = ({ type }) => {
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ const Posts = ({ type }) => {
             key={post.id}
             className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-none"
           >
-            <PostCard post={post} />
+            <FeedItem post={post} />
           </div>
         );
       })}
