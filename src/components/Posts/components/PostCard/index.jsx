@@ -8,7 +8,7 @@ import ShareButton from "@/components/ShareButton";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCurrentUser } from "@/features/auth";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, disableInteractions = true }) => {
   const [emblaRef] = useEmblaCarousel();
   const {
     id,
@@ -34,35 +34,39 @@ const PostCard = ({ post }) => {
         </div>
       </div>
       <div className="mt-1 w-full pl-12">
-        <div ref={emblaRef}>
-          <div className="flex items-center gap-2">
-            {media_urls.map((url) => {
-              return (
-                <img
-                  key={url}
-                  src={url}
-                  alt=""
-                  className="min-h-52 min-w-40 rounded-md object-cover"
-                />
-              );
-            })}
+        {media_urls && (
+          <div ref={emblaRef} className="w-full">
+            <div className="flex items-center gap-2">
+              {media_urls.map((url) => {
+                return (
+                  <img
+                    key={url}
+                    src={url}
+                    alt=""
+                    className="min-h-52 min-w-40 rounded-md object-cover"
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="flex items-center justify-start">
-          <LikeButton
-            postId={id}
-            count={likes_count}
-            isLiked={is_liked_by_auth}
-          />
-          <CommentButton count={replies_count} />
-          <RepostButton
-            postId={id}
-            count={reposts_and_quotes_count}
-            isReposted={is_reposted_by_auth}
-            hasMenu={currentUser}
-          />
-          <ShareButton />
-        </div>
+        )}
+        {disableInteractions && (
+          <div className="flex items-center justify-start">
+            <LikeButton
+              postId={id}
+              count={likes_count}
+              isLiked={is_liked_by_auth}
+            />
+            <CommentButton count={replies_count} />
+            <RepostButton
+              postId={id}
+              count={reposts_and_quotes_count}
+              isReposted={is_reposted_by_auth}
+              hasMenu={currentUser}
+            />
+            <ShareButton />
+          </div>
+        )}
       </div>
     </>
   );
