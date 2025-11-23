@@ -23,6 +23,8 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!isOpen || !postId) return;
+
     (async () => {
       setLoading(true);
       try {
@@ -34,9 +36,7 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
         setLoading(false);
       }
     })();
-  }, [dispatch, postId]);
-
-  if (!post) return;
+  }, [dispatch, postId, isOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleQuote} className="border-none">
@@ -67,7 +67,9 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
             </div>
 
             {loading ? (
-              <Loading size={"w-6 h-6"} />
+              <div className="flex justify-center">
+                <Loading size={"w-6 h-6"} />
+              </div>
             ) : (
               <div className="mt-5 w-full rounded-md border border-gray-400 p-3">
                 <FeedItem post={post} variant="quote" />
@@ -75,7 +77,6 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
             )}
           </div>
         </div>
-
         <DialogFooter>
           <Button>Đăng</Button>
         </DialogFooter>

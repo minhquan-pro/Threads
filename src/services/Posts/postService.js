@@ -11,6 +11,15 @@ export const getPosts = createAsyncThunk(
   },
 );
 
+export const getPostById = async (postId) => {
+  try {
+    const response = await http.get(`/posts/${postId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
+
 export const likePost = async (postId) => {
   try {
     const response = await http.post(`/posts/${postId}/like`);

@@ -1,11 +1,11 @@
-import PostHeader from "../PostHeader";
 import UserProfileDialog from "@/components/UserProfileDialog";
 import LikeButton from "@/components/LikeButton";
 import CommentButton from "@/components/CommentButton";
 import RepostButton from "@/components/RepostButton";
 import ShareButton from "@/components/ShareButton";
 import { useCurrentUser } from "@/features/auth";
-import PostContent from "../PostContent";
+import PostHeader from "../Posts/components/PostHeader";
+import PostContent from "../Posts/components/PostContent";
 
 const FeedItem = ({ post, variant }) => {
   const currentUser = useCurrentUser();
