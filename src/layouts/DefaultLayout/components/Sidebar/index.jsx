@@ -7,11 +7,12 @@ import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
+import { Button } from "@/components/ui/button";
 
 const Sidebar = () => {
   const currentUser = useCurrentUser();
   return (
-    <div className="flex h-full flex-col justify-between">
+    <div className="flex h-full flex-col justify-between p-6">
       <div>
         <Link to={"/"}>
           <img src={threads_logo} alt="" className="h-12 w-10" />
@@ -20,6 +21,7 @@ const Sidebar = () => {
       <div className="flex flex-col gap-8">
         {NAV_ITEMS.map((nav) => {
           const Icon = nav.component;
+
           if (nav.requireAuth && !currentUser) {
             return (
               <AuthRequiredDialog
@@ -38,7 +40,7 @@ const Sidebar = () => {
               key={nav.id}
               to={nav.path}
               className={classNames(
-                "inline-block rounded-md px-5 py-3 text-gray-600 hover:bg-gray-100",
+                "inline-block rounded-md text-gray-600 hover:bg-gray-100",
                 {
                   "bg-gray-100 hover:text-black": nav.id === "create",
                 },
@@ -46,19 +48,19 @@ const Sidebar = () => {
             >
               {({ isActive }) => {
                 return (
-                  <Icon
-                    className={`${isActive && "text-foreground fill-current"}`}
-                    size={26}
-                  />
+                  <Button variant="outline border-none shadow-none">
+                    <Icon
+                      className={`${isActive && "text-foreground fill-current"}`}
+                      style={{ width: 26, height: 26 }}
+                    />
+                  </Button>
                 );
               }}
             </NavLink>
           );
         })}
       </div>
-      <div className="px-4 py-5">
-        {currentUser ? <AuthenticatedMenu /> : <UnauthenticatedMenu />}
-      </div>
+      <div>{currentUser ? <AuthenticatedMenu /> : <UnauthenticatedMenu />}</div>
     </div>
   );
 };

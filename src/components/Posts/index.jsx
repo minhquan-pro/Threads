@@ -29,7 +29,7 @@ const Posts = ({ type }) => {
           <div
             ref={lastElementRef}
             key={post.id}
-            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3"
+            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-none"
           >
             <PostCard post={post} />
           </div>
