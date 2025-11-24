@@ -55,14 +55,12 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
   const handleQuotePost = async () => {
     setLoading(true);
     try {
-      await dispatch(
-        quotePost(postId, { content, reply_permission: "everyone" }),
-      );
-      toast("Đã đăng", {
-        autoClose: 1000,
-        theme: "dark",
-        position: "bottom-center",
-      });
+      (await quotePost(postId, { content, reply_permission: "everyone" }),
+        toast("Đã đăng", {
+          autoClose: 1000,
+          theme: "dark",
+          position: "bottom-center",
+        }));
     } catch (error) {
       toast.error("Đăng bài thất bại. Vui lòng thử lại!", {
         autoClose: 1000,
@@ -117,7 +115,7 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
           </div>
         </div>
         <DialogFooter>
-          <Button disabled={!content} onClick={handleQuotePost}>
+          <Button disabled={!content.trim()} onClick={handleQuotePost}>
             Đăng
           </Button>
         </DialogFooter>

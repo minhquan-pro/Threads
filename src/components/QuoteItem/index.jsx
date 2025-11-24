@@ -6,7 +6,7 @@ import defaultImageUser from "@/assets/images/defaultImageUser.png";
 const QuoteItem = ({ originalPost }) => {
   const { user, content, media_urls } = originalPost;
   return (
-    <div className="mt-2 flex min-h-24 items-start gap-2 rounded-xl border border-gray-300 p-3 shadow">
+    <div className="mt-2 flex items-start gap-2 rounded-xl border border-gray-300 bg-gray-50 p-3 shadow">
       <div>
         <UserAvatar
           src={user.avatar_url || defaultImageUser}
