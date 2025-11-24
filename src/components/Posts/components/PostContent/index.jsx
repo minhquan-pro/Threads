@@ -1,3 +1,4 @@
+import FeedItem from "@/components/FeedItem";
 import useEmblaCarousel from "embla-carousel-react";
 
 const PostContent = ({ content, media_urls }) => {

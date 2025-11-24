@@ -19,6 +19,7 @@ import FeedItem from "@/components/FeedItem";
 const QuoteModal = ({ postId, isOpen, handleQuote }) => {
   const dispatch = useDispatch();
   const currentUser = useCurrentUser();
+  const [content, setContent] = useState("");
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -38,6 +39,10 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
     })();
   }, [dispatch, postId, isOpen]);
 
+  const handleContent = (e) => {
+    setContent(e.target.value);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={handleQuote} className="border-none">
       <DialogContent className="max-w-[600px] min-w-[500px]">
@@ -56,13 +61,10 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
             <input
               className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
               placeholder="Hãy chia sẻ suy nghĩ của bạn..."
+              value={content}
+              onChange={handleContent}
             />
             <div className="mt-3 flex items-center gap-3">
-              <Image color="gray" size={20} />
-              <Image color="gray" size={20} />
-              <Image color="gray" size={20} />
-              <Image color="gray" size={20} />
-              <Image color="gray" size={20} />
               <Image color="gray" size={20} />
             </div>
 
