@@ -8,19 +8,19 @@ import {
 
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import UserAvatar from "../UserAvatar";
-import defaultImageUser from "@/assets/images/defaultImageUser.png";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../ui/button";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
-
   return (
     <div className="relative">
       <Dialog>
         <DialogTrigger>
           <UserAvatar
-            src={user.avatar_url || defaultImageUser}
+            username={user.name}
+            userId={user.id}
+            src={user.avatar_url}
             imgSize="h-10 w-10"
             Icon={Plus}
           />
@@ -33,10 +33,7 @@ const UserProfileDialog = ({ user }) => {
               </DialogTitle>
               <span>{user.username}</span>
             </div>
-            <UserAvatar
-              src={user.avatar_url || defaultImageUser}
-              imgSize="h-14 w-14"
-            />
+            <UserAvatar src={user.avatar_url} imgSize="h-14 w-14" />
           </div>
           <p
             className="text-foreground text-sm font-semibold"

@@ -10,7 +10,6 @@ import {
 
 import UserAvatar from "@/components/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
-import defaultImageUser from "@/assets/images/defaultImageUser.png";
 
 const CreatePost = () => {
   const currentUser = useCurrentUser();
@@ -18,10 +17,7 @@ const CreatePost = () => {
     <div className="flex items-center justify-between gap-2 border-b border-gray-300 p-4">
       <div className="flex w-full items-center">
         <Link to={"/profile"}>
-          <UserAvatar
-            imgSize="w-9 h-9"
-            src={currentUser.avatar_url || defaultImageUser}
-          />
+          <UserAvatar imgSize="w-9 h-9" src={currentUser.avatar_url} />
         </Link>
         <div className="w-full rounded-md p-2 text-sm text-gray-400">
           Có gì mới?
