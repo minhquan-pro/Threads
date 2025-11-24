@@ -9,11 +9,11 @@ const UserAvatar = ({ imgSize, className, src, Icon }) => {
           <AvatarImage src={src} />
         </Avatar>
       </div>
-      {/* {Icon && (
+      {Icon && (
         <div className="absolute right-0 bottom-0 flex h-3 w-3 items-center justify-center rounded-full bg-black hover:scale-125">
           <Icon size={8} strokeWidth={2} color="white" />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

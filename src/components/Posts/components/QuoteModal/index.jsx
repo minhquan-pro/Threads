@@ -1,4 +1,8 @@
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { Image } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -6,17 +10,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import PostHeader from "../PostHeader";
+import { Button } from "@/components/ui/button";
+
+import { getPostById, quotePost } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
 import UserProfileDialog from "@/components/UserProfileDialog";
-import { Image } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPostById } from "@/services/Posts";
 import Loading from "@/components/Loading";
 import FeedItem from "@/components/FeedItem";
+import PostHeader from "../PostHeader";
 
-const QuoteModal = ({ postId, isOpen, handleQuote }) => {
+const QuoteModal = ({ postId, isOpen, onClose }) => {
   const dispatch = useDispatch();
   const currentUser = useCurrentUser();
   const [content, setContent] = useState("");
@@ -37,18 +40,52 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
         setLoading(false);
       }
     })();
-  }, [dispatch, postId, isOpen]);
+  }, [dispatch, postId, isOpen, onClose]);
 
-  const handleContent = (e) => {
+  const handleChangeContent = (e) => {
     setContent(e.target.value);
   };
 
+  const handleClose = () => {
+    setPost(null);
+    onClose();
+    setContent("");
+  };
+
+  const handleQuotePost = async () => {
+    setLoading(true);
+    try {
+      await dispatch(
+        quotePost(postId, { content, reply_permission: "everyone" }),
+      );
+      toast("Đã đăng", {
+        autoClose: 1000,
+        theme: "dark",
+        position: "bottom-center",
+      });
+    } catch (error) {
+      toast.error("Đăng bài thất bại. Vui lòng thử lại!", {
+        autoClose: 1000,
+        theme: "colored",
+        position: "bottom-center",
+      });
+      console.log(error);
+    } finally {
+      setLoading(false);
+      handleClose();
+    }
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={handleQuote} className="border-none">
+    <Dialog open={isOpen} onOpenChange={handleClose} className="border-none">
       <DialogContent className="max-w-[600px] min-w-[500px]">
         <DialogHeader>
           <div className="flex items-center">
-            <Button variant="outline" className="border-none shadow-none">
+            <Button
+              onClick={onClose}
+              variant="outline"
+              className="border-none shadow-none"
+            >
               Hủy
             </Button>
             <DialogTitle className="m-auto">Thread mới</DialogTitle>
@@ -62,25 +99,27 @@ const QuoteModal = ({ postId, isOpen, handleQuote }) => {
               className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
               placeholder="Hãy chia sẻ suy nghĩ của bạn..."
               value={content}
-              onChange={handleContent}
+              onChange={handleChangeContent}
             />
             <div className="mt-3 flex items-center gap-3">
               <Image color="gray" size={20} />
             </div>
 
-            {loading ? (
-              <div className="flex justify-center">
-                <Loading size={"w-6 h-6"} />
-              </div>
-            ) : (
-              <div className="mt-5 w-full rounded-md border border-gray-400 p-3">
-                <FeedItem post={post} variant="quote" />
-              </div>
-            )}
+            <div className="mt-5 w-full rounded-md border border-gray-300 p-3 shadow">
+              {loading ? (
+                <div className="flex justify-center">
+                  <Loading size={"w-6 h-6"} />
+                </div>
+              ) : (
+                post && <FeedItem post={post} variant="quote" />
+              )}
+            </div>
           </div>
         </div>
         <DialogFooter>
-          <Button>Đăng</Button>
+          <Button disabled={!content} onClick={handleQuotePost}>
+            Đăng
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -1,10 +1,9 @@
-import FeedItem from "@/components/FeedItem";
 import useEmblaCarousel from "embla-carousel-react";
 
 const PostContent = ({ content, media_urls }) => {
   const [emblaRef] = useEmblaCarousel();
   return (
-    <div>
+    <div className="mt-1">
       <p className="text-[15px] wrap-break-word">{content}</p>
       {media_urls && (
         <div ref={emblaRef} className="w-full">

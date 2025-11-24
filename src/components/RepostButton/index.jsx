@@ -8,7 +8,7 @@ import {
 } from "../ui/dropdown-menu";
 import { useOptimisticRepost } from "@/hooks/useOptimisticRepost";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import QuoteModal from "../Posts/components/QuoteModal";
 
 const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
@@ -33,9 +33,9 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
     }
   };
 
-  const handleQuote = () => {
-    setIsOpenQuote(!isOpenQuote);
-  };
+  const handleCloseDialog = useCallback(() => {
+    setIsOpenQuote(false);
+  }, []);
 
   if (!hasMenu) {
     return (
@@ -76,7 +76,7 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
             <Repeat className="mr-2 h-4 w-4" />
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={handleQuote}
+            onClick={() => setIsOpenQuote(true)}
             className="text-md flex justify-between p-3 font-semibold"
           >
             <span>Trích dẫn</span>
@@ -87,8 +87,8 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
 
       <QuoteModal
         postId={postId}
-        handleQuote={handleQuote}
         isOpen={isOpenQuote}
+        onClose={handleCloseDialog}
       />
     </div>
   );

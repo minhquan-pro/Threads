@@ -25,10 +25,10 @@ const FeedItem = ({ post, variant }) => {
   } = post;
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-start gap-2">
         <UserProfileDialog user={user} />
-        <div>
+        <div className="w-full">
           <PostHeader user={user} />
           {variant !== "quote" && (
             <>
@@ -38,22 +38,20 @@ const FeedItem = ({ post, variant }) => {
                 original_post={original_post}
               />
               {original_post && <QuoteItem originalPost={original_post} />}
-              <div>
-                <div className="flex items-center justify-start">
-                  <LikeButton
-                    postId={id}
-                    count={likes_count}
-                    isLiked={is_liked_by_auth}
-                  />
-                  <CommentButton count={replies_count} />
-                  <RepostButton
-                    postId={id}
-                    count={reposts_and_quotes_count}
-                    isReposted={is_reposted_by_auth}
-                    hasMenu={currentUser}
-                  />
-                  <ShareButton />
-                </div>
+              <div className="flex items-center justify-start">
+                <LikeButton
+                  postId={id}
+                  count={likes_count}
+                  isLiked={is_liked_by_auth}
+                />
+                <CommentButton count={replies_count} />
+                <RepostButton
+                  postId={id}
+                  count={reposts_and_quotes_count}
+                  isReposted={is_reposted_by_auth}
+                  hasMenu={currentUser}
+                />
+                <ShareButton />
               </div>
             </>
           )}
