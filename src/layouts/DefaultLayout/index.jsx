@@ -33,7 +33,7 @@ const DefaultLayout = () => {
                 <div className="sticky top-0 z-50 border-b border-gray-300 bg-white p-4">
                   <h1 className="text-md text-center font-semibold">{title}</h1>
                 </div>
-                <div className="min-w-[640px] overflow-y-auto border border-gray-300 border-t-transparent">
+                <div className="relative w-[640px] overflow-y-auto border border-gray-300 border-t-transparent">
                   <Outlet />
                 </div>
               </div>

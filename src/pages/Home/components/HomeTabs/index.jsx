@@ -9,8 +9,8 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
       value={currentTab}
       onValueChange={handleValueChange}
     >
-      <div className="sticky top-0 z-50 border-b border-gray-300">
-        <TabsList className="relative min-h-16 w-full gap-5 rounded-none bg-white">
+      <div className="sticky top-0 z-50">
+        <TabsList className="relative min-h-16 w-full gap-5 rounded-none border-b border-gray-300 bg-white">
           <TabsTrigger value="for-you">Dành cho bạn</TabsTrigger>
           <TabsTrigger value="following">Đang theo dõi</TabsTrigger>
           <TabsTrigger value="ghost-posts">Bài viết tự hủy</TabsTrigger>
@@ -18,7 +18,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
       </div>
       <TabsContent
         value={currentTab}
-        className="relative z-10 mt-0 min-w-[640px] overflow-y-auto border-x border-b border-gray-300 bg-white py-2"
+        className="relative z-10 mt-0 min-w-[600px] overflow-y-auto border-x border-b border-gray-300 bg-white py-2 shadow-inner"
       >
         <div>{children}</div>
       </TabsContent>

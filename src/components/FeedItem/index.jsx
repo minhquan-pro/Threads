@@ -42,6 +42,7 @@ const FeedItem = ({ post, variant }) => {
               />
               {original_post && (
                 <QuoteItem
+                  post={post}
                   originalPostId={original_post_id}
                   originalPost={original_post}
                 />
@@ -68,7 +69,7 @@ const FeedItem = ({ post, variant }) => {
         </div>
       </div>
       {variant === "quote" && (
-        <PostContent content={content} media_urls={media_urls} />
+        <PostContent content={content} mediaUrls={media_urls} />
       )}
     </div>
   );

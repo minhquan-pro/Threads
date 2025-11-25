@@ -15,7 +15,7 @@ const Posts = ({ type }) => {
   const lastElementRef = useRef(null);
 
   useFetchPostsList({ type, page, per_page: 10 });
-  const posts = usePostsList({ excludeCurrentUser: true });
+  const posts = usePostsList({ excludeCurrentUser: false });
 
   const loading = useSelector(selectorLoadingPost);
   const pagination = useSelector(selectorPagination);
@@ -29,7 +29,7 @@ const Posts = ({ type }) => {
           <div
             ref={lastElementRef}
             key={post.id}
-            className="flex w-[650px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-none"
+            className="flex w-[640px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-none"
           >
             <FeedItem post={post} />
           </div>
