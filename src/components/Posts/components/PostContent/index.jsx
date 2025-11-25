@@ -1,14 +1,14 @@
 import useEmblaCarousel from "embla-carousel-react";
 
-const PostContent = ({ content, media_urls }) => {
+const PostContent = ({ content, mediaUrls }) => {
   const [emblaRef] = useEmblaCarousel();
   return (
     <div className="mt-1">
       <p className="text-[15px] wrap-break-word">{content}</p>
-      {media_urls && (
+      {mediaUrls && (
         <div ref={emblaRef} className="w-full">
           <div className="flex items-center gap-2">
-            {media_urls.map((url) => {
+            {mediaUrls.map((url) => {
               return (
                 <img
                   key={url}

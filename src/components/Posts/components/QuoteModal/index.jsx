@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Image } from "lucide-react";
@@ -12,19 +12,22 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { getPostById, quotePost } from "@/services/Posts";
+import { getPostById, quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
 import UserProfileDialog from "@/components/UserProfileDialog";
 import Loading from "@/components/Loading";
 import FeedItem from "@/components/FeedItem";
 import PostHeader from "../PostHeader";
+import { PermissionContext } from "@/context/PermissionContext";
 
 const QuoteModal = ({ postId, isOpen, onClose }) => {
+  const [quotePost, setQuotePost] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
+  const { permission } = useContext(PermissionContext);
+
   const dispatch = useDispatch();
   const currentUser = useCurrentUser();
-  const [content, setContent] = useState("");
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!isOpen || !postId) return;
@@ -33,7 +36,7 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
       setLoading(true);
       try {
         const response = await getPostById(postId);
-        setPost(response);
+        setQuotePost(response);
       } catch (error) {
         console.log(error);
       } finally {
@@ -47,7 +50,7 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
   };
 
   const handleClose = () => {
-    setPost(null);
+    setQuotePost(null);
     onClose();
     setContent("");
   };
@@ -55,19 +58,22 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
   const handleQuotePost = async () => {
     setLoading(true);
     try {
-      (await quotePost(postId, { content, reply_permission: "everyone" }),
+      (await quotePostService(postId, {
+        content,
+        reply_permission: permission,
+      }),
         toast("Đã đăng", {
           autoClose: 1000,
           theme: "dark",
           position: "bottom-center",
         }));
     } catch (error) {
+      console.log(error);
       toast.error("Đăng bài thất bại. Vui lòng thử lại!", {
         autoClose: 1000,
         theme: "colored",
         position: "bottom-center",
       });
-      console.log(error);
     } finally {
       setLoading(false);
       handleClose();
@@ -109,7 +115,7 @@ const QuoteModal = ({ postId, isOpen, onClose }) => {
                   <Loading size={"w-6 h-6"} />
                 </div>
               ) : (
-                post && <FeedItem post={post} variant="quote" />
+                quotePost && <FeedItem post={quotePost} variant="quote" />
               )}
             </div>
           </div>
