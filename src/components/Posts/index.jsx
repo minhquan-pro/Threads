@@ -15,7 +15,7 @@ const Posts = ({ type }) => {
   const lastElementRef = useRef(null);
 
   useFetchPostsList({ type, page, per_page: 10 });
-  const posts = usePostsList();
+  const posts = usePostsList({ excludeCurrentUser: true });
 
   const loading = useSelector(selectorLoadingPost);
   const pagination = useSelector(selectorPagination);

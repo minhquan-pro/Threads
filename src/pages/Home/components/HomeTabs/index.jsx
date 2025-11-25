@@ -18,7 +18,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
       </div>
       <TabsContent
         value={currentTab}
-        className="relative z-10 mt-0 min-w-[640px] overflow-y-auto border-x border-b border-gray-300 bg-white"
+        className="relative z-10 mt-0 min-w-[640px] overflow-y-auto border-x border-b border-gray-300 bg-white py-2"
       >
         <div>{children}</div>
       </TabsContent>
