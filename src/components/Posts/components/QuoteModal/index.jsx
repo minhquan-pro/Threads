@@ -1,31 +1,21 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Image } from "lucide-react";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 import { quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
 import UserProfileDialog from "@/components/UserProfileDialog";
 import Loading from "@/components/Loading";
 import PostHeader from "../PostHeader";
-import { PermissionContext } from "@/context/PermissionContext";
 import QuoteItem from "@/components/QuoteItem";
 import UserAvatar from "@/components/UserAvatar";
 import ThreadLine from "@/components/ThreadLine";
+import BaseThreadModal from "@/components/BaseModal";
 
-const QuoteModal = ({ post, postId, isOpen, onClose }) => {
+const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
   const [loading, setLoading] = useState(false);
   const [content, setContent] = useState("");
-  const { permission } = useContext(PermissionContext);
 
   const handleChangeContent = (e) => {
     setContent(e.target.value);
@@ -39,9 +29,9 @@ const QuoteModal = ({ post, postId, isOpen, onClose }) => {
   const handleQuotePost = async () => {
     setLoading(true);
     try {
-      (await quotePostService(postId, {
+      (await quotePostService(post.id, {
         content,
-        reply_permission: permission,
+        reply_permission: post.reply_permission,
       }),
         toast("Đã đăng", {
           autoClose: 1000,
@@ -62,61 +52,42 @@ const QuoteModal = ({ post, postId, isOpen, onClose }) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose} className="border-none">
-      <DialogContent className="max-w-[600px] min-w-[500px]">
-        <DialogHeader>
-          <div className="flex items-center">
-            <Button
-              onClick={onClose}
-              variant="outline"
-              className="text-md border-none shadow-none"
-            >
-              Hủy
-            </Button>
-            <DialogTitle className="m-auto">Thread mới</DialogTitle>
+    <BaseThreadModal
+      title="Thread mới"
+      isOpen={isOpen}
+      onClose={handleClose}
+      onSubmit={handleQuotePost}
+      loading={loading}
+    >
+      <div className="flex w-full gap-3">
+        <div className="relative">
+          <ThreadLine show />
+          <UserProfileDialog user={currentUser} />
+        </div>
+        <div className="w-full">
+          <PostHeader user={currentUser} hideDate />
+          <input
+            className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
+            placeholder="Hãy chia sẻ suy nghĩ của bạn..."
+            value={content}
+            onChange={handleChangeContent}
+          />
+          <div className="mt-3 flex items-center gap-3">
+            <Image color="gray" size={20} />
           </div>
-        </DialogHeader>
-        <div>
-          <div className="flex w-full gap-3">
-            <div className="relative">
-              <ThreadLine show />
-              <UserProfileDialog user={currentUser} />
-            </div>
-            <div className="w-full">
-              <PostHeader user={currentUser} hideDate />
-              <input
-                className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
-                placeholder="Hãy chia sẻ suy nghĩ của bạn..."
-                value={content}
-                onChange={handleChangeContent}
-              />
-              <div className="mt-3 flex items-center gap-3">
-                <Image color="gray" size={20} />
-              </div>
 
-              <div>
-                {loading ? (
-                  <div className="flex justify-center">
-                    <Loading size={"w-6 h-6"} />
-                  </div>
-                ) : (
-                  post && <QuoteItem quotedPostId={post.id} quotedPost={post} />
-                )}
+          <div>
+            {loading ? (
+              <div className="flex justify-center">
+                <Loading size={"w-6 h-6"} />
               </div>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center gap-2 pl-3">
-            <UserAvatar imgSize="w-4 h-4" />
-            <div className="text-sm text-gray-500">Thêm vào threads</div>
+            ) : (
+              post && <QuoteItem quotedPostId={post.id} quotedPost={post} />
+            )}
           </div>
         </div>
-        <DialogFooter>
-          <Button disabled={!content.trim()} onClick={handleQuotePost}>
-            Đăng
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </BaseThreadModal>
   );
 };
 export default QuoteModal;
