@@ -7,25 +7,11 @@ import { useCurrentUser } from "@/features/auth";
 import PostHeader from "../Posts/components/PostHeader";
 import PostContent from "../Posts/components/PostContent";
 import QuoteItem from "../QuoteItem";
-import Provider from "@/context/PermissionContext";
 
-const FeedItem = ({ post, variant }) => {
+const FeedItem = ({ post, variant, hideInteraction = false }) => {
   const currentUser = useCurrentUser();
 
-  const {
-    id,
-    content,
-    user,
-    replies_count,
-    likes_count,
-    media_urls,
-    reposts_and_quotes_count,
-    is_liked_by_auth,
-    is_reposted_by_auth,
-    original_post,
-    original_post_id,
-    reply_permission,
-  } = post;
+  const { content, user, media_urls, original_post, original_post_id } = post;
 
   return (
     <div className="w-full">
@@ -42,28 +28,18 @@ const FeedItem = ({ post, variant }) => {
               />
               {original_post && (
                 <QuoteItem
-                  post={post}
-                  originalPostId={original_post_id}
-                  originalPost={original_post}
+                  quotedPostId={original_post_id}
+                  quotedPost={original_post}
                 />
               )}
-              <div className="flex items-center justify-start">
-                <LikeButton
-                  postId={id}
-                  count={likes_count}
-                  isLiked={is_liked_by_auth}
-                />
-                <CommentButton count={replies_count} />
-                <Provider permission={reply_permission}>
-                  <RepostButton
-                    postId={id}
-                    count={reposts_and_quotes_count}
-                    isReposted={is_reposted_by_auth}
-                    hasMenu={currentUser}
-                  />
-                </Provider>
-                <ShareButton />
-              </div>
+              {!hideInteraction && (
+                <div className="flex items-center justify-start">
+                  <LikeButton post={post} />
+                  <CommentButton post={post} />
+                  <RepostButton post={post} hasMenu={currentUser} />
+                  <ShareButton />
+                </div>
+              )}
             </>
           )}
         </div>

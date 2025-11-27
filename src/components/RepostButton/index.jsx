@@ -11,14 +11,14 @@ import { toast } from "react-toastify";
 import { useCallback, useState } from "react";
 import QuoteModal from "../Posts/components/QuoteModal";
 
-const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
+const RepostButton = ({ post, hasMenu = false }) => {
   const [isOpenQuote, setIsOpenQuote] = useState(false);
   const { toggleRepost } = useOptimisticRepost("post");
 
   const handleRepost = () => {
     try {
-      toggleRepost({ postId, isReposted });
-      toast(isReposted ? "Đã gỡ" : "Đã đăng lại", {
+      toggleRepost({ postId: post.id, isReposted: post.is_reposted_by_auth });
+      toast(post.is_reposted_by_auth ? "Đã gỡ" : "Đã đăng lại", {
         autoClose: 1000,
         position: "bottom-center",
         theme: "dark",
@@ -40,10 +40,9 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
   if (!hasMenu) {
     return (
       <Interactions
-        count={count}
+        count={post.reposts_and_quotes_count}
         Icon={Repeat}
         onClick={handleRepost}
-        isActive={isReposted}
         activeClass="text-blue-600"
         title="Đăng ký để đăng lại"
         description="Bạn đã tiến thêm được một bước trong hành trình khơi mào cuộc trò chuyện."
@@ -57,9 +56,9 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
         <DropdownMenuTrigger asChild>
           <div>
             <Interactions
-              count={count}
+              count={post.reposts_and_quotes_count}
               Icon={Repeat}
-              isActive={isReposted}
+              isActive={post.is_reposted_by_auth}
               activeClass="text-blue-600"
             />
           </div>
@@ -72,7 +71,7 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
             onClick={handleRepost}
             className="text-md flex justify-between p-3 font-semibold"
           >
-            <span>{isReposted ? "Bỏ đăng lại" : "Đăng lại"}</span>
+            <span>{post.is_reposted_by_auth ? "Bỏ đăng lại" : "Đăng lại"}</span>
             <Repeat className="mr-2 h-4 w-4" />
           </DropdownMenuItem>
           <DropdownMenuItem
@@ -86,7 +85,7 @@ const RepostButton = ({ postId, count, isReposted, hasMenu = false }) => {
       </DropdownMenu>
 
       <QuoteModal
-        postId={postId}
+        post={post}
         isOpen={isOpenQuote}
         onClose={handleCloseDialog}
       />

@@ -2,19 +2,19 @@ import { Heart } from "lucide-react";
 import Interactions from "../Interactions";
 import { useOptimisticLike } from "@/hooks";
 
-const LikeButton = ({ postId, count, isLiked }) => {
+const LikeButton = ({ post }) => {
   const { toggleLike } = useOptimisticLike("post");
 
   const handleLike = () => {
-    toggleLike({ postId, isLiked });
+    toggleLike({ postId: post.id, isLiked: post.is_liked_by_auth });
   };
 
   return (
     <Interactions
-      count={count}
+      count={post.likes_count}
       Icon={Heart}
       onClick={handleLike}
-      isActive={isLiked}
+      isActive={post.is_liked_by_auth}
       activeClass="text-red-500"
       title="Bạn thích nội dung này ư? Bạn sẽ thích mê Threads."
       description="Hãy đăng ký để thích, trả lời và hơn thế nữa."

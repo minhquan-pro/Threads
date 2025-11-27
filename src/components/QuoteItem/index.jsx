@@ -7,24 +7,25 @@ import PostContent from "../Posts/components/PostContent";
 import UserAvatar from "../UserAvatar";
 import Loading from "../Loading";
 
-const QuoteItem = ({ originalPostId, originalPost }) => {
-  const { user, content, media_urls } = originalPost;
-  const [nestedPost, setNestedPost] = useState(null);
+const QuoteItem = ({ quotedPostId, quotedPost }) => {
+  const { user, content, media_urls } = quotedPost;
+  const [originalPost, setOriginalPost] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // extra handler when api returns without media_urls field
   useEffect(() => {
-    const needsFetch = !media_urls;
-    if (!needsFetch || !originalPostId) return;
+    const needsFetch = !media_urls?.length;
+
+    if (!needsFetch || !quotedPostId) return;
 
     let isCancelled = false;
 
     (async () => {
       setLoading(true);
       try {
-        const response = await getPostById(originalPostId);
+        const response = await getPostById(quotedPostId);
         if (!isCancelled) {
-          setNestedPost(response.original_post);
+          setOriginalPost(response.original_post);
         }
       } catch (error) {
         console.error("Failed to fetch quote post:", error);
@@ -38,7 +39,7 @@ const QuoteItem = ({ originalPostId, originalPost }) => {
     return () => {
       isCancelled = true;
     };
-  }, [media_urls, originalPostId]);
+  }, [media_urls, quotedPostId]);
 
   if (loading) {
     return (
@@ -53,15 +54,16 @@ const QuoteItem = ({ originalPostId, originalPost }) => {
       <div>
         <UserAvatar src={user.avatar_url} imgSize="h-6 w-6" />
       </div>
-      <div>
+      <div className="w-full">
         <PostHeader user={user} />
         <div>
-          <PostContent content={content} mediaUrls={nestedPost?.media_urls} />
-          {nestedPost && (
-            <div className="mt-1 flex items-center gap-2">
+          <PostContent content={content} mediaUrls={originalPost?.media_urls} />
+          {originalPost && (
+            <div className="mt-1 flex items-center gap-2 rounded-lg bg-gray-50 p-2 dark:bg-gray-800">
               <MoveRight size={15} color="gray" />
-              <span className="text-sm text-gray-500">
-                {nestedPost?.user.username}:{nestedPost?.content}
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span> {originalPost?.user.username}</span>
+                {": "} {originalPost?.content}
               </span>
             </div>
           )}
