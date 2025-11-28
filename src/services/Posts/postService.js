@@ -19,3 +19,15 @@ export const getPostById = async (postId) => {
     throw new Error(error.response?.data || error.message);
   }
 };
+
+export const fetchComments = createAsyncThunk(
+  "posts/getReply",
+  async (postId) => {
+    try {
+      const response = await http.get(`posts/${postId}/replies`);
+      return { postId, comments: response.data };
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
