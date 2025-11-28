@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 import FeedItem from "@/components/FeedItem";
@@ -10,15 +10,21 @@ import {
   selectCommentsLoading,
 } from "@/features/comments";
 import { fetchComments, getPostById } from "@/services/Posts";
-import ReplyComposer from "@/components/ReplyComposer";
+import { Button } from "@/components/ui/button";
+import CommentItem from "@/components/CommentItem";
+import ThreadLine from "@/components/ThreadLine";
 
 const ContentDetailPage = () => {
   const [post, setPost] = useState(null);
+  const [parentPost, setParentPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [parentLoading, setParentLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
+  const location = useLocation();
   const { postId } = useParams();
+  const parentId = location.state?.parentId;
 
   const comments = useSelector((state) =>
     selectCommentsByPostId(state, postId),
@@ -27,6 +33,39 @@ const ContentDetailPage = () => {
     selectCommentsLoading(state, postId),
   );
 
+  // Get Parent Post
+  useEffect(() => {
+    if (!parentId) return;
+
+    let isMounted = true;
+
+    const loadParentPost = async () => {
+      setParentLoading(true);
+      try {
+        const response = await getPostById(parentId);
+        if (isMounted) {
+          setParentPost(response);
+        }
+      } catch (err) {
+        console.error("Failed to load parent post:", err);
+        if (isMounted) {
+          toast.error("Không thể tải bài viết gốc");
+        }
+      } finally {
+        if (isMounted) {
+          setParentLoading(false);
+        }
+      }
+    };
+
+    loadParentPost();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [parentId]);
+
+  // Get Main Post and Comments
   useEffect(() => {
     let isMounted = true;
 
@@ -74,13 +113,16 @@ const ContentDetailPage = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center py-10">
-        <p className="text-red-500">Có lỗi xảy ra: {error}</p>
-        <button
+        <p className="font-semibold text-red-500 italic">
+          Có lỗi xảy ra: {error}
+        </p>
+        <Button
+          variant="outline"
           onClick={() => window.location.reload()}
-          className="mt-4 text-blue-500"
+          className="mt-4"
         >
           Thử lại
-        </button>
+        </Button>
       </div>
     );
   }
@@ -97,8 +139,35 @@ const ContentDetailPage = () => {
     <div className="py-4">
       {/* Post detail */}
       <div className="ps-6 pe-6">
-        <FeedItem post={post} />
-        <div className="mt-3 flex h-14 items-center justify-between border-t text-sm">
+        {parentId ? (
+          <div>
+            {parentLoading ? (
+              <div className="flex justify-center py-4">
+                <Loading size="w-5 h-5" />
+              </div>
+            ) : parentPost ? (
+              <>
+                <div className="relative">
+                  <ThreadLine show />
+                  <FeedItem post={parentPost} />
+                </div>
+                <div className="mt-3">
+                  <CommentItem comment={post} />
+                </div>
+              </>
+            ) : (
+              <div className="py-4 text-center text-sm text-gray-500">
+                Không thể tải bài viết gốc
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="mt-4">
+            <FeedItem post={post} />
+          </div>
+        )}
+
+        <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-300 text-sm">
           <div className="font-bold">Mới đây</div>
           <div className="text-gray-400">Xem hoạt động</div>
         </div>
@@ -120,7 +189,7 @@ const ContentDetailPage = () => {
               key={comment.id}
               className="border-t border-gray-300 ps-6 pe-6 pt-3"
             >
-              <FeedItem post={comment} />
+              <CommentItem comment={comment} />
             </div>
           ))
         )}
