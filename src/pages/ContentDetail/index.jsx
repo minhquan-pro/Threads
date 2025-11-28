@@ -152,7 +152,7 @@ const ContentDetailPage = () => {
                   <FeedItem post={parentPost} />
                 </div>
                 <div className="mt-3">
-                  <CommentItem comment={post} />
+                  <FeedItem post={post} />
                 </div>
               </>
             ) : (
