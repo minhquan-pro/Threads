@@ -1,6 +1,14 @@
-export const selectCommentsByPostId = (state, postId) => {
+export const selectCommentsByPostId = (state, postId, sortOrder) => {
   const comments = state.comments.byPostId[postId];
-  return comments;
+
+  console.log(sortOrder);
+
+  if (!comments || !comments.length) return;
+
+  const sortComments = [...comments].sort((a, b) => {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+  return sortOrder === "recent" ? sortComments : comments;
 };
 
 export const selectCommentsLoading = (state, postId) =>

@@ -9,7 +9,8 @@ import Loading from "@/components/Loading";
 import { getPostById } from "@/services/Posts";
 import { Button } from "@/components/ui/button";
 import ThreadLine from "@/components/ThreadLine";
-import CommentSection from "@/components/CommentSection";
+import CommentSection from "./components/CommentSection";
+import ActivityHeader from "@/components/ActivityHeader";
 
 const ItemDetailPage = () => {
   const [currentItem, setCurrentItem] = useState(null);
@@ -151,12 +152,8 @@ const ItemDetailPage = () => {
           </div>
         )}
 
-        <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-300 text-sm">
-          <div className="font-bold">Mới đây</div>
-          <div className="text-gray-400">Xem hoạt động</div>
-        </div>
+        <ActivityHeader />
       </div>
-
       {/* Comments section */}
       <CommentSection postId={postId} />
     </div>

@@ -26,7 +26,6 @@ const commentsSlice = createSlice({
         const { postId, comments, pagination } = action.payload;
 
         const oldComments = state.byPostId[postId] || [];
-        state.pagination[postId] = pagination;
 
         const newComments = comments.filter((newComment) => {
           return !oldComments?.some(
@@ -36,6 +35,7 @@ const commentsSlice = createSlice({
 
         state.byPostId[postId] = [...oldComments, ...newComments];
         state.loading[postId] = false;
+        state.pagination[postId] = pagination;
       });
   },
 });
