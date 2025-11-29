@@ -1,9 +1,10 @@
-import { fetchComments } from "@/services/Posts/postService";
+import { fetchComments } from "@/services/comment";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   byPostId: {},
   loading: {},
+  pagination: {},
 };
 
 const commentsSlice = createSlice({
@@ -22,8 +23,18 @@ const commentsSlice = createSlice({
         state.loading[action.meta.arg] = true;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
-        const { postId, comments } = action.payload;
-        state.byPostId[postId] = comments;
+        const { postId, comments, pagination } = action.payload;
+
+        const oldComments = state.byPostId[postId] || [];
+        state.pagination[postId] = pagination;
+
+        const newComments = comments.filter((newComment) => {
+          return !oldComments?.some(
+            (oldComment) => oldComment.id === newComment.id,
+          );
+        });
+
+        state.byPostId[postId] = [...oldComments, ...newComments];
         state.loading[postId] = false;
       });
   },

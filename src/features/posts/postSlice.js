@@ -43,6 +43,22 @@ const postsSlice = createSlice({
         "is_reposted_by_auth",
       );
     },
+
+    optimisticIncrementRepliesCount: (state, action) => {
+      const { postId } = action.payload;
+      const post = state.items.find((p) => p.id === postId);
+      if (post) {
+        post.replies_count += 1;
+      }
+    },
+
+    optimisticDecrementRepliesCount: (state, action) => {
+      const { postId } = action.payload;
+      const post = state.items.find((p) => p.id === postId);
+      if (post) {
+        post.replies_count -= 1;
+      }
+    },
   },
   extraReducers: (builder) => {
     // Get posts
@@ -69,7 +85,11 @@ const postsSlice = createSlice({
   },
 });
 
-export const { optimisticUpdateLikePost, optimisticUpdateRepostPost } =
-  postsSlice.actions;
+export const {
+  optimisticUpdateLikePost,
+  optimisticUpdateRepostPost,
+  optimisticIncrementRepliesCount,
+  optimisticDecrementRepliesCount,
+} = postsSlice.actions;
 
 export default postsSlice;
