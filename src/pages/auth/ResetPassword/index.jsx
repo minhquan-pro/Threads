@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -38,15 +37,8 @@ const ResetPassword = () => {
         try {
           await validateToken({ token });
           setIsValidToken(true);
+          // eslint-disable-next-line no-unused-vars
         } catch (error) {
-          toast.error(
-            error?.message || "Liên kết đã hết hạn hoặc không hợp lệ",
-            {
-              autoClose: 3000,
-              theme: "colored",
-              position: "top-center",
-            },
-          );
           setIsValidToken(false);
         } finally {
           setValidating(false);
@@ -63,6 +55,7 @@ const ResetPassword = () => {
       navigate("/login", {
         state: { message: "Tạo mật khẩu mới thành công, vui lòng đăng nhập" },
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setIsValidToken(false);
     }

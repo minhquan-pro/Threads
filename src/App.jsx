@@ -17,7 +17,7 @@ import Activity from "./pages/Activity";
 import Profile from "./pages/Profile";
 import FollowingFeed from "./pages/FollowingFeed";
 import GhostPosts from "./pages/GhostPosts";
-import ContentDetailPage from "./pages/ContentDetail";
+import ItemDetailPage from "./pages/ItemDetail";
 
 function App() {
   return (
@@ -43,10 +43,7 @@ function App() {
             <Route path="/activity" element={<Activity />} />
             <Route path="/following" element={<FollowingFeed />} />
             <Route path="/ghost-posts" element={<GhostPosts />} />
-            <Route
-              path="/:userId/post/:postId"
-              element={<ContentDetailPage />}
-            />
+            <Route path="/:userId/post/:postId" element={<ItemDetailPage />} />
             <Route path="/:userId" element={<Profile />} />
           </Route>
         </Route>

@@ -5,7 +5,12 @@ import UserAvatar from "../UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../ui/button";
 
-const ReplyComposer = ({ placeholder, showClose = false }) => {
+const ReplyComposer = ({
+  placeholder,
+  showClose = false,
+  content,
+  onChange,
+}) => {
   const currentUser = useCurrentUser();
   return (
     <div className="relative mt-4 flex gap-2">
@@ -25,6 +30,8 @@ const ReplyComposer = ({ placeholder, showClose = false }) => {
         <input
           className="w-full border-none p-0 shadow-none outline-none placeholder:text-[#050505]/50"
           placeholder={placeholder}
+          value={content}
+          onChange={onChange}
           autoFocus
         />
         <div className="mt-3 flex items-center gap-3">

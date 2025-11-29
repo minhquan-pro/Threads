@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 import FeedItem from "@/components/FeedItem";
 import Loading from "@/components/Loading";
-import {
-  selectCommentsByPostId,
-  selectCommentsLoading,
-} from "@/features/comments";
-import { fetchComments, getPostById } from "@/services/Posts";
-import { Button } from "@/components/ui/button";
-import CommentItem from "@/components/CommentItem";
-import ThreadLine from "@/components/ThreadLine";
 
-const ContentDetailPage = () => {
-  const [post, setPost] = useState(null);
-  const [parentPost, setParentPost] = useState(null);
+import { getPostById } from "@/services/Posts";
+import { Button } from "@/components/ui/button";
+import ThreadLine from "@/components/ThreadLine";
+import CommentSection from "@/components/CommentSection";
+
+const ItemDetailPage = () => {
+  const [currentItem, setCurrentItem] = useState(null);
+  const [parentItem, setParentItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [parentLoading, setParentLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,13 +22,6 @@ const ContentDetailPage = () => {
   const location = useLocation();
   const { postId } = useParams();
   const parentId = location.state?.parentId;
-
-  const comments = useSelector((state) =>
-    selectCommentsByPostId(state, postId),
-  );
-  const commentsLoading = useSelector((state) =>
-    selectCommentsLoading(state, postId),
-  );
 
   // Get Parent Post
   useEffect(() => {
@@ -44,7 +34,7 @@ const ContentDetailPage = () => {
       try {
         const response = await getPostById(parentId);
         if (isMounted) {
-          setParentPost(response);
+          setParentItem(response);
         }
       } catch (err) {
         console.error("Failed to load parent post:", err);
@@ -74,17 +64,14 @@ const ContentDetailPage = () => {
       setError(null);
 
       try {
-        const [postData] = await Promise.all([
-          getPostById(postId),
-          dispatch(fetchComments(postId)).unwrap(),
-        ]);
+        const [postData] = await Promise.all([getPostById(postId)]);
 
         if (isMounted) {
-          setPost(postData);
+          setCurrentItem(postData);
         }
       } catch (err) {
-        console.error("Failed to load page data:", err);
         if (isMounted) {
+          console.error("Failed to load page data:", err);
           setError(err.message || "Có lỗi xảy ra");
           toast.error("Không thể tải bài viết");
         }
@@ -92,14 +79,11 @@ const ContentDetailPage = () => {
         if (isMounted) {
           setLoading(false);
         }
+        setLoading(false);
       }
     };
 
     loadPageData();
-
-    return () => {
-      isMounted = false;
-    };
   }, [postId, dispatch]);
 
   if (loading) {
@@ -127,7 +111,7 @@ const ContentDetailPage = () => {
     );
   }
 
-  if (!post) {
+  if (!currentItem) {
     return (
       <div className="flex justify-center py-10">
         <p className="text-gray-500">Không tìm thấy bài viết</p>
@@ -145,14 +129,14 @@ const ContentDetailPage = () => {
               <div className="flex justify-center py-4">
                 <Loading size="w-5 h-5" />
               </div>
-            ) : parentPost ? (
+            ) : parentItem ? (
               <>
                 <div className="relative">
                   <ThreadLine show />
-                  <FeedItem post={parentPost} />
+                  <FeedItem post={parentItem} />
                 </div>
                 <div className="mt-3">
-                  <FeedItem post={post} />
+                  <FeedItem post={currentItem} />
                 </div>
               </>
             ) : (
@@ -163,7 +147,7 @@ const ContentDetailPage = () => {
           </div>
         ) : (
           <div className="mt-4">
-            <FeedItem post={post} />
+            <FeedItem post={currentItem} />
           </div>
         )}
 
@@ -174,28 +158,9 @@ const ContentDetailPage = () => {
       </div>
 
       {/* Comments section */}
-      <div className="flex flex-col gap-2">
-        {commentsLoading[postId] ? (
-          <div className="flex justify-center py-4">
-            <Loading size="w-5 h-5" />
-          </div>
-        ) : comments.length === 0 ? (
-          <div className="py-8 text-center text-sm font-semibold text-gray-500 italic">
-            Chưa có bình luận nào
-          </div>
-        ) : (
-          comments.map((comment) => (
-            <div
-              key={comment.id}
-              className="border-t border-gray-300 ps-6 pe-6 pt-3"
-            >
-              <CommentItem comment={comment} />
-            </div>
-          ))
-        )}
-      </div>
+      <CommentSection postId={postId} />
     </div>
   );
 };
 
-export default ContentDetailPage;
+export default ItemDetailPage;

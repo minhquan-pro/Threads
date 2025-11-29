@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { MoveRight } from "lucide-react";
 
 import { getPostById } from "@/services/Posts";
@@ -8,9 +9,15 @@ import UserAvatar from "../UserAvatar";
 import Loading from "../Loading";
 
 const QuoteItem = ({ quotedPostId, quotedPost }) => {
+  const navigate = useNavigate();
   const { user, content, media_urls } = quotedPost;
   const [originalPost, setOriginalPost] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const handleClickPost = (e) => {
+    e.stopPropagation();
+    navigate(`/@${user.username}/post/${quotedPostId}`);
+  };
 
   // extra handler when api returns without media_urls field
   useEffect(() => {
@@ -50,12 +57,15 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
   }
 
   return (
-    <div className="mt-2 flex items-start gap-2 rounded-xl border border-gray-300 p-3">
+    <div
+      className="mt-2 flex items-start gap-2 rounded-xl border border-gray-300 p-3"
+      onClick={handleClickPost}
+    >
       <div>
         <UserAvatar src={user.avatar_url} imgSize="h-6 w-6" />
       </div>
       <div className="w-full">
-        <PostHeader user={user} />
+        <PostHeader user={user} createdAt={quotedPost.created_at} />
         <div>
           <PostContent content={content} mediaUrls={originalPost?.media_urls} />
           {originalPost && (

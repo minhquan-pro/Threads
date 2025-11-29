@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import FeedItem from "../FeedItem";
-import { getReplies } from "@/services/Posts";
 import ThreadLine from "../ThreadLine";
+import { getReplies } from "@/services/comment";
 
 const CommentItem = ({ comment, depth = 0 }) => {
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies] = useState(null);
   const hasReplies = comment.replies_count > 0;
   const hasOnlyOneReply = comment.replies_count === 1;
   const MAX_DEPTH = 4;
 
   useEffect(() => {
     if (!hasOnlyOneReply || depth >= MAX_DEPTH) return;
-
     const loadPageData = async () => {
       try {
         const response = await getReplies(comment.id);
@@ -32,7 +31,7 @@ const CommentItem = ({ comment, depth = 0 }) => {
       </div>
       {hasReplies && hasOnlyOneReply && (
         <div className="mt-3">
-          {replies.map((reply) => {
+          {replies?.map((reply) => {
             return (
               <CommentItem key={reply.id} comment={reply} depth={depth + 1} />
             );

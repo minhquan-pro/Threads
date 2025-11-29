@@ -12,7 +12,7 @@ export const useInfiniteScroll = ({
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !loading) {
-          if (page >= pagination.last_page) return;
+          if (page >= pagination?.last_page) return;
           onEnd();
         }
       });
@@ -22,5 +22,5 @@ export const useInfiniteScroll = ({
     observer.observe(lastElement);
 
     return () => observer.disconnect(lastElement);
-  }, [loading, page, pagination.last_page, lastElementRef, onEnd]);
+  }, [loading, page, pagination?.last_page, lastElementRef, onEnd]);
 };
