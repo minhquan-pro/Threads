@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { toast } from "react-toastify";
 import { Image } from "lucide-react";
 
 import { quotePost as quotePostService } from "@/services/Posts";
@@ -8,47 +6,39 @@ import UserProfileDialog from "@/components/UserProfileDialog";
 import Loading from "@/components/Loading";
 import PostHeader from "../PostHeader";
 import QuoteItem from "@/components/QuoteItem";
-import UserAvatar from "@/components/UserAvatar";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
+import { usePostForm } from "@/hooks/usePostForm";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
-  const [loading, setLoading] = useState(false);
-  const [content, setContent] = useState("");
 
-  const handleChangeContent = (e) => {
-    setContent(e.target.value);
-  };
+  const { loading, content, handleChangeContent, resetContent, handleSubmit } =
+    usePostForm(
+      async ({ content }) => {
+        await quotePostService(post.id, {
+          content,
+          reply_permission: post.reply_permission,
+        });
+      },
+      {
+        successMessage: "Đã đăng",
+        errorMessage: "Đăng bài thất bại. Vui lòng thử lại!",
+        onSuccess: () => {
+          onClose();
+          resetContent();
+        },
+      },
+    );
 
   const handleClose = () => {
     onClose();
-    setContent("");
+    resetContent();
   };
 
-  const handleQuotePost = async () => {
-    setLoading(true);
-    try {
-      (await quotePostService(post.id, {
-        content,
-        reply_permission: post.reply_permission,
-      }),
-        toast("Đã đăng", {
-          autoClose: 1000,
-          theme: "dark",
-          position: "bottom-center",
-        }));
-    } catch (error) {
-      console.log(error);
-      toast.error("Đăng bài thất bại. Vui lòng thử lại!", {
-        autoClose: 1000,
-        theme: "colored",
-        position: "bottom-center",
-      });
-    } finally {
-      setLoading(false);
-      handleClose();
-    }
+  const onSubmit = () => {
+    handleSubmit();
+    handleClose();
   };
 
   return (
@@ -56,7 +46,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
       title="Thread mới"
       isOpen={isOpen}
       onClose={handleClose}
-      onSubmit={handleQuotePost}
+      onSubmit={onSubmit}
       loading={loading}
     >
       <div className="flex w-full gap-3">

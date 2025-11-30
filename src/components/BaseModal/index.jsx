@@ -18,17 +18,16 @@ const BaseThreadModal = ({
   children,
   loading,
 }) => {
-  const handleClose = () => {
-    onClose();
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose} className="border-none">
+    <Dialog open={isOpen} onOpenChange={onClose} className="border-none">
       <DialogContent className="flex max-h-[700px] max-w-[600px] min-w-[500px] flex-col gap-0 overflow-hidden rounded-2xl! p-0">
         {/* Header */}
         <DialogHeader className="sticky top-0 right-0 left-0 z-50 min-h-16 border-b border-gray-300 bg-white pt-5 pb-3 shadow">
           <div className="flex px-6">
-            <div className="cursor-pointer font-semibold hover:opacity-70">
+            <div
+              className="cursor-pointer font-semibold hover:opacity-70"
+              onClick={onClose}
+            >
               Hủy
             </div>
             <DialogTitle className="m-auto">{title}</DialogTitle>
@@ -57,7 +56,7 @@ const BaseThreadModal = ({
             <div>Các lựa chọn để kiểm soát câu trả lời</div>
           </Button>
           <Button disabled={submitDisabled || loading} onClick={onSubmit}>
-            {loading ? "Đang đăng..." : "Đăng"}
+            Đăng
           </Button>
         </DialogFooter>
       </DialogContent>
