@@ -1,8 +1,6 @@
 export const selectCommentsByPostId = (state, postId, sortOrder) => {
   const comments = state.comments.byPostId[postId];
 
-  console.log(sortOrder);
-
   if (!comments || !comments.length) return;
 
   const sortComments = [...comments].sort((a, b) => {

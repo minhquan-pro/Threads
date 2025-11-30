@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { useInfiniteScroll } from "@/hooks";
 import {
   selectCommentsByPostId,
   selectCommentsLoading,
   selectCommentsPagination,
+  useFetchCommentsList,
 } from "@/features/comments";
-import { fetchComments } from "@/services/comment";
 import Loading from "@/components/Loading";
 import CommentItem from "@/components/CommentItem";
 import { useSortOrder } from "@/hooks/useSortOrder";
@@ -15,20 +15,12 @@ import { useSortOrder } from "@/hooks/useSortOrder";
 const CommentSection = ({ postId }) => {
   const [page, setPage] = useState(1);
   const lastElementRef = useRef(null);
-  const dispatch = useDispatch();
   const { sortOrder } = useSortOrder();
+  useFetchCommentsList({ postId, page });
 
   useEffect(() => {
     setPage(1);
   }, [sortOrder]);
-
-  useEffect(() => {
-    const loadCommentData = async () => {
-      await dispatch(fetchComments({ postId, page }));
-    };
-
-    loadCommentData();
-  }, [dispatch, page, postId]);
 
   const comments = useSelector((state) =>
     selectCommentsByPostId(state, postId, sortOrder),
@@ -50,21 +42,13 @@ const CommentSection = ({ postId }) => {
     lastElementRef,
     page,
     pagination,
-    onEnd,
+    onEnd: sortOrder !== "recent" ? onEnd : () => {},
   });
 
   if (commentsLoading && page === 1) {
     return (
       <div className="flex justify-center py-4">
         <Loading size="w-5 h-5" />
-      </div>
-    );
-  }
-
-  if (comments?.length === 0) {
-    return (
-      <div className="py-8 text-center text-sm font-semibold text-gray-500 italic">
-        Chưa có bình luận nào
       </div>
     );
   }
