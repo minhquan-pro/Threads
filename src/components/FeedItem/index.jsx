@@ -34,10 +34,10 @@ const FeedItem = ({ post, variant, hideInteraction = false }) => {
   };
 
   return (
-    <div className="w-full cursor-pointer" onClick={handleClickPost}>
+    <div className="w-full cursor-pointer">
       <div className="flex items-start gap-2">
         <UserProfileDialog user={user} />
-        <div className="w-full">
+        <div className="w-full" onClick={handleClickPost}>
           <PostHeader user={user} createdAt={created_at} />
           {variant !== "quote" && (
             <>
