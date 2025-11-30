@@ -9,7 +9,12 @@ import PostContent from "../Posts/components/PostContent";
 import QuoteItem from "../QuoteItem";
 import { useNavigate } from "react-router";
 
-const FeedItem = ({ post, variant, hideInteraction = false }) => {
+const FeedItem = ({
+  post,
+  variant,
+  hideInteraction = false,
+  disableNavigation = false,
+}) => {
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
 
@@ -25,6 +30,8 @@ const FeedItem = ({ post, variant, hideInteraction = false }) => {
   } = post;
 
   const handleClickPost = (e) => {
+    if (disableNavigation) return;
+
     e.stopPropagation();
     navigate(`/@${user.username}/post/${id}`, {
       state: {
@@ -34,8 +41,10 @@ const FeedItem = ({ post, variant, hideInteraction = false }) => {
   };
 
   return (
-    <div className="w-full cursor-pointer">
-      <div className="flex items-start gap-2">
+    <div className={`w-full`}>
+      <div
+        className={`flex ${!disableNavigation ? "cursor-pointer" : ""} items-start gap-2`}
+      >
         <UserProfileDialog user={user} />
         <div className="w-full" onClick={handleClickPost}>
           <PostHeader user={user} createdAt={created_at} />

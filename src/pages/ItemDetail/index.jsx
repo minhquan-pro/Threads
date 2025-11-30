@@ -45,10 +45,10 @@ const ItemDetailPage = () => {
               <>
                 <div className="relative">
                   <ThreadLine show />
-                  <FeedItem post={parentItem} />
+                  <FeedItem post={parentItem} disableNavigation />
                 </div>
                 <div className="mt-3">
-                  <FeedItem post={currentItem} />
+                  <FeedItem post={currentItem} disableNavigation />
                 </div>
               </>
             ) : (
@@ -59,7 +59,7 @@ const ItemDetailPage = () => {
           </div>
         ) : (
           <div className="mt-4">
-            <FeedItem post={currentItem} />
+            <FeedItem post={currentItem} disableNavigation />
           </div>
         )}
 

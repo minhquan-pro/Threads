@@ -27,7 +27,7 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
 
   return (
     <div
-      className="mt-2 flex items-start gap-2 rounded-xl border border-gray-300 p-3"
+      className="mt-2 flex cursor-pointer items-start gap-2 rounded-xl border border-gray-300 p-3"
       onClick={handleClickPost}
     >
       <div>
