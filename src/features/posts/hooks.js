@@ -1,8 +1,9 @@
-import { getPosts } from "@/services/Posts";
-import { useEffect, useMemo } from "react";
+import { getPostById, getPosts } from "@/services/Posts";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorList } from "./selectors";
 import { useCurrentUser } from "../auth";
+import { toast } from "react-toastify";
 
 export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
   const dispatch = useDispatch();
@@ -23,4 +24,42 @@ export const usePostsList = ({ excludeCurrentUser = false }) => {
 
     return posts.filter((post) => post.user.id !== currentUser.id);
   }, [currentUser?.id, excludeCurrentUser, posts]);
+};
+
+export const useFetchPostDetail = (postId) => {
+  const [currentItem, setCurrentItem] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!postId) return;
+
+    let isMounted = true;
+
+    const loadParentPost = async () => {
+      setLoading(true);
+      try {
+        const response = await getPostById(postId);
+        if (isMounted) {
+          setCurrentItem(response);
+        }
+      } catch (err) {
+        console.error("Failed to load parent post:", err);
+        if (isMounted) {
+          toast.error("Không thể tải bài viết");
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadParentPost();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [postId]);
+
+  return [currentItem, loading];
 };
