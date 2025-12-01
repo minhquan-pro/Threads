@@ -37,13 +37,13 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route index path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/:userId/post/:postId" element={<ItemDetailPage />} />
 
           {/* PrivateRoute */}
           <Route element={<PrivateRoute />}>
             <Route path="/activity" element={<Activity />} />
             <Route path="/following" element={<FollowingFeed />} />
             <Route path="/ghost-posts" element={<GhostPosts />} />
-            <Route path="/:userId/post/:postId" element={<ItemDetailPage />} />
             <Route path="/:userId" element={<Profile />} />
           </Route>
         </Route>

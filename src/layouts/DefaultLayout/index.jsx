@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
+import CurvedBorderBottom from "@/components/CurvedBorderBottom";
 
 const DefaultLayout = () => {
   const currentUser = useCurrentUser();
@@ -30,18 +31,21 @@ const DefaultLayout = () => {
               </HomeTabs>
             ) : (
               <div>
-                <div className="sticky top-0 z-50 border-b border-gray-300 bg-white p-4">
+                <div className="sticky top-0 z-50 w-[700px] border-gray-200 bg-white p-4">
                   <h1 className="text-md text-center font-semibold">{title}</h1>
+                  <CurvedBorderBottom />
                 </div>
-                <div className="relative w-[640px] overflow-x-hidden overflow-y-auto border border-gray-300 border-t-transparent">
-                  <Outlet />
+                <div className="flex justify-center">
+                  <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border border-gray-200 border-t-transparent shadow-md">
+                    <Outlet />
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
         {!currentUser && (
-          <div className="sticky top-14 mt-9 max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center">
+          <div className="sticky top-14 z-50 mt-9 max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center">
             <h2 className="text-lg font-bold">
               Đăng nhập hoặc đăng ký threads
             </h2>
