@@ -1,9 +1,13 @@
 import { http } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const createComments = async (id, data) => {
+export const createComments = async ({ postId, content, reply_permission }) => {
   try {
-    await http.post(`/posts/${id}/reply`, data);
+    const response = await http.post(`/posts/${postId}/reply`, {
+      content,
+      reply_permission,
+    });
+    console.log(response);
   } catch (error) {
     throw new Error(error);
   }
@@ -16,6 +20,7 @@ export const fetchComments = createAsyncThunk(
       const response = await http.get(
         `posts/${postId}/replies?page=${page}&per_page=${per_page}`,
       );
+
       return {
         postId,
         comments: response.data,

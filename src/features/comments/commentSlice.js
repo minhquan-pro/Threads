@@ -14,17 +14,17 @@ const commentsSlice = createSlice({
     addCommentOptimistic: (state, action) => {
       const { postId, comment } = action.payload;
       if (!state.byPostId[postId]) state.byPostId[postId] = [];
-      state.byPostId[postId].push(comment);
+      state.byPostId[postId].unshift(comment);
     },
   },
   extraReducers: (builder) => {
+    // fetch comments
     builder
       .addCase(fetchComments.pending, (state, action) => {
-        state.loading[action.meta.arg] = true;
+        state.loading[action.meta.arg.postId] = true;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         const { postId, comments, pagination } = action.payload;
-
         const oldComments = state.byPostId[postId] || [];
 
         const newComments = comments.filter((newComment) => {

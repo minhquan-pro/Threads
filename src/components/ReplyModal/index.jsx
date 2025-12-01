@@ -1,15 +1,23 @@
+import { useDispatch } from "react-redux";
+
 import { usePostForm } from "@/hooks/usePostForm";
 import { createComments } from "@/services/comment";
 import ThreadLine from "../ThreadLine";
 import ReplyComposer from "../ReplyComposer";
 import FeedItem from "../FeedItem";
 import BaseThreadModal from "../BaseModal";
+import {
+  optimisticDecrementRepliesCount,
+  optimisticIncrementRepliesCount,
+} from "@/features/posts/postSlice";
 
 const ReplyModal = ({ post, isOpen, onClose }) => {
+  const dispatch = useDispatch();
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(
       async ({ content }) => {
-        await createComments(post.id, {
+        await createComments({
+          postId: post.id,
           content,
           reply_permission: post.reply_permission,
         });
@@ -25,9 +33,13 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
     onClose();
   };
 
-  const onSubmit = () => {
-    handleSubmit();
+  const onSubmit = async () => {
+    dispatch(optimisticIncrementRepliesCount({ postId: post.id }));
     handleClose();
+
+    const success = await handleSubmit();
+    if (!success)
+      dispatch(optimisticDecrementRepliesCount({ postId: post.id }));
   };
 
   return (

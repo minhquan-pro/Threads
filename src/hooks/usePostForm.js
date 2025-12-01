@@ -29,11 +29,12 @@ export const usePostForm = (submitFunction, options = {}) => {
       }),
         toast.update(toastId, {
           render: successMessage,
-          type: "success",
+          type: "default",
           isLoading: false,
           autoClose: 1000,
           theme: "dark",
         }));
+      return true;
     } catch (error) {
       console.log(error);
       toast.update(toastId, {
@@ -41,8 +42,9 @@ export const usePostForm = (submitFunction, options = {}) => {
         type: "error",
         isLoading: false,
         autoClose: 1000,
-        theme: "dark",
+        theme: "colored",
       });
+      return false;
     } finally {
       setLoading(false);
     }
