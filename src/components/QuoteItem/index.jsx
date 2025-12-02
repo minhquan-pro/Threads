@@ -8,7 +8,9 @@ import Loading from "../Loading";
 import { useFetchPostDetail } from "@/features/posts";
 
 const QuoteItem = ({ quotedPostId, quotedPost }) => {
-  const [originalPost, originalPostLoading] = useFetchPostDetail(quotedPostId);
+  const originalPostId = quotedPost?.original_post_id;
+  const [originalPost, originalPostLoading] =
+    useFetchPostDetail(originalPostId);
   const navigate = useNavigate();
   const { user, content } = quotedPost;
 

@@ -27,11 +27,15 @@ const Posts = ({ type }) => {
       {posts.map((post) => {
         return (
           <div
-            ref={lastElementRef}
             key={post.id}
-            className="flex w-[640px] flex-col items-start overflow-hidden border-t border-gray-300 p-3 first-of-type:border-none"
+            className="border-t border-gray-300 first-of-type:border-none"
           >
-            <FeedItem post={post} />
+            <div
+              ref={lastElementRef}
+              className="flex w-[640px] flex-col items-start overflow-hidden px-4 py-3"
+            >
+              <FeedItem post={post} />
+            </div>
           </div>
         );
       })}

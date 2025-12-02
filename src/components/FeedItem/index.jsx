@@ -24,8 +24,8 @@ const FeedItem = ({
     user,
     created_at,
     media_urls,
-    original_post,
     parent_id,
+    original_post,
     original_post_id,
   } = post;
 

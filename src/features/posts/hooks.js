@@ -35,7 +35,7 @@ export const useFetchPostDetail = (postId) => {
 
     let isMounted = true;
 
-    const loadParentPost = async () => {
+    const loadPostData = async () => {
       setLoading(true);
       try {
         const response = await getPostById(postId);
@@ -54,7 +54,7 @@ export const useFetchPostDetail = (postId) => {
       }
     };
 
-    loadParentPost();
+    loadPostData();
 
     return () => {
       isMounted = false;
