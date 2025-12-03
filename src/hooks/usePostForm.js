@@ -24,16 +24,16 @@ export const usePostForm = (submitFunction, options = {}) => {
     });
 
     try {
-      (await submitFunction({
-        content,
-      }),
-        toast.update(toastId, {
-          render: successMessage,
-          type: "default",
-          isLoading: false,
-          autoClose: 1000,
-          theme: "dark",
-        }));
+      await submitFunction({ content });
+
+      toast.update(toastId, {
+        render: successMessage,
+        type: "default",
+        isLoading: false,
+        autoClose: 1000,
+        theme: "dark",
+        hideProgressBar: true,
+      });
       return true;
     } catch (error) {
       console.log(error);

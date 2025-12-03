@@ -63,13 +63,13 @@ const FeedItem = ({
               )}
               {!hideInteraction && (
                 <div
-                  className="pointer-events-auto flex items-center justify-start"
+                  className="pointer-events-auto mt-1 flex items-center justify-start"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <LikeButton post={post} />
                   <CommentButton post={post} />
                   <RepostButton post={post} hasMenu={currentUser} />
-                  <ShareButton />
+                  <ShareButton post={post} hasMenu={currentUser} />
                 </div>
               )}
             </>
