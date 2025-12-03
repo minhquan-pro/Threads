@@ -4,6 +4,7 @@ import ThreadLine from "../ThreadLine";
 import UserAvatar from "../UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../ui/button";
+import CommentActionToolbar from "../CommentActionToolbar";
 
 const ReplyComposer = ({
   placeholder,
@@ -36,9 +37,7 @@ const ReplyComposer = ({
             disabled={disabled}
             autoFocus
           />
-          <div className="mt-3 flex items-center gap-3">
-            <Image color="gray" size={20} />
-          </div>
+          <CommentActionToolbar />
         </div>
       </div>
     </div>

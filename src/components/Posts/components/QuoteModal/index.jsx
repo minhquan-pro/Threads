@@ -1,4 +1,4 @@
-import { Image } from "lucide-react";
+import { Image, MapPin, Smile } from "lucide-react";
 
 import { quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
@@ -9,6 +9,7 @@ import QuoteItem from "@/components/QuoteItem";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
 import { usePostForm } from "@/hooks/usePostForm";
+import CommentActionToolbar from "@/components/CommentActionToolbar";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
@@ -57,14 +58,13 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
         <div className="w-full">
           <PostHeader user={currentUser} hideDate />
           <input
-            className="w-full border-none p-0 text-sm shadow-none outline-none placeholder:text-gray-600"
+            className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"
             placeholder="Hãy chia sẻ suy nghĩ của bạn..."
             value={content}
             onChange={handleChangeContent}
+            autoFocus={true}
           />
-          <div className="mt-3 flex items-center gap-3">
-            <Image color="gray" size={20} />
-          </div>
+          <CommentActionToolbar />
 
           <div>
             {loading ? (
