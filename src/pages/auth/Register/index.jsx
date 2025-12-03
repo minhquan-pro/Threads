@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -12,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
 import { useEffect } from "react";
+import { toast } from "@/utils/toast";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -45,14 +45,18 @@ const Register = () => {
     try {
       const response = await dispatch(registerService(data)).unwrap();
       if (response.success) {
-        toast.success(response.message, {
-          autoClose: 1000,
-          theme: "colored",
-          position: "top-center",
-        });
+        toast.success(
+          "Chúng tôi đã gửi một liên kết xác thực tới email của bạn. Vui lòng kiểm tra email để xác thực tài khoản.",
+          {
+            theme: "colored",
+          },
+        );
       }
     } catch (error) {
       console.log(error);
+      toast.error("Có lỗi xảy ra! Vui lòng thử lại", {
+        theme: "colored",
+      });
     }
   };
 

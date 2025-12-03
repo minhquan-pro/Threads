@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectorList } from "./selectors";
 import { useCurrentUser } from "../auth";
-import { toast } from "react-toastify";
+import { toast } from "@/utils/toast";
 
 export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ export const useFetchPostDetail = (postId) => {
       } catch (err) {
         console.error("Failed to load parent post:", err);
         if (isMounted) {
-          toast.error("Không thể tải bài viết");
+          toast.error("Không thể tải bài viết", { theme: "colored" });
         }
       } finally {
         if (isMounted) {

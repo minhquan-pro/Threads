@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,7 @@ import { loadingSelector, useCurrentUser } from "@/features/auth";
 import { getCurrentUser, login } from "@/services/auth/authService";
 import { loginSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
+import { toast } from "@/utils/toast";
 
 const Login = () => {
   const location = useLocation();
@@ -33,17 +33,14 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data)).unwrap();
-      if (response.success) {
-        toast.success(response.message, {
-          autoClose: 1000,
-          theme: "colored",
-          position: "top-center",
-        });
-      }
       const { access_token, refresh_token } = response.data;
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("refreshToken", refresh_token);
       dispatch(getCurrentUser());
+
+      toast.success("Đăng nhập thành công", {
+        theme: "colored",
+      });
     } catch (error) {
       console.log(error);
       setError("password", {
@@ -56,9 +53,7 @@ const Login = () => {
   useEffect(() => {
     if (location.state) {
       toast.success(location.state.message, {
-        autoClose: 1000,
         theme: "colored",
-        position: "top-center",
       });
     }
   }, [location]);

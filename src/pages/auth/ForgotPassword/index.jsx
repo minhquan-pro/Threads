@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -11,6 +10,7 @@ import { loadingSelector } from "@/features/auth";
 import { forgotPassword } from "@/services/auth";
 import FormField from "@/components/FormField";
 import { forgotPasswordSchema } from "@/schemas/auth";
+import { toast } from "@/utils/toast";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -30,19 +30,17 @@ const ForgotPassword = () => {
 
       if (response.success) {
         toast.success(
-          response.message ||
-            "Liên kết đặt lại mật khẩu đã được gửi tới email của bạn",
-          { autoClose: 1000, theme: "colored", position: "top-center" },
+          "Liên kết đặt lại mật khẩu đã được gửi tới email của bạn",
+          {
+            theme: "colored",
+          },
         );
         reset({ email: "" });
         localStorage.setItem("resetEmail", data.email);
       }
     } catch (error) {
-      toast.error(error?.message || "Có lỗi xảy ra. Vui lòng thử lại sau.", {
-        autoClose: 1000,
-        theme: "colored",
-        position: "top-center",
-      });
+      console.log(error);
+      toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.", { theme: "colored" });
     }
   };
 

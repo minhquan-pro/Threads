@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useOptimisticRepost } from "@/hooks/useOptimisticRepost";
-import { toast } from "react-toastify";
 import { useCallback, useState } from "react";
 import QuoteModal from "../Posts/components/QuoteModal";
+import { toast } from "@/utils/toast";
 
 const RepostButton = ({ post, hasMenu = false }) => {
   const [isOpenQuote, setIsOpenQuote] = useState(false);
@@ -18,18 +18,10 @@ const RepostButton = ({ post, hasMenu = false }) => {
   const handleRepost = () => {
     try {
       toggleRepost({ postId: post.id, isReposted: post.is_reposted_by_auth });
-      toast(post.is_reposted_by_auth ? "Đã gỡ" : "Đã đăng lại", {
-        autoClose: 1000,
-        position: "bottom-center",
-        theme: "dark",
-      });
+      toast.default(post.is_reposted_by_auth ? "Đã gỡ" : "Đã đăng lại");
     } catch (error) {
       console.log(error);
-      toast.error("Có lỗi xảy ra! Vui lòng thử lại", {
-        autoClose: 1000,
-        position: "bottom-center",
-        theme: "colored",
-      });
+      toast.error("Có lỗi xảy ra! Vui lòng thử lại");
     }
   };
 
@@ -42,7 +34,6 @@ const RepostButton = ({ post, hasMenu = false }) => {
       <Interactions
         count={post.reposts_and_quotes_count}
         Icon={Repeat}
-        onClick={handleRepost}
         activeClass="text-blue-600"
         title="Đăng ký để đăng lại"
         description="Bạn đã tiến thêm được một bước trong hành trình khơi mào cuộc trò chuyện."
