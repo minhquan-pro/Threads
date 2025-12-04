@@ -11,11 +11,13 @@ import Interactions from "../Interactions";
 import { toast } from "@/utils/toast";
 import { getShareMenuItems } from "@/constants/getShareMenuItems";
 import ShareDropdownMenu from "./components/ShareDropdownMenu";
-import ShareImageDialog from "./components/ShareImageDialog";
 import { useState } from "react";
+import CopyImageDialog from "./components/CopyImageDialog";
+import EmbedModal from "../EmbedModal";
 
 const ShareButton = ({ post, hasMenu = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [isEmbedCodeDialogOpen, setIsEmbedCodeDialogOpen] = useState(false);
 
   const handleCopy = () => {
     const postUrl = `${window.location.origin}/${post.user.username}/post/${post.id}`;
@@ -26,10 +28,14 @@ const ShareButton = ({ post, hasMenu = false }) => {
     }
   };
 
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
+
   const shareMenuItems = getShareMenuItems({
     onCopyLink: handleCopy,
-    onCopyImage: () => setIsOpen(true),
-    onEmbed: () => {},
+    onCopyImage: () => setIsOpenDialog(true),
+    onEmbed: () => setIsEmbedCodeDialogOpen(true),
   });
 
   if (!hasMenu) {
@@ -60,7 +66,16 @@ const ShareButton = ({ post, hasMenu = false }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ShareImageDialog isOpen={isOpen} post={post} />
+      <CopyImageDialog
+        isOpen={isOpenDialog}
+        post={post}
+        onClose={handleCloseDialog}
+      />
+      <EmbedModal
+        isOpen={isEmbedCodeDialogOpen}
+        post={post}
+        onClose={() => setIsEmbedCodeDialogOpen(false)}
+      />
     </div>
   );
 };

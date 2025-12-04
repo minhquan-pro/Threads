@@ -18,6 +18,7 @@ import Profile from "./pages/Profile";
 import FollowingFeed from "./pages/FollowingFeed";
 import GhostPosts from "./pages/GhostPosts";
 import ItemDetailPage from "./pages/ItemDetail";
+import Embed from "./pages/Embed";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
       <ToastContainer />
       <AuthProvider />
       <Routes>
+        {/* Embed */}
+        <Route path="/:userId/post/:postId/embed" element={<Embed />} />
+
         {/* AuthLayout */}
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
