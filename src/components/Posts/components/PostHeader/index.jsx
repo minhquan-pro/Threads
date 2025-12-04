@@ -1,16 +1,79 @@
+/* eslint-disable no-unused-vars */
 import { formatTime } from "@/utils/formatTime";
 import verifiedIcon from "@/assets/icons/verifiedIcon.png";
+import {
+  BellOff,
+  ChevronRight,
+  Ellipsis,
+  EyeOff,
+  Icon,
+  Link,
+  LockKeyhole,
+  MessageSquareWarning,
+  Save,
+  Shield,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const PostHeader = ({ user, hideDate = false, createdAt }) => {
+const POST_HEADER_MENU_ITEMS = [
+  { label: "Thêm vào bảng feed", type: "item", Icon: ChevronRight },
+  { type: "separator" },
+  { label: "Lưu", type: "item", Icon: Save },
+  { label: "Không quan tâm", type: "item", Icon: EyeOff },
+  { type: "separator" },
+  { label: "Tắt thông báo", type: "item", Icon: BellOff },
+  { label: "Hạn chế", type: "item", Icon: Shield },
+  { label: "Chặn", type: "item", Icon: LockKeyhole },
+  { label: "Báo cáo", type: "item", Icon: MessageSquareWarning },
+  { type: "separator" },
+  { label: "Sao chép liên kết", type: "item", Icon: Link },
+];
+
+const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
   return (
-    <div className="flex items-center gap-1">
-      <div className="flex items-center gap-0.5">
-        <span className="text-md font-semibold">{user.username}</span>
-        {user.verified && <img src={verifiedIcon} alt="" className="h-4 w-4" />}
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
+          <span className="text-md font-semibold">{user.username}</span>
+          {user.verified && (
+            <img src={verifiedIcon} alt="" className="h-4 w-4" />
+          )}
+        </div>
+        {!hideDate && showStats && (
+          <span className="text-sm text-gray-500">{formatTime(createdAt)}</span>
+        )}
       </div>
-      {!hideDate && (
-        <span className="text-sm text-gray-500">{formatTime(createdAt)}</span>
-      )}
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          onClick={(e) => e.stopPropagation()}
+          className="border-none outline-none"
+        >
+          <Ellipsis size={16} color="gray" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="border-none outline-none">
+          {POST_HEADER_MENU_ITEMS.map(({ label, type, Icon }, index) => {
+            if (type === "separator") {
+              return <DropdownMenuSeparator key={`separator-${index}`} />;
+            }
+            return (
+              <DropdownMenuItem
+                key={label}
+                onClick={(e) => e.stopPropagation()}
+                className="text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold"
+              >
+                {label}
+                <Icon size={18} />
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };
