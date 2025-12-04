@@ -67,27 +67,28 @@ const FeedItem = ({
                   quotedPost={original_post}
                 />
               )}
-              {!hideInteraction && showStats ? (
-                <div
-                  className="pointer-events-auto mt-1 flex items-center justify-start"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <LikeButton post={post} />
-                  <CommentButton post={post} />
-                  <RepostButton post={post} hasMenu={currentUser} />
-                  <ShareButton post={post} hasMenu={currentUser} />
-                </div>
-              ) : (
-                <div
-                  className="mt-3 flex items-center gap-5 pl-3"
-                  aria-hidden="true"
-                >
-                  <Heart size={17} />
-                  <MessageCircle size={17} />
-                  <Repeat size={17} />
-                  <Send size={17} />
-                </div>
-              )}
+              {!hideInteraction &&
+                (showStats ? (
+                  <div
+                    className="pointer-events-auto mt-1 flex items-center justify-start"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <LikeButton post={post} />
+                    <CommentButton post={post} />
+                    <RepostButton post={post} hasMenu={currentUser} />
+                    <ShareButton post={post} hasMenu={currentUser} />
+                  </div>
+                ) : (
+                  <div
+                    className="mt-3 flex items-center gap-6 pl-3"
+                    aria-hidden="true"
+                  >
+                    <Heart size={16} />
+                    <MessageCircle size={16} />
+                    <Repeat size={16} />
+                    <Send size={16} />
+                  </div>
+                ))}
             </>
           )}
         </div>
