@@ -14,26 +14,34 @@ export const useImageExport = () => {
         return { width: 650, height: 650 };
       case "Bài viết trên instagram":
         return { width: 720, height: 900 };
+      case "Tự động":
       default:
         return { width: rect.width, height: rect.height };
     }
   };
 
-  const generateImage = async (element, aspectRatio) => {
-    if (!element) return;
+  const generateImage = async (element, aspectRatio = "Tự động") => {
+    if (!element) {
+      throw new Error("Element không tồn tại");
+    }
 
     const dimension = getImageDimensions(element, aspectRatio);
+
     try {
       const dataUrl = await htmlToImage.toPng(element, {
         width: dimension.width,
         height: dimension.height,
         pixelRatio: 2,
         cacheBust: true,
+        filter: (node) => {
+          if (node.nodeType === Node.COMMENT_NODE) return false;
+          return true;
+        },
       });
       return dataUrl;
     } catch (error) {
-      console.log(error);
-      return error;
+      console.error("Generate image error:", error);
+      throw error;
     }
   };
 
@@ -44,12 +52,15 @@ export const useImageExport = () => {
       const blob = await fetch(dataUrl).then((res) => res.blob());
 
       await navigator.clipboard.write([
-        new ClipboardItem({ "image/png": blob }),
+        new ClipboardItem({
+          "image/png": blob,
+        }),
       ]);
       toast.default("Đã sao chép hình ảnh");
       onSuccess?.();
     } catch (error) {
-      console.log(error);
+      console.error("Copy image error:", error);
+      toast.error("Không sao chép được hình ảnh");
     } finally {
       setLoadingCopy(false);
     }
@@ -65,14 +76,18 @@ export const useImageExport = () => {
       link.click();
       onSuccess?.();
     } catch (error) {
-      console.log(error);
-      toast.error("Không thể tải hình ảnh", {
-        theme: "colored",
-      });
+      console.error("Download image error:", error);
+      toast.error("Không thể tải hình ảnh");
     } finally {
       setLoadingDownload(false);
     }
   };
 
-  return { loadingCopy, loadingDownload, copyImage, downloadImage };
+  return {
+    loadingCopy,
+    loadingDownload,
+    copyImage,
+    downloadImage,
+    generateImage,
+  };
 };
