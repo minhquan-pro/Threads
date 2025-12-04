@@ -16,22 +16,83 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Download } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import * as htmlToImage from "html-to-image";
+import Loading from "@/components/Loading";
+import { toast } from "@/utils/toast";
 
 const ShareImageDialog = ({ isOpen, post, onCloseDialog }) => {
+  const elementRef = useRef(null);
   const [showStats, setShowStats] = useState(true);
+  const [loadingCopy, setLoadingCopy] = useState(false);
+  const [loadingDownload, setLoadingDownload] = useState(false);
+
+  const generateImage = async () => {
+    if (!elementRef.current) return;
+
+    const element = elementRef.current;
+    try {
+      const dataUrl = await htmlToImage.toPng(element, {
+        width: element.getBoundingClientRect().width,
+        height: element.getBoundingClientRect().height,
+        pixelRatio: 2,
+        cacheBust: true,
+      });
+      return dataUrl;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+  const handleCopyImage = async () => {
+    setLoadingCopy(true);
+    try {
+      const dataUrl = await generateImage();
+      const blob = await fetch(dataUrl).then((res) => res.blob());
+
+      await navigator.clipboard.write([
+        new ClipboardItem({ "image/png": blob }),
+      ]);
+      toast.default("Đã sao chép hình ảnh");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingCopy(false);
+      onCloseDialog();
+    }
+  };
+
+  const handleDownloadImage = async () => {
+    setLoadingDownload(true);
+    try {
+      const dataUrl = await generateImage();
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `post-${post.id}.png`;
+      link.click();
+    } catch (error) {
+      console.log(error);
+      toast.error("Không thể tải hình ảnh", {
+        theme: "colored",
+      });
+    } finally {
+      setLoadingDownload(false);
+      onCloseDialog();
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onCloseDialog}>
-      <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 pt-3">
+      <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0">
         <DialogTitle />
-        <div className="relative">
+        <div ref={elementRef} className="relative py-3">
           <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5">
             <FeedItem post={post} showStats={showStats} />
           </div>
           <div className="absolute inset-0 z-10 bg-transparent"></div>
         </div>
-        <DialogFooter className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2">
+        <div className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2">
           <div className="mr-auto flex items-center gap-2">
             <Checkbox
               id="terms"
@@ -59,12 +120,18 @@ const ShareImageDialog = ({ isOpen, post, onCloseDialog }) => {
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="ml-auto flex items-center gap-2">
-            <Button variant={"outline"}>
-              <Download />
+            <Button
+              variant={"outline"}
+              onClick={handleDownloadImage}
+              className={"w-14"}
+            >
+              {loadingDownload ? <Loading size={"w-4 h-4"} /> : <Download />}
             </Button>
-            <Button>Sao chép</Button>
+            <Button onClick={handleCopyImage} className={"w-28"}>
+              {loadingCopy ? <Loading size={"w-4 h-4"} /> : "Sao Chép"}
+            </Button>
           </div>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   );
