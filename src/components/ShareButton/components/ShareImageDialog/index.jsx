@@ -16,21 +16,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Download } from "lucide-react";
+import { useState } from "react";
 
 const ShareImageDialog = ({ isOpen, post, onCloseDialog }) => {
+  const [showStats, setShowStats] = useState(true);
+
   return (
     <Dialog open={isOpen} onOpenChange={onCloseDialog}>
       <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 pt-3">
         <DialogTitle />
         <div className="relative">
           <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5">
-            <FeedItem post={post} />
+            <FeedItem post={post} showStats={showStats} />
           </div>
           <div className="absolute inset-0 z-10 bg-transparent"></div>
         </div>
         <DialogFooter className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2">
           <div className="mr-auto flex items-center gap-2">
-            <Checkbox id="terms" />
+            <Checkbox
+              id="terms"
+              checked={showStats}
+              onCheckedChange={() => setShowStats(!showStats)}
+            />
             <Label htmlFor="terms">Hiển thị số liệu</Label>
           </div>
           <DropdownMenu>

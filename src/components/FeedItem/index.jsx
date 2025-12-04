@@ -8,12 +8,14 @@ import PostHeader from "../Posts/components/PostHeader";
 import PostContent from "../Posts/components/PostContent";
 import QuoteItem from "../QuoteItem";
 import { useNavigate } from "react-router";
+import { Heart, MessageCircle, Repeat, Send } from "lucide-react";
 
 const FeedItem = ({
   post,
   variant,
   hideInteraction = false,
   disableNavigation = false,
+  showStats = true,
 }) => {
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
@@ -47,7 +49,11 @@ const FeedItem = ({
       >
         <UserProfileDialog user={user} />
         <div className="w-full" onClick={handleClickPost}>
-          <PostHeader user={user} createdAt={created_at} />
+          <PostHeader
+            user={user}
+            createdAt={created_at}
+            showStats={showStats}
+          />
           {variant !== "quote" && (
             <>
               <PostContent
@@ -61,7 +67,7 @@ const FeedItem = ({
                   quotedPost={original_post}
                 />
               )}
-              {!hideInteraction && (
+              {!hideInteraction && showStats ? (
                 <div
                   className="pointer-events-auto mt-1 flex items-center justify-start"
                   onClick={(e) => e.stopPropagation()}
@@ -70,6 +76,16 @@ const FeedItem = ({
                   <CommentButton post={post} />
                   <RepostButton post={post} hasMenu={currentUser} />
                   <ShareButton post={post} hasMenu={currentUser} />
+                </div>
+              ) : (
+                <div
+                  className="mt-3 flex items-center gap-5 pl-3"
+                  aria-hidden="true"
+                >
+                  <Heart size={17} />
+                  <MessageCircle size={17} />
+                  <Repeat size={17} />
+                  <Send size={17} />
                 </div>
               )}
             </>
