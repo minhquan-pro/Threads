@@ -1,85 +1,45 @@
+import { useRef, useState } from "react";
+
+import { ChevronDown, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-
-import FeedItem from "@/components/FeedItem";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Download } from "lucide-react";
-import { useRef, useState } from "react";
-import * as htmlToImage from "html-to-image";
+
+import { useImageExport } from "@/hooks";
+import FeedItem from "@/components/FeedItem";
 import Loading from "@/components/Loading";
-import { toast } from "@/utils/toast";
+
+const ASPECT_RATIOS = [
+  { label: "Tự động", value: "auto" },
+  { label: "Vuông", value: "square" },
+  { label: "Bài viết trên instagram", value: "instagram" },
+];
 
 const ShareImageDialog = ({ isOpen, post, onCloseDialog }) => {
   const elementRef = useRef(null);
+  const [aspectRatio, setAspectRatio] = useState(ASPECT_RATIOS[0].label);
   const [showStats, setShowStats] = useState(true);
-  const [loadingCopy, setLoadingCopy] = useState(false);
-  const [loadingDownload, setLoadingDownload] = useState(false);
-
-  const generateImage = async () => {
-    if (!elementRef.current) return;
-
-    const element = elementRef.current;
-    try {
-      const dataUrl = await htmlToImage.toPng(element, {
-        width: element.getBoundingClientRect().width,
-        height: element.getBoundingClientRect().height,
-        pixelRatio: 2,
-        cacheBust: true,
-      });
-      return dataUrl;
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-  };
+  const { loadingCopy, loadingDownload, copyImage, downloadImage } =
+    useImageExport();
 
   const handleCopyImage = async () => {
-    setLoadingCopy(true);
-    try {
-      const dataUrl = await generateImage();
-      const blob = await fetch(dataUrl).then((res) => res.blob());
-
-      await navigator.clipboard.write([
-        new ClipboardItem({ "image/png": blob }),
-      ]);
-      toast.default("Đã sao chép hình ảnh");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoadingCopy(false);
-      onCloseDialog();
-    }
+    copyImage(elementRef.current, aspectRatio, onCloseDialog);
   };
 
   const handleDownloadImage = async () => {
-    setLoadingDownload(true);
-    try {
-      const dataUrl = await generateImage();
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = `post-${post.id}.png`;
-      link.click();
-    } catch (error) {
-      console.log(error);
-      toast.error("Không thể tải hình ảnh", {
-        theme: "colored",
-      });
-    } finally {
-      setLoadingDownload(false);
-      onCloseDialog();
-    }
+    downloadImage(
+      elementRef.current,
+      `post-${post.id}.png`,
+      aspectRatio,
+      onCloseDialog,
+    );
   };
 
   return (
@@ -103,20 +63,22 @@ const ShareImageDialog = ({ isOpen, post, onCloseDialog }) => {
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="flex items-center gap-2 rounded-md border border-gray-300 p-2 font-bold hover:opacity-80">
-                Tự động <ChevronDown />{" "}
+              <div className="flex items-center gap-2 rounded-md border border-gray-300 p-2 text-sm font-bold outline-none hover:opacity-80">
+                {aspectRatio} <ChevronDown />{" "}
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="border border-gray-300">
-              <DropdownMenuItem className="flex justify-between p-3 font-semibold">
-                <span>Tự động</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex justify-between p-3 font-semibold">
-                <span>Vuông</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex justify-between p-3 font-semibold">
-                <span>Bài viết trên instagram</span>
-              </DropdownMenuItem>
+              {ASPECT_RATIOS.map(({ label, value }) => {
+                return (
+                  <DropdownMenuItem
+                    key={value}
+                    className={`flex justify-between p-3 font-semibold ${aspectRatio === label && "border-3 border-blue-400"}`}
+                    onClick={() => setAspectRatio(label)}
+                  >
+                    <span>{label}</span>
+                  </DropdownMenuItem>
+                );
+              })}
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="ml-auto flex items-center gap-2">
