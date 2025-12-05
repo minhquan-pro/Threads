@@ -6,7 +6,7 @@ import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
-import CurvedBorderBottom from "@/components/CurvedBorderBottom";
+import Header from "./components/Header";
 
 const DefaultLayout = () => {
   const currentUser = useCurrentUser();
@@ -31,10 +31,7 @@ const DefaultLayout = () => {
               </HomeTabs>
             ) : (
               <div>
-                <div className="sticky top-0 z-50 w-[700px] border-gray-200 bg-white p-4">
-                  <h1 className="text-md text-center font-semibold">{title}</h1>
-                  <CurvedBorderBottom />
-                </div>
+                <Header title={title} />
                 <div className="flex min-h-screen justify-center">
                   <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border border-gray-200 border-t-transparent shadow-md">
                     <Outlet />
