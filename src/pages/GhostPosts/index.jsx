@@ -1,12 +1,4 @@
-import Posts from "@/components/Posts";
-import CreatePost from "@/components/Posts/components/CreatePost";
-
 const GhostPosts = () => {
-  return (
-    <div>
-      <CreatePost />
-      <Posts type="ghost" />
-    </div>
-  );
+  return <div></div>;
 };
 export default GhostPosts;

@@ -1,6 +1,4 @@
-import Posts from "@/components/Posts";
-
 const Search = () => {
-  return <Posts />;
+  return null;
 };
 export default Search;
