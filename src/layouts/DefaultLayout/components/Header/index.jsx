@@ -19,8 +19,7 @@ const Header = ({ title }) => {
             <ArrowLeft />
           </Button>
         )}
-        <h1 className="text-md text-center font-semibold">{title}</h1>
-        <div></div>
+        <h1 className="text-md m-auto text-center font-semibold">{title}</h1>
       </div>
       <CurvedBorderBottom />
     </div>
