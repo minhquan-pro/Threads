@@ -20,5 +20,9 @@ export const useNavigation = () => {
 };
 
 export const useTitle = (currentTab) => {
-  return NAV_ITEMS.find((nav) => nav.id === currentTab)?.title || "Trang chủ";
+  const location = useLocation();
+  const isPagePostDetail = location.pathname.includes("/post/");
+  const defaultTitle = isPagePostDetail ? "Thread" : "Trang chủ";
+
+  return NAV_ITEMS.find((nav) => nav.id === currentTab)?.title || defaultTitle;
 };
