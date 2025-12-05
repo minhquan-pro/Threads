@@ -29,8 +29,8 @@ const POST_HEADER_MENU_ITEMS = [
   { type: "separator" },
   { label: "Tắt thông báo", type: "item", Icon: BellOff },
   { label: "Hạn chế", type: "item", Icon: Shield },
-  { label: "Chặn", type: "item", Icon: LockKeyhole },
-  { label: "Báo cáo", type: "item", Icon: MessageSquareWarning },
+  { label: "Chặn", type: "item", Icon: LockKeyhole, danger: true },
+  { label: "Báo cáo", type: "item", Icon: MessageSquareWarning, danger: true },
   { type: "separator" },
   { label: "Sao chép liên kết", type: "item", Icon: Link },
 ];
@@ -52,26 +52,28 @@ const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
       <DropdownMenu>
         <DropdownMenuTrigger
           onClick={(e) => e.stopPropagation()}
-          className="border-none outline-none"
+          className="rounded-full border-none p-1 outline-none hover:bg-gray-100"
         >
           <Ellipsis size={16} color="gray" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="border-none outline-none">
-          {POST_HEADER_MENU_ITEMS.map(({ label, type, Icon }, index) => {
-            if (type === "separator") {
-              return <DropdownMenuSeparator key={`separator-${index}`} />;
-            }
-            return (
-              <DropdownMenuItem
-                key={label}
-                onClick={(e) => e.stopPropagation()}
-                className="text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold"
-              >
-                {label}
-                <Icon size={18} />
-              </DropdownMenuItem>
-            );
-          })}
+          {POST_HEADER_MENU_ITEMS.map(
+            ({ label, type, Icon, danger }, index) => {
+              if (type === "separator") {
+                return <DropdownMenuSeparator key={`separator-${index}`} />;
+              }
+              return (
+                <DropdownMenuItem
+                  key={label}
+                  onClick={(e) => e.stopPropagation()}
+                  className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger && "text-red-500"}`}
+                >
+                  {label}
+                  <Icon size={18} />
+                </DropdownMenuItem>
+              );
+            },
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
