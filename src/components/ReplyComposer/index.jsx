@@ -22,7 +22,7 @@ const ReplyComposer = ({
         <UserAvatar />
         <div className="flex-1">
           <div className="flex items-center justify-between">
-            <PostHeader user={currentUser} hideDate />
+            <PostHeader user={currentUser} hideDate showMenu={false} />
             {showClose && (
               <Button variant={"outline"} className={"border-none shadow-none"}>
                 <X />

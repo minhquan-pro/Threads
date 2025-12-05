@@ -35,7 +35,13 @@ const POST_HEADER_MENU_ITEMS = [
   { label: "Sao chép liên kết", type: "item", Icon: Link },
 ];
 
-const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
+const PostHeader = ({
+  user,
+  hideDate = false,
+  createdAt,
+  showStats,
+  showMenu = true,
+}) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
@@ -47,36 +53,38 @@ const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
           <span className="text-sm text-gray-500">{formatTime(createdAt)}</span>
         )}
       </div>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          onClick={(e) => e.stopPropagation()}
-          className="rounded-full border-none p-1 outline-none hover:bg-gray-100"
-        >
-          <Ellipsis size={16} color="gray" />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="end"
-          className="border border-gray-200 outline-none"
-        >
-          {POST_HEADER_MENU_ITEMS.map(
-            ({ label, type, Icon, danger }, index) => {
-              if (type === "separator") {
-                return <DropdownMenuSeparator key={`separator-${index}`} />;
-              }
-              return (
-                <DropdownMenuItem
-                  key={label}
-                  onClick={(e) => e.stopPropagation()}
-                  className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger && "text-red-500"}`}
-                >
-                  {label}
-                  <Icon size={18} />
-                </DropdownMenuItem>
-              );
-            },
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {showMenu && (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            onClick={(e) => e.stopPropagation()}
+            className="rounded-full border-none p-1 outline-none hover:bg-gray-100"
+          >
+            <Ellipsis size={16} color="gray" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="border border-gray-200 outline-none"
+          >
+            {POST_HEADER_MENU_ITEMS.map(
+              ({ label, type, Icon, danger }, index) => {
+                if (type === "separator") {
+                  return <DropdownMenuSeparator key={`separator-${index}`} />;
+                }
+                return (
+                  <DropdownMenuItem
+                    key={label}
+                    onClick={(e) => e.stopPropagation()}
+                    className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger && "text-red-500"}`}
+                  >
+                    {label}
+                    <Icon size={18} />
+                  </DropdownMenuItem>
+                );
+              },
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
     </div>
   );
 };

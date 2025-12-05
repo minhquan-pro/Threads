@@ -66,7 +66,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
           <UserProfileDialog user={currentUser} />
         </div>
         <div className="w-full">
-          <PostHeader user={currentUser} hideDate />
+          <PostHeader user={currentUser} hideDate showMenu={false} />
           <input
             ref={inputRef}
             className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"

@@ -36,7 +36,11 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
         <UserAvatar src={user.avatar_url} imgSize="h-6 w-6" />
       </div>
       <div className="w-full">
-        <PostHeader user={user} createdAt={quotedPost.created_at} />
+        <PostHeader
+          user={user}
+          createdAt={quotedPost.created_at}
+          showMenu={false}
+        />
         <div>
           <PostContent content={content} mediaUrls={quotedPost?.media_urls} />
           {originalPost && (

@@ -16,6 +16,7 @@ const FeedItem = ({
   hideInteraction = false,
   disableNavigation = false,
   showStats = true,
+  showMenu = true,
 }) => {
   const currentUser = useCurrentUser();
   const navigate = useNavigate();
@@ -53,6 +54,7 @@ const FeedItem = ({
             user={user}
             createdAt={created_at}
             showStats={showStats}
+            showMenu={showMenu}
           />
           {variant !== "quote" && (
             <>
