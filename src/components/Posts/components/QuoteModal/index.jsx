@@ -8,11 +8,13 @@ import PostHeader from "../PostHeader";
 import QuoteItem from "@/components/QuoteItem";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
-import { usePostForm } from "@/hooks/usePostForm";
 import CommentActionToolbar from "@/components/CommentActionToolbar";
+import { usePostForm } from "@/hooks/usePostForm";
+import { useEffect, useRef } from "react";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
+  const inputRef = useRef();
 
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(
@@ -31,6 +33,14 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
         },
       },
     );
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 100);
+    }
+  }, [isOpen]);
 
   const handleClose = () => {
     onClose();
@@ -58,11 +68,11 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
         <div className="w-full">
           <PostHeader user={currentUser} hideDate />
           <input
+            ref={inputRef}
             className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"
             placeholder="Hãy chia sẻ suy nghĩ của bạn..."
             value={content}
             onChange={handleChangeContent}
-            autoFocus={true}
           />
           <CommentActionToolbar />
 

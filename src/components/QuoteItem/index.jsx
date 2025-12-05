@@ -38,7 +38,7 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
       <div className="w-full">
         <PostHeader user={user} createdAt={quotedPost.created_at} />
         <div>
-          <PostContent content={content} mediaUrls={originalPost?.media_urls} />
+          <PostContent content={content} mediaUrls={quotedPost?.media_urls} />
           {originalPost && (
             <div className="mt-1 flex items-center gap-2 rounded-lg bg-gray-50 p-2 dark:bg-gray-800">
               <MoveRight size={15} color="gray" />

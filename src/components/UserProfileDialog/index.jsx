@@ -16,7 +16,7 @@ const UserProfileDialog = ({ user }) => {
   return (
     <div className="relative">
       <Dialog>
-        <DialogTrigger>
+        <DialogTrigger className="border-none outline-none">
           <UserAvatar
             username={user.name}
             userId={user.id}

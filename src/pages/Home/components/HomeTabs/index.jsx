@@ -18,7 +18,10 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
         </TabsList>
         <CurvedBorderBottom />
       </div>
-      <TabsContent value={currentTab} className="m-auto flex justify-center">
+      <TabsContent
+        value={currentTab}
+        className="m-auto flex min-h-screen justify-center"
+      >
         <div className="relative z-10 mt-0 w-[650px] overflow-y-auto border-x border-b border-gray-200 bg-white py-2 shadow-md">
           {children}
         </div>

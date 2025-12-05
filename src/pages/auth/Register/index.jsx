@@ -45,12 +45,10 @@ const Register = () => {
     try {
       const response = await dispatch(registerService(data)).unwrap();
       if (response.success) {
-        toast.success(
-          "Chúng tôi đã gửi một liên kết xác thực tới email của bạn. Vui lòng kiểm tra email để xác thực tài khoản.",
-          {
-            theme: "colored",
-          },
-        );
+        toast.success("Vui lòng kiểm tra email để xác thực tài khoản", {
+          theme: "colored",
+          autoClose: 1500,
+        });
       }
     } catch (error) {
       console.log(error);

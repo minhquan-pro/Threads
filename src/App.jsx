@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter, Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -22,7 +22,7 @@ import Embed from "./pages/Embed";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer />
       <AuthProvider />
       <Routes>
@@ -52,7 +52,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

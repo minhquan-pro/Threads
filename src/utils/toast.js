@@ -28,6 +28,7 @@ export const toast = {
   error: (message, options = {}) => {
     return toastify.error(message, {
       ...defaultConfig,
+      theme: "colored",
       ...options,
     });
   },

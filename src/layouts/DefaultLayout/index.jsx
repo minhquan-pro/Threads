@@ -21,7 +21,7 @@ const DefaultLayout = () => {
       </div>
       <div className="mx-auto flex items-start gap-3 pb-3">
         <div>
-          <div className="flex flex-1 flex-col items-center">
+          <div className="flex flex-1 flex-col">
             {showTabs ? (
               <HomeTabs
                 currentTab={currentTab}
@@ -35,7 +35,7 @@ const DefaultLayout = () => {
                   <h1 className="text-md text-center font-semibold">{title}</h1>
                   <CurvedBorderBottom />
                 </div>
-                <div className="flex justify-center">
+                <div className="flex min-h-screen justify-center">
                   <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border border-gray-200 border-t-transparent shadow-md">
                     <Outlet />
                   </div>
@@ -59,10 +59,7 @@ const DefaultLayout = () => {
             >
               <Link to={"/login"} className="flex items-center gap-3">
                 <Instagram />
-                <div className="flex flex-col items-start">
-                  <span className="text-gray-500">Tiếp tục bằng instagram</span>
-                  <span className="font-bold">quanlm02227</span>
-                </div>
+                <span className="text-gray-800">Tiếp tục bằng instagram</span>
               </Link>
             </Button>
             <Link to={"/login"} className="text-sm font-semibold text-gray-400">

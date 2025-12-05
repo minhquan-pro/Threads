@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import FeedItem from "@/components/FeedItem";
 import { Link } from "react-router";
@@ -22,6 +22,7 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogTitle />
       <DialogContent className="max-w-2xl overflow-y-auto">
         <div className="space-y-4">
           <div>
