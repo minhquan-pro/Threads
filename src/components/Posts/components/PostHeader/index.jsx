@@ -41,9 +41,7 @@ const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
       <div className="flex items-center gap-1">
         <div className="flex items-center gap-0.5">
           <span className="text-md font-semibold">{user.username}</span>
-          {user.verified && (
-            <img src={verifiedIcon} alt="" className="h-4 w-4" />
-          )}
+          {user.verified && <img src={verifiedIcon} className="h-4 w-4" />}
         </div>
         {!hideDate && showStats && (
           <span className="text-sm text-gray-500">{formatTime(createdAt)}</span>
@@ -56,7 +54,10 @@ const PostHeader = ({ user, hideDate = false, createdAt, showStats }) => {
         >
           <Ellipsis size={16} color="gray" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="border-none outline-none">
+        <DropdownMenuContent
+          align="end"
+          className="border border-gray-200 outline-none"
+        >
           {POST_HEADER_MENU_ITEMS.map(
             ({ label, type, Icon, danger }, index) => {
               if (type === "separator") {

@@ -19,12 +19,14 @@ import FollowingFeed from "./pages/FollowingFeed";
 import GhostPosts from "./pages/GhostPosts";
 import ItemDetailPage from "./pages/ItemDetail";
 import Embed from "./pages/Embed";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <HashRouter>
       <ToastContainer />
       <AuthProvider />
+      <ScrollToTop />
       <Routes>
         {/* Embed */}
         <Route path="/:userId/post/:postId/embed" element={<Embed />} />
