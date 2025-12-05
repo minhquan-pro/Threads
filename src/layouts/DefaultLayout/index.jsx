@@ -68,11 +68,13 @@ const DefaultLayout = () => {
           </div>
         )}
       </div>
-      <div className="fixed right-8 bottom-8">
-        <Button variant="outline" className="h-16 w-20">
-          <Plus strokeWidth={2.5} className="size-7" />
-        </Button>
-      </div>
+      {currentUser && (
+        <div className="fixed right-8 bottom-8">
+          <Button variant="outline" className="h-16 w-20">
+            <Plus strokeWidth={2.5} className="size-7" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
