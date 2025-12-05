@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Ellipsis,
   EyeOff,
-  Icon,
   Link,
   LockKeyhole,
   MessageSquareWarning,
@@ -20,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useCurrentUser } from "@/features/auth";
 
 const POST_HEADER_MENU_ITEMS = [
   { label: "Thêm vào bảng feed", type: "item", Icon: ChevronRight },
@@ -35,6 +35,10 @@ const POST_HEADER_MENU_ITEMS = [
   { label: "Sao chép liên kết", type: "item", Icon: Link },
 ];
 
+const GUEST_MENU_ITEMS = [
+  { label: "Sao chép liên kết", type: "item", Icon: Link },
+];
+
 const PostHeader = ({
   user,
   hideDate = false,
@@ -42,6 +46,9 @@ const PostHeader = ({
   showStats,
   showMenu = true,
 }) => {
+  const currentUser = useCurrentUser();
+  const menuItems = currentUser ? POST_HEADER_MENU_ITEMS : GUEST_MENU_ITEMS;
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
@@ -65,23 +72,21 @@ const PostHeader = ({
             align="end"
             className="border border-gray-200 outline-none"
           >
-            {POST_HEADER_MENU_ITEMS.map(
-              ({ label, type, Icon, danger }, index) => {
-                if (type === "separator") {
-                  return <DropdownMenuSeparator key={`separator-${index}`} />;
-                }
-                return (
-                  <DropdownMenuItem
-                    key={label}
-                    onClick={(e) => e.stopPropagation()}
-                    className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger && "text-red-500"}`}
-                  >
-                    {label}
-                    <Icon size={18} />
-                  </DropdownMenuItem>
-                );
-              },
-            )}
+            {menuItems.map(({ label, type, Icon, danger }, index) => {
+              if (type === "separator") {
+                return <DropdownMenuSeparator key={`separator-${index}`} />;
+              }
+              return (
+                <DropdownMenuItem
+                  key={label}
+                  onClick={(e) => e.stopPropagation()}
+                  className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger ? "text-red-500" : ""}`}
+                >
+                  {label}
+                  <Icon size={18} />
+                </DropdownMenuItem>
+              );
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
       )}
