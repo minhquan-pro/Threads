@@ -1,17 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { formatTime } from "@/utils/formatTime";
 import verifiedIcon from "@/assets/icons/verifiedIcon.png";
-import {
-  BellOff,
-  ChevronRight,
-  Ellipsis,
-  EyeOff,
-  Link,
-  LockKeyhole,
-  MessageSquareWarning,
-  Save,
-  Shield,
-} from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,26 +10,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useCurrentUser } from "@/features/auth";
-
-const POST_HEADER_MENU_ITEMS = [
-  { label: "Thêm vào bảng feed", type: "item", Icon: ChevronRight },
-  { type: "separator" },
-  { label: "Lưu", type: "item", Icon: Save },
-  { label: "Không quan tâm", type: "item", Icon: EyeOff },
-  { type: "separator" },
-  { label: "Tắt thông báo", type: "item", Icon: BellOff },
-  { label: "Hạn chế", type: "item", Icon: Shield },
-  { label: "Chặn", type: "item", Icon: LockKeyhole, danger: true },
-  { label: "Báo cáo", type: "item", Icon: MessageSquareWarning, danger: true },
-  { type: "separator" },
-  { label: "Sao chép liên kết", type: "item", Icon: Link },
-];
-
-const GUEST_MENU_ITEMS = [
-  { label: "Sao chép liên kết", type: "item", Icon: Link },
-];
+import {
+  GUEST_MENU_ITEMS,
+  POST_HEADER_MENU_ITEMS,
+  POST_HEADER_USER_MENU_ITEMS,
+} from "@/constants";
+import { Ellipsis } from "lucide-react";
+import { useCopyPostUrl } from "@/hooks";
+import { savePost } from "@/services/Posts";
+import { toast } from "@/utils/toast";
+import { usePostActions } from "@/hooks/usePostActions";
 
 const PostHeader = ({
+  post,
   user,
   hideDate = false,
   createdAt,
@@ -47,7 +30,31 @@ const PostHeader = ({
   showMenu = true,
 }) => {
   const currentUser = useCurrentUser();
-  const menuItems = currentUser ? POST_HEADER_MENU_ITEMS : GUEST_MENU_ITEMS;
+  const menuItems = !currentUser
+    ? GUEST_MENU_ITEMS
+    : currentUser.id === user.id
+      ? POST_HEADER_USER_MENU_ITEMS
+      : POST_HEADER_MENU_ITEMS;
+
+  const { copyPostUrl } = useCopyPostUrl();
+  const { isSaved, handleSavePost } = usePostActions(post);
+
+  const getMenuLabel = (action, label) => {
+    if (action === "save") {
+      return isSaved ? "Bỏ lưu" : label;
+    }
+
+    return label;
+  };
+
+  const handleAction = (action) => {
+    switch (action) {
+      case "copyLink":
+        return copyPostUrl(post);
+      case "save":
+        return handleSavePost();
+    }
+  };
 
   return (
     <div className="flex items-center justify-between">
@@ -72,17 +79,20 @@ const PostHeader = ({
             align="end"
             className="border border-gray-200 outline-none"
           >
-            {menuItems.map(({ label, type, Icon, danger }, index) => {
+            {menuItems.map(({ label, action, type, Icon, danger }, index) => {
               if (type === "separator") {
                 return <DropdownMenuSeparator key={`separator-${index}`} />;
               }
               return (
                 <DropdownMenuItem
                   key={label}
-                  onClick={(e) => e.stopPropagation()}
-                  className={`text-md flex min-w-60 cursor-pointer items-center justify-between p-3 font-semibold ${danger ? "text-red-500" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAction(action);
+                  }}
+                  className={`flex w-56 cursor-pointer items-center justify-between p-3 font-semibold ${danger ? "text-red-500" : ""}`}
                 >
-                  {label}
+                  {getMenuLabel(action, label)}
                   <Icon size={18} />
                 </DropdownMenuItem>
               );
