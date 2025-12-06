@@ -7,7 +7,8 @@ export const createComments = async ({ postId, content, reply_permission }) => {
       content,
       reply_permission,
     });
-    console.log(response);
+
+    return response;
   } catch (error) {
     throw new Error(error);
   }

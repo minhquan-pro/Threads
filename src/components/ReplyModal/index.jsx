@@ -1,26 +1,50 @@
 import { useDispatch } from "react-redux";
+import { useMemo } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import { useCurrentUser } from "@/features/auth";
+import { createComments } from "@/services/comment";
 
 import { usePostForm } from "@/hooks/usePostForm";
-import { createComments } from "@/services/comment";
 import ThreadLine from "../ThreadLine";
 import ReplyComposer from "../ReplyComposer";
 import FeedItem from "../FeedItem";
 import BaseThreadModal from "../BaseModal";
+
 import {
   optimisticDecrementRepliesCount,
   optimisticIncrementRepliesCount,
 } from "@/features/posts/postSlice";
+import {
+  addCommentOptimistic,
+  removeOptimisticComment,
+  updateComment,
+} from "@/features/comments/commentSlice";
 
 const ReplyModal = ({ post, isOpen, onClose }) => {
+  const idFake = useMemo(() => `temp-${uuidv4()}`, []);
   const dispatch = useDispatch();
+  const currentUser = useCurrentUser();
+  const postId = post.id;
+
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(
       async ({ content }) => {
-        await createComments({
-          postId: post.id,
+        const response = await createComments({
+          postId,
           content,
           reply_permission: post.reply_permission,
         });
+
+        dispatch(
+          updateComment({
+            reply: response.data,
+            idFake,
+            postId,
+          }),
+        );
+
+        return response.data;
       },
       {
         successMessage: "Đã đăng",
@@ -35,11 +59,26 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
 
   const onSubmit = async () => {
     dispatch(optimisticIncrementRepliesCount({ postId: post.id }));
-    handleClose();
+
+    const dataFake = {
+      id: idFake,
+      content,
+      postId,
+      user: currentUser,
+      created_at: new Date().toISOString(),
+      likes_count: 0,
+      replies_count: 0,
+    };
+
+    dispatch(addCommentOptimistic(dataFake));
 
     const success = await handleSubmit();
-    if (!success)
+
+    if (!success) {
       dispatch(optimisticDecrementRepliesCount({ postId: post.id }));
+      dispatch(removeOptimisticComment({ postId, idFake }));
+    }
+    handleClose();
   };
 
   return (
