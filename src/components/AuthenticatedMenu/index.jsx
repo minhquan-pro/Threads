@@ -41,7 +41,14 @@ const AuthenticatedMenu = () => {
       }
     }
 
-    handleActiveSubmenu(action);
+    const menuItem =
+      MENU_ITEMS[
+        Object.keys(MENU_ITEMS).find((key) => MENU_ITEMS[key].action === action)
+      ];
+
+    if (menuItem?.hasSubmenu) {
+      handleActiveSubmenu(action);
+    }
   };
 
   const renderMenuItem = (menu) => {

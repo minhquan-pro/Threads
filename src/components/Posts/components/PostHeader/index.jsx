@@ -64,7 +64,7 @@ const PostHeader = ({
         <DropdownMenu>
           <DropdownMenuTrigger
             onClick={(e) => e.stopPropagation()}
-            className="rounded-full border-none p-1 outline-none hover:bg-gray-100"
+            className="rounded-full border-none p-2 outline-none hover:bg-gray-100"
           >
             <Ellipsis size={16} color="gray" />
           </DropdownMenuTrigger>
