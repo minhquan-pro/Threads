@@ -10,11 +10,10 @@ import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
 import CommentActionToolbar from "@/components/CommentActionToolbar";
 import { usePostForm } from "@/hooks/usePostForm";
-import { useEffect, useRef } from "react";
+import PostComposer from "@/components/PostComposer";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
-  const inputRef = useRef();
 
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(
@@ -33,14 +32,6 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
         },
       },
     );
-
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        inputRef.current.focus();
-      }, 100);
-    }
-  }, [isOpen]);
 
   const handleClose = () => {
     onClose();
@@ -66,16 +57,13 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
           <UserProfileDialog user={currentUser} />
         </div>
         <div className="w-full">
-          <PostHeader user={currentUser} hideDate showMenu={false} />
-          <input
-            ref={inputRef}
-            className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"
-            placeholder="Hãy chia sẻ suy nghĩ của bạn..."
-            value={content}
+          <PostComposer
+            user={currentUser}
+            content={content}
+            onFocus={isOpen}
             onChange={handleChangeContent}
+            placeholder="Hãy chia sẻ suy nghĩ của bạn..."
           />
-          <CommentActionToolbar />
-
           <div>
             {loading ? (
               <div className="flex justify-center">

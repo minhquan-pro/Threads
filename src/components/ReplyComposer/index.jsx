@@ -1,14 +1,14 @@
-import { Image, X } from "lucide-react";
-import PostHeader from "../Posts/components/PostHeader";
-import ThreadLine from "../ThreadLine";
-import UserAvatar from "../UserAvatar";
+import { X } from "lucide-react";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../ui/button";
-import CommentActionToolbar from "../CommentActionToolbar";
+import ThreadLine from "../ThreadLine";
+import UserAvatar from "../UserAvatar";
+import PostComposer from "../PostComposer";
 
 const ReplyComposer = ({
   placeholder,
   showClose = false,
+  onClose,
   content,
   onChange,
   disabled = false,
@@ -17,27 +17,29 @@ const ReplyComposer = ({
 
   return (
     <div className="relative mt-4 flex gap-2">
-      <ThreadLine show lineStyle="bg-gray-200!" />
+      <ThreadLine show lineStyle="bg-gray-200" />
       <div className="flex gap-2">
         <UserAvatar />
         <div className="flex-1">
           <div className="flex items-center justify-between">
-            <PostHeader user={currentUser} hideDate showMenu={false} />
+            <PostComposer
+              user={currentUser}
+              content={content}
+              onChange={onChange}
+              disabled={disabled}
+              placeholder={placeholder}
+              autoFocus
+            />
             {showClose && (
-              <Button variant={"outline"} className={"border-none shadow-none"}>
+              <Button
+                variant="outline"
+                className="border-none shadow-none"
+                onClick={onClose}
+              >
                 <X />
               </Button>
             )}
           </div>
-          <input
-            className="w-full border-none p-0 shadow-none outline-none placeholder:text-[#050505]/50"
-            placeholder={placeholder}
-            value={content}
-            onChange={onChange}
-            disabled={disabled}
-            autoFocus
-          />
-          <CommentActionToolbar />
         </div>
       </div>
     </div>
