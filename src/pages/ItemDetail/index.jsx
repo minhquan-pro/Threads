@@ -11,7 +11,6 @@ const ItemDetailPage = () => {
   const location = useLocation();
   const parentId = location.state?.parentId;
   const { postId } = useParams();
-
   const [currentItem, currentPostLoading] = useFetchPostDetail(postId);
   const [parentItem, parentPostLoading] = useFetchPostDetail(parentId);
 

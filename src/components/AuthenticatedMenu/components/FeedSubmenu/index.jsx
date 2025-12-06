@@ -28,9 +28,6 @@ const FeedSubmenu = ({ handleBack }) => {
             <Link key={feed.id} to={`/${feed.id}`}>
               <DropdownMenuItem
                 className={classNames(`w-full px-4 py-3 font-semibold`)}
-                onSelect={(e) => {
-                  e.preventDefault();
-                }}
               >
                 {feed.label}
               </DropdownMenuItem>
