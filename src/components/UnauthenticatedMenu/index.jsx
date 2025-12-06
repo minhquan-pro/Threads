@@ -6,8 +6,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ArrowRight, Menu } from "lucide-react";
-import ThemeSubmenu from "../ThemeSubmenu";
 import { useMenuSubmenu } from "@/hooks";
+import ThemeSubmenu from "../AuthenticatedMenu/components/ThemeSubmenu";
 
 const UnauthenticatedMenu = () => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();

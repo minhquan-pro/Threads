@@ -1,6 +1,6 @@
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { THEMES } from "@/constants";
 import classNames from "classnames";
-import { DropdownMenuItem } from "../ui/dropdown-menu";
 import { ChevronLeft } from "lucide-react";
 
 const ThemeSubmenu = ({ handleBack }) => {

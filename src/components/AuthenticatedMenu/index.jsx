@@ -14,13 +14,14 @@ import { Spinner } from "../ui/spinner";
 
 import { MENU_GROUPS, MENU_ITEMS, MENU_OFFSET } from "@/constants";
 import { useMenuSubmenu } from "@/hooks";
-import ThemeSubmenu from "../ThemeSubmenu";
 import {
   loadingSelector as authLoadingSelector,
   setCurrentUser,
 } from "@/features/auth";
 import { logout } from "@/services/auth";
 import MenuGroup from "./components/MenuGroup";
+import ThemeSubmenu from "./components/ThemeSubmenu";
+import FeedSubmenu from "./components/FeedSubmenu";
 
 const AuthenticatedMenu = () => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
@@ -111,6 +112,7 @@ const AuthenticatedMenu = () => {
           {activeSubmenu === "interface" && (
             <ThemeSubmenu handleBack={handleBack} />
           )}
+          {activeSubmenu === "feed" && <FeedSubmenu handleBack={handleBack} />}
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
