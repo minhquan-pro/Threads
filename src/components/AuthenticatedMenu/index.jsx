@@ -8,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import { ArrowRight, Menu } from "lucide-react";
 import { Spinner } from "../ui/spinner";
@@ -21,6 +20,7 @@ import {
   setCurrentUser,
 } from "@/features/auth";
 import { logout } from "@/services/auth";
+import MenuGroup from "./components/MenuGroup";
 
 const AuthenticatedMenu = () => {
   const { handleActiveSubmenu, handleBack, activeSubmenu } = useMenuSubmenu();
@@ -68,9 +68,7 @@ const AuthenticatedMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div>
-          <Menu />
-        </div>
+        <Menu />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         sideOffset={MENU_OFFSET.side}
@@ -86,24 +84,22 @@ const AuthenticatedMenu = () => {
                 : "opacity-100"
             }`}
           >
-            <DropdownMenuGroup>
-              {MENU_GROUPS.settings.map((menu) => {
-                return renderMenuItem(menu);
-              })}
-            </DropdownMenuGroup>
+            <MenuGroup
+              items={MENU_GROUPS.settings}
+              renderMenuItem={renderMenuItem}
+            />
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              {MENU_GROUPS.content.map((menu) => {
-                return renderMenuItem(menu);
-              })}
-            </DropdownMenuGroup>
+            <MenuGroup
+              items={MENU_GROUPS.content}
+              renderMenuItem={renderMenuItem}
+            />
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              {MENU_GROUPS.actions.map((menu) => {
-                return renderMenuItem(menu);
-              })}
-            </DropdownMenuGroup>
+            <MenuGroup
+              items={MENU_GROUPS.actions}
+              renderMenuItem={renderMenuItem}
+            />
           </div>
+
           {/* Submenu */}
           {activeSubmenu === "interface" && (
             <ThemeSubmenu handleBack={handleBack} />
