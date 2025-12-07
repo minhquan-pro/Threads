@@ -12,15 +12,21 @@ const PostComposer = ({
   placeholder,
   autoFocus,
 }) => {
-  const inputRef = useRef(null);
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     if (onFocus) {
       setTimeout(() => {
-        inputRef.current?.focus();
+        textareaRef.current?.focus();
       }, 100);
     }
   }, [onFocus]);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [content]);
 
   return (
     <>
@@ -35,14 +41,15 @@ const PostComposer = ({
           />
         </div>
       </div>
-      <input
-        ref={inputRef}
-        className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"
+      <textarea
+        ref={textareaRef}
+        className="w-full resize-none border-none p-0 shadow-none outline-none placeholder:text-gray-600"
         placeholder={placeholder}
         value={content}
         onChange={onChange}
         disabled={disabled}
         autoFocus={autoFocus}
+        rows={1}
       />
       <CommentActionToolbar />
     </>
