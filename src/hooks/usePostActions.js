@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 export const usePostActions = (post) => {
   const dispatch = useDispatch();
   const [isSaved, setIsSaved] = useState(post?.is_saved_by_auth || false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleSavePost = async () => {
     try {
@@ -18,13 +19,16 @@ export const usePostActions = (post) => {
   };
 
   const handleDeletePost = async () => {
+    setIsDeleting(true);
     try {
       await dispatch(deletePost(post.id));
       toast.default("Đã xóa");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
-  return { isSaved, handleSavePost, handleDeletePost };
+  return { isSaved, isDeleting, handleSavePost, handleDeletePost };
 };
