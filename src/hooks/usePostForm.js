@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-export const usePostForm = (submitFunction, options = {}) => {
+export const usePostForm = (
+  submitFunction,
+  options = { successMessage: "Đã đăng", errorMessage: "Đăng thất bại" },
+) => {
   const { successMessage, errorMessage } = options;
 
   const [content, setContent] = useState("");
@@ -18,7 +21,7 @@ export const usePostForm = (submitFunction, options = {}) => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    const toastId = toast.loading("Đang đăng", {
+    const toastId = toast.loading("Đang đăng...", {
       position: "bottom-center",
       theme: "dark",
     });

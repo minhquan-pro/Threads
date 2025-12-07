@@ -11,12 +11,12 @@ const ItemDetailPage = () => {
   const location = useLocation();
   const parentId = location.state?.parentId;
   const { postId } = useParams();
-  const [currentItem, currentPostLoading] = useFetchPostDetail(postId);
   const [parentItem, parentPostLoading] = useFetchPostDetail(parentId);
+  const [currentItem, currentItemLoading] = useFetchPostDetail(postId);
 
-  if (currentPostLoading) {
+  if (currentItemLoading) {
     return (
-      <div className="flex items-center justify-center py-10">
+      <div className="flex justify-center py-10">
         <Loading size="w-6 h-6" />
       </div>
     );
@@ -25,7 +25,7 @@ const ItemDetailPage = () => {
   if (!currentItem) {
     return (
       <div className="flex justify-center py-10">
-        <p className="t text-gray-500">Không tìm thấy bài viết</p>
+        <p className="text-gray-500">Không tìm thấy bài viết</p>
       </div>
     );
   }

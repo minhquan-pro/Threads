@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 
 const Sidebar = () => {
   const currentUser = useCurrentUser();
+
   return (
     <div className="flex h-full flex-col justify-between p-6">
       <div>

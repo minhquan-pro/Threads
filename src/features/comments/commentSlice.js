@@ -47,8 +47,6 @@ const commentsSlice = createSlice({
         state.loading[action.meta.arg.postId] = true;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
-        console.log(action);
-
         const { postId, comments, pagination } = action.payload;
         const oldComments = state.byPostId[postId] || [];
 

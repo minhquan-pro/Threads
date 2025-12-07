@@ -13,6 +13,19 @@ export const createPost = createAsyncThunk(
   },
 );
 
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      await http.post(`/posts/${postId}`, {
+        _method: "DELETE",
+      });
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);
+
 export const getPosts = createAsyncThunk(
   "posts/getList",
   async ({ type, page = 1, per_page = 10 }) => {

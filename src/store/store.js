@@ -8,7 +8,11 @@ import storage from "redux-persist/lib/storage";
 const rootPersistConfig = {
   key: "root",
   storage,
-  blacklist: ["auth", "posts", "comments"],
+  blacklist: [
+    authSlice.reducerPath,
+    postsSlice.reducerPath,
+    commentsSlice.reducerPath,
+  ],
 };
 
 const authPersistConfig = {

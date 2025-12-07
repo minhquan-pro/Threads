@@ -96,7 +96,7 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
       </div>
       <div className="relative mt-4 flex gap-2">
         <ThreadLine show lineStyle="bg-gray-200" />
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <ThreadComposer
             user={currentUser}
             content={content}

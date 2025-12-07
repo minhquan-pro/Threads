@@ -27,3 +27,12 @@ export const quotePost = async (postId, data) => {
     throw new Error(error);
   }
 };
+
+export const savePost = async (postId) => {
+  try {
+    const response = await http.post(`posts/${postId}/save`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

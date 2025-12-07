@@ -1,9 +1,10 @@
-import { getPostById, getPosts } from "@/services/Posts";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectorList } from "./selectors";
-import { useCurrentUser } from "../auth";
+
 import { toast } from "@/utils/toast";
+import { getPostById, getPosts } from "@/services/Posts";
+import { selectItemsById, selectorList } from "./selectors";
+import { useCurrentUser } from "../auth";
 
 export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
   const dispatch = useDispatch();

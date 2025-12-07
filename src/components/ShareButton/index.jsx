@@ -1,4 +1,3 @@
-import copy from "copy-to-clipboard";
 import { Send } from "lucide-react";
 
 import {
@@ -8,24 +7,20 @@ import {
 } from "../ui/dropdown-menu";
 
 import Interactions from "../Interactions";
-import { toast } from "@/utils/toast";
 import { getShareMenuItems } from "@/constants/getShareMenuItems";
 import ShareDropdownMenu from "./components/ShareDropdownMenu";
 import { useState } from "react";
 import CopyImageDialog from "./components/CopyImageDialog";
 import EmbedModal from "../EmbedModal";
+import { useCopyPostUrl } from "@/hooks";
 
 const ShareButton = ({ post, hasMenu = false }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isEmbedCodeDialogOpen, setIsEmbedCodeDialogOpen] = useState(false);
+  const { copyPostUrl } = useCopyPostUrl();
 
   const handleCopy = () => {
-    const postUrl = `${window.location.origin}/${post.user.username}/post/${post.id}`;
-    const success = copy(postUrl);
-
-    if (success) {
-      toast.default("Đã sao chép");
-    }
+    copyPostUrl(post);
   };
 
   const handleCloseDialog = () => {
@@ -41,7 +36,6 @@ const ShareButton = ({ post, hasMenu = false }) => {
   if (!hasMenu) {
     return (
       <Interactions
-        count={post.reposts_and_quotes_count}
         Icon={Send}
         activeClass="text-blue-600"
         title="Đăng ký để đăng lại"

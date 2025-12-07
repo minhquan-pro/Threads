@@ -17,6 +17,7 @@ export const NAV_ITEMS = [
   },
   {
     id: "create",
+    action: "create",
     component: Plus,
     requireAuth: true,
     dialogTitle: "Đăng nhập để đăng",
