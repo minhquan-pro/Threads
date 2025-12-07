@@ -49,8 +49,9 @@ const FeedItem = ({
         className={`flex ${!disableNavigation ? "cursor-pointer" : ""} items-start gap-2`}
       >
         <UserProfileDialog user={user} />
-        <div className="w-full" onClick={handleClickPost}>
+        <div className="w-full">
           <PostHeader
+            post={post}
             user={user}
             createdAt={created_at}
             showStats={showStats}
@@ -58,17 +59,21 @@ const FeedItem = ({
           />
           {variant !== "quote" && (
             <>
-              <PostContent
-                content={content}
-                mediaUrls={media_urls}
-                original_post={original_post}
-              />
-              {original_post && (
-                <QuoteItem
-                  quotedPostId={original_post_id}
-                  quotedPost={original_post}
+              <div onClick={handleClickPost}>
+                <PostContent
+                  content={content}
+                  mediaUrls={media_urls}
+                  original_post={original_post}
                 />
-              )}
+
+                {original_post && (
+                  <QuoteItem
+                    quotedPostId={original_post_id}
+                    quotedPost={original_post}
+                  />
+                )}
+              </div>
+
               {!hideInteraction &&
                 (showStats ? (
                   <div

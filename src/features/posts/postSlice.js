@@ -1,4 +1,4 @@
-import { createPost, getPosts } from "@/services/Posts/postService";
+import { createPost, deletePost, getPosts } from "@/services/Posts/postService";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -146,6 +146,37 @@ const postsSlice = createSlice({
         delete state.byId[idFake];
         delete state.loadingById[idFake];
         state.items = state.items.filter((id) => id !== idFake);
+      });
+    // Delete Post
+    builder
+      .addCase(deletePost.pending, (state, action) => {
+        const postId = action.meta.arg;
+
+        state.items = state.items.filter((id) => id !== postId);
+
+        const indexPostId = state.items.findIndex((id) => id === postId);
+        if (indexPostId !== -1) {
+          state.items.splice(indexPostId, 1);
+        }
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const postId = action.meta.arg;
+
+        delete state.byId[postId];
+        delete state.loadingById[postId];
+
+        state.pagination.total -= 1;
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        const postId = action.meta.arg;
+
+        if (state.byId[postId]) {
+          if (!state.items.includes(postId)) {
+            state.items.unshift(postId);
+          }
+        }
+
+        delete state.loadingById[postId];
       });
   },
 });
