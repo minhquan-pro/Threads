@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import PostHeader from "../Posts/components/PostHeader";
 import CommentActionToolbar from "../CommentActionToolbar";
+import { ChevronRight } from "lucide-react";
 
 const PostComposer = ({
   user,
@@ -22,8 +23,18 @@ const PostComposer = ({
   }, [onFocus]);
 
   return (
-    <div className="w-full">
-      <PostHeader user={user} hideDate showMenu={false} />
+    <>
+      <div className="flex items-center">
+        <PostHeader user={user} hideDate showMenu={false} />
+        <div className="flex items-center gap-1 placeholder:text-gray-500">
+          <ChevronRight color="gray" size={15} />
+          <input
+            type="text"
+            placeholder="thêm chủ đề"
+            className="border-none outline-none"
+          />
+        </div>
+      </div>
       <input
         ref={inputRef}
         className="w-full border-none p-0 shadow-none outline-none placeholder:text-gray-600"
@@ -34,7 +45,7 @@ const PostComposer = ({
         autoFocus={autoFocus}
       />
       <CommentActionToolbar />
-    </div>
+    </>
   );
 };
 
