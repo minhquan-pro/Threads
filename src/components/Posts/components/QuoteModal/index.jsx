@@ -1,38 +1,29 @@
-import { Image, MapPin, Smile } from "lucide-react";
-
 import { quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
 import UserProfileDialog from "@/components/UserProfileDialog";
 import Loading from "@/components/Loading";
-import PostHeader from "../PostHeader";
 import QuoteItem from "@/components/QuoteItem";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
-import CommentActionToolbar from "@/components/CommentActionToolbar";
 import { usePostForm } from "@/hooks/usePostForm";
 import PostComposer from "@/components/PostComposer";
-import ThreadComposer from "@/components/ThreadComposer";
+import { useCallback } from "react";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
 
+  const handleReplySubmit = useCallback(
+    async ({ content }) => {
+      await quotePostService(post.id, {
+        content,
+        reply_permission: post.reply_permission,
+      });
+    },
+    [post.id, post.reply_permission],
+  );
+
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
-    usePostForm(
-      async ({ content }) => {
-        await quotePostService(post.id, {
-          content,
-          reply_permission: post.reply_permission,
-        });
-      },
-      {
-        successMessage: "Đã đăng",
-        errorMessage: "Đăng bài thất bại. Vui lòng thử lại!",
-        onSuccess: () => {
-          onClose();
-          resetContent();
-        },
-      },
-    );
+    usePostForm(handleReplySubmit);
 
   const handleClose = () => {
     onClose();

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { useCurrentUser } from "@/features/auth";
@@ -19,8 +19,6 @@ import {
   removeOptimisticComment,
   updateComment,
 } from "@/features/comments/commentSlice";
-import UserAvatar from "../UserAvatar";
-import PostComposer from "../PostComposer";
 import ThreadComposer from "../ThreadComposer";
 
 const ReplyModal = ({ post, isOpen, onClose }) => {
@@ -29,22 +27,24 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
   const postId = post.id;
 
-  const handleReplySubmit = async ({ content }) => {
-    const response = await createComments({
-      postId,
-      content,
-      reply_permission: post.reply_permission,
-    });
-    dispatch(
-      updateComment({
-        reply: response.data,
-        idFake,
+  const handleReplySubmit = useCallback(
+    async ({ content }) => {
+      const response = await createComments({
         postId,
-      }),
-    );
-
-    return response.data;
-  };
+        content,
+        reply_permission: post.reply_permission,
+      });
+      dispatch(
+        updateComment({
+          reply: response.data,
+          idFake,
+          postId,
+        }),
+      );
+      return response.data;
+    },
+    [dispatch, idFake, post.reply_permission, postId],
+  );
 
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(handleReplySubmit, {
