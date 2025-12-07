@@ -1,6 +1,18 @@
 import { http } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const createPost = createAsyncThunk(
+  "posts/createPost",
+  async (postData, { rejectWithValue }) => {
+    try {
+      const response = await http.post("/posts", postData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);
+
 export const getPosts = createAsyncThunk(
   "posts/getList",
   async ({ type, page = 1, per_page = 10 }) => {
@@ -8,6 +20,18 @@ export const getPosts = createAsyncThunk(
       `posts/feed?type=${type}&page=${page}&per_page=${per_page}`,
     );
     return response;
+  },
+);
+
+export const fetchPostById = createAsyncThunk(
+  "posts/fetchById",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const response = await http.get(`/posts/${postId}`);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   },
 );
 
