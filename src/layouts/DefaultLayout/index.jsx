@@ -1,14 +1,17 @@
 import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Instagram, Plus } from "lucide-react";
+import { Ellipsis, Instagram, Plus } from "lucide-react";
 
 import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
+import { useState } from "react";
+import CreatePostModal from "@/components/Posts/components/CreatePost/components/CreatePostModal";
 
 const DefaultLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const currentUser = useCurrentUser();
   const { currentTab, handleValueChange, isHomeFeedRoute } = useNavigation();
   const showTabs = isHomeFeedRoute && currentUser;
@@ -20,8 +23,8 @@ const DefaultLayout = () => {
         <Sidebar />
       </div>
       <div className="mx-auto flex items-start gap-3 pb-3">
-        <div>
-          <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col">
+          <div>
             {showTabs ? (
               <HomeTabs
                 currentTab={currentTab}
@@ -66,10 +69,18 @@ const DefaultLayout = () => {
         )}
       </div>
       {currentUser && (
-        <div className="fixed right-8 bottom-8">
-          <Button variant="outline" className="h-16 w-20">
-            <Plus strokeWidth={2.5} className="size-7" />
-          </Button>
+        <div className="fixed right-8 bottom-8 z-50">
+          {!isOpen ? (
+            <Button
+              variant="outline"
+              className="h-16 w-20 shadow-md"
+              onClick={() => setIsOpen(true)}
+            >
+              <Plus strokeWidth={2.5} className="size-7" />
+            </Button>
+          ) : (
+            <CreatePostModal open={isOpen} onClose={() => setIsOpen(false)} />
+          )}
         </div>
       )}
     </div>
