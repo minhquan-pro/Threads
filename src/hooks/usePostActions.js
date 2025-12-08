@@ -1,4 +1,5 @@
 import { deletePost, savePost } from "@/services/Posts";
+import { blockUser, unBlockUser } from "@/services/userActions";
 import { toast } from "@/utils/toast";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,6 +8,7 @@ export const usePostActions = (post) => {
   const dispatch = useDispatch();
   const [isSaved, setIsSaved] = useState(post?.is_saved_by_auth || false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
 
   const handleSavePost = async () => {
     try {
@@ -30,5 +32,32 @@ export const usePostActions = (post) => {
     }
   };
 
-  return { isSaved, isDeleting, handleSavePost, handleDeletePost };
+  const handleBlockUser = async () => {
+    try {
+      const isBlocked = await blockUser(post.user.id);
+      setIsBlocked(isBlocked);
+      toast.default("Đã chặn");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnblockUser = async () => {
+    try {
+      await unBlockUser(post.user.id);
+      toast.default("Đã bỏ chặn");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    isSaved,
+    isDeleting,
+    isBlocked,
+    handleSavePost,
+    handleDeletePost,
+    handleBlockUser,
+    handleUnblockUser,
+  };
 };
