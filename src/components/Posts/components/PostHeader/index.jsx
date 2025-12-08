@@ -9,18 +9,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
+
 import { useCurrentUser } from "@/features/auth";
 import {
+  DIALOG_CONFIGS,
   GUEST_MENU_ITEMS,
   POST_HEADER_MENU_ITEMS,
   POST_HEADER_USER_MENU_ITEMS,
@@ -28,6 +20,7 @@ import {
 import { Ellipsis } from "lucide-react";
 import { useCopyPostUrl } from "@/hooks";
 import { usePostActions } from "@/hooks/usePostActions";
+import ConfirmDialog from "./components/ConfirmDialog";
 
 const PostHeader = ({
   post,
@@ -39,9 +32,18 @@ const PostHeader = ({
 }) => {
   const currentUser = useCurrentUser();
   const { copyPostUrl } = useCopyPostUrl();
-  const { isSaved, isDeleting, handleSavePost, handleDeletePost } =
-    usePostActions(post);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const {
+    isSaved,
+    isBlocked,
+    handleSavePost,
+    handleDeletePost,
+    handleBlockUser,
+    handleUnblockUser,
+  } = usePostActions(post);
+  const [dialogState, setDialogState] = useState({
+    type: null,
+    open: false,
+  });
 
   const menuItems = !currentUser
     ? GUEST_MENU_ITEMS
@@ -50,37 +52,65 @@ const PostHeader = ({
       : POST_HEADER_MENU_ITEMS;
 
   const getMenuLabel = (action, label) => {
-    if (action === "save") {
-      return isSaved ? "Bỏ lưu" : label;
+    switch (action) {
+      case "save":
+        return isSaved ? "Bỏ lưu" : label;
+      case "block":
+        return isBlocked ? "Bỏ chặn" : label;
     }
+
     return label;
   };
 
   // Handle menu actions
   const handleAction = (action) => {
+    if (action === "block" && isBlocked) {
+      setDialogState({ type: "unblock", open: true });
+      return;
+    }
+
     switch (action) {
       case "copyLink":
         copyPostUrl(post);
         break;
-
       case "save":
         handleSavePost();
         break;
-
       case "delete":
-        setOpenDeleteDialog(true);
+        setDialogState({ type: "delete", open: true });
         break;
-
+      case "block":
+        setDialogState({ type: "block", open: true });
+        break;
       default:
         console.log("Unhandled action:", action);
         break;
     }
   };
 
-  const handleConfirmDelete = async () => {
-    await handleDeletePost();
-    setOpenDeleteDialog(false);
+  const handleConfirm = () => {
+    if (dialogState.type === "delete") {
+      handleDeletePost();
+    } else if (dialogState.type === "block") {
+      handleBlockUser();
+    } else if (dialogState.type === "unblock") {
+      handleUnblockUser();
+    }
+
+    handleCloseDialog();
   };
+
+  const handleCloseDialog = () => {
+    setDialogState({ type: null, open: false });
+  };
+
+  const getCurrentDialogConfig = () => {
+    if (!dialogState.type) return null;
+    const config = DIALOG_CONFIGS[dialogState.type];
+    return typeof config === "function" ? config(user.username) : config;
+  };
+
+  const currentDialogConfig = getCurrentDialogConfig();
 
   return (
     <div>
@@ -145,47 +175,16 @@ const PostHeader = ({
         )}
       </div>
 
-      <Dialog open={openDeleteDialog} onOpenChange={setOpenDeleteDialog}>
-        <DialogContent
-          onClick={(e) => e.stopPropagation()}
-          onPointerDownOutside={(e) => e.preventDefault()}
-          className="flex max-w-72 flex-col items-center p-0"
-        >
-          <DialogHeader className="px-3 py-5">
-            <DialogTitle className="text-center">Xóa bài viết?</DialogTitle>
-            <DialogDescription className="text-md mt-3 text-center">
-              Nếu xóa bài viết này, bạn sẽ không khôi phục được nữa.
-            </DialogDescription>
-          </DialogHeader>
-
-          <DialogFooter className="w-full">
-            <ButtonGroup className="w-full">
-              <Button
-                variant="outline"
-                className="min-h-12 flex-1"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setOpenDeleteDialog(false);
-                }}
-                disabled={isDeleting}
-              >
-                Hủy
-              </Button>
-              <Button
-                variant="outline"
-                className="min-h-12 flex-1 text-red-500"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleConfirmDelete();
-                }}
-                disabled={isDeleting}
-              >
-                Xóa
-              </Button>
-            </ButtonGroup>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {currentDialogConfig && (
+        <ConfirmDialog
+          open={dialogState.open}
+          onOpenChange={handleCloseDialog}
+          title={currentDialogConfig.title}
+          description={currentDialogConfig.description}
+          confirmLabel={currentDialogConfig.confirmLabel}
+          onConfirm={handleConfirm}
+        />
+      )}
     </div>
   );
 };

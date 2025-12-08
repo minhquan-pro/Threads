@@ -30,8 +30,8 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
     resetContent();
   };
 
-  const onSubmit = () => {
-    handleSubmit();
+  const onSubmit = async () => {
+    await handleSubmit();
     handleClose();
   };
 
