@@ -27,7 +27,7 @@ const PostHeader = ({
   user,
   hideDate = false,
   createdAt,
-  showStats,
+  showStats = true,
   showMenu = true,
 }) => {
   const currentUser = useCurrentUser();

@@ -40,7 +40,6 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
           user={user}
           createdAt={quotedPost.created_at}
           showMenu={false}
-          showStats
         />
         <div>
           <PostContent content={content} mediaUrls={quotedPost?.media_urls} />
