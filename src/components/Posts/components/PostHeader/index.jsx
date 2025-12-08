@@ -35,10 +35,13 @@ const PostHeader = ({
   const {
     isSaved,
     isBlocked,
+    isRestricted,
     handleSavePost,
     handleDeletePost,
     handleBlockUser,
     handleUnblockUser,
+    handleMuteUser,
+    handleUnmuteUser,
   } = usePostActions(post);
   const [dialogState, setDialogState] = useState({
     type: null,
@@ -57,6 +60,8 @@ const PostHeader = ({
         return isSaved ? "Bỏ lưu" : label;
       case "block":
         return isBlocked ? "Bỏ chặn" : label;
+      case "restrict":
+        return isRestricted ? "Bỏ hạn chế" : label;
     }
 
     return label;
@@ -67,6 +72,13 @@ const PostHeader = ({
     if (action === "block" && isBlocked) {
       setDialogState({ type: "unblock", open: true });
       return;
+    } else if (action === "restrict") {
+      if (isRestricted) {
+        handleUnmuteUser();
+        return;
+      }
+
+      return handleMuteUser();
     }
 
     switch (action) {
