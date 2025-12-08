@@ -37,6 +37,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
 
   return (
     <BaseThreadModal
+      content={content}
       title="Thread mới"
       isOpen={isOpen}
       onClose={handleClose}

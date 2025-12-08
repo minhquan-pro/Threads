@@ -58,6 +58,7 @@ const CreatePost = () => {
           Có gì mới?
         </div>
         <BaseThreadModal
+          content={content}
           onSubmit={onSubmit}
           loading={loading}
           isOpen={isOpen}

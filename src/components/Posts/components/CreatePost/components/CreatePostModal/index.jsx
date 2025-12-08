@@ -1,22 +1,21 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { ArrowUpDown, Ellipsis } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 
 import ThreadLine from "@/components/ThreadLine";
 import UserAvatar from "@/components/UserAvatar";
 import PostComposer from "@/components/PostComposer";
-import { Button } from "@/components/ui/button";
 
 import { useCurrentUser } from "@/features/auth";
 import { usePostForm } from "@/hooks/usePostForm";
 import { createPost } from "@/services/Posts";
+import PostModalFooter from "@/components/PostModalFooter";
 
-const CreatePostForm = ({ onPostCreated, onClose }) => {
+const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   const currentUser = useCurrentUser();
   const dispatch = useDispatch();
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
-
   const handlePostSubmit = async ({ content }) => {
     try {
       const result = await dispatch(
@@ -39,6 +38,9 @@ const CreatePostForm = ({ onPostCreated, onClose }) => {
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
     usePostForm(handlePostSubmit);
 
+  const contentLength = String(content || "").length;
+  const isSubmitDisabled = contentLength > maxLength || contentLength === 0;
+
   // Handle form submission
   const onSubmit = (e) => {
     e.preventDefault();
@@ -48,10 +50,10 @@ const CreatePostForm = ({ onPostCreated, onClose }) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex w-[500px] flex-col gap-2 rounded-2xl border border-gray-300 bg-white shadow-md"
+      className="flex max-h-[500px] w-[500px] flex-col gap-2 rounded-2xl border border-gray-300 bg-white shadow-md"
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-300 p-3">
+      <div className="sticky top-0 right-0 left-0 flex items-center justify-between border-b border-gray-300 bg-white p-3">
         <div
           className="cursor-pointer font-semibold hover:opacity-70"
           onClick={onClose}
@@ -69,7 +71,7 @@ const CreatePostForm = ({ onPostCreated, onClose }) => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 p-3">
+      <div className="flex-1 overflow-y-auto p-3">
         <div className="relative flex w-full gap-2">
           <ThreadLine show />
           <UserAvatar user={currentUser} />
@@ -88,7 +90,7 @@ const CreatePostForm = ({ onPostCreated, onClose }) => {
         {/* Add to thread button */}
         <button
           type="button"
-          className="mt-2 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+          className="mt-4 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50"
           disabled={loading}
         >
           <UserAvatar user={currentUser} imgSize="w-4 h-4" />
@@ -97,27 +99,13 @@ const CreatePostForm = ({ onPostCreated, onClose }) => {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between border-t border-gray-300 p-3">
-        <Button
-          type="button"
-          variant="outline"
-          className="mr-auto border-none p-0 text-gray-500 shadow-none outline-none hover:bg-white disabled:opacity-50"
-          disabled={loading}
-        >
-          <div className="rounded-sm border-2 p-0.5">
-            <ArrowUpDown size={18} />
-          </div>
-          <span className="ml-1 text-sm">Các lựa chọn để kiểm soát</span>
-        </Button>
-
-        <Button
-          type="submit"
-          disabled={loading || !content.trim()}
-          className="min-w-20"
-        >
-          {loading ? "Đang đăng..." : "Đăng"}
-        </Button>
-      </div>
+      <PostModalFooter
+        onSubmit={onSubmit}
+        loading={loading}
+        isSubmitDisabled={isSubmitDisabled}
+        contentLength={contentLength}
+        maxLength={maxLength}
+      />
     </form>
   );
 };

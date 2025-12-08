@@ -24,6 +24,7 @@ const PostComposer = ({
 
   useEffect(() => {
     if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [content]);

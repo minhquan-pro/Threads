@@ -83,6 +83,7 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
 
   return (
     <BaseThreadModal
+      content={content}
       title="Thread trả lời"
       isOpen={isOpen}
       onClose={handleClose}
