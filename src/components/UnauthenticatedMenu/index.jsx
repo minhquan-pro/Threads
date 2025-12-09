@@ -17,14 +17,14 @@ const UnauthenticatedMenu = () => {
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none">
           <div>
-            <Menu />
+            <Menu className="dark:text-white" />
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           sideOffset={10}
           align="start"
           alignOffset={20}
-          className="w-64 overflow-hidden border border-gray-800"
+          className="w-64 overflow-hidden border border-gray-300 dark:border-gray-600"
         >
           <div
             className={`transition-opacity duration-100 ${
