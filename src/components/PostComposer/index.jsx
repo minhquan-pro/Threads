@@ -15,6 +15,14 @@ const PostComposer = ({
   const textareaRef = useRef(null);
 
   useEffect(() => {
+    if (!textareaRef.current) return;
+
+    textareaRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
     if (onFocus) {
       setTimeout(() => {
         textareaRef.current?.focus();
