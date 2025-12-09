@@ -4,7 +4,10 @@ const PostContent = ({ content, mediaUrls }) => {
   const [emblaRef] = useEmblaCarousel();
   return (
     <div className="mt-1">
-      <p className="mb-1 text-[15px] wrap-break-word whitespace-pre-wrap">
+      <p
+        className="mb-1 overflow-hidden text-[15px] wrap-break-word whitespace-pre-wrap"
+        style={{ overflowWrap: "anywhere" }}
+      >
         {content}
       </p>
       {mediaUrls && (

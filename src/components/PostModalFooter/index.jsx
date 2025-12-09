@@ -9,7 +9,7 @@ const PostModalFooter = ({
   loading,
 }) => {
   return (
-    <div className="sticky right-0 bottom-0 left-0 z-50 mt-3 flex items-center justify-between border-t border-gray-100 bg-white px-6 py-3 shadow-sm">
+    <div className="sticky right-0 bottom-0 left-0 mt-3 flex items-center justify-between border-t border-gray-100 bg-white px-6 py-3 shadow-sm">
       <Button
         variant="ghost"
         className="mr-auto gap-2 border-none p-0 text-gray-500 hover:bg-transparent hover:opacity-70"

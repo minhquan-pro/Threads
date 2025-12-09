@@ -50,7 +50,7 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex max-h-[500px] w-[500px] flex-col gap-2 rounded-2xl border border-gray-300 bg-white shadow-md"
+      className="z-50 flex max-h-[500px] w-[500px] flex-col gap-2 rounded-2xl border border-gray-300 bg-white shadow-md"
     >
       {/* Header */}
       <div className="sticky top-0 right-0 left-0 flex items-center justify-between border-b border-gray-300 bg-white p-3">
