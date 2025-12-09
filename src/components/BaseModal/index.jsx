@@ -29,7 +29,7 @@ const BaseThreadModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden rounded-2xl! border-gray-200 bg-white p-0 sm:min-w-[500px] dark:border-[#181818] dark:bg-[#181818]">
+      <DialogContent className="dark:border-card flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden rounded-2xl! border-gray-200 bg-white p-0 sm:min-w-[500px] dark:bg-[#181818]">
         {/* Header */}
         <DialogHeader className="sticky top-0 right-0 left-0 z-50 min-h-16 border-b border-gray-300 bg-white px-6 pt-5 pb-3 shadow-sm dark:border-gray-800 dark:bg-[#181818]">
           <div className="flex items-center justify-between">

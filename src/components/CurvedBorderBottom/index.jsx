@@ -2,7 +2,7 @@ const CurvedBorderBottom = () => {
   return (
     <div className="relative">
       {/* Center horizontal border */}
-      <div className="absolute bottom-0 m-auto flex w-[calc(100%-10px)] border-b border-gray-200 dark:border-[#181818]" />
+      <div className="dark:bg-card-dark absolute bottom-0 m-auto flex w-[calc(100%-10px)] border-b border-gray-200 dark:border-[#181818]" />
 
       {/* Left curved corner */}
       <div className="absolute -bottom-[21px] left-1 h-8 w-8 bg-white dark:bg-black">

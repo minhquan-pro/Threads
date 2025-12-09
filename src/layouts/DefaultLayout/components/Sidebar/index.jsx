@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router";
 import classNames from "classnames";
 
 import { NAV_ITEMS } from "@/constants/sidebar";
-import threads_logo from "@/assets/logo/threads_logo.png";
+import threads_logo_dark from "@/assets/logo/threads_logo_dark.png";
 import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
@@ -16,7 +16,11 @@ const Sidebar = () => {
     <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
       <div>
         <Link to={"/"}>
-          <img src={threads_logo} alt="" className="h-12 w-10" />
+          <img
+            src={threads_logo_dark}
+            alt=""
+            className="h-12 w-10 dark:invert"
+          />
         </Link>
       </div>
       <div className="flex flex-col gap-8">
