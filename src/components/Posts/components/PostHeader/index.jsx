@@ -153,7 +153,7 @@ const PostHeader = ({
           <DropdownMenu>
             <DropdownMenuTrigger
               onClick={(e) => e.stopPropagation()}
-              className="rounded-full border-none p-2 outline-none hover:bg-gray-100"
+              className="rounded-full border-none p-2 outline-none hover:bg-gray-100 dark:hover:bg-gray-800"
               aria-label="Menu bài viết"
             >
               <Ellipsis size={16} color="gray" />

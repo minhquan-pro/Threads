@@ -44,7 +44,7 @@ const FeedItem = ({
   };
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${!disableNavigation && "cursor-pointer"}`}>
       <div className="flex items-start gap-2">
         <UserProfileDialog user={user} />
         <div className="w-full">

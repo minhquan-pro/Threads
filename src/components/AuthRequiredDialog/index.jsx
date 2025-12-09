@@ -23,20 +23,26 @@ const AuthRequiredDialog = ({
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className={classNames("border-none text-gray-600 shadow-none", {
-            "bg-black text-white hover:bg-black/80": children,
-          })}
+          className={classNames(
+            "border-none bg-transparent text-gray-600 shadow-none dark:text-gray-400",
+            {
+              "bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/90":
+                children,
+            },
+          )}
         >
           {Icon && <Icon style={iconSize} />}
           {count !== undefined && count !== null && <span>{count}</span>}
           {children && <div>{children}</div>}
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none">
+      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white dark:bg-gray-900">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
+          <DialogTitle className="text-center text-2xl text-gray-900 dark:text-gray-100">
+            {title}
+          </DialogTitle>
           {description && (
-            <DialogDescription className="text-center">
+            <DialogDescription className="text-center text-gray-600 dark:text-gray-400">
               {description}
             </DialogDescription>
           )}

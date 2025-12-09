@@ -21,7 +21,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
       </div>
 
       <TabsContent value={currentTab} className="m-auto flex justify-center">
-        <div className="relative z-10 mt-0 min-h-screen w-[650px] overflow-y-auto border-x border-b border-gray-200 bg-white shadow-md dark:border-gray-800 dark:bg-[#181818]">
+        <div className="relative z-10 mt-0 min-h-screen w-[650px] overflow-y-auto border-x border-b border-gray-200 bg-white shadow-md dark:border-[#181818] dark:bg-[#181818]">
           {children}
         </div>
       </TabsContent>
