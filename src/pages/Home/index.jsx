@@ -16,7 +16,7 @@ const Home = () => {
   const posts = useSelector(selectorList);
 
   return (
-    <div className="overflow-hidden">
+    <div className="min-h-screen overflow-hidden bg-white dark:bg-[#181818]">
       {currentUser && <CreatePost />}
 
       {loading && posts.length === 0 ? (
@@ -36,4 +36,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;

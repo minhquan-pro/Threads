@@ -11,18 +11,20 @@ const ThemeSubmenu = ({ handleBack }) => {
           e.preventDefault();
           handleBack();
         }}
-        className="flex items-center gap-2 font-medium"
+        className="flex items-center gap-2 font-medium text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700"
       >
         <ChevronLeft className="h-4 w-4" />
         <span className="text-md w-full text-center">Giao diện</span>
       </DropdownMenuItem>
-      <div className="mt-2 flex items-center justify-between rounded-xl bg-gray-50 p-2">
+      <div className="mt-2 flex items-center justify-between rounded-xl bg-gray-50 p-2 dark:bg-[#181818]">
         {THEMES.map((theme) => {
           const Icon = theme.icon;
           return (
             <DropdownMenuItem
               key={theme.label}
-              className={classNames(`w-full px-4 py-3 font-semibold`)}
+              className={classNames(
+                "w-full px-4 py-3 font-semibold text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-600",
+              )}
               onSelect={(e) => {
                 e.preventDefault();
               }}
@@ -35,4 +37,5 @@ const ThemeSubmenu = ({ handleBack }) => {
     </div>
   );
 };
+
 export default ThemeSubmenu;

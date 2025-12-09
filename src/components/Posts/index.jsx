@@ -23,16 +23,16 @@ const Posts = ({ type }) => {
   useInfiniteScroll({ lastElementRef, page, loading, pagination, onEnd });
 
   return (
-    <div>
+    <div className="bg-white dark:bg-[#181818]">
       {posts.map((post) => {
         return (
           <div
             key={post.id}
-            className="border-t border-gray-300 first-of-type:border-none"
+            className="border-t border-gray-300 first-of-type:border-none dark:border-gray-800"
           >
             <div
               ref={lastElementRef}
-              className="flex w-[640px] flex-col items-start overflow-hidden px-4 py-3"
+              className="flex w-[640px] flex-col items-start overflow-hidden bg-white px-4 py-3 dark:bg-[#181818]"
             >
               <FeedItem post={post} />
             </div>
@@ -42,4 +42,5 @@ const Posts = ({ type }) => {
     </div>
   );
 };
+
 export default Posts;

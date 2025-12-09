@@ -62,26 +62,31 @@ const AuthenticatedMenu = () => {
           handleClickMenuItem(MENU_ITEMS[menu].action);
         }}
         className={classNames(
-          "flex w-full items-center justify-between p-3 text-sm font-semibold",
-          { "text-red-500": MENU_ITEMS[menu].variant === "destructive" },
+          "flex w-full items-center justify-between p-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700",
+          {
+            "text-red-500 dark:text-red-400":
+              MENU_ITEMS[menu].variant === "destructive",
+          },
         )}
       >
         {MENU_ITEMS[menu].label}
         {MENU_ITEMS[menu].action === "logout" && loading && <Spinner />}
-        {MENU_ITEMS[menu].hasSubmenu && <ArrowRight color="gray" />}
+        {MENU_ITEMS[menu].hasSubmenu && (
+          <ArrowRight className="text-gray-500 dark:text-gray-400" />
+        )}
       </DropdownMenuItem>
     );
   };
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger className="text-gray-700 outline-none hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
         <Menu />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         sideOffset={MENU_OFFSET.side}
         align="start"
-        className="w-60 overflow-hidden border border-gray-300"
+        className="w-60 overflow-hidden border border-gray-300 bg-white dark:border-gray-800 dark:bg-[#181818]"
         alignOffset={MENU_OFFSET.align}
       >
         <div className="relative">
@@ -96,12 +101,12 @@ const AuthenticatedMenu = () => {
               items={MENU_GROUPS.settings}
               renderMenuItem={renderMenuItem}
             />
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
             <MenuGroup
               items={MENU_GROUPS.content}
               renderMenuItem={renderMenuItem}
             />
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
             <MenuGroup
               items={MENU_GROUPS.actions}
               renderMenuItem={renderMenuItem}
@@ -118,4 +123,5 @@ const AuthenticatedMenu = () => {
     </DropdownMenu>
   );
 };
+
 export default AuthenticatedMenu;

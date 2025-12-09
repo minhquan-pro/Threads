@@ -48,22 +48,21 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="z-50 flex max-h-[500px] w-[500px] flex-col gap-2 rounded-2xl border border-gray-300 bg-white shadow-md"
-    >
+    <div className="z-50 flex max-h-[500px] min-w-[520px] flex-col gap-2 overflow-hidden rounded-2xl border border-gray-300 bg-white shadow-md dark:border-[#373535] dark:bg-[#181818]">
       {/* Header */}
-      <div className="sticky top-0 right-0 left-0 flex items-center justify-between border-b border-gray-300 bg-white p-3">
+      <div className="sticky top-0 right-0 left-0 flex items-center justify-between border-b border-gray-300 bg-white p-3 dark:border-[#373535] dark:bg-[#181818]">
         <div
-          className="cursor-pointer font-semibold hover:opacity-70"
+          className="cursor-pointer font-semibold text-gray-900 hover:opacity-70 dark:text-gray-100"
           onClick={onClose}
         >
           Hủy
         </div>
-        <div className="font-bold">Threads mới</div>
+        <div className="font-bold text-gray-900 dark:text-gray-100">
+          Threads mới
+        </div>
         <button
           type="button"
-          className="flex h-7 w-7 items-center justify-center rounded-full hover:bg-gray-100 disabled:opacity-50"
+          className="flex h-7 w-7 items-center justify-center rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-50 dark:text-gray-300 dark:hover:bg-gray-800"
           disabled={loading}
         >
           <Ellipsis size={20} />
@@ -71,7 +70,7 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="custom-scrollbar flex-1 overflow-y-auto p-3">
         <div className="relative flex w-full gap-2">
           <ThreadLine show />
           <UserAvatar user={currentUser} />
@@ -90,7 +89,7 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
         {/* Add to thread button */}
         <button
           type="button"
-          className="mt-4 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+          className="mt-4 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50 dark:text-gray-400 dark:hover:text-gray-300"
           disabled={loading}
         >
           <UserAvatar user={currentUser} imgSize="w-4 h-4" />
@@ -106,7 +105,7 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
         contentLength={contentLength}
         maxLength={maxLength}
       />
-    </form>
+    </div>
   );
 };
 

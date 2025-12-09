@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
+
   return (
     <div className="relative">
       <Dialog>
@@ -25,32 +26,43 @@ const UserProfileDialog = ({ user }) => {
             Icon={Plus}
           />
         </DialogTrigger>
-        <DialogContent className="w-80" aria-describedby="user-dialog-desc">
+        <DialogContent
+          className="w-80 border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
+          aria-describedby="user-dialog-desc"
+        >
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <DialogTitle className="text-lg font-bold">
+              <DialogTitle className="text-lg font-bold text-gray-900 dark:text-white">
                 {user.name}
               </DialogTitle>
-              <span>{user.username}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {user.username}
+              </span>
             </div>
             <UserAvatar src={user.avatar_url} imgSize="h-14 w-14" />
           </div>
+
           <p
-            className="text-foreground text-sm font-semibold"
+            className="text-sm font-semibold text-gray-900 dark:text-gray-100"
             id="user-dialog-desc"
           >
             {user.bio}
           </p>
-          <span className="text-sm text-gray-500">23 người theo dõi</span>
+
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            23 người theo dõi
+          </span>
 
           {currentUser ? (
-            <Button>Theo dõi</Button>
+            <Button className="dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">
+              Theo dõi
+            </Button>
           ) : (
             <AuthRequiredDialog
               type="button"
               title="Đăng ký để theo dõi"
               description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-              buttonClasses="w-full  bg-black text-white"
+              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
             >
               Theo dõi
             </AuthRequiredDialog>
@@ -60,4 +72,5 @@ const UserProfileDialog = ({ user }) => {
     </div>
   );
 };
+
 export default UserProfileDialog;

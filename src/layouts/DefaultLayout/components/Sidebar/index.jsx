@@ -13,7 +13,7 @@ const Sidebar = () => {
   const currentUser = useCurrentUser();
 
   return (
-    <div className="flex h-full flex-col justify-between p-6">
+    <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
       <div>
         <Link to={"/"}>
           <img src={threads_logo} alt="" className="h-12 w-10" />
@@ -41,9 +41,10 @@ const Sidebar = () => {
               key={nav.id}
               to={nav.path}
               className={classNames(
-                "inline-block rounded-md text-gray-600 hover:bg-gray-100",
+                "inline-block rounded-md text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800",
                 {
-                  "bg-gray-100 hover:text-black": nav.id === "create",
+                  "bg-gray-100 hover:text-black dark:bg-gray-800 dark:hover:text-white":
+                    nav.id === "create",
                 },
               )}
             >
@@ -51,7 +52,10 @@ const Sidebar = () => {
                 return (
                   <Button variant="outline border-none shadow-none">
                     <Icon
-                      className={`${isActive && "text-foreground fill-current"}`}
+                      className={classNames({
+                        "text-foreground fill-current dark:text-gray-100":
+                          isActive,
+                      })}
                       style={{ width: 26, height: 26 }}
                     />
                   </Button>
@@ -65,4 +69,5 @@ const Sidebar = () => {
     </div>
   );
 };
+
 export default Sidebar;

@@ -130,7 +130,9 @@ const PostHeader = ({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <div className="flex items-center gap-0.5">
-            <span className="text-md font-semibold">{user.username}</span>
+            <span className="font-semibold text-gray-900 hover:underline dark:text-white">
+              {user.username}
+            </span>
             {user.verified && (
               <img
                 src={verifiedIcon}
@@ -140,7 +142,7 @@ const PostHeader = ({
             )}
           </div>
           {!hideDate && showStats && (
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-400">
               {formatTime(createdAt)}
             </span>
           )}
@@ -159,7 +161,7 @@ const PostHeader = ({
 
             <DropdownMenuContent
               align="end"
-              className="border border-gray-200 outline-none"
+              className="border border-gray-300 outline-none dark:border-gray-800"
             >
               {menuItems.map(({ label, action, type, Icon, danger }, index) => {
                 if (type === "separator") {

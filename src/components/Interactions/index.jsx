@@ -28,12 +28,16 @@ const Interactions = ({
   return (
     <Button
       onClick={onClick}
-      variant="outline"
-      className={`border-none shadow-none ${isActive && activeClass}`}
+      variant="ghost"
+      size="sm"
+      className={`gap-1 border-none text-gray-600 shadow-none hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 ${
+        isActive ? activeClass : ""
+      }`}
     >
-      {Icon && <Icon className={`${isActive && "fill-current"}`} />}
-      {count ? <span>{count}</span> : null}
+      {Icon && <Icon className={`h-5 w-5 ${isActive ? "fill-current" : ""}`} />}
+      {count > 0 && <span className="text-sm">{count}</span>}
     </Button>
   );
 };
+
 export default Interactions;

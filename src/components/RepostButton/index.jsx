@@ -34,7 +34,7 @@ const RepostButton = ({ post, hasMenu = false }) => {
       <Interactions
         count={post.reposts_and_quotes_count}
         Icon={Repeat}
-        activeClass="text-blue-600"
+        activeClass="text-blue-600 dark:text-red-500"
         title="Đăng ký để đăng lại"
         description="Bạn đã tiến thêm được một bước trong hành trình khơi mào cuộc trò chuyện."
       />
@@ -56,7 +56,7 @@ const RepostButton = ({ post, hasMenu = false }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="start"
-          className="w-56 border border-gray-300"
+          className="w-56 border border-gray-800"
         >
           <DropdownMenuItem
             onClick={handleRepost}

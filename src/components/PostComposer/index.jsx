@@ -41,18 +41,21 @@ const PostComposer = ({
     <>
       <div className="flex items-center">
         <PostHeader user={user} hideDate showMenu={false} />
-        <div className="flex items-center gap-1 placeholder:text-gray-500">
-          <ChevronRight color="gray" size={15} />
+        <div className="flex items-center gap-1 placeholder:text-gray-500 dark:placeholder:text-gray-400">
+          <ChevronRight
+            className="text-gray-500 dark:text-gray-400"
+            size={15}
+          />
           <input
             type="text"
             placeholder="thêm chủ đề"
-            className="border-none outline-none"
+            className="border-none bg-transparent text-gray-900 outline-none placeholder:text-gray-500 dark:text-gray-100 dark:placeholder:text-gray-400"
           />
         </div>
       </div>
       <textarea
         ref={textareaRef}
-        className="w-full resize-none border-none p-0 shadow-none outline-none placeholder:text-gray-600"
+        className="w-full resize-none border-none bg-transparent p-0 text-gray-900 shadow-none outline-none placeholder:text-gray-600 dark:text-gray-100 dark:placeholder:text-gray-400"
         placeholder={placeholder}
         value={content}
         onChange={onChange}

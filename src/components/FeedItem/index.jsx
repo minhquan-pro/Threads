@@ -44,10 +44,8 @@ const FeedItem = ({
   };
 
   return (
-    <div className={`w-full`}>
-      <div
-        className={`flex ${!disableNavigation ? "cursor-pointer" : ""} items-start gap-2`}
-      >
+    <div className="w-full">
+      <div className="flex items-start gap-2">
         <UserProfileDialog user={user} />
         <div className="w-full">
           <PostHeader
@@ -87,7 +85,7 @@ const FeedItem = ({
                   </div>
                 ) : (
                   <div
-                    className="mt-3 flex items-center gap-6 pl-3"
+                    className="mt-3 flex items-center gap-6 pl-3 text-gray-600 dark:text-gray-400"
                     aria-hidden="true"
                   >
                     <Heart size={16} />
@@ -106,4 +104,5 @@ const FeedItem = ({
     </div>
   );
 };
+
 export default FeedItem;

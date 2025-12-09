@@ -21,7 +21,7 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
 
   if (originalPostLoading) {
     return (
-      <div className="mt-2 flex justify-center rounded-xl border border-gray-300 p-6">
+      <div className="mt-2 flex justify-center rounded-xl border border-gray-800 p-6">
         <Loading size="w-4 h-4" className="text-gray-400" />
       </div>
     );
@@ -29,7 +29,7 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
 
   return (
     <div
-      className="mt-2 flex cursor-pointer items-start gap-2 rounded-xl border border-gray-300 p-3"
+      className="mt-2 flex cursor-pointer items-start gap-2 rounded-xl border border-gray-300 p-3 dark:border-[#373535]"
       onClick={handleClickPost}
     >
       <div>

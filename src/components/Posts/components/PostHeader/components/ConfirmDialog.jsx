@@ -39,12 +39,14 @@ const ConfirmDialog = ({
       <DialogContent
         onClick={(e) => e.stopPropagation()}
         onPointerDownOutside={(e) => e.preventDefault()}
-        className="flex max-w-72 flex-col items-center p-0"
+        className="flex max-w-72 flex-col items-center border-gray-200 bg-white p-0 dark:border-gray-800 dark:bg-gray-900"
       >
         <DialogHeader className="px-3 py-5">
-          <DialogTitle className="text-center">{title}</DialogTitle>
+          <DialogTitle className="text-center text-gray-900 dark:text-white">
+            {title}
+          </DialogTitle>
           {description && (
-            <DialogDescription className="text-md mt-3 text-center">
+            <DialogDescription className="text-md mt-3 text-center text-gray-600 dark:text-gray-400">
               {description}
             </DialogDescription>
           )}
@@ -54,17 +56,17 @@ const ConfirmDialog = ({
           <ButtonGroup className="w-full">
             <Button
               variant="outline"
-              className="min-h-12 flex-1"
+              className="min-h-12 flex-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
               onClick={handleCancel}
             >
               {cancelLabel}
             </Button>
             <Button
               variant="outline"
-              className={`min-h-12 flex-1 ${
+              className={`min-h-12 flex-1 border-gray-300 dark:border-gray-700 dark:bg-gray-900 ${
                 variant === "destructive"
-                  ? "text-red-500 hover:text-red-600"
-                  : "text-blue-500 hover:text-blue-600"
+                  ? "text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:bg-gray-800 dark:hover:text-red-300"
+                  : "text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:bg-gray-800 dark:hover:text-blue-300"
               }`}
               onClick={handleConfirm}
             >

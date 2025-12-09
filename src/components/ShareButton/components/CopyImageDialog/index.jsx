@@ -63,11 +63,11 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="flex items-center gap-2 rounded-md border border-gray-300 p-2 text-sm font-bold outline-none hover:opacity-80">
+              <div className="flex items-center gap-2 rounded-md border border-gray-800 p-2 text-sm font-bold outline-none hover:opacity-80">
                 {aspectRatio} <ChevronDown />{" "}
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="border border-gray-300">
+            <DropdownMenuContent className="border border-gray-800">
               {ASPECT_RATIOS.map(({ label, value }) => {
                 return (
                   <DropdownMenuItem
