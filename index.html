@@ -5,6 +5,50 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>threads</title>
+
+    <script>
+      const initializeTheme = () => {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+          if (storedTheme === "auto") {
+            const systemTheme = window.matchMedia(
+              "(prefers-color-scheme: dark)",
+            ).matches
+              ? "dark"
+              : "light";
+            document.documentElement.classList.add(systemTheme);
+          } else {
+            document.documentElement.classList.add(storedTheme);
+          }
+        } else {
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+
+          document.documentElement.classList.add(systemTheme);
+          localStorage.setItem("theme", "auto");
+        }
+      };
+
+      window.setTheme = (theme) => {
+        document.documentElement.classList.remove("light", "dark");
+
+        localStorage.setItem("theme", theme);
+
+        if (theme === "auto") {
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+          document.documentElement.classList.add(systemTheme);
+        } else {
+          document.documentElement.classList.add(theme);
+        }
+      };
+
+      initializeTheme();
+    </script>
   </head>
   <body>
     <div id="root"></div>
