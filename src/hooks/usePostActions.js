@@ -44,10 +44,9 @@ export const usePostActions = (post) => {
 
     setIsDeleting(true);
     try {
+      toast.default("Đã xóa");
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await dispatch(deletePost(post.id));
-      if (isMountedRef.current) {
-        toast.default("Đã xóa");
-      }
     } catch (error) {
       console.error("Error deleting post:", error);
       if (isMountedRef.current) {
