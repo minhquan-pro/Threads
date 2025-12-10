@@ -44,35 +44,37 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0">
+      <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 dark:bg-[#181818]">
         <DialogTitle />
         <div ref={elementRef} className="relative py-3">
-          <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5">
+          <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5 dark:bg-[#181818]">
             <FeedItem post={post} showStats={showStats} />
           </div>
           <div className="absolute inset-0 z-10 bg-transparent"></div>
         </div>
-        <div className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2">
+        <div className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2 dark:bg-[#181818]">
           <div className="mr-auto flex items-center gap-2">
             <Checkbox
               id="terms"
               checked={showStats}
               onCheckedChange={() => setShowStats(!showStats)}
             />
-            <Label htmlFor="terms">Hiển thị số liệu</Label>
+            <Label htmlFor="terms" className="dark:text-gray-200">
+              Hiển thị số liệu
+            </Label>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="flex items-center gap-2 rounded-md border border-gray-800 p-2 text-sm font-bold outline-none hover:opacity-80">
+              <div className="flex items-center gap-2 rounded-md border border-gray-800 p-2 text-sm font-bold outline-none hover:opacity-80 dark:border-gray-300 dark:text-gray-200">
                 {aspectRatio} <ChevronDown />{" "}
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="border border-gray-800">
+            <DropdownMenuContent className="border border-gray-800 dark:border-gray-300 dark:bg-[#242424]">
               {ASPECT_RATIOS.map(({ label, value }) => {
                 return (
                   <DropdownMenuItem
                     key={value}
-                    className={`flex justify-between p-3 font-semibold ${aspectRatio === label && "border-3 border-blue-400"}`}
+                    className={`flex justify-between p-3 font-semibold dark:text-gray-200 dark:hover:bg-[#2f2f2f] ${aspectRatio === label && "border-3 border-blue-400 dark:border-blue-500"}`}
                     onClick={() => setAspectRatio(label)}
                   >
                     <span>{label}</span>
@@ -85,7 +87,9 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
             <Button
               variant={"outline"}
               onClick={handleDownloadImage}
-              className={"w-14"}
+              className={
+                "w-14 dark:border-gray-600 dark:bg-[#242424] dark:text-gray-200 dark:hover:bg-[#2f2f2f]"
+              }
             >
               {loadingDownload ? <Loading size={"w-4 h-4"} /> : <Download />}
             </Button>

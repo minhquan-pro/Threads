@@ -56,7 +56,7 @@ const RepostButton = ({ post, hasMenu = false }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="start"
-          className="w-56 border border-gray-800"
+          className="w-56 border border-gray-300 dark:border-gray-900"
         >
           <DropdownMenuItem
             onClick={handleRepost}
