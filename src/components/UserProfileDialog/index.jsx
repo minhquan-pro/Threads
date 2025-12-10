@@ -27,7 +27,7 @@ const UserProfileDialog = ({ user }) => {
           />
         </DialogTrigger>
         <DialogContent
-          className="w-80 border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
+          className="w-80 border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#181818]"
           aria-describedby="user-dialog-desc"
         >
           <div className="flex items-center justify-between">
@@ -54,7 +54,7 @@ const UserProfileDialog = ({ user }) => {
           </span>
 
           {currentUser ? (
-            <Button className="dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">
+            <Button className="dark:bg-white dark:text-black dark:hover:bg-gray-200">
               Theo dõi
             </Button>
           ) : (
@@ -62,7 +62,7 @@ const UserProfileDialog = ({ user }) => {
               type="button"
               title="Đăng ký để theo dõi"
               description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
+              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               Theo dõi
             </AuthRequiredDialog>
