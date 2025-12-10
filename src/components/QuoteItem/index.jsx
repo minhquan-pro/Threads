@@ -44,8 +44,8 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
         <div>
           <PostContent content={content} mediaUrls={quotedPost?.media_urls} />
           {originalPost && (
-            <div className="mt-1 flex items-center gap-2 rounded-lg bg-gray-50 p-2 dark:bg-gray-800">
-              <MoveRight size={15} color="gray" />
+            <div className="mt-1 flex items-center gap-2 rounded-lg p-2">
+              <MoveRight size={20} color="gray" />
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 <span> {originalPost?.user.username}</span>
                 {": "} {originalPost?.content}

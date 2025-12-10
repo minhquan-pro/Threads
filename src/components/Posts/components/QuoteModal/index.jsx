@@ -1,13 +1,15 @@
+import { useCallback } from "react";
+
 import { quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
+import { usePostForm } from "@/hooks/usePostForm";
+
 import UserProfileDialog from "@/components/UserProfileDialog";
 import Loading from "@/components/Loading";
 import QuoteItem from "@/components/QuoteItem";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
-import { usePostForm } from "@/hooks/usePostForm";
 import PostComposer from "@/components/PostComposer";
-import { useCallback } from "react";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();

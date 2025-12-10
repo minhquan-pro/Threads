@@ -14,15 +14,16 @@ const Sidebar = () => {
 
   return (
     <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
-      <div>
-        <Link to={"/"}>
-          <img
-            src={threads_logo_dark}
-            alt=""
-            className="h-12 w-10 dark:invert"
-          />
-        </Link>
-      </div>
+      <Link
+        to={"/"}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+          });
+        }}
+      >
+        <img src={threads_logo_dark} alt="" className="h-12 w-10 dark:invert" />
+      </Link>
       <div className="flex flex-col gap-8">
         {NAV_ITEMS.map((nav) => {
           const Icon = nav.component;

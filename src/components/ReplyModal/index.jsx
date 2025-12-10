@@ -93,7 +93,12 @@ const ReplyModal = ({ post, isOpen, onClose }) => {
     >
       <div className="relative flex gap-2">
         <ThreadLine show />
-        <FeedItem post={post} hideInteraction={true} showMenu={false} />
+        <FeedItem
+          post={post}
+          hideInteraction={true}
+          showMenu={false}
+          disableNavigation
+        />
       </div>
       <div className="relative mt-4 flex gap-2">
         <ThreadLine show lineStyle="bg-gray-200" />
