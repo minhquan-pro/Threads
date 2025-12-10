@@ -9,8 +9,11 @@ import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
 import { useScrollRestoration } from "@/hooks";
+import { useState } from "react";
+import CreatePostModal from "@/components/CreatePostModal";
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const currentUser = useCurrentUser();
   useScrollRestoration();
@@ -22,63 +25,80 @@ const Sidebar = () => {
     }
   };
 
+  const handleClick = (value) => {
+    if (value.action === "create") {
+      setIsOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
-      <Link to={"/"} onClick={handleNavigate} className="cursor-pointer">
-        <img
-          src={threads_logo_dark}
-          alt=""
-          className="h-12 w-10 hover:scale-90 dark:invert"
-        />
-      </Link>
-      <div className="flex flex-col gap-8">
-        {NAV_ITEMS.map((nav) => {
-          const Icon = nav.component;
+    <>
+      {" "}
+      <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
+        <Link to={"/"} onClick={handleNavigate} className="cursor-pointer">
+          <img
+            src={threads_logo_dark}
+            alt=""
+            className="h-12 w-10 hover:scale-90 dark:invert"
+          />
+        </Link>
+        <div className="flex flex-col gap-8">
+          {NAV_ITEMS.map((nav) => {
+            const Icon = nav.component;
 
-          if (nav.requireAuth && !currentUser) {
+            if (nav.requireAuth && !currentUser) {
+              return (
+                <AuthRequiredDialog
+                  id={nav.id}
+                  key={nav.id}
+                  title={nav.dialogTitle}
+                  description={nav.dialogDescription}
+                  Icon={Icon}
+                  iconSize={{ width: 26, height: 26 }}
+                />
+              );
+            }
+
             return (
-              <AuthRequiredDialog
-                id={nav.id}
+              <NavLink
+                onClick={() => handleClick(nav)}
                 key={nav.id}
-                title={nav.dialogTitle}
-                description={nav.dialogDescription}
-                Icon={Icon}
-                iconSize={{ width: 26, height: 26 }}
-              />
+                to={nav.path}
+                className={classNames(
+                  "inline-block rounded-md text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800",
+                  {
+                    "bg-gray-100 hover:text-black dark:bg-gray-800 dark:hover:text-white":
+                      nav.id === "create",
+                  },
+                )}
+              >
+                {({ isActive }) => {
+                  return (
+                    <Button variant="outline border-none shadow-none">
+                      <Icon
+                        className={classNames({
+                          "text-foreground fill-current dark:text-gray-100":
+                            isActive,
+                        })}
+                        style={{ width: 26, height: 26 }}
+                      />
+                    </Button>
+                  );
+                }}
+              </NavLink>
             );
-          }
-
-          return (
-            <NavLink
-              key={nav.id}
-              to={nav.path}
-              className={classNames(
-                "inline-block rounded-md text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800",
-                {
-                  "bg-gray-100 hover:text-black dark:bg-gray-800 dark:hover:text-white":
-                    nav.id === "create",
-                },
-              )}
-            >
-              {({ isActive }) => {
-                return (
-                  <Button variant="outline border-none shadow-none">
-                    <Icon
-                      className={classNames({
-                        "text-foreground fill-current dark:text-gray-100":
-                          isActive,
-                      })}
-                      style={{ width: 26, height: 26 }}
-                    />
-                  </Button>
-                );
-              }}
-            </NavLink>
-          );
-        })}
+          })}
+        </div>
+        <div>
+          {currentUser ? <AuthenticatedMenu /> : <UnauthenticatedMenu />}
+        </div>
       </div>
-      <div>{currentUser ? <AuthenticatedMenu /> : <UnauthenticatedMenu />}</div>
-    </div>
+      <CreatePostModal open={isOpen} onClose={handleCloseModal} />
+    </>
   );
 };
 

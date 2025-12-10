@@ -8,7 +8,7 @@ import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
-import CreatePostModal from "@/components/Posts/components/CreatePostModal";
+import CreatePostForm from "@/components/Posts/components/CreatePostForm";
 
 const DefaultLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ const DefaultLayout = () => {
               <Plus strokeWidth={2.5} className="size-7" />
             </Button>
           ) : (
-            <CreatePostModal open={isOpen} onClose={() => setIsOpen(false)} />
+            <CreatePostForm open={isOpen} onClose={() => setIsOpen(false)} />
           )}
         </div>
       )}
