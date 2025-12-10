@@ -11,8 +11,8 @@ import {
 const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
   return (
     <Dialog open={open}>
-      <DialogContent className="flex w-[280px] flex-col items-center rounded-2xl p-0 dark:bg-[#181818]">
-        <DialogHeader className={"p-5"}>
+      <DialogContent className="flex w-[300px] flex-col items-center rounded-2xl p-0 dark:bg-[#181818]">
+        <DialogHeader className={"p-8"}>
           <DialogTitle className="text-gray-900 dark:text-white">
             Bỏ thread?
           </DialogTitle>
@@ -22,14 +22,14 @@ const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
           <ButtonGroup className={"w-full"}>
             <Button
               variant="outline"
-              className="flex-1 border-gray-300 p-6 dark:text-white"
+              className="flex-1 border-gray-300 bg-transparent p-6 dark:text-white"
               onClick={onCancel}
             >
               Hủy
             </Button>
             <Button
               variant="outline"
-              className="text-md flex-1 border-gray-300 p-6 text-red-500"
+              className="text-md flex-1 border-gray-300 bg-transparent p-6 text-red-500"
               onClick={onDiscard}
             >
               Bỏ
