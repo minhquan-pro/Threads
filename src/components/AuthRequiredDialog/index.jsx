@@ -36,9 +36,9 @@ const AuthRequiredDialog = ({
           {children && <div>{children}</div>}
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white dark:bg-gray-900">
+      <DialogContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white dark:bg-[#181818]">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl text-gray-900 dark:text-gray-100">
+          <DialogTitle className="text-center text-2xl text-gray-900 dark:text-white">
             {title}
           </DialogTitle>
           {description && (
@@ -47,7 +47,10 @@ const AuthRequiredDialog = ({
             </DialogDescription>
           )}
         </DialogHeader>
-        <Button asChild className="w-full text-lg font-semibold">
+        <Button
+          asChild
+          className="w-full text-lg font-semibold dark:bg-white dark:text-black dark:hover:bg-gray-200"
+        >
           <Link to="/login">Đăng nhập</Link>
         </Button>
       </DialogContent>

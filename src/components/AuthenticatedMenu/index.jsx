@@ -62,7 +62,7 @@ const AuthenticatedMenu = () => {
           handleClickMenuItem(MENU_ITEMS[menu].action);
         }}
         className={classNames(
-          "flex w-full items-center justify-between p-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700",
+          "flex w-full items-center justify-between p-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-[#242424]",
           {
             "text-red-500 dark:text-red-400":
               MENU_ITEMS[menu].variant === "destructive",
@@ -86,7 +86,7 @@ const AuthenticatedMenu = () => {
       <DropdownMenuContent
         sideOffset={MENU_OFFSET.side}
         align="start"
-        className="w-60 overflow-hidden border border-gray-300 bg-white dark:border-gray-800 dark:bg-[#181818]"
+        className="w-60 overflow-hidden border border-gray-300 bg-white dark:border-[#2f2f2f] dark:bg-[#181818]"
         alignOffset={MENU_OFFSET.align}
       >
         <div className="relative">
@@ -101,12 +101,12 @@ const AuthenticatedMenu = () => {
               items={MENU_GROUPS.settings}
               renderMenuItem={renderMenuItem}
             />
-            <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
+            <DropdownMenuSeparator className="bg-gray-200 dark:bg-[#2f2f2f]" />
             <MenuGroup
               items={MENU_GROUPS.content}
               renderMenuItem={renderMenuItem}
             />
-            <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
+            <DropdownMenuSeparator className="bg-gray-200 dark:bg-[#2f2f2f]" />
             <MenuGroup
               items={MENU_GROUPS.actions}
               renderMenuItem={renderMenuItem}
