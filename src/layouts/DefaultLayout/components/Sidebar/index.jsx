@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import classNames from "classnames";
 
 import { NAV_ITEMS } from "@/constants/sidebar";
@@ -8,21 +8,28 @@ import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
+import { useScrollRestoration } from "@/hooks";
 
 const Sidebar = () => {
+  const location = useLocation();
   const currentUser = useCurrentUser();
+  useScrollRestoration();
+
+  const handleNavigate = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+  };
 
   return (
     <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
-      <Link
-        to={"/"}
-        onClick={() => {
-          window.scrollTo({
-            top: 0,
-          });
-        }}
-      >
-        <img src={threads_logo_dark} alt="" className="h-12 w-10 dark:invert" />
+      <Link to={"/"} onClick={handleNavigate} className="cursor-pointer">
+        <img
+          src={threads_logo_dark}
+          alt=""
+          className="h-12 w-10 hover:scale-90 dark:invert"
+        />
       </Link>
       <div className="flex flex-col gap-8">
         {NAV_ITEMS.map((nav) => {
