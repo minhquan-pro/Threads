@@ -14,12 +14,12 @@ const FormField = ({ name, placeholder, control, type = "text" }) => {
             type={type}
             aria-invalid={fieldState.invalid}
             placeholder={placeholder}
-            className="auth-input"
+            className="auth-input dark:border-[#2f2f2f]! dark:bg-[#242424]! dark:text-white dark:placeholder:text-gray-500 dark:focus:border-gray-500"
           />
           {fieldState.invalid && (
             <FieldError
               errors={[fieldState.error]}
-              className="text-start font-semibold"
+              className="text-start font-semibold dark:text-red-400"
             />
           )}
         </Field>

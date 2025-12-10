@@ -66,7 +66,7 @@ const Login = () => {
 
   return (
     <>
-      <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
         <FieldGroup>
           <FormField
             name="login"
@@ -81,17 +81,26 @@ const Login = () => {
           />
         </FieldGroup>
 
-        <Button size="lg" className="text-md p-6 font-bold">
+        <Button
+          size="lg"
+          className="text-md rounded-lg bg-black p-7 font-bold text-white dark:bg-white dark:text-black dark:hover:bg-gray-200"
+        >
           {loading && <Spinner />}
           Đăng nhập
         </Button>
 
         <div className="flex flex-col justify-center gap-3">
-          <Link to={"/forgot-password"} className="text-sm font-semibold">
+          <Link
+            to={"/forgot-password"}
+            className="text-sm font-semibold dark:text-gray-300 dark:hover:text-white"
+          >
             Quên mật khẩu?
           </Link>
-          <span className="text-sm text-gray-600">hoặc</span>
-          <Link to={"/register"} className="text-sm font-semibold">
+          <span className="text-sm text-gray-600 dark:text-gray-400">hoặc</span>
+          <Link
+            to={"/register"}
+            className="text-sm font-semibold dark:text-gray-300 dark:hover:text-white"
+          >
             Đăng ký tài khoản
           </Link>
         </div>

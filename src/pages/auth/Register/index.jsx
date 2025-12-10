@@ -84,13 +84,12 @@ const Register = () => {
           {loading && <Spinner />}
           Đăng ký
         </Button>
-
-        <div className="flex items-center justify-center gap-1">
-          Bạn đã có tài khoản?
-          <Link to={"/login"} className="font-semibold">
-            Đăng nhập
-          </Link>
-        </div>
+        <Link
+          to={"/login"}
+          className="ml-1 text-sm font-semibold dark:text-gray-300 dark:hover:text-white"
+        >
+          Bạn đã có tài khoản? Đăng nhập
+        </Link>
       </form>
     </>
   );

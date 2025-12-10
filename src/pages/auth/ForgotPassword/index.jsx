@@ -57,11 +57,12 @@ const ForgotPassword = () => {
           Đặt lại mật khẩu
         </Button>
 
-        <div>
-          <Link to={"/login"} className="text-sm font-semibold">
-            Quay lại trang đăng nhập
-          </Link>
-        </div>
+        <Link
+          to={"/login"}
+          className="text-sm font-semibold dark:text-gray-300 dark:hover:text-white"
+        >
+          Quay lại trang đăng nhập
+        </Link>
       </form>
     </>
   );
