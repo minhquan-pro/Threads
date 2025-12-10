@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
+import { Link } from "react-router";
+
 import { formatTime } from "@/utils/formatTime";
 import verifiedIcon from "@/assets/icons/verifiedIcon.png";
 import {
@@ -9,17 +11,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Ellipsis } from "lucide-react";
 
+import { useCopyPostUrl } from "@/hooks";
 import { useCurrentUser } from "@/features/auth";
+import { usePostActions } from "@/hooks/usePostActions";
+
 import {
   DIALOG_CONFIGS,
   GUEST_MENU_ITEMS,
   POST_HEADER_MENU_ITEMS,
   POST_HEADER_USER_MENU_ITEMS,
 } from "@/constants";
-import { Ellipsis } from "lucide-react";
-import { useCopyPostUrl } from "@/hooks";
-import { usePostActions } from "@/hooks/usePostActions";
 import ConfirmDialog from "./components/ConfirmDialog";
 
 const PostHeader = ({
@@ -129,7 +132,10 @@ const PostHeader = ({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <div className="flex items-center gap-0.5">
+          <Link
+            to={user.id === currentUser?.id ? "/profile" : `/@${user.username}`}
+            className="flex items-center gap-0.5"
+          >
             <span className="font-semibold text-gray-900 hover:underline dark:text-white">
               {user.username}
             </span>
@@ -140,7 +146,7 @@ const PostHeader = ({
                 className="h-4 w-4"
               />
             )}
-          </div>
+          </Link>
           {!hideDate && showStats && (
             <span className="text-sm text-gray-500 dark:text-gray-400">
               {formatTime(createdAt)}
