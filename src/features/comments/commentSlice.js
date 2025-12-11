@@ -1,10 +1,13 @@
-import { fetchComments } from "@/services/comment";
+import { fetchComments, fetchReplies } from "@/services/comment";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   byPostId: {},
   loading: {},
   pagination: {},
+  repliesByCommentId: {},
+  repliesLoading: {},
+  repliesPagination: {},
 };
 
 const commentsSlice = createSlice({
@@ -39,6 +42,35 @@ const commentsSlice = createSlice({
         );
       }
     },
+
+    addReplyOptimistic: (state, action) => {
+      const { commentId, ...replyData } = action.payload;
+      if (!state.repliesByCommentId[commentId]) {
+        state.repliesByCommentId[commentId] = [];
+      }
+      state.repliesByCommentId[commentId].unshift(replyData);
+    },
+    updateReply: (state, action) => {
+      const { reply, idFake, commentId } = action.payload;
+      const replies = state.repliesByCommentId[commentId];
+
+      if (replies) {
+        const replyIndex = replies.findIndex((r) => r.id === idFake);
+        if (replyIndex !== -1) {
+          state.repliesByCommentId[commentId][replyIndex] = reply;
+        }
+      }
+    },
+    removeOptimisticReply: (state, action) => {
+      const { commentId, replyId } = action.payload;
+      const replies = state.repliesByCommentId[commentId];
+
+      if (replies) {
+        state.repliesByCommentId[commentId] = replies.filter(
+          (reply) => reply.id !== replyId,
+        );
+      }
+    },
   },
   extraReducers: (builder) => {
     // fetch comments
@@ -62,9 +94,36 @@ const commentsSlice = createSlice({
       .addCase(fetchComments.rejected, (state, action) => {
         state.loading[action.meta.arg.postId] = false;
       });
+    // fetch reply
+    builder
+      .addCase(fetchReplies.pending, (state, action) => {
+        state.repliesLoading[action.meta.arg.commentId] = true;
+      })
+      .addCase(fetchReplies.fulfilled, (state, action) => {
+        const { commentId, replies, pagination } = action.payload;
+        const oldComments = state.repliesByCommentId[commentId] || [];
+
+        const newComments = replies.filter((newComment) => {
+          return !oldComments?.some(
+            (oldComment) => oldComment.id === newComment.id,
+          );
+        });
+        state.repliesByCommentId[commentId] = [...oldComments, ...newComments];
+        state.repliesLoading[commentId] = false;
+        state.repliesPagination[commentId] = pagination;
+      })
+      .addCase(fetchReplies.rejected, (state, action) => {
+        state.repliesLoading[action.meta.arg.postId] = false;
+      });
   },
 });
 
-export const { addCommentOptimistic, updateComment, removeOptimisticComment } =
-  commentsSlice.actions;
+export const {
+  addCommentOptimistic,
+  updateComment,
+  removeOptimisticComment,
+  updateReply,
+  addReplyOptimistic,
+  removeOptimisticReply,
+} = commentsSlice.actions;
 export default commentsSlice;

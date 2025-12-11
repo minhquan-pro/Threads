@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { formatTime } from "@/utils/formatTime";
 import verifiedIcon from "@/assets/icons/verifiedIcon.png";
@@ -34,6 +34,7 @@ const PostHeader = ({
   showMenu = true,
 }) => {
   const currentUser = useCurrentUser();
+  const navigate = useNavigate();
   const { copyPostUrl } = useCopyPostUrl();
   const {
     isSaved,
@@ -103,9 +104,9 @@ const PostHeader = ({
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (dialogState.type === "delete") {
-      handleDeletePost();
+      await handleDeletePost();
     } else if (dialogState.type === "block") {
       handleBlockUser();
     } else if (dialogState.type === "unblock") {

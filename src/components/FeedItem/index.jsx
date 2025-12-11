@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router";
+import { Heart, MessageCircle, Repeat, Send } from "lucide-react";
+
 import UserProfileDialog from "@/components/UserProfileDialog";
 import LikeButton from "@/components/LikeButton";
 import CommentButton from "@/components/CommentButton";
@@ -7,8 +10,6 @@ import { useCurrentUser } from "@/features/auth";
 import PostHeader from "../Posts/components/PostHeader";
 import PostContent from "../Posts/components/PostContent";
 import QuoteItem from "../QuoteItem";
-import { useNavigate } from "react-router";
-import { Heart, MessageCircle, Repeat, Send } from "lucide-react";
 
 const FeedItem = ({
   post,
@@ -32,7 +33,7 @@ const FeedItem = ({
     original_post_id,
   } = post;
 
-  const handleClickPost = (e) => {
+  const handleClickPost = async (e) => {
     if (disableNavigation) return;
 
     e.stopPropagation();

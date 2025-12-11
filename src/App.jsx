@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -23,7 +23,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ToastContainer />
       <AuthProvider />
       <ScrollToTop />
@@ -54,7 +54,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

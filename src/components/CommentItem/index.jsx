@@ -1,55 +1,67 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import FeedItem from "../FeedItem";
 import ThreadLine from "../ThreadLine";
-import { getReplies } from "@/services/comment";
+import { fetchReplies } from "@/services/comment";
 import Loading from "../Loading";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectRepliesLoading,
+  selectReplyByCommentId,
+} from "@/features/comments";
 
 const CommentItem = ({ comment, depth = 0 }) => {
-  const [replies, setReplies] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const hasReplies = comment.replies_count > 0;
   const hasOnlyOneReply = comment.replies_count === 1;
-  const MAX_DEPTH = 4;
+
+  const replyComments = useSelector((state) =>
+    selectReplyByCommentId(state, comment.id),
+  );
+  const loading = useSelector((state) =>
+    selectRepliesLoading(state, comment.id),
+  );
+
+  const MAX_DEPTH = 3;
 
   useEffect(() => {
     if (!hasOnlyOneReply || depth >= MAX_DEPTH) return;
-    const loadPageData = async () => {
-      setLoading(true);
-      try {
-        const response = await getReplies(comment.id);
-        setReplies(response);
-      } catch (err) {
-        console.error("Failed to load page data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    loadPageData();
-  }, [comment.id, depth, hasOnlyOneReply]);
+    if (!replyComments || replyComments.length === 0) {
+      const loadReplies = async () => {
+        try {
+          await dispatch(fetchReplies({ commentId: comment.id }));
+        } catch (err) {
+          console.error("Failed to load replies:", err);
+        }
+      };
+
+      loadReplies();
+    }
+  }, [comment.id, depth, dispatch, hasOnlyOneReply, replyComments]);
 
   return (
-    <div>
+    <>
       <div className="relative">
         {hasReplies && hasOnlyOneReply && <ThreadLine show />}
         <FeedItem post={comment} />
       </div>
-      {hasReplies && hasOnlyOneReply && (
+
+      {hasReplies && hasOnlyOneReply && depth < MAX_DEPTH && (
         <div className="mt-3">
           {loading ? (
             <div className="flex pl-3">
               <Loading size="w-3 h-3" />
             </div>
           ) : (
-            replies?.map((reply) => {
-              return (
-                <CommentItem key={reply.id} comment={reply} depth={depth + 1} />
-              );
-            })
+            replyComments &&
+            replyComments.length > 0 && (
+              <CommentItem comment={replyComments[0]} depth={depth + 1} />
+            )
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
+
 export default CommentItem;

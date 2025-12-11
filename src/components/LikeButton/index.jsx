@@ -3,7 +3,7 @@ import Interactions from "../Interactions";
 import { useOptimisticLike } from "@/hooks";
 
 const LikeButton = ({ post }) => {
-  const { toggleLike } = useOptimisticLike("post");
+  const { toggleLike } = useOptimisticLike();
 
   const handleLike = () => {
     toggleLike({ postId: post.id, isLiked: post.is_liked_by_auth });

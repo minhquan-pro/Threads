@@ -1,4 +1,9 @@
-import { createPost, deletePost, getPosts } from "@/services/Posts/postService";
+import {
+  createPost,
+  deletePost,
+  fetchPostById,
+  getPosts,
+} from "@/services/Posts/postService";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -53,10 +58,6 @@ const postsSlice = createSlice({
 
     optimisticIncrementRepliesCount: (state, action) => {
       const { postId } = action.payload;
-      const post = state.items.find((p) => p.id === postId);
-      if (post) {
-        post.replies_count += 1;
-      }
       if (state.byId[postId]) {
         state.byId[postId].replies_count += 1;
       }
@@ -100,6 +101,28 @@ const postsSlice = createSlice({
         state.loading = false;
         state.error = action.payload?.error || action.error.message;
       });
+    // Get Post by id
+    builder
+      .addCase(fetchPostById.pending, (state, action) => {
+        const postId = action.meta.arg;
+        state.loadingById[postId] = true;
+      })
+      .addCase(fetchPostById.fulfilled, (state, action) => {
+        const post = action.payload.data;
+        const postId = post?.id;
+        state.loadingById[postId] = false;
+        state.byId[postId] = post;
+
+        if (!post?.parent_id && !state.items.includes(postId)) {
+          state.items.unshift(postId);
+        }
+      })
+      .addCase(fetchPostById.rejected, (state, action) => {
+        const postId = action.meta.arg;
+        state.loadingById[postId] = false;
+        state.error = action.payload?.error || action.error.message;
+      });
+
     // Create Post
     builder
       .addCase(createPost.pending, (state, action) => {

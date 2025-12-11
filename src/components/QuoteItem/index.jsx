@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { MoveRight } from "lucide-react";
 
@@ -5,12 +6,18 @@ import PostHeader from "../Posts/components/PostHeader";
 import PostContent from "../Posts/components/PostContent";
 import UserAvatar from "../UserAvatar";
 import Loading from "../Loading";
-import { useFetchPostDetail } from "@/features/posts";
+import { selectItemsById, selectorLoading } from "@/features/posts";
 
 const QuoteItem = ({ quotedPostId, quotedPost }) => {
   const originalPostId = quotedPost?.original_post_id;
-  const [originalPost, originalPostLoading] =
-    useFetchPostDetail(originalPostId);
+
+  const originalPost = useSelector((state) =>
+    selectItemsById(state, originalPostId),
+  );
+  const originalPostLoading = useSelector((state) =>
+    selectorLoading(state, originalPostId),
+  );
+
   const navigate = useNavigate();
   const { user, content } = quotedPost;
 

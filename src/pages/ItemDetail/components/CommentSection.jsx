@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { useAutoScrollToBottom, useInfiniteScroll } from "@/hooks";
+import { useInfiniteScroll } from "@/hooks";
 import {
   selectCommentsByPostId,
   selectCommentsLoading,
@@ -11,8 +11,10 @@ import {
 import Loading from "@/components/Loading";
 import CommentItem from "@/components/CommentItem";
 import { useSortOrder } from "@/hooks/useSortOrder";
+import FeedItem from "@/components/FeedItem";
 
 const CommentSection = ({ postId }) => {
+  const lastElementRef = useRef(null);
   const [page, setPage] = useState(1);
   const { sortOrder } = useSortOrder();
   useFetchCommentsList({ postId, page });
@@ -21,10 +23,6 @@ const CommentSection = ({ postId }) => {
     selectCommentsByPostId(state, postId, sortOrder),
   );
 
-  const { lastElementRef } = useAutoScrollToBottom({
-    dependency: comments,
-    permitScrollToBottom: false,
-  });
   const commentsLoading = useSelector((state) =>
     selectCommentsLoading(state, postId),
   );

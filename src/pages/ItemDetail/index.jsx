@@ -1,18 +1,41 @@
 import { useLocation, useParams } from "react-router";
 
-import { useFetchPostDetail } from "@/features/posts";
+import { selectItemsById, selectorLoading } from "@/features/posts";
 import FeedItem from "@/components/FeedItem";
 import Loading from "@/components/Loading";
 import ThreadLine from "@/components/ThreadLine";
 import CommentSection from "./components/CommentSection";
 import ActivityHeader from "@/components/ActivityHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchPostById } from "@/services/Posts";
 
 const ItemDetailPage = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const parentId = location.state?.parentId;
   const { postId } = useParams();
-  const [parentItem, parentPostLoading] = useFetchPostDetail(parentId);
-  const [currentItem, currentItemLoading] = useFetchPostDetail(postId);
+
+  const parentItem = useSelector((state) => selectItemsById(state, parentId));
+  const parentPostLoading = useSelector((state) =>
+    selectorLoading(state, parentId),
+  );
+  const currentItem = useSelector((state) => selectItemsById(state, postId));
+  const currentItemLoading = useSelector((state) =>
+    selectorLoading(state, postId),
+  );
+
+  useEffect(() => {
+    if (!currentItem && !currentItemLoading) {
+      dispatch(fetchPostById(postId));
+    }
+  }, [postId, currentItem, currentItemLoading, dispatch]);
+
+  useEffect(() => {
+    if (parentId && !parentItem && !parentPostLoading) {
+      dispatch(fetchPostById(parentId));
+    }
+  }, [parentId, parentItem, parentPostLoading, dispatch]);
 
   if (currentItemLoading) {
     return (
@@ -22,10 +45,12 @@ const ItemDetailPage = () => {
     );
   }
 
-  if (!currentItem) {
+  if (!currentItem && !currentItemLoading) {
     return (
       <div className="flex justify-center py-10">
-        <p className="text-gray-500">Không tìm thấy bài viết</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          Không tìm thấy bài viết
+        </p>
       </div>
     );
   }
@@ -51,7 +76,7 @@ const ItemDetailPage = () => {
                 </div>
               </>
             ) : (
-              <div className="py-4 text-center text-sm font-bold text-gray-500">
+              <div className="py-4 text-center text-sm font-bold text-gray-500 dark:text-gray-400">
                 Không thể tải bài viết gốc
               </div>
             )}
