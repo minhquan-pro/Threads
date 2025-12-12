@@ -1,59 +1,39 @@
 import { HashRouter, Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 
-import DefaultLayout from "./layouts/DefaultLayout";
-import AuthLayout from "./layouts/AuthLayout";
-
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import ResetPassword from "./pages/auth/ResetPassword";
-
 import AuthProvider from "./components/AuthProvider";
-import PrivateRoute from "./components/PrivateRoute";
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import Activity from "./pages/Activity";
-import Profile from "./pages/Profile";
-import FollowingFeed from "./pages/FollowingFeed";
-import GhostPosts from "./pages/GhostPosts";
-import ItemDetailPage from "./pages/ItemDetail";
-import Embed from "./pages/Embed";
 import ScrollToTop from "./components/ScrollToTop";
+import { useEffect, useState } from "react";
+import SplashScreen from "./components/SplashScreen";
+import AppRoute from "./components/AppRoute";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => {
+      setIsFading(true);
+    }, 400);
+
+    const hideTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
   return (
     <HashRouter>
+      {isLoading && <SplashScreen isFading={isFading} />}
       <ToastContainer />
       <AuthProvider />
       <ScrollToTop />
-      <Routes>
-        {/* Embed */}
-        <Route path="/:userId/post/:postId/embed" element={<Embed />} />
 
-        {/* AuthLayout */}
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
-
-        {/* DefaultLayout */}
-        <Route element={<DefaultLayout />}>
-          <Route index path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/:userId/post/:postId" element={<ItemDetailPage />} />
-
-          {/* PrivateRoute */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/following" element={<FollowingFeed />} />
-            <Route path="/ghost-posts" element={<GhostPosts />} />
-            <Route path="/:userId" element={<Profile />} />
-          </Route>
-        </Route>
-      </Routes>
+      <AppRoute />
     </HashRouter>
   );
 }

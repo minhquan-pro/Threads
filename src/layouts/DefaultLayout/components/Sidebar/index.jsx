@@ -2,7 +2,6 @@ import { Link, NavLink, useLocation } from "react-router";
 import classNames from "classnames";
 
 import { NAV_ITEMS } from "@/constants/sidebar";
-import threads_logo_dark from "@/assets/logo/threads_logo_dark.png";
 import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
 import AuthRequiredDialog from "@/components/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
@@ -11,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { useScrollRestoration } from "@/hooks";
 import { useState } from "react";
 import CreatePostModal from "@/components/CreatePostModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThreads } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,10 +41,9 @@ const Sidebar = () => {
       {" "}
       <div className="flex h-full flex-col justify-between bg-white p-6 dark:bg-black">
         <Link to={"/"} onClick={handleNavigate} className="cursor-pointer">
-          <img
-            src={threads_logo_dark}
-            alt=""
-            className="h-12 w-10 hover:scale-90 dark:invert"
+          <FontAwesomeIcon
+            icon={faThreads}
+            className="text-4xl hover:scale-90 dark:text-white"
           />
         </Link>
         <div className="flex flex-col gap-8">
