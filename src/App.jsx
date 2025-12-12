@@ -14,11 +14,11 @@ function App() {
   useEffect(() => {
     const fadeTimer = setTimeout(() => {
       setIsFading(true);
-    }, 400);
+    }, 0);
 
     const hideTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 400);
 
     return () => {
       clearTimeout(fadeTimer);
