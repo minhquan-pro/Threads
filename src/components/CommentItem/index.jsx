@@ -1,15 +1,16 @@
-import { useEffect } from "react";
-import FeedItem from "../FeedItem";
-import ThreadLine from "../ThreadLine";
-import { fetchReplies } from "@/services/comment";
-import Loading from "../Loading";
 import { useDispatch, useSelector } from "react-redux";
+import FeedItem from "../FeedItem";
+import { useEffect } from "react";
+import { fetchReplies } from "@/services/comment";
 import {
   selectRepliesLoading,
   selectReplyByCommentId,
 } from "@/features/comments";
+import ThreadLine from "../ThreadLine";
+import Loading from "../Loading";
 
 const CommentItem = ({ comment, depth = 0 }) => {
+  const MAX_DEPTH = 3;
   const dispatch = useDispatch();
   const hasReplies = comment.replies_count > 0;
   const hasOnlyOneReply = comment.replies_count === 1;
@@ -21,10 +22,8 @@ const CommentItem = ({ comment, depth = 0 }) => {
     selectRepliesLoading(state, comment.id),
   );
 
-  const MAX_DEPTH = 3;
-
   useEffect(() => {
-    if (!hasOnlyOneReply || depth >= MAX_DEPTH) return;
+    if (!hasOnlyOneReply || depth >= MAX_DEPTH || loading) return;
 
     if (!replyComments || replyComments.length === 0) {
       const loadReplies = async () => {
@@ -37,13 +36,15 @@ const CommentItem = ({ comment, depth = 0 }) => {
 
       loadReplies();
     }
-  }, [comment.id, depth, dispatch, hasOnlyOneReply, replyComments]);
+  }, [comment.id, depth, dispatch, hasOnlyOneReply, loading, replyComments]);
 
   return (
     <>
       <div className="relative">
-        {hasReplies && hasOnlyOneReply && <ThreadLine show />}
-        <FeedItem post={comment} />
+        {hasReplies && hasOnlyOneReply && depth < MAX_DEPTH && (
+          <ThreadLine show />
+        )}
+        <FeedItem post={comment} type="comment" />
       </div>
 
       {hasReplies && hasOnlyOneReply && depth < MAX_DEPTH && (
