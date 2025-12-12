@@ -1,15 +1,20 @@
+import { optimisticUpdateLikeComment } from "@/features/comments/commentSlice";
 import { optimisticUpdateLikePost } from "@/features/posts/postSlice";
 import { likePost } from "@/services/Posts";
 import { useDispatch } from "react-redux";
 
-export const useOptimisticLike = () => {
+export const useOptimisticLike = (type) => {
   const dispatch = useDispatch();
-  const toggleLike = async ({ postId, isLiked }) => {
-    dispatch(optimisticUpdateLikePost({ postId, isLiked }));
+
+  const toggleLike = async ({ parentId, id, isLiked = false }) => {
+    type === "post"
+      ? dispatch(optimisticUpdateLikePost({ id, isLiked }))
+      : dispatch(optimisticUpdateLikeComment({ parentId, id }));
+
     try {
-      await likePost(postId);
+      await likePost(id);
     } catch (error) {
-      dispatch(optimisticUpdateLikePost({ postId, isLiked: !isLiked }));
+      dispatch(optimisticUpdateLikePost({ id, isLiked: !isLiked }));
       console.log(error);
     }
   };
