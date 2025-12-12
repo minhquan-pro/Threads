@@ -11,10 +11,10 @@ export const useFetchCurrentUser = () => {
       try {
         await dispatch(getCurrentUser()).unwrap();
       } catch (error) {
-        console.log(error);
+        console.error("Failed to fetch current user:", error);
       }
     })();
-  });
+  }, [dispatch]);
 };
 
 export const useCurrentUser = () => {

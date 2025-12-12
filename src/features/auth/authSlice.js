@@ -9,9 +9,20 @@ import {
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  loadingCurrentUser: false,
   currentUser: null,
   loading: false,
   error: null,
+};
+
+const handlePending = (state) => {
+  state.loading = true;
+  state.error = null;
+};
+
+const handleRejected = (state) => {
+  state.loading = false;
+  state.error = "Có lỗi xảy ra";
 };
 
 const authSlice = createSlice({
@@ -21,93 +32,74 @@ const authSlice = createSlice({
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     // GetCurrentUser
     builder
       .addCase(getCurrentUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loadingCurrentUser = true;
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingCurrentUser = false;
         state.error = null;
         state.currentUser = action.payload;
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
+        state.loadingCurrentUser = false;
+        state.error =
+          action.payload?.message || "Không thể tải thông tin người dùng";
       });
 
     // Login
     builder
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+      .addCase(login.pending, handlePending)
       .addCase(login.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
-      .addCase(login.rejected, (state, action) => {
-        console.log(action);
-        state.loading = false;
-        state.error = action.payload.error;
-      });
+      .addCase(login.rejected, handleRejected);
+
     // Register
     builder
-      .addCase(register.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(register.fulfilled, (state, action) => {
-        console.log(action);
+      .addCase(register.pending, handlePending)
+      .addCase(register.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
-      .addCase(register.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.error;
-      });
+      .addCase(register.rejected, handleRejected);
+
     // Forgot Password
     builder
-      .addCase(forgotPassword.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+      .addCase(forgotPassword.pending, handlePending)
       .addCase(forgotPassword.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
-      .addCase(forgotPassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.error;
-      });
+      .addCase(forgotPassword.rejected, handleRejected);
+
     // Reset Password
     builder
-      .addCase(resetPassword.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+      .addCase(resetPassword.pending, handlePending)
       .addCase(resetPassword.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
-      .addCase(resetPassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.error;
-      });
-    //Logout
+      .addCase(resetPassword.rejected, handleRejected);
+
+    // Logout
     builder
-      .addCase(logout.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(logout.pending, handlePending)
       .addCase(logout.fulfilled, (state) => {
         state.loading = false;
+        state.error = null;
         state.currentUser = null;
       })
-      .addCase(logout.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.error;
-      });
+      .addCase(logout.rejected, handleRejected);
   },
 });
 
-export const { setCurrentUser } = authSlice.actions;
+export const { setCurrentUser, clearError } = authSlice.actions;
 export default authSlice;
