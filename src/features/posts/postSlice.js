@@ -9,8 +9,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
   byId: {},
-  loading: false,
   loadingById: {},
+  loading: false,
   error: null,
   pagination: {
     last_page: 0,

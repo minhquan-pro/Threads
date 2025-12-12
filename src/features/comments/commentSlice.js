@@ -73,16 +73,14 @@ const commentsSlice = createSlice({
     },
 
     optimisticUpdateLikeComment: (state, action) => {
-      const { parentId, id: commentId, isLiked } = action.payload;
-
+      const { parentId, postId, isLiked } = action.payload;
       const comments = state.byPostId[parentId];
-      const comment = comments?.find((c) => c.id === commentId);
-
+      const comment = comments?.find((c) => c.id === postId);
       if (comment) {
         comment.likes_count += isLiked ? -1 : 1;
       } else {
         const replies = state.repliesByCommentId[parentId];
-        const reply = replies?.find((r) => r.id === commentId);
+        const reply = replies?.find((r) => r.id === postId);
         if (reply) {
           reply.likes_count += isLiked ? -1 : 1;
         }

@@ -10,18 +10,18 @@ import ThreadLine from "../ThreadLine";
 import FeedItem from "../FeedItem";
 import BaseThreadModal from "../BaseModal";
 
-import {
-  addReplyOptimistic,
-  removeOptimisticComment,
-  updateReply,
-} from "@/features/comments/commentSlice";
 import ThreadComposer from "../ThreadComposer";
+import {
+  addCommentOptimistic,
+  updateComment,
+} from "@/features/comments/commentSlice";
 
 const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
   const dispatch = useDispatch();
   const currentUser = useCurrentUser();
-  const commentId = post.id;
+  const commentId = post?.id;
+  const originalPostId = post?.parent_id;
 
   const handleReplySubmit = useCallback(
     async ({ content }) => {
@@ -32,15 +32,16 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
       });
 
       dispatch(
-        updateReply({
+        updateComment({
           reply: response.data,
           idFake,
-          commentId,
+          parentId: commentId,
+          postId: originalPostId,
         }),
       );
       return response.data;
     },
-    [dispatch, idFake, post.reply_permission, commentId],
+    [commentId, post.reply_permission, dispatch, idFake, originalPostId],
   );
 
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
@@ -58,20 +59,17 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     const dataFake = {
       id: idFake,
       content,
-      commentId,
+      postId: originalPostId,
+      parentId: commentId,
       user: currentUser,
       created_at: new Date().toISOString(),
       likes_count: 0,
       replies_count: 0,
     };
 
-    dispatch(addReplyOptimistic(dataFake));
+    dispatch(addCommentOptimistic(dataFake));
 
-    const success = await handleSubmit();
-
-    if (!success) {
-      dispatch(removeOptimisticComment({ commentId, idFake }));
-    }
+    await handleSubmit();
     handleClose();
   };
 

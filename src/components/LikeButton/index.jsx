@@ -2,11 +2,15 @@ import { Heart } from "lucide-react";
 import Interactions from "../Interactions";
 import { useOptimisticLike } from "@/hooks";
 
-const LikeButton = ({ post }) => {
-  const { toggleLike } = useOptimisticLike();
+const LikeButton = ({ post, type }) => {
+  const { toggleLike } = useOptimisticLike(type);
 
   const handleLike = () => {
-    toggleLike({ postId: post.id, isLiked: post.is_liked_by_auth });
+    toggleLike({
+      parentId: post?.parent_id,
+      postId: post.id,
+      isLiked: post?.is_liked_by_auth,
+    });
   };
 
   return (

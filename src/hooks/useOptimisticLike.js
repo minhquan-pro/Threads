@@ -6,15 +6,15 @@ import { useDispatch } from "react-redux";
 export const useOptimisticLike = (type) => {
   const dispatch = useDispatch();
 
-  const toggleLike = async ({ parentId, id, isLiked = false }) => {
+  const toggleLike = async ({ parentId, postId, isLiked = false }) => {
     type === "post"
-      ? dispatch(optimisticUpdateLikePost({ id, isLiked }))
-      : dispatch(optimisticUpdateLikeComment({ parentId, id }));
+      ? dispatch(optimisticUpdateLikePost({ postId, isLiked }))
+      : dispatch(optimisticUpdateLikeComment({ parentId, postId }));
 
     try {
-      await likePost(id);
+      await likePost(postId);
     } catch (error) {
-      dispatch(optimisticUpdateLikePost({ id, isLiked: !isLiked }));
+      dispatch(optimisticUpdateLikePost({ postId, isLiked: !isLiked }));
       console.log(error);
     }
   };

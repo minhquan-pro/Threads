@@ -12,6 +12,7 @@ import PostContent from "../Posts/components/PostContent";
 import QuoteItem from "../QuoteItem";
 
 const FeedItem = ({
+  type = "post",
   post,
   variant,
   hideInteraction = false,
@@ -79,7 +80,7 @@ const FeedItem = ({
                     className="pointer-events-auto mt-1 flex items-center justify-start"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <LikeButton post={post} />
+                    <LikeButton post={post} type={type} />
                     <CommentButton post={post} />
                     <RepostButton post={post} hasMenu={currentUser} />
                     <ShareButton post={post} hasMenu={currentUser} />
