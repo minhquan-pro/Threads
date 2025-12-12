@@ -1,17 +1,11 @@
 import { http } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const createComments = async ({
-  id,
-  parentId,
-  content,
-  reply_permission,
-}) => {
+export const createComments = async ({ id, content, reply_permission }) => {
   try {
     const response = await http.post(`/posts/${id}/reply`, {
       content,
       reply_permission,
-      ...(parentId && { parent_id: parentId }),
     });
 
     return response;
