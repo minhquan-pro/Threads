@@ -13,7 +13,7 @@ const Header = ({ title }) => {
           <Button
             variant="outline"
             size="icon"
-            className="absolute bottom-3 z-50 ml-8 h-6 w-6 rounded-full border border-gray-300 bg-white shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+            className="absolute bottom-3 z-50 ml-8 h-6 w-6 rounded-full border border-gray-300 bg-white shadow dark:border-gray-700 dark:bg-[#181818] dark:text-white dark:hover:bg-gray-700"
             onClick={() => navigate(-1)}
             aria-label="Go back"
           >

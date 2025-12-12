@@ -16,7 +16,7 @@ const ActivityHeader = ({ showActivity = true }) => {
   };
 
   return (
-    <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-800 text-sm dark:border-gray-700">
+    <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-300 text-sm dark:border-gray-700">
       {Boolean(showActivity) && (
         <DropdownMenu>
           <DropdownMenuTrigger className="border-none outline-none focus:ring-0">
@@ -29,7 +29,7 @@ const ActivityHeader = ({ showActivity = true }) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="start"
-            className="w-52 border-gray-800 bg-white dark:border-gray-700 dark:bg-gray-800"
+            className="w-52 border-gray-300 bg-white dark:border-gray-700 dark:bg-[#181818]"
           >
             <DropdownMenuItem
               onClick={() => setSortOrder("top")}

@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router";
 import { AUTH_PAGES } from "@/constants/auth";
-import decorImg from "@/assets/images/decor.jpg";
+import decorImg from "@/assets/images/decor.avif";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const AuthLayout = () => {
   const location = useLocation();
@@ -13,10 +14,13 @@ const AuthLayout = () => {
 
   return (
     <div className="flex h-screen items-center justify-center bg-white dark:bg-[#181818]">
-      <div className="relative z-50">
-        <img src={decorImg} className="absolute top-0 h-full w-full invert" />
+      <div className="fixed -top-20 right-0 left-0">
+        <AspectRatio ratio={16 / 9}>
+          <img src={decorImg} />
+        </AspectRatio>
       </div>
-      <div className="w-[350px] text-center">
+
+      <div className="z-50 w-[350px] text-center">
         <h1 className="mb-3 text-3xl font-bold text-gray-900 dark:text-white">
           {title}
         </h1>
