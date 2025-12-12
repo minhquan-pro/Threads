@@ -6,9 +6,9 @@ export const usePostForm = (
   options = { successMessage: "Đã đăng", errorMessage: "Đăng thất bại" },
 ) => {
   const { successMessage, errorMessage } = options;
-
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const isDark = document.documentElement.classList.contains("dark");
 
   const handleChangeContent = (e) => {
     setContent(e.target.value);
@@ -23,6 +23,10 @@ export const usePostForm = (
 
     const toastId = toast.loading("Đang đăng...", {
       position: "bottom-center",
+      style: {
+        background: isDark ? "#ffffff" : "black",
+        color: isDark ? "#000000" : "#ffffff",
+      },
       theme: "dark",
     });
 

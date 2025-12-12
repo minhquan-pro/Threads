@@ -14,8 +14,15 @@ const defaultConfig = {
 
 export const toast = {
   default: (message, options = {}) => {
+    const isDark = document.documentElement.classList.contains("dark");
+
     return toastify(message, {
       ...defaultConfig,
+      style: {
+        ...defaultConfig.style,
+        background: isDark ? "#ffffff" : "black",
+        color: isDark ? "#000000" : "#ffffff",
+      },
       ...options,
     });
   },
