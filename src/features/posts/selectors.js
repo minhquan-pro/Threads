@@ -1,9 +1,15 @@
-export const selectorList = (state) => {
-  return state.posts.items.map((id) => state.posts.byId[id]);
+export const selectLoadingAllPost = (state) => state.posts.loading;
+
+export const selectList = (state) => {
+  return state.posts.items.map((id) => state.posts.byId[id]).filter(Boolean); // Loại bỏ undefined nếu id không tồn tại
 };
-export const selectItemsById = (state, postId) => {
-  return state.posts.byId[postId];
+
+export const selectItemById = (state, postId) => {
+  return state.posts.byId[postId] || null;
 };
-export const selectorLoading = (state, postId) =>
-  state.posts.loadingById[postId];
-export const selectorPagination = (state) => state.posts.pagination;
+
+export const selectLoadingById = (state, postId) => {
+  return state.posts.loadingById[postId] || false;
+};
+
+export const selectPagination = (state) => state.posts.pagination;

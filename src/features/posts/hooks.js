@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { toast } from "@/utils/toast";
 import { getPostById, getPosts } from "@/services/Posts";
-import { selectItemsById, selectorList } from "./selectors";
 import { useCurrentUser } from "../auth";
+import { selectList } from "./selectors";
 
 export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
 
 export const usePostsList = ({ excludeCurrentUser = false }) => {
   const currentUser = useCurrentUser();
-  const posts = useSelector(selectorList);
+  const posts = useSelector(selectList);
 
   return useMemo(() => {
     if (!excludeCurrentUser || !currentUser?.id) return posts;
