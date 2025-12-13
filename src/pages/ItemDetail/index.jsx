@@ -37,6 +37,16 @@ const ItemDetailPage = () => {
     }
   }, [parentId, parentItem, parentPostLoading, dispatch]);
 
+  useEffect(() => {
+    if (currentItem) {
+      document.title = currentItem.content;
+    }
+
+    return () => {
+      document.title = "Threads";
+    };
+  }, [currentItem, currentItem?.content]);
+
   if (currentItemLoading) {
     return (
       <div className="flex justify-center py-10">
