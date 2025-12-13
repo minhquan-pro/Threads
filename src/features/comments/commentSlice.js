@@ -119,11 +119,13 @@ const commentsSlice = createSlice({
         const { commentId, replies, pagination } = action.payload;
         const oldComments = state.repliesByCommentId[commentId] || [];
 
-        const newComments = replies.filter((newComment) => {
-          return !oldComments?.some(
-            (oldComment) => oldComment.id === newComment.id,
-          );
-        });
+        const newComments = replies
+          .filter((reply) => {
+            return !oldComments?.some(
+              (oldComment) => oldComment.id === reply.id,
+            );
+          })
+          .filter((c) => !state.deletedIds?.includes(c.id));
         state.repliesByCommentId[commentId] = [...oldComments, ...newComments];
         state.repliesLoading[commentId] = false;
         state.repliesPagination[commentId] = pagination;
@@ -145,6 +147,7 @@ const commentsSlice = createSlice({
           replyIndex: -1,
         };
 
+        // Main comment
         const comments = state.byPostId[parentId];
         if (comments) {
           const index = comments.findIndex((c) => c.id === commentId);
@@ -155,6 +158,7 @@ const commentsSlice = createSlice({
           }
         }
 
+        // Reply of comment
         const replyComments = state.repliesByCommentId[parentId];
         if (replyComments) {
           const replyIndex = replyComments.findIndex(
@@ -169,10 +173,31 @@ const commentsSlice = createSlice({
         }
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
-        const { commentId } = action.meta.arg;
+        const { postId, commentId, parentId } = action.meta.arg;
 
         if (state.backup?.[commentId]) {
           delete state.backup[commentId];
+        }
+
+        let parentFound = false;
+
+        Object.values(state.repliesByCommentId).forEach((repliesGroup) => {
+          if (parentFound) return;
+
+          const parentComment = repliesGroup?.find((c) => c.id === parentId);
+          if (parentComment && parentComment.replies_count > 0) {
+            parentComment.replies_count -= 1;
+            parentFound = true;
+          }
+        });
+
+        if (!parentFound) {
+          const mainComments = state.byPostId[postId];
+          const parentComment = mainComments?.find((c) => c.id === parentId);
+
+          if (parentComment && parentComment.replies_count > 0) {
+            parentComment.replies_count -= 1;
+          }
         }
       })
       .addCase(deleteComment.rejected, (state, action) => {

@@ -8,10 +8,12 @@ import {
 import { toast } from "@/utils/toast";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 
 export const usePostActions = (post) => {
   const dispatch = useDispatch();
   const isMountedRef = useRef(true);
+  const { postId } = useParams();
 
   const [isSaved, setIsSaved] = useState(post?.is_saved_by_auth || false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -51,6 +53,7 @@ export const usePostActions = (post) => {
           type === "post"
             ? deletePost(post.id)
             : deleteComment({
+                postId,
                 commentId: post.id,
                 parentId: post.parent_id,
               }),
