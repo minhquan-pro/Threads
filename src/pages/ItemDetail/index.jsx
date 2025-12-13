@@ -1,6 +1,6 @@
 import { useLocation, useParams } from "react-router";
 
-import { selectItemsById, selectorLoading } from "@/features/posts";
+import { selectItemById, selectLoadingById } from "@/features/posts";
 import FeedItem from "@/components/FeedItem";
 import Loading from "@/components/Loading";
 import ThreadLine from "@/components/ThreadLine";
@@ -16,13 +16,13 @@ const ItemDetailPage = () => {
   const parentId = location.state?.parentId;
   const { postId } = useParams();
 
-  const parentItem = useSelector((state) => selectItemsById(state, parentId));
+  const parentItem = useSelector((state) => selectItemById(state, parentId));
   const parentPostLoading = useSelector((state) =>
-    selectorLoading(state, parentId),
+    selectLoadingById(state, parentId),
   );
-  const currentItem = useSelector((state) => selectItemsById(state, postId));
+  const currentItem = useSelector((state) => selectItemById(state, postId));
   const currentItemLoading = useSelector((state) =>
-    selectorLoading(state, postId),
+    selectLoadingById(state, postId),
   );
 
   useEffect(() => {

@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 import { useInfiniteScroll } from "@/hooks";
 import {
-  selectorLoading as selectorLoadingPost,
-  selectorPagination,
+  selectLoadingAllPost,
+  selectPagination,
   useFetchPostsList,
   usePostsList,
 } from "@/features/posts";
@@ -17,8 +17,8 @@ const Posts = ({ type }) => {
   useFetchPostsList({ type, page, per_page: 10 });
   const posts = usePostsList({ excludeCurrentUser: false });
 
-  const loading = useSelector(selectorLoadingPost);
-  const pagination = useSelector(selectorPagination);
+  const loading = useSelector(selectLoadingAllPost);
+  const pagination = useSelector(selectPagination);
   const onEnd = useCallback(() => setPage((prevState) => prevState + 1), []);
   useInfiniteScroll({ lastElementRef, page, loading, pagination, onEnd });
 

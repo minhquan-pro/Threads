@@ -1,19 +1,15 @@
-import { useSelector } from "react-redux";
-
 import { useCurrentUser } from "@/features/auth";
-import {
-  selectorLoading as selectorPostsLoading,
-  selectorList,
-} from "@/features/posts";
 
-import Loading from "@/components/Loading";
 import Posts from "@/components/Posts";
 import CreatePost from "@/components/Posts/components/CreatePost";
+import { useSelector } from "react-redux";
+import { selectList, selectLoadingAllPost } from "@/features/posts";
+import Loading from "@/components/Loading";
 
 const Home = () => {
   const currentUser = useCurrentUser();
-  const loading = useSelector(selectorPostsLoading);
-  const posts = useSelector(selectorList);
+  const posts = useSelector(selectList);
+  const loading = useSelector(selectLoadingAllPost);
 
   return (
     <div className="min-h-screen overflow-hidden bg-white dark:bg-[#181818]">

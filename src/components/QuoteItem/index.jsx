@@ -6,16 +6,16 @@ import PostHeader from "../Posts/components/PostHeader";
 import PostContent from "../Posts/components/PostContent";
 import UserAvatar from "../UserAvatar";
 import Loading from "../Loading";
-import { selectItemsById, selectorLoading } from "@/features/posts";
+import { selectItemById, selectLoadingById } from "@/features/posts";
 
 const QuoteItem = ({ quotedPostId, quotedPost }) => {
   const originalPostId = quotedPost?.original_post_id;
 
   const originalPost = useSelector((state) =>
-    selectItemsById(state, originalPostId),
+    selectItemById(state, originalPostId),
   );
   const originalPostLoading = useSelector((state) =>
-    selectorLoading(state, originalPostId),
+    selectLoadingById(state, originalPostId),
   );
 
   const navigate = useNavigate();
