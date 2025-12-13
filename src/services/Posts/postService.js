@@ -26,6 +26,19 @@ export const deletePost = createAsyncThunk(
   },
 );
 
+export const deleteComment = createAsyncThunk(
+  "posts/deleteComment",
+  async ({ commentId }, { rejectWithValue }) => {
+    try {
+      await http.post(`/posts/${commentId}`, {
+        _method: "DELETE",
+      });
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  },
+);
+
 export const getPosts = createAsyncThunk(
   "posts/getList",
   async ({ type, page = 1, per_page = 10 }) => {

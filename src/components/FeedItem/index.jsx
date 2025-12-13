@@ -51,6 +51,7 @@ const FeedItem = ({
         <UserProfileDialog user={user} />
         <div className="w-full">
           <PostHeader
+            type={type}
             post={post}
             user={user}
             createdAt={created_at}

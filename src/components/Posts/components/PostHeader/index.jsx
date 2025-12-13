@@ -26,6 +26,7 @@ import {
 import ConfirmDialog from "./components/ConfirmDialog";
 
 const PostHeader = ({
+  type,
   post,
   user,
   hideDate = false,
@@ -106,7 +107,7 @@ const PostHeader = ({
 
   const handleConfirm = async () => {
     if (dialogState.type === "delete") {
-      await handleDeletePost();
+      await handleDeletePost(type);
     } else if (dialogState.type === "block") {
       handleBlockUser();
     } else if (dialogState.type === "unblock") {

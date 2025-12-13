@@ -1,4 +1,5 @@
 import { fetchComments, fetchReplies } from "@/services/comment";
+import { deleteComment } from "@/services/Posts";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
   repliesByCommentId: {},
   repliesLoading: {},
   repliesPagination: {},
+  backup: {},
 };
 
 const commentsSlice = createSlice({
@@ -28,7 +30,7 @@ const commentsSlice = createSlice({
         const postComments = state.byPostId[postId] || [];
         const parentInPost = postComments.find((c) => c.id === parentId);
         if (parentInPost) {
-          parentInPost.replies_count = (parentInPost.replies_count || 0) + 1;
+          parentInPost.replies_count = parentInPost.replies_count + 1;
         } else {
           Object.keys(state.repliesByCommentId).forEach((key) => {
             const replies = state.repliesByCommentId[key];
@@ -128,6 +130,57 @@ const commentsSlice = createSlice({
       })
       .addCase(fetchReplies.rejected, (state, action) => {
         state.repliesLoading[action.meta.arg.postId] = false;
+      });
+
+    // Delete comment
+    builder
+      .addCase(deleteComment.pending, (state, action) => {
+        const { commentId, parentId } = action.meta.arg;
+
+        state.backup[commentId] = {
+          parentId,
+          comment: null,
+          commentIndex: -1,
+          reply: null,
+          replyIndex: -1,
+        };
+
+        const comments = state.byPostId[parentId];
+        if (comments) {
+          const index = comments.findIndex((c) => c.id === commentId);
+          if (index !== -1) {
+            state.backup[commentId].comment = comments[index];
+            state.backup[commentId].commentIndex = index;
+            comments.splice(index, 1);
+          }
+        }
+
+        const replyComments = state.repliesByCommentId[parentId];
+        if (replyComments) {
+          const replyIndex = replyComments.findIndex(
+            (reply) => reply.id === commentId,
+          );
+
+          if (replyIndex !== -1) {
+            state.backup[commentId].reply = replyComments[replyIndex];
+            state.backup[commentId].replyIndex = replyIndex;
+            replyComments.splice(replyIndex, 1);
+          }
+        }
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        const { commentId } = action.meta.arg;
+
+        if (state.backup?.[commentId]) {
+          delete state.backup[commentId];
+        }
+      })
+      .addCase(deleteComment.rejected, (state, action) => {
+        const { commentId } = action.meta.arg;
+        const { comment, parentId, index } = state.backup[commentId];
+
+        state.byPostId[parentId].splice(index, 0, comment);
+        delete state.backup[commentId];
       });
   },
 });

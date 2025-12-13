@@ -11,7 +11,6 @@ import {
 import Loading from "@/components/Loading";
 import CommentItem from "@/components/CommentItem";
 import { useSortOrder } from "@/hooks/useSortOrder";
-import FeedItem from "@/components/FeedItem";
 
 const CommentSection = ({ postId }) => {
   const lastElementRef = useRef(null);
