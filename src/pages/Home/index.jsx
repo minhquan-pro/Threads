@@ -16,7 +16,7 @@ const Home = () => {
       {currentUser && <CreatePost />}
 
       {loading && posts.length === 0 ? (
-        <div className="flex items-center justify-center py-20">
+        <div className="flex min-h-screen items-center justify-center py-20">
           <Loading size="w-8 h-8" />
         </div>
       ) : (
