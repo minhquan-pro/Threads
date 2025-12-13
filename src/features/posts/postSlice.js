@@ -56,6 +56,43 @@ const postsSlice = createSlice({
       );
     },
 
+    optimisticUpdateQuotePost: (state, action) => {
+      const dataFake = action.payload;
+      const id = dataFake.id;
+
+      if (!state.items.includes(id)) {
+        state.items.unshift(id);
+      }
+      state.byId[id] = dataFake;
+    },
+
+    updateQuotePost: (state, action) => {
+      const { idFake, response } = action.payload;
+      const quotePostId = response.id;
+
+      const indexQuotePost = state.items.findIndex((id) => id === idFake);
+      if (indexQuotePost !== -1) {
+        state.items[indexQuotePost] = quotePostId;
+      }
+
+      if (state.byId[idFake]) {
+        delete state.byId[idFake];
+      }
+      state.byId[quotePostId] = response;
+    },
+
+    rollbackQuotePost: (state, action) => {
+      const { idFake } = action.payload;
+
+      const indexQuotePost = state.items.findIndex((id) => id === idFake);
+      if (indexQuotePost !== -1) {
+        state.items.splice(indexQuotePost, 1);
+      }
+      if (state.byId[idFake]) {
+        delete state.byId[idFake];
+      }
+    },
+
     optimisticIncrementRepliesCount: (state, action) => {
       const { postId } = action.payload;
       if (state.byId[postId]) {
@@ -209,6 +246,9 @@ export const {
   optimisticUpdateRepostPost,
   optimisticIncrementRepliesCount,
   optimisticDecrementRepliesCount,
+  updateQuotePost,
+  optimisticUpdateQuotePost,
+  rollbackQuotePost,
 } = postsSlice.actions;
 
 export default postsSlice;

@@ -21,7 +21,6 @@ export const repostPost = async (postId) => {
 export const quotePost = async (postId, data) => {
   try {
     const response = await http.post(`posts/${postId}/quote`, data);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw new Error(error);

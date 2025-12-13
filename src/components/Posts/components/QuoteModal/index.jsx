@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { quotePost as quotePostService } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
@@ -10,18 +11,28 @@ import QuoteItem from "@/components/QuoteItem";
 import ThreadLine from "@/components/ThreadLine";
 import BaseThreadModal from "@/components/BaseModal";
 import PostComposer from "@/components/PostComposer";
+import { useDispatch } from "react-redux";
+import {
+  optimisticUpdateQuotePost,
+  rollbackQuotePost,
+  updateQuotePost,
+} from "@/features/posts/postSlice";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
+  const dispatch = useDispatch();
+  const idFake = useMemo(() => `temp-${uuidv4()}`, []);
   const currentUser = useCurrentUser();
+  const postId = post?.id;
 
   const handleReplySubmit = useCallback(
     async ({ content }) => {
-      await quotePostService(post.id, {
+      const response = await quotePostService(postId, {
         content,
         reply_permission: post.reply_permission,
       });
+      dispatch(updateQuotePost({ response, idFake }));
     },
-    [post.id, post.reply_permission],
+    [postId, post.reply_permission, dispatch, idFake],
   );
 
   const { loading, content, handleChangeContent, resetContent, handleSubmit } =
@@ -33,7 +44,23 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
   };
 
   const onSubmit = async () => {
-    await handleSubmit();
+    const dataFake = {
+      id: idFake,
+      content,
+      user: currentUser,
+      created_at: new Date().toISOString(),
+      original_post: post,
+      original_post_id: postId,
+      likes_count: 0,
+      replies_count: 0,
+    };
+
+    dispatch(optimisticUpdateQuotePost(dataFake));
+    const success = await handleSubmit();
+
+    if (!success) {
+      dispatch(rollbackQuotePost({ idFake }));
+    }
     handleClose();
   };
 

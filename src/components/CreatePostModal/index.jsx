@@ -14,7 +14,6 @@ import PostComposer from "../PostComposer";
 const CreatePostModal = ({ open, onClose }) => {
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
   const currentUser = useCurrentUser();
-
   const dispatch = useDispatch();
 
   const handleReplySubmit = async ({ content }) => {

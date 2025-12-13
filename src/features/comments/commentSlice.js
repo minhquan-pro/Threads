@@ -16,7 +16,6 @@ const commentsSlice = createSlice({
   reducers: {
     addCommentOptimistic: (state, action) => {
       const { postId, parentId, ...commentData } = action.payload;
-
       if (!parentId) {
         if (!state.byPostId[postId]) state.byPostId[postId] = [];
         state.byPostId[postId].unshift(commentData);
