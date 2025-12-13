@@ -1,10 +1,12 @@
 import CurvedBorderBottom from "@/components/CurvedBorderBottom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const Header = ({ title }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isPagePostDetail = location.pathname.includes("/post/");
 
   return (
     <div className="sticky top-0 z-50 w-[700px] bg-white pt-4 dark:bg-black">
@@ -20,11 +22,13 @@ const Header = ({ title }) => {
             <ArrowLeft className="h-4 w-4" />
           </Button>
         )}
-        <div className="mb-3 flex flex-col">
+        <div className="mb-3 inline-flex w-full flex-col items-center justify-center">
           <h1 className="text-md m-auto font-semibold text-gray-900 dark:text-white">
             {title}
           </h1>
-          <span className="text-xs dark:text-gray-300">1.3k lượt xem</span>
+          {isPagePostDetail && (
+            <span className="text-xs dark:text-gray-300">1.3k lượt xem</span>
+          )}
         </div>
         <div></div>
       </div>
