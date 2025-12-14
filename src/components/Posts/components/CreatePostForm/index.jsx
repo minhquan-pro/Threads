@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { Ellipsis } from "lucide-react";
 
 import ThreadLine from "@/components/ThreadLine";
 import UserAvatar from "@/components/UserAvatar";
@@ -11,6 +10,7 @@ import { useCurrentUser } from "@/features/auth";
 import { usePostForm } from "@/hooks/usePostForm";
 import { createPost } from "@/services/Posts";
 import PostModalFooter from "@/components/PostModalFooter";
+import PostModalHeader from "@/components/PostModalHeader";
 
 const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   const currentUser = useCurrentUser();
@@ -50,24 +50,11 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   return (
     <div className="z-50 flex max-h-[500px] min-w-[520px] flex-col gap-2 overflow-hidden rounded-2xl border border-gray-300 bg-white shadow-md dark:border-[#373535] dark:bg-[#181818]">
       {/* Header */}
-      <div className="sticky top-0 right-0 left-0 flex items-center justify-between border-b border-gray-300 bg-white p-3 dark:border-[#373535] dark:bg-[#181818]">
-        <div
-          className="cursor-pointer font-semibold text-gray-900 hover:opacity-70 dark:text-gray-100"
-          onClick={onClose}
-        >
-          Hủy
-        </div>
-        <div className="font-bold text-gray-900 dark:text-gray-100">
-          Threads mới
-        </div>
-        <button
-          type="button"
-          className="flex h-7 w-7 items-center justify-center rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-50 dark:text-gray-300 dark:hover:bg-gray-800"
-          disabled={loading}
-        >
-          <Ellipsis size={20} />
-        </button>
-      </div>
+      <PostModalHeader
+        title={"Threads mới"}
+        content={content}
+        onClose={onClose}
+      />
 
       {/* Content */}
       <div className="custom-scrollbar flex-1 overflow-y-auto p-3">

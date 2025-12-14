@@ -45,7 +45,7 @@ const CreatePostModal = ({ open, onClose }) => {
       onSubmit={onSubmit}
       loading={loading}
       isOpen={open}
-      onClose={onClose}
+      onClose={handleClose}
       title={"Thread mới"}
     >
       <div className="relative flex gap-2">
