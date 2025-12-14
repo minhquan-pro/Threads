@@ -8,7 +8,7 @@ import {
   useFetchPostsList,
   usePostsList,
 } from "@/features/posts";
-import FeedItem from "../FeedItem";
+import FeedItem from "./FeedItem";
 
 const Posts = ({ type }) => {
   const [page, setPage] = useState(1);

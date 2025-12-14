@@ -1,6 +1,6 @@
 import { Ellipsis } from "lucide-react";
-import { Button } from "../ui/button";
-import ConfirmDiscardDialog from "../modals/BaseModal/ConfirmDiscardDialog";
+import { Button } from "../../ui/button";
+import ConfirmDiscardDialog from "../../modals/BaseModal/ConfirmDiscardDialog";
 import { useState } from "react";
 
 const PostModalHeader = ({ title, content, onClose }) => {

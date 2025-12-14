@@ -8,8 +8,8 @@ import {
   selectCommentsPagination,
   useFetchCommentsList,
 } from "@/features/comments";
-import Loading from "@/components/Loading";
-import CommentItem from "@/components/CommentItem";
+import Loading from "@/components/common/Loading";
+import CommentItem from "@/components/comments/CommentItem";
 import { useSortOrder } from "@/hooks/useSortOrder";
 
 const CommentSection = ({ postId }) => {

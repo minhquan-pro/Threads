@@ -1,11 +1,11 @@
 import { useLocation, useParams } from "react-router";
 
 import { selectItemById, selectLoadingById } from "@/features/posts";
-import FeedItem from "@/components/FeedItem";
-import Loading from "@/components/Loading";
-import ThreadLine from "@/components/ThreadLine";
+import FeedItem from "@/components/Posts/FeedItem";
+import Loading from "@/components/common/Loading";
+import ThreadLine from "@/components/common/ThreadLine";
 import CommentSection from "./components/CommentSection";
-import ActivityHeader from "@/components/ActivityHeader";
+import ActivityHeader from "@/components/navigation/ActivityHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchPostById } from "@/services/Posts";

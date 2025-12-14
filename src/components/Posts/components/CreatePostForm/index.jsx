@@ -2,15 +2,15 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import ThreadLine from "@/components/ThreadLine";
-import UserAvatar from "@/components/UserAvatar";
-import PostComposer from "@/components/PostComposer";
+import UserAvatar from "@/components/users/UserAvatar";
+import ThreadLine from "@/components/common/ThreadLine";
 
 import { useCurrentUser } from "@/features/auth";
 import { usePostForm } from "@/hooks/usePostForm";
 import { createPost } from "@/services/Posts";
-import PostModalFooter from "@/components/PostModalFooter";
-import PostModalHeader from "@/components/PostModalHeader";
+import PostModalFooter from "@/components/Posts/PostModalFooter";
+import PostModalHeader from "@/components/Posts/PostModalHeader";
+import PostComposer from "../../PostComposer";
 
 const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   const currentUser = useCurrentUser();

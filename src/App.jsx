@@ -1,9 +1,9 @@
 import { HashRouter, Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 
-import AuthProvider from "./components/AuthProvider";
-import ScrollToTop from "./components/ScrollToTop";
-import AppRoute from "./components/AppRoute";
+import AuthProvider from "./components/auth/AuthProvider";
+import ScrollToTop from "./components/common/ScrollToTop";
+import AppRoute from "./components/navigation/AppRoute";
 
 function App() {
   return (

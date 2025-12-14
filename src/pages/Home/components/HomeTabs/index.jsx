@@ -1,4 +1,4 @@
-import CurvedBorderBottom from "@/components/CurvedBorderBottom";
+import CurvedBorderBottom from "@/components/common/CurvedBorderBottom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TAB_VALUES } from "@/constants";
 

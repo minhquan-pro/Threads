@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import FeedItem from "@/components/FeedItem";
+import FeedItem from "@/components/Posts/FeedItem";
 import { useFetchPostDetail } from "@/features/posts";
 
 const Embed = () => {

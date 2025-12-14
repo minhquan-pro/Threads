@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 
-import UserAvatar from "@/components/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import CreatePostModal from "@/components/CreatePostModal";
+import CreatePostModal from "@/components/modals/CreatePostModal";
+import UserAvatar from "@/components/users/UserAvatar";
 
 const CreatePost = () => {
   const currentUser = useCurrentUser();

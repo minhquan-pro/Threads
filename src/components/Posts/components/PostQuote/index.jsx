@@ -1,4 +1,4 @@
-import UserProfileDialog from "@/components/UserProfileDialog";
+import UserProfileDialog from "@/components/users/UserProfileDialog";
 import PostHeader from "../PostHeader";
 import PostContent from "../PostContent";
 

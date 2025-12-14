@@ -1,4 +1,4 @@
-import AuthRequiredDialog from "@/components/AuthRequiredDialog";
+import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/features/auth";
 

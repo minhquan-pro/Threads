@@ -3,13 +3,13 @@ import classNames from "classnames";
 
 import { NAV_ITEMS } from "@/constants/sidebar";
 import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
-import AuthRequiredDialog from "@/components/AuthRequiredDialog";
+import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
 import { useScrollRestoration } from "@/hooks";
 import { useState } from "react";
-import CreatePostModal from "@/components/CreatePostModal";
+import CreatePostModal from "@/components/modals/CreatePostModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThreads } from "@fortawesome/free-brands-svg-icons";
 

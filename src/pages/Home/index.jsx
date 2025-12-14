@@ -4,7 +4,7 @@ import Posts from "@/components/Posts";
 import CreatePost from "@/components/Posts/components/CreatePost";
 import { useSelector } from "react-redux";
 import { selectList, selectLoadingAllPost } from "@/features/posts";
-import Loading from "@/components/Loading";
+import Loading from "@/components/common/Loading";
 
 const Home = () => {
   const currentUser = useCurrentUser();

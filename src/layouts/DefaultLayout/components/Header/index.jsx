@@ -1,4 +1,4 @@
-import CurvedBorderBottom from "@/components/CurvedBorderBottom";
+import CurvedBorderBottom from "@/components/common/CurvedBorderBottom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useLocation, useNavigate } from "react-router";

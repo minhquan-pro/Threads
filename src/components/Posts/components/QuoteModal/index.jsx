@@ -1,22 +1,22 @@
 import { useCallback, useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { quotePost as quotePostService } from "@/services/Posts";
-import { useCurrentUser } from "@/features/auth";
-import { usePostForm } from "@/hooks/usePostForm";
-
-import UserProfileDialog from "@/components/UserProfileDialog";
-import Loading from "@/components/Loading";
-import QuoteItem from "@/components/QuoteItem";
-import ThreadLine from "@/components/ThreadLine";
-import BaseThreadModal from "@/components/BaseModal";
-import PostComposer from "@/components/PostComposer";
-import { useDispatch } from "react-redux";
 import {
   optimisticUpdateQuotePost,
   rollbackQuotePost,
   updateQuotePost,
 } from "@/features/posts/postSlice";
+
+import { useCurrentUser } from "@/features/auth";
+import { usePostForm } from "@/hooks/usePostForm";
+import BaseThreadModal from "@/components/modals/BaseModal";
+import ThreadLine from "@/components/common/ThreadLine";
+import UserProfileDialog from "@/components/users/UserProfileDialog";
+import PostComposer from "../../PostComposer";
+import Loading from "@/components/common/Loading";
+import QuoteItem from "@/components/common/QuoteItem";
+import { quotePost } from "@/services/Posts";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
 
   const handleReplySubmit = useCallback(
     async ({ content }) => {
-      const response = await quotePostService(postId, {
+      const response = await quotePost(postId, {
         content,
         reply_permission: post.reply_permission,
       });
