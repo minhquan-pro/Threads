@@ -24,8 +24,6 @@ const BaseThreadModal = ({
   const isSubmitDisabled =
     submitDisabled || loading || contentLength > maxLength || !hasContent;
 
-  console.log({ submitDisabled, loading, hasContent });
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="dark:border-card flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden rounded-2xl! border-gray-200 bg-white p-0 sm:min-w-[500px] dark:bg-[#181818]">

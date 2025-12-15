@@ -21,7 +21,6 @@ const handlePending = (state) => {
 };
 
 const handleRejected = (state) => {
-  console.log(123);
   state.loading = false;
   state.error = "Có lỗi xảy ra";
 };
