@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { createPost } from "@/services/Posts";
 import { usePostForm } from "@/hooks/usePostForm";
 import { useCurrentUser } from "@/features/auth";
+import { ConfirmDiscardDialogProvider } from "@/contexts/ConfirmDiscardDialogContext";
 
 import BaseThreadModal from "../BaseModal";
 import ThreadLine from "../../common/ThreadLine";
@@ -40,30 +41,32 @@ const CreatePostModal = ({ open, onClose }) => {
   };
 
   return (
-    <BaseThreadModal
-      content={content}
-      onSubmit={onSubmit}
-      loading={loading}
-      isOpen={open}
-      onClose={handleClose}
-      title={"Thread mới"}
-    >
-      <div className="relative flex gap-2">
-        <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
-        <div className="flex w-full gap-2">
-          <UserAvatar />
-          <div className="flex-1">
-            <PostComposer
-              user={currentUser}
-              content={content}
-              onChange={handleChangeContent}
-              placeholder="Có gì mới?"
-              autoFocus
-            />
+    <ConfirmDiscardDialogProvider showSaveOption={true}>
+      <BaseThreadModal
+        content={content}
+        onSubmit={onSubmit}
+        loading={loading}
+        isOpen={open}
+        onClose={handleClose}
+        title={"Thread mới"}
+      >
+        <div className="relative flex gap-2">
+          <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
+          <div className="flex w-full gap-2">
+            <UserAvatar />
+            <div className="flex-1">
+              <PostComposer
+                user={currentUser}
+                content={content}
+                onChange={handleChangeContent}
+                placeholder="Có gì mới?"
+                autoFocus
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </BaseThreadModal>
+      </BaseThreadModal>
+    </ConfirmDiscardDialogProvider>
   );
 };
 export default CreatePostModal;

@@ -29,10 +29,10 @@ const BaseThreadModal = ({
 
           {/* Header */}
           <PostModalHeader title={title} content={content} onClose={onClose} />
+
           {/* Content */}
           <div className="mt-3 flex-1 overflow-y-auto bg-white px-6 dark:bg-[#181818]">
             {children}
-
             {/* Add to thread button */}
             <button
               type="button"

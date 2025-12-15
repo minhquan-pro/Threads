@@ -1,10 +1,12 @@
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, NotepadTextDashed } from "lucide-react";
 import { Button } from "../../ui/button";
 import ConfirmDiscardDialog from "../../modals/BaseModal/ConfirmDiscardDialog";
 import { useState } from "react";
+import { useConfirmDiscardDialog } from "@/hooks/useConfirmDiscardDialog";
 
 const PostModalHeader = ({ title, content, onClose }) => {
   const [open, setOpen] = useState(false);
+  const { showSaveOption } = useConfirmDiscardDialog();
 
   const handleClose = () => {
     if (!content) {
@@ -36,14 +38,26 @@ const PostModalHeader = ({ title, content, onClose }) => {
           <h1 className="absolute left-1/2 -translate-x-1/2 text-gray-900 dark:text-white">
             {title}
           </h1>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-7 w-7 rounded-full border-2 border-gray-800 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-            aria-label="Tùy chọn khác"
-          >
-            <Ellipsis size={20} />
-          </Button>
+          <div className="flex gap-3">
+            {showSaveOption && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 rounded-full border-2 border-gray-800 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+                aria-label="Tùy chọn khác"
+              >
+                <NotepadTextDashed size={20} />
+              </Button>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7 rounded-full border-2 border-gray-800 text-gray-700 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+              aria-label="Tùy chọn khác"
+            >
+              <Ellipsis size={20} />
+            </Button>
+          </div>
         </div>
       </div>
       <ConfirmDiscardDialog
