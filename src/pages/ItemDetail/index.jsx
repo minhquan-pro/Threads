@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 import { selectItemById, selectLoadingById } from "@/features/posts";
 import FeedItem from "@/components/Posts/FeedItem";
@@ -12,6 +12,7 @@ import { fetchPostById } from "@/services/Posts";
 
 const ItemDetailPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const parentId = location.state?.parentId;
   const { postId } = useParams();
@@ -25,28 +26,39 @@ const ItemDetailPage = () => {
     selectLoadingById(state, postId),
   );
 
+  // Fetch current post
   useEffect(() => {
     if (!currentItem && !currentItemLoading) {
       dispatch(fetchPostById(postId));
     }
   }, [postId, currentItem, currentItemLoading, dispatch]);
 
+  // Fetch parent post
   useEffect(() => {
     if (parentId && !parentItem && !parentPostLoading) {
       dispatch(fetchPostById(parentId));
     }
   }, [parentId, parentItem, parentPostLoading, dispatch]);
 
+  // Handle deleted post
   useEffect(() => {
-    if (currentItem) {
+    if (currentItem?._deleted) {
+      navigate("/", { replace: true });
+    }
+  }, [currentItem?._deleted, navigate]);
+
+  // Update document title
+  useEffect(() => {
+    if (currentItem?.content) {
       document.title = currentItem.content;
     }
 
     return () => {
       document.title = "Threads";
     };
-  }, [currentItem, currentItem?.content]);
+  }, [currentItem?.content]);
 
+  // Loading state
   if (currentItemLoading) {
     return (
       <div className="flex justify-center py-10">
@@ -55,6 +67,7 @@ const ItemDetailPage = () => {
     );
   }
 
+  // Post not found (after loading completed)
   if (!currentItem && !currentItemLoading) {
     return (
       <div className="flex justify-center py-10">
@@ -63,6 +76,11 @@ const ItemDetailPage = () => {
         </p>
       </div>
     );
+  }
+
+  // Don't render anything if deleted (redirect will happen in effect)
+  if (currentItem?._deleted) {
+    return null;
   }
 
   return (

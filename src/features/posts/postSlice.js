@@ -147,6 +147,11 @@ const postsSlice = createSlice({
       .addCase(fetchPostById.fulfilled, (state, action) => {
         const post = action.payload.data;
         const postId = post?.id;
+
+        if (state.byId[postId]?._deleted) {
+          return;
+        }
+
         state.loadingById[postId] = false;
         state.byId[postId] = post;
 
@@ -212,8 +217,11 @@ const postsSlice = createSlice({
       .addCase(deletePost.pending, (state, action) => {
         const postId = action.meta.arg;
 
-        state.items = state.items.filter((id) => id !== postId);
+        if (state.byId[postId]) {
+          state.byId[postId]._deleting = true;
+        }
 
+        state.items = state.items.filter((id) => id !== postId);
         const indexPostId = state.items.findIndex((id) => id === postId);
         if (indexPostId !== -1) {
           state.items.splice(indexPostId, 1);
@@ -222,7 +230,7 @@ const postsSlice = createSlice({
       .addCase(deletePost.fulfilled, (state, action) => {
         const postId = action.meta.arg;
 
-        delete state.byId[postId];
+        state.byId[postId] = { _deleted: true };
         delete state.loadingById[postId];
 
         state.pagination.total -= 1;
