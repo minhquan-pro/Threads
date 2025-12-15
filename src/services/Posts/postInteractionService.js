@@ -1,4 +1,4 @@
-import { http } from "@/utils";
+import http from "@/utils/http";
 
 export const likePost = async (postId) => {
   try {

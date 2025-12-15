@@ -1,4 +1,4 @@
-import { http } from "@/utils";
+import http from "@/utils/http";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getCurrentUser = createAsyncThunk(
@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
       const response = await http.post("/auth/login", data);
       return response;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data?.error || error.message);
     }
   },
 );

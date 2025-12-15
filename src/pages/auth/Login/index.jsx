@@ -33,6 +33,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data)).unwrap();
+
       const { access_token, refresh_token } = response.data;
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("refreshToken", refresh_token);
@@ -41,8 +42,8 @@ const Login = () => {
       toast.success("Đăng nhập thành công", {
         theme: "colored",
       });
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.log(error);
       setError("password", {
         type: "invalid",
         message: "Tên đăng nhập hoặc mật khẩu không chính xác",
