@@ -30,9 +30,10 @@ const CreatePostModal = ({ open, onClose }) => {
   const {
     loading,
     resetThreads,
-    contentTest,
-    handleSubmit,
     threads,
+    firstThreadContent,
+    hasContent,
+    handleSubmit,
     handleAddThread,
     handleThreadContentChange,
     handleRemoveThread,
@@ -48,10 +49,14 @@ const CreatePostModal = ({ open, onClose }) => {
     onClose();
   };
 
+  const lastThreadContent = threads[threads.length - 1]?.content || "";
+
   return (
     <ConfirmDiscardDialogProvider showSaveOption={true}>
       <BaseThreadModal
-        content={contentTest}
+        firstThreadContent={firstThreadContent}
+        lastThreadContent={lastThreadContent}
+        hasContent={hasContent}
         onSubmit={onSubmit}
         loading={loading}
         isOpen={open}
@@ -59,27 +64,25 @@ const CreatePostModal = ({ open, onClose }) => {
         title={"Thread mới"}
         onAddThread={handleAddThread}
       >
-        {threads.map((thread) => {
+        {threads.map((thread, index) => {
           return (
             <div key={thread.id} className="relative flex gap-2">
               <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
               <div className="flex w-full gap-2">
-                <UserAvatar />
+                <UserAvatar user={currentUser} />
                 <div className="flex-1">
                   <PostComposer
                     onRemoveThread={() => handleRemoveThread(thread.id)}
                     showRemoveButton={thread.showButton}
                     user={currentUser}
-                    content={thread.content}
+                    value={thread.content}
                     onChange={(e) =>
                       handleThreadContentChange(thread.id, e.target.value)
                     }
                     placeholder={
-                      threads.length === 1
-                        ? "Có gì mới?"
-                        : "Bạn nói thêm gì đi..."
+                      index === 0 ? "Có gì mới?" : "Bạn nói thêm gì đi..."
                     }
-                    autoFocus
+                    autoFocus={index === threads.length - 1}
                   />
                 </div>
               </div>
@@ -90,4 +93,5 @@ const CreatePostModal = ({ open, onClose }) => {
     </ConfirmDiscardDialogProvider>
   );
 };
+
 export default CreatePostModal;

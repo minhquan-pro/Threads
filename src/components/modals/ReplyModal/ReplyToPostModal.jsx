@@ -48,9 +48,10 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
 
   const {
     loading,
-    contentTest,
-    handleSubmit,
     threads,
+    firstThreadContent,
+    hasContent,
+    handleSubmit,
     handleAddThread,
     handleThreadContentChange,
     handleRemoveThread,
@@ -70,7 +71,7 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
 
     const dataFake = {
       id: idFake,
-      content: contentTest,
+      content: firstThreadContent,
       postId,
       user: currentUser,
       created_at: new Date().toISOString(),
@@ -89,15 +90,19 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
     handleClose();
   };
 
+  const lastThreadContent = threads[threads.length - 1]?.content || "";
+
   return (
     <BaseThreadModal
-      content={contentTest}
+      firstThreadContent={firstThreadContent}
+      lastThreadContent={lastThreadContent}
+      hasContent={hasContent}
       title="Thread trả lời"
       isOpen={isOpen}
       onClose={handleClose}
       onSubmit={onSubmit}
       loading={loading}
-      submitDisabled={!contentTest.trim()}
+      submitDisabled={!hasContent}
       onAddThread={handleAddThread}
     >
       <div className="relative flex gap-2">
@@ -114,11 +119,11 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
           <div key={thread.id} className="relative mt-2 flex">
             <ThreadLine show lineStyle="bg-gray-200" />
             <div className="flex w-full gap-2">
-              <UserAvatar />
+              <UserAvatar user={currentUser} />
               <div className="flex-1">
                 <PostComposer
                   user={currentUser}
-                  content={thread.content}
+                  value={thread.content}
                   showRemoveButton={thread.showButton}
                   onRemoveThread={() => handleRemoveThread(thread.id)}
                   onChange={(e) =>
@@ -129,7 +134,7 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
                       ? `Trả lời ${post.user.username}...`
                       : "Bạn nói thêm gì đi..."
                   }
-                  autoFocus
+                  autoFocus={index === threads.length - 1}
                 />
               </div>
             </div>

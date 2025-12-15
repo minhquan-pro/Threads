@@ -45,8 +45,9 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
 
   const {
     loading,
-    contentTest,
     threads,
+    firstThreadContent,
+    hasContent,
     handleAddThread,
     handleThreadContentChange,
     handleRemoveThread,
@@ -57,6 +58,8 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     errorMessage: "Không thể đăng bình luận. Vui lòng thử lại!",
   });
 
+  const lastThreadContent = threads[threads.length - 1]?.content;
+
   const handleClose = () => {
     resetThreads();
     onClose();
@@ -65,7 +68,7 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   const onSubmit = async () => {
     const dataFake = {
       id: idFake,
-      content: contentTest,
+      content: firstThreadContent,
       postId: originalPostId,
       parentId: commentId,
       user: currentUser,
@@ -80,17 +83,17 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     handleClose();
   };
 
-  console.log(contentTest);
-
   return (
     <BaseThreadModal
-      content={contentTest}
+      hasContent={hasContent}
+      content={firstThreadContent}
+      lastThreadContent={lastThreadContent}
       title="Thread trả lời"
       isOpen={isOpen}
       onClose={handleClose}
       onSubmit={onSubmit}
       loading={loading}
-      submitDisabled={!contentTest.trim()}
+      submitDisabled={!hasContent}
       onAddThread={handleAddThread}
     >
       <div className="relative flex gap-2">
@@ -107,9 +110,10 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
           <div key={thread.id} className="relative mt-4 flex">
             <ThreadLine show lineStyle="bg-gray-200" />
             <div className="flex w-full gap-2">
-              <UserAvatar />
+              <UserAvatar user={currentUser} />
               <div className="flex-1">
                 <PostComposer
+                  value={thread.content}
                   showRemoveButton={thread.showButton}
                   onRemoveThread={() => handleRemoveThread(thread.id)}
                   user={currentUser}
@@ -121,7 +125,7 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
                       ? `Trả lời ${post.user.username}...`
                       : "Bạn nói thêm gì đi..."
                   }
-                  autoFocus
+                  autoFocus={index === threads.length - 1}
                 />
               </div>
             </div>

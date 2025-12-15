@@ -12,6 +12,7 @@ import { useCurrentUser } from "@/features/auth";
 import { usePostForm } from "@/hooks/usePostForm";
 import BaseThreadModal from "@/components/modals/BaseModal";
 import ThreadLine from "@/components/common/ThreadLine";
+import UserAvatar from "@/components/users/UserAvatar";
 import UserProfileDialog from "@/components/users/UserProfileDialog";
 import PostComposer from "../../PostComposer";
 import Loading from "@/components/common/Loading";
@@ -37,9 +38,10 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
 
   const {
     loading,
-    contentTest,
-    handleSubmit,
     threads,
+    firstThreadContent,
+    hasContent,
+    handleSubmit,
     handleAddThread,
     handleThreadContentChange,
     handleRemoveThread,
@@ -47,14 +49,14 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
   } = usePostForm(handleReplySubmit);
 
   const handleClose = () => {
-    onClose();
     resetThreads();
+    onClose();
   };
 
   const onSubmit = async () => {
     const dataFake = {
       id: idFake,
-      content: contentTest,
+      content: firstThreadContent,
       user: currentUser,
       created_at: new Date().toISOString(),
       original_post: post,
@@ -72,50 +74,68 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
     handleClose();
   };
 
+  const lastThreadContent = threads[threads.length - 1]?.content || "";
+
   return (
     <BaseThreadModal
-      content={contentTest}
+      firstThreadContent={firstThreadContent}
+      lastThreadContent={lastThreadContent}
+      hasContent={hasContent}
       title="Thread mới"
       isOpen={isOpen}
       onClose={handleClose}
       onSubmit={onSubmit}
       loading={loading}
+      submitDisabled={!hasContent}
       onAddThread={handleAddThread}
     >
       <div className="flex w-full flex-col gap-3">
-        <div className="flex gap-3">
-          <div className="relative">
-            <ThreadLine show />
-            <UserProfileDialog user={currentUser} />
-          </div>
-          <div className="w-full">
-            {threads.map((thread) => {
-              return (
-                <PostComposer
-                  user={currentUser}
-                  onFocus={isOpen}
-                  onChange={(e) =>
-                    handleThreadContentChange(thread.id, e.target.value)
-                  }
-                  placeholder="Hãy chia sẻ suy nghĩ của bạn..."
-                  onRemoveThread={() => handleRemoveThread(thread.id)}
-                />
-              );
-            })}
-
-            <div>
-              {loading ? (
-                <div className="flex justify-center">
-                  <Loading size={"w-6 h-6"} />
-                </div>
+        {threads.map((thread, index) => (
+          <div key={thread.id} className="flex gap-3">
+            <div className="relative">
+              <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
+              {index === 0 ? (
+                <UserProfileDialog user={currentUser} />
               ) : (
-                post && <QuoteItem quotedPostId={post.id} quotedPost={post} />
+                <UserAvatar user={currentUser} />
+              )}
+            </div>
+            <div className="w-full">
+              <PostComposer
+                user={currentUser}
+                value={thread.content}
+                showRemoveButton={thread.showButton}
+                onChange={(e) =>
+                  handleThreadContentChange(thread.id, e.target.value)
+                }
+                placeholder={
+                  index === 0
+                    ? "Hãy chia sẻ suy nghĩ của bạn..."
+                    : "Bạn nói thêm gì đi..."
+                }
+                onRemoveThread={() => handleRemoveThread(thread.id)}
+                autoFocus={index === threads.length - 1}
+              />
+
+              {index === 0 && (
+                <div className="mt-2">
+                  {loading ? (
+                    <div className="flex justify-center">
+                      <Loading size={"w-6 h-6"} />
+                    </div>
+                  ) : (
+                    post && (
+                      <QuoteItem quotedPostId={post.id} quotedPost={post} />
+                    )
+                  )}
+                </div>
               )}
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </BaseThreadModal>
   );
 };
+
 export default QuoteModal;

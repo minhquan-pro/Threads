@@ -9,34 +9,36 @@ export const usePostForm = (
   const { successMessage, errorMessage } = options;
   const [loading, setLoading] = useState(false);
   const isDark = document.documentElement.classList.contains("dark");
-  const [contentTest, setContentTest] = useState("");
   const [threads, setThreads] = useState([
     { id: uuidv4(), content: "", showButton: false },
   ]);
 
+  const firstThreadContent = threads[0]?.content || "";
+  const hasContent = threads.some((thread) => thread.content.trim());
+
   const handleThreadContentChange = (id, content) => {
-    setThreads(
-      threads.map((thread) =>
+    setThreads((prevThreads) =>
+      prevThreads.map((thread) =>
         thread.id === id ? { ...thread, content } : thread,
       ),
     );
-    setContentTest(content);
   };
 
   const handleAddThread = () => {
-    setThreads((prevState) => [
-      ...prevState,
+    setThreads((prevThreads) => [
+      ...prevThreads,
       { id: uuidv4(), content: "", showButton: true },
     ]);
   };
 
   const handleRemoveThread = (id) => {
-    setThreads(threads.filter((thread) => thread.id !== id));
-    setContentTest("");
+    setThreads((prevThreads) =>
+      prevThreads.filter((thread) => thread.id !== id),
+    );
   };
 
   const resetThreads = () => {
-    setThreads([{ id: uuidv4(), content: "" }]);
+    setThreads([{ id: uuidv4(), content: "", showButton: false }]);
   };
 
   const handleSubmit = async () => {
@@ -52,7 +54,7 @@ export const usePostForm = (
     });
 
     try {
-      await submitFunction({ content: contentTest });
+      const result = await submitFunction({ content: firstThreadContent });
 
       toast.update(toastId, {
         render: successMessage,
@@ -62,7 +64,9 @@ export const usePostForm = (
         theme: "dark",
         hideProgressBar: true,
       });
-      return true;
+
+      resetThreads();
+      return result;
     } catch (error) {
       console.log(error);
       toast.update(toastId, {
@@ -80,9 +84,10 @@ export const usePostForm = (
 
   return {
     loading,
-    contentTest,
-    handleSubmit,
     threads,
+    firstThreadContent,
+    hasContent,
+    handleSubmit,
     handleAddThread,
     handleThreadContentChange,
     handleRemoveThread,
