@@ -13,6 +13,7 @@ const BaseThreadModal = ({
   children,
   loading = false,
   maxLength = 500,
+  onAddThread,
 }) => {
   const contentLength = String(content || "").length;
   const isSubmitDisabled =
@@ -36,8 +37,9 @@ const BaseThreadModal = ({
             {/* Add to thread button */}
             <button
               type="button"
-              className="mt-4 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50 dark:text-gray-400 dark:hover:text-gray-300"
-              disabled={loading}
+              className={`mt-4 flex items-center gap-2 pl-3 text-gray-500 hover:text-gray-700 disabled:opacity-50 dark:text-gray-400 dark:hover:text-gray-300 ${!content && "cursor-not-allowed"}`}
+              disabled={loading || !content}
+              onClick={onAddThread}
             >
               <UserAvatar imgSize="w-4 h-4" />
               <span className="text-sm">Thêm vào threads</span>

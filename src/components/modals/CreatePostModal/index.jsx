@@ -27,8 +27,15 @@ const CreatePostModal = ({ open, onClose }) => {
     }
   };
 
-  const { loading, content, handleChangeContent, resetContent, handleSubmit } =
-    usePostForm(handleReplySubmit);
+  const {
+    loading,
+    resetThreads,
+    contentTest,
+    handleSubmit,
+    threads,
+    handleAddThread,
+    handleThreadContentChange,
+  } = usePostForm(handleReplySubmit);
 
   const onSubmit = async () => {
     await handleSubmit();
@@ -36,35 +43,46 @@ const CreatePostModal = ({ open, onClose }) => {
   };
 
   const handleClose = () => {
-    resetContent();
+    resetThreads();
     onClose();
   };
 
   return (
     <ConfirmDiscardDialogProvider showSaveOption={true}>
       <BaseThreadModal
-        content={content}
+        content={contentTest}
         onSubmit={onSubmit}
         loading={loading}
         isOpen={open}
         onClose={handleClose}
         title={"Thread mới"}
+        onAddThread={handleAddThread}
       >
-        <div className="relative flex gap-2">
-          <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
-          <div className="flex w-full gap-2">
-            <UserAvatar />
-            <div className="flex-1">
-              <PostComposer
-                user={currentUser}
-                content={content}
-                onChange={handleChangeContent}
-                placeholder="Có gì mới?"
-                autoFocus
-              />
+        {threads.map((thread) => {
+          return (
+            <div key={thread.id} className="relative flex gap-2">
+              <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
+              <div className="flex w-full gap-2">
+                <UserAvatar />
+                <div className="flex-1">
+                  <PostComposer
+                    user={currentUser}
+                    content={thread.content}
+                    onChange={(e) =>
+                      handleThreadContentChange(thread.id, e.target.value)
+                    }
+                    placeholder={
+                      threads.length === 1
+                        ? "Có gì mới?"
+                        : "Bạn nói thêm gì đi..."
+                    }
+                    autoFocus
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </BaseThreadModal>
     </ConfirmDiscardDialogProvider>
   );

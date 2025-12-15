@@ -42,21 +42,28 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     [commentId, post.reply_permission, dispatch, idFake, originalPostId],
   );
 
-  const { loading, content, handleChangeContent, resetContent, handleSubmit } =
-    usePostForm(handleReplySubmit, {
-      successMessage: "Đã đăng",
-      errorMessage: "Không thể đăng bình luận. Vui lòng thử lại!",
-    });
+  const {
+    loading,
+    contentTest,
+    threads,
+    handleAddThread,
+    handleThreadContentChange,
+    resetThreads,
+    handleSubmit,
+  } = usePostForm(handleReplySubmit, {
+    successMessage: "Đã đăng",
+    errorMessage: "Không thể đăng bình luận. Vui lòng thử lại!",
+  });
 
   const handleClose = () => {
-    resetContent();
+    resetThreads();
     onClose();
   };
 
   const onSubmit = async () => {
     const dataFake = {
       id: idFake,
-      content,
+      content: contentTest,
       postId: originalPostId,
       parentId: commentId,
       user: currentUser,
@@ -73,13 +80,14 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
 
   return (
     <BaseThreadModal
-      content={content}
+      content={contentTest}
       title="Thread trả lời"
       isOpen={isOpen}
       onClose={handleClose}
       onSubmit={onSubmit}
       loading={loading}
-      submitDisabled={!content.trim()}
+      submitDisabled={!contentTest.trim()}
+      onAddThread={handleAddThread}
     >
       <div className="relative flex gap-2">
         <ThreadLine show />
@@ -90,18 +98,27 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
           disableNavigation
         />
       </div>
-      <div className="relative mt-4 flex gap-2">
-        <ThreadLine show lineStyle="bg-gray-200" />
-        <div className="flex w-full flex-col gap-2">
-          <ThreadComposer
-            user={currentUser}
-            content={content}
-            onChange={handleChangeContent}
-            placeholder={`Trả lời ${post.user.username}...`}
-            autoFocus
-          />
-        </div>
-      </div>
+      {threads.map((thread) => {
+        return (
+          <div key={thread.id} className="relative mt-4 flex gap-2">
+            <ThreadLine show lineStyle="bg-gray-200" />
+            <div className="flex w-full flex-col gap-2">
+              <ThreadComposer
+                user={currentUser}
+                onChange={(e) =>
+                  handleThreadContentChange(thread.id, e.target.value)
+                }
+                placeholder={
+                  threads.length === 1
+                    ? `Trả lời ${post.user.username}...`
+                    : "Bạn nói thêm gì đi..."
+                }
+                autoFocus
+              />
+            </div>
+          </div>
+        );
+      })}
     </BaseThreadModal>
   );
 };

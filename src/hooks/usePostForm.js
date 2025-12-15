@@ -1,21 +1,32 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 export const usePostForm = (
   submitFunction,
   options = { successMessage: "Đã đăng", errorMessage: "Đăng thất bại" },
 ) => {
   const { successMessage, errorMessage } = options;
-  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const isDark = document.documentElement.classList.contains("dark");
+  const [contentTest, setContentTest] = useState("");
+  const [threads, setThreads] = useState([{ id: uuidv4(), content: "" }]);
 
-  const handleChangeContent = (e) => {
-    setContent(e.target.value);
+  const handleThreadContentChange = (id, content) => {
+    setThreads(
+      threads.map((thread) =>
+        thread.id === id ? { ...thread, content } : thread,
+      ),
+    );
+    setContentTest(content);
   };
 
-  const resetContent = () => {
-    setContent("");
+  const handleAddThread = () => {
+    setThreads((prevState) => [...prevState, { id: uuidv4(), content: "" }]);
+  };
+
+  const resetThreads = () => {
+    setThreads([{ id: uuidv4(), content: "" }]);
   };
 
   const handleSubmit = async () => {
@@ -31,7 +42,7 @@ export const usePostForm = (
     });
 
     try {
-      await submitFunction({ content });
+      await submitFunction({ content: contentTest });
 
       toast.update(toastId, {
         render: successMessage,
@@ -57,5 +68,13 @@ export const usePostForm = (
     }
   };
 
-  return { loading, content, handleChangeContent, resetContent, handleSubmit };
+  return {
+    loading,
+    contentTest,
+    handleSubmit,
+    threads,
+    handleAddThread,
+    handleThreadContentChange,
+    resetThreads,
+  };
 };
