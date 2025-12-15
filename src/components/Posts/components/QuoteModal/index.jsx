@@ -35,18 +35,26 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
     [postId, post.reply_permission, dispatch, idFake],
   );
 
-  const { loading, content, handleChangeContent, resetContent, handleSubmit } =
-    usePostForm(handleReplySubmit);
+  const {
+    loading,
+    contentTest,
+    handleSubmit,
+    threads,
+    handleAddThread,
+    handleThreadContentChange,
+    handleRemoveThread,
+    resetThreads,
+  } = usePostForm(handleReplySubmit);
 
   const handleClose = () => {
     onClose();
-    resetContent();
+    resetThreads();
   };
 
   const onSubmit = async () => {
     const dataFake = {
       id: idFake,
-      content,
+      content: contentTest,
       user: currentUser,
       created_at: new Date().toISOString(),
       original_post: post,
@@ -66,12 +74,13 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
 
   return (
     <BaseThreadModal
-      content={content}
+      content={contentTest}
       title="Thread mới"
       isOpen={isOpen}
       onClose={handleClose}
       onSubmit={onSubmit}
       loading={loading}
+      onAddThread={handleAddThread}
     >
       <div className="flex w-full flex-col gap-3">
         <div className="flex gap-3">
@@ -80,13 +89,20 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
             <UserProfileDialog user={currentUser} />
           </div>
           <div className="w-full">
-            <PostComposer
-              user={currentUser}
-              content={content}
-              onFocus={isOpen}
-              onChange={handleChangeContent}
-              placeholder="Hãy chia sẻ suy nghĩ của bạn..."
-            />
+            {threads.map((thread) => {
+              return (
+                <PostComposer
+                  user={currentUser}
+                  onFocus={isOpen}
+                  onChange={(e) =>
+                    handleThreadContentChange(thread.id, e.target.value)
+                  }
+                  placeholder="Hãy chia sẻ suy nghĩ của bạn..."
+                  onRemoveThread={() => handleRemoveThread(thread.id)}
+                />
+              );
+            })}
+
             <div>
               {loading ? (
                 <div className="flex justify-center">
@@ -98,17 +114,6 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
             </div>
           </div>
         </div>
-        {/* Add to thread */}
-        {/* <div className="flex flex-col gap-2">
-          <ThreadComposer
-            user={currentUser}
-            content={content}
-            onChange={handleChangeContent}
-            placeholder="Bạn nói thêm đi..."
-            autoFocus
-            showThreadLine
-          />
-        </div> */}
       </div>
     </BaseThreadModal>
   );
