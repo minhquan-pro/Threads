@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import PostHeader from "../components/PostHeader";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import CommentActionToolbar from "@/components/comments/CommentActionToolbar";
+import { Button } from "@/components/ui/button";
 
 const PostComposer = ({
   user,
@@ -11,6 +12,8 @@ const PostComposer = ({
   disabled,
   placeholder,
   autoFocus,
+  showRemoveButton,
+  onRemoveThread,
 }) => {
   const textareaRef = useRef(null);
 
@@ -52,6 +55,16 @@ const PostComposer = ({
             className="border-none bg-transparent text-gray-900 outline-none placeholder:text-gray-500 dark:text-gray-100 dark:placeholder:text-gray-400"
           />
         </div>
+
+        {showRemoveButton && (
+          <Button
+            variant={"outline"}
+            className={"ml-auto border-none bg-transparent shadow-none"}
+            onClick={onRemoveThread}
+          >
+            <X color="white" />
+          </Button>
+        )}
       </div>
       <textarea
         ref={textareaRef}

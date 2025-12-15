@@ -10,7 +10,9 @@ export const usePostForm = (
   const [loading, setLoading] = useState(false);
   const isDark = document.documentElement.classList.contains("dark");
   const [contentTest, setContentTest] = useState("");
-  const [threads, setThreads] = useState([{ id: uuidv4(), content: "" }]);
+  const [threads, setThreads] = useState([
+    { id: uuidv4(), content: "", showButton: false },
+  ]);
 
   const handleThreadContentChange = (id, content) => {
     setThreads(
@@ -22,7 +24,15 @@ export const usePostForm = (
   };
 
   const handleAddThread = () => {
-    setThreads((prevState) => [...prevState, { id: uuidv4(), content: "" }]);
+    setThreads((prevState) => [
+      ...prevState,
+      { id: uuidv4(), content: "", showButton: true },
+    ]);
+  };
+
+  const handleRemoveThread = (id) => {
+    setThreads(threads.filter((thread) => thread.id !== id));
+    setContentTest("");
   };
 
   const resetThreads = () => {
@@ -75,6 +85,7 @@ export const usePostForm = (
     threads,
     handleAddThread,
     handleThreadContentChange,
+    handleRemoveThread,
     resetThreads,
   };
 };

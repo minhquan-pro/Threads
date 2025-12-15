@@ -35,6 +35,7 @@ const CreatePostModal = ({ open, onClose }) => {
     threads,
     handleAddThread,
     handleThreadContentChange,
+    handleRemoveThread,
   } = usePostForm(handleReplySubmit);
 
   const onSubmit = async () => {
@@ -66,6 +67,8 @@ const CreatePostModal = ({ open, onClose }) => {
                 <UserAvatar />
                 <div className="flex-1">
                   <PostComposer
+                    onRemoveThread={() => handleRemoveThread(thread.id)}
+                    showRemoveButton={thread.showButton}
                     user={currentUser}
                     content={thread.content}
                     onChange={(e) =>

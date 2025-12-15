@@ -22,6 +22,8 @@ const BaseThreadModal = ({
     contentLength > maxLength ||
     contentLength === 0;
 
+  console.log({ submitDisabled, loading, contentLength });
+
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>

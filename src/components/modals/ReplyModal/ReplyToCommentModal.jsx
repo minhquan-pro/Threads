@@ -12,7 +12,8 @@ import {
 import BaseThreadModal from "../BaseModal";
 import ThreadLine from "@/components/common/ThreadLine";
 import FeedItem from "@/components/Posts/FeedItem";
-import ThreadComposer from "@/components/Posts/ThreadComposer";
+import PostComposer from "@/components/Posts/PostComposer";
+import UserAvatar from "@/components/users/UserAvatar";
 
 const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
@@ -48,6 +49,7 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     threads,
     handleAddThread,
     handleThreadContentChange,
+    handleRemoveThread,
     resetThreads,
     handleSubmit,
   } = usePostForm(handleReplySubmit, {
@@ -78,6 +80,8 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     handleClose();
   };
 
+  console.log(contentTest);
+
   return (
     <BaseThreadModal
       content={contentTest}
@@ -98,23 +102,28 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
           disableNavigation
         />
       </div>
-      {threads.map((thread) => {
+      {threads.map((thread, index) => {
         return (
-          <div key={thread.id} className="relative mt-4 flex gap-2">
+          <div key={thread.id} className="relative mt-4 flex">
             <ThreadLine show lineStyle="bg-gray-200" />
-            <div className="flex w-full flex-col gap-2">
-              <ThreadComposer
-                user={currentUser}
-                onChange={(e) =>
-                  handleThreadContentChange(thread.id, e.target.value)
-                }
-                placeholder={
-                  threads.length === 1
-                    ? `Trả lời ${post.user.username}...`
-                    : "Bạn nói thêm gì đi..."
-                }
-                autoFocus
-              />
+            <div className="flex w-full gap-2">
+              <UserAvatar />
+              <div className="flex-1">
+                <PostComposer
+                  showRemoveButton={thread.showButton}
+                  onRemoveThread={() => handleRemoveThread(thread.id)}
+                  user={currentUser}
+                  onChange={(e) =>
+                    handleThreadContentChange(thread.id, e.target.value)
+                  }
+                  placeholder={
+                    index === 0
+                      ? `Trả lời ${post.user.username}...`
+                      : "Bạn nói thêm gì đi..."
+                  }
+                  autoFocus
+                />
+              </div>
             </div>
           </div>
         );
