@@ -3,14 +3,13 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 import UserAvatar from "@/components/users/UserAvatar";
-import ThreadLine from "@/components/common/ThreadLine";
 import PostModalFooter from "@/components/Posts/PostModalFooter";
 import PostModalHeader from "@/components/Posts/PostModalHeader";
+import ThreadList from "@/components/Posts/ThreadList";
 
 import { usePostForm } from "@/hooks/usePostForm";
 import { useCurrentUser } from "@/features/auth";
 import { createPost } from "@/services/Posts";
-import PostComposer from "../../PostComposer";
 
 const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
   const currentUser = useCurrentUser();
@@ -69,28 +68,13 @@ const CreatePostForm = ({ onPostCreated, onClose, maxLength = 500 }) => {
 
       {/* Content */}
       <div className="custom-scrollbar flex-1 overflow-y-auto p-3">
-        {threads.map((thread, index) => (
-          <div key={thread.id} className="relative mb-4 flex w-full gap-2">
-            <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
-            <UserAvatar user={currentUser} />
-            <div className="flex-1">
-              <PostComposer
-                user={currentUser}
-                placeholder={
-                  index === 0 ? "Có gì mới?" : "Bạn nói thêm gì đi..."
-                }
-                autoFocus={index === threads.length - 1}
-                value={thread.content}
-                showRemoveButton={thread.showButton}
-                onChange={(e) =>
-                  handleThreadContentChange(thread.id, e.target.value)
-                }
-                onRemoveThread={() => handleRemoveThread(thread.id)}
-                disabled={loading}
-              />
-            </div>
-          </div>
-        ))}
+        <ThreadList
+          threads={threads}
+          currentUser={currentUser}
+          loading={loading}
+          onContentChange={handleThreadContentChange}
+          onRemoveThread={handleRemoveThread}
+        />
 
         {/* Add to thread button */}
         <button
