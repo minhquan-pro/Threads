@@ -6,7 +6,11 @@ import { getPostById, getPosts } from "@/services/Posts";
 import { useCurrentUser } from "../auth";
 import { selectList } from "./selectors";
 
-export const useFetchPostsList = ({ type, page = 1, per_page = 10 }) => {
+export const useFetchPostsList = ({
+  type = "for_you",
+  page = 1,
+  per_page = 10,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
