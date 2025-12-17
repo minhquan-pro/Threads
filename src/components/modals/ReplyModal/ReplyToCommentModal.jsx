@@ -113,6 +113,7 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
               <UserAvatar user={currentUser} />
               <div className="flex-1">
                 <PostComposer
+                  content={thread.content}
                   value={thread.content}
                   showRemoveButton={thread.showButton}
                   onRemoveThread={() => handleRemoveThread(thread.id)}

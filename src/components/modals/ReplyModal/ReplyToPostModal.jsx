@@ -122,6 +122,7 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
               <UserAvatar user={currentUser} />
               <div className="flex-1">
                 <PostComposer
+                  content={thread.content}
                   user={currentUser}
                   value={thread.content}
                   showRemoveButton={thread.showButton}

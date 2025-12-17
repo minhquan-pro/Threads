@@ -102,6 +102,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
             </div>
             <div className="w-full">
               <PostComposer
+                content={thread.content}
                 user={currentUser}
                 value={thread.content}
                 showRemoveButton={thread.showButton}

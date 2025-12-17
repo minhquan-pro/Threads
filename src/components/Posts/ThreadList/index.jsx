@@ -18,6 +18,7 @@ const ThreadList = ({
             <UserAvatar user={currentUser} />
             <div className="flex-1">
               <PostComposer
+                content={thread.content}
                 user={currentUser}
                 value={thread.content}
                 onChange={(e) => onContentChange(thread.id, e.target.value)}
