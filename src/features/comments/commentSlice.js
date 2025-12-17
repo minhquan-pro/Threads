@@ -173,6 +173,26 @@ const commentsSlice = createSlice({
       .addCase(deleteComment.fulfilled, (state, action) => {
         const { postId, commentId, parentId } = action.meta.arg;
 
+        // Remove the comment
+        const comments = state.byPostId[parentId];
+        if (comments) {
+          const index = comments.findIndex((c) => c.id === commentId);
+          if (index !== -1) {
+            comments.splice(index, 1);
+          }
+        }
+
+        // Remove the reply
+        const replyComments = state.repliesByCommentId[parentId];
+        if (replyComments) {
+          const replyIndex = replyComments.findIndex(
+            (reply) => reply.id === commentId,
+          );
+          if (replyIndex !== -1) {
+            replyComments.splice(replyIndex, 1);
+          }
+        }
+
         if (state.backup?.[commentId]) {
           delete state.backup[commentId];
         }
