@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Instagram, Moon, Plus, Sun } from "lucide-react";
+import { Instagram, Menu, Moon, Plus, Sun } from "lucide-react";
 
 import Sidebar from "./components/Sidebar";
 import { useNavigation, useTitle } from "@/hooks/useNavigation";
@@ -9,6 +9,8 @@ import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
 import CreatePostForm from "@/components/Posts/components/CreatePostForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThreads } from "@fortawesome/free-brands-svg-icons";
 
 const DefaultLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +21,17 @@ const DefaultLayout = () => {
 
   return (
     <div className="flex min-h-screen bg-white dark:bg-black">
-      <div className="fixed left-0 h-full">
+      <div className="fixed bottom-0 hidden h-full md:left-0 md:block">
+        <Sidebar />
+      </div>
+
+      {/* Sidebar - Mobile bottom nav */}
+      <div className="md:hidden">
         <Sidebar />
       </div>
 
       <div className="mx-auto flex items-start gap-3 pb-3">
-        <div className="flex flex-1 flex-col">
+        <div className="hidden flex-1 flex-col md:block">
           <div>
             {showTabs ? (
               <HomeTabs
@@ -46,8 +53,30 @@ const DefaultLayout = () => {
           </div>
         </div>
 
+        {/* Mobile */}
+        <div className="relative overflow-x-hidden overflow-y-auto md:hidden dark:bg-[#181818]">
+          <header className="fixed top-0 z-50 flex h-14 w-full items-center justify-between bg-white px-3 shadow dark:bg-[#181818]">
+            <Button
+              variant={"outline"}
+              className={
+                "border-none shadow-none dark:bg-transparent dark:text-white"
+              }
+            >
+              <Menu />
+            </Button>
+            <FontAwesomeIcon
+              icon={faThreads}
+              className="text-3xl dark:text-white"
+            />
+            <Button>Login</Button>
+          </header>
+          <div className="mt-15">
+            <Outlet />
+          </div>
+        </div>
+
         {!currentUser && (
-          <div className="sticky top-14 z-50 mt-9 max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center dark:border-[#181818] dark:bg-[#181818]">
+          <div className="sticky top-14 z-50 mt-9 hidden max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center md:block dark:border-[#181818] dark:bg-[#181818]">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">
               Đăng nhập hoặc đăng ký threads
             </h2>
@@ -77,7 +106,7 @@ const DefaultLayout = () => {
       </div>
 
       {currentUser && (
-        <div className="fixed right-8 bottom-8 z-50">
+        <div className="fixed right-8 bottom-8 z-50 hidden md:block">
           {!isOpen ? (
             <Button
               variant="outline"

@@ -78,13 +78,13 @@ const ItemDetailPage = () => {
     );
   }
 
-  // Don't render anything if deleted (redirect will happen in effect)
+  // Don't render anything if deleted
   if (currentItem?._deleted) {
     return null;
   }
 
   return (
-    <div className="py-4">
+    <div className="min-h-screen">
       {/* Post detail */}
       <div className="ps-6 pe-6">
         {parentId ? (

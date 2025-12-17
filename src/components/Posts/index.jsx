@@ -39,7 +39,7 @@ const Posts = ({ type }) => {
           >
             <div
               ref={lastElementRef}
-              className="flex w-[640px] flex-col items-start overflow-hidden bg-white px-4 py-3 dark:bg-[#181818]"
+              className="flex max-w-[640px] flex-col items-start overflow-hidden bg-white px-4 py-3 dark:bg-[#181818]"
             >
               <FeedItem post={post} />
             </div>

@@ -60,7 +60,7 @@ const FeedItem = ({
           />
           {variant !== "quote" && (
             <>
-              <div onClick={handleClickPost}>
+              <div onClick={handleClickPost} className="wrap-break-word">
                 <PostContent
                   content={content}
                   mediaUrls={media_urls}
