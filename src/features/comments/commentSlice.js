@@ -154,7 +154,6 @@ const commentsSlice = createSlice({
           if (index !== -1) {
             state.backup[commentId].comment = comments[index];
             state.backup[commentId].commentIndex = index;
-            comments.splice(index, 1);
           }
         }
 
@@ -168,7 +167,6 @@ const commentsSlice = createSlice({
           if (replyIndex !== -1) {
             state.backup[commentId].reply = replyComments[replyIndex];
             state.backup[commentId].replyIndex = replyIndex;
-            replyComments.splice(replyIndex, 1);
           }
         }
       })
