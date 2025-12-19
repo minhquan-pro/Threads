@@ -30,6 +30,8 @@ const ItemDetailPage = () => {
   }, [postId, currentItem, currentItemLoading, dispatch]);
 
   useEffect(() => {
+    if (loadingParents) return;
+
     const fetchParentChain = async () => {
       if (!currentItem?.parent_id) {
         setParentChain([]);
@@ -64,7 +66,7 @@ const ItemDetailPage = () => {
     };
 
     fetchParentChain();
-  }, [currentItem?.parent_id, dispatch, allPosts]);
+  }, [currentItem?.parent_id, dispatch, allPosts, loadingParents]);
 
   // Handle deleted post
   useEffect(() => {
