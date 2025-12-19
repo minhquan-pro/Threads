@@ -30,7 +30,7 @@ const Interactions = ({
       onClick={onClick}
       variant="ghost"
       size="sm"
-      className={`gap-1 border-none text-gray-600 shadow-none hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 ${
+      className={`gap-1 border-none text-gray-600 shadow-none dark:text-gray-400 dark:hover:bg-gray-800 ${
         isActive ? activeClass : ""
       }`}
     >

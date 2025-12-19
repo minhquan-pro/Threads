@@ -84,7 +84,7 @@ const ItemDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-4">
       {/* Post detail */}
       <div className="ps-6 pe-6">
         {parentId ? (
