@@ -1,3 +1,7 @@
+import {
+  optimisticDecrementRepliesCount,
+  optimisticIncrementRepliesCount,
+} from "@/features/posts/postSlice";
 import { deleteComment, deletePost, savePost } from "@/services/Posts";
 import {
   blockUser,
@@ -46,6 +50,11 @@ export const usePostActions = (post) => {
       if (isDeleting) return;
 
       setIsDeleting(true);
+
+      if (type === "comment" && post?.parent_id === +postId) {
+        dispatch(optimisticDecrementRepliesCount({ postId }));
+      }
+
       try {
         toast.default("Đã xóa");
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -61,6 +70,11 @@ export const usePostActions = (post) => {
         return true;
       } catch (error) {
         console.error("Error deleting post:", error);
+
+        if (type === "comment" && post?.parent_id === +postId) {
+          dispatch(optimisticIncrementRepliesCount({ postId }));
+        }
+
         if (isMountedRef.current) {
           toast.error("Không thể xóa bài viết");
         }
@@ -71,7 +85,7 @@ export const usePostActions = (post) => {
         }
       }
     },
-    [dispatch, post?.id, isDeleting],
+    [isDeleting, dispatch, post?.id, post?.parent_id, postId],
   );
 
   const handleBlockUser = useCallback(async () => {

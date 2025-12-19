@@ -35,7 +35,6 @@ const PostHeader = ({
   showMenu = true,
 }) => {
   const currentUser = useCurrentUser();
-  const navigate = useNavigate();
   const { copyPostUrl } = useCopyPostUrl();
   const {
     isSaved,
