@@ -84,11 +84,11 @@ const Profile = () => {
       };
 
   useEffect(() => {
-    document.title = `${displayUser.name} · Threads`;
+    document.title = `${displayUser.name} (@${displayUser.username}) · Threads`;
     return () => {
       document.title = "Threads";
     };
-  }, [displayUser.name]);
+  }, [displayUser.name, displayUser.username]);
 
   return (
     <div>
