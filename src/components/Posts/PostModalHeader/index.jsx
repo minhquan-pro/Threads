@@ -35,7 +35,7 @@ const PostModalHeader = ({ title, content, onClose }) => {
           >
             Hủy
           </Button>
-          <h1 className="absolute left-1/2 -translate-x-1/2 text-gray-900 dark:text-white">
+          <h1 className="absolute left-1/2 -translate-x-1/2 font-bold text-gray-900 dark:text-white">
             {title}
           </h1>
           <div className="flex gap-3">
