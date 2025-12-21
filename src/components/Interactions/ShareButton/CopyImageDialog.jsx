@@ -47,7 +47,7 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
       <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 dark:bg-[#181818]">
         <DialogTitle />
         <div ref={elementRef} className="relative py-3">
-          <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5 dark:bg-[#181818]">
+          <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5 dark:bg-[#252424]">
             <FeedItem post={post} showStats={showStats} />
           </div>
           <div className="absolute inset-0 z-10 bg-transparent"></div>

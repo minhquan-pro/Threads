@@ -88,7 +88,7 @@ const FeedItem = ({
                   </div>
                 ) : (
                   <div
-                    className="mt-3 flex items-center gap-6 pl-3 text-gray-600 dark:text-gray-400"
+                    className="mt-3 flex items-center gap-5 pl-2 text-gray-600 dark:text-gray-400"
                     aria-hidden="true"
                   >
                     <Heart size={16} />
