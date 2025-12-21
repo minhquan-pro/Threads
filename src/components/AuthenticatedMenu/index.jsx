@@ -79,7 +79,7 @@ const AuthenticatedMenu = () => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="text-gray-700 outline-none hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
         <Menu />
       </DropdownMenuTrigger>

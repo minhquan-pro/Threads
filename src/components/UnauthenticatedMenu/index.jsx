@@ -14,7 +14,7 @@ const UnauthenticatedMenu = () => {
 
   return (
     <div>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger className="outline-none">
           <div>
             <Menu className="dark:text-white" />
