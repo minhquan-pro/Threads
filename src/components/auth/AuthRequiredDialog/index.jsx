@@ -11,6 +11,7 @@ import { Button } from "../../ui/button";
 import classNames from "classnames";
 
 const AuthRequiredDialog = ({
+  id,
   children,
   title = "Yêu cầu đăng nhập",
   description = "Vui lòng đăng nhập để tiếp tục",
@@ -29,10 +30,13 @@ const AuthRequiredDialog = ({
               "bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/90":
                 children,
             },
+            {
+              "bg-gray-100 text-black dark:bg-gray-800/50": id === "create",
+            },
           )}
         >
           {Icon && <Icon style={iconSize} />}
-          {count !== undefined && count !== null && <span>{count}</span>}
+          {count && <span>{count}</span>}
           {children && <div>{children}</div>}
         </Button>
       </DialogTrigger>
