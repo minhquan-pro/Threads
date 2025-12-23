@@ -10,7 +10,6 @@ import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
 import CreatePostForm from "@/components/Posts/components/CreatePostForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThreads } from "@fortawesome/free-brands-svg-icons";
 
 const DefaultLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +21,6 @@ const DefaultLayout = () => {
   return (
     <div className="flex min-h-screen bg-white dark:bg-black">
       <div className="fixed bottom-0 hidden h-full md:left-0 md:block">
-        <Sidebar />
-      </div>
-
-      {/* Sidebar - Mobile bottom nav */}
-      <div className="md:hidden">
         <Sidebar />
       </div>
 
@@ -50,28 +44,6 @@ const DefaultLayout = () => {
                 </div>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Mobile */}
-        <div className="relative overflow-x-hidden overflow-y-auto md:hidden dark:bg-[#181818]">
-          <header className="fixed top-0 z-50 flex h-14 w-full items-center justify-between bg-white px-3 shadow dark:bg-[#181818]">
-            <Button
-              variant={"outline"}
-              className={
-                "border-none shadow-none dark:bg-transparent dark:text-white"
-              }
-            >
-              <Menu />
-            </Button>
-            <FontAwesomeIcon
-              icon={faThreads}
-              className="text-3xl dark:text-white"
-            />
-            <Button>Login</Button>
-          </header>
-          <div className="mt-15">
-            <Outlet />
           </div>
         </div>
 

@@ -106,6 +106,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
                 user={currentUser}
                 value={thread.content}
                 showRemoveButton={thread.showButton}
+                onFocus
                 onChange={(e) =>
                   handleThreadContentChange(thread.id, e.target.value)
                 }
@@ -115,7 +116,6 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
                     : "Bạn nói thêm gì đi..."
                 }
                 onRemoveThread={() => handleRemoveThread(thread.id)}
-                autoFocus={index === threads.length - 1}
               />
 
               {index === 0 && (

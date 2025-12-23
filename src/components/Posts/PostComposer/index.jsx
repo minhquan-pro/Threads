@@ -11,7 +11,6 @@ const PostComposer = ({
   onFocus,
   disabled,
   placeholder,
-  autoFocus,
   showRemoveButton,
   onRemoveThread,
 }) => {
@@ -73,7 +72,7 @@ const PostComposer = ({
         value={content}
         onChange={onChange}
         disabled={disabled}
-        autoFocus={autoFocus}
+        autoFocus
         rows={1}
       />
       <CommentActionToolbar />
