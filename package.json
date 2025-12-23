@@ -50,6 +50,7 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.9.5",
     "react-router-dom": "^7.9.5",
+    "react-snowfall": "^2.4.0",
     "react-toastify": "^11.0.5",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",

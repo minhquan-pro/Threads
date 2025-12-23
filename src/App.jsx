@@ -4,14 +4,19 @@ import { ToastContainer } from "react-toastify";
 import AuthProvider from "./components/auth/AuthProvider";
 import ScrollToTop from "./components/common/ScrollToTop";
 import AppRoute from "./components/navigation/AppRoute";
+import Snowfall from "react-snowfall";
 
 function App() {
   return (
     <HashRouter>
+      <div
+        className={`pointer-events-none fixed inset-0 opacity-0 transition-opacity duration-500 ease-in-out dark:opacity-100`}
+      >
+        <Snowfall speed={[0.15, 0.4]} />
+      </div>
       <ToastContainer />
       <AuthProvider />
       <ScrollToTop />
-
       <AppRoute />
     </HashRouter>
   );
