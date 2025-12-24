@@ -1,7 +1,7 @@
 import Snowfall from "react-snowfall";
 import useSnowfallVisibility from "@/hooks/useSnowfallVisibility";
 
-export default function SnowOverlay({ threshold = 200, speed = [0.05, 0.2] }) {
+export default function SnowOverlay({ threshold = 200, speed = [0.25, 0.2] }) {
   const { showSnow } = useSnowfallVisibility(threshold);
 
   if (!showSnow) return null;
@@ -9,10 +9,10 @@ export default function SnowOverlay({ threshold = 200, speed = [0.05, 0.2] }) {
   return (
     <div
       className={
-        "pointer-events-none fixed inset-0 z-50 h-20 opacity-0 transition-opacity duration-500 ease-in-out dark:opacity-50"
+        "pointer-events-none fixed inset-0 z-50 h-[90px] opacity-0 transition-opacity duration-500 ease-in-out dark:opacity-50"
       }
     >
-      <Snowfall speed={speed} />
+      <Snowfall speed={speed} wind={[0, 0]} />
     </div>
   );
 }

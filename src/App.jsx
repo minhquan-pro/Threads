@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 
 import AuthProvider from "./components/auth/AuthProvider";
 import ScrollToTop from "./components/common/ScrollToTop";
-import SnowOverlay from "./components/common/SnowOverlay";
 import AppRoute from "./components/navigation/AppRoute";
 
 function App() {
