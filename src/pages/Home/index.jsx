@@ -5,6 +5,7 @@ import CreatePost from "@/components/Posts/components/CreatePost";
 import { useSelector } from "react-redux";
 import { selectList, selectLoadingAllPost } from "@/features/posts";
 import Loading from "@/components/common/Loading";
+import SnowOverlay from "@/components/common/SnowOverlay";
 
 const Home = () => {
   const currentUser = useCurrentUser();
@@ -13,7 +14,12 @@ const Home = () => {
 
   return (
     <div className="min-h-screen overflow-hidden bg-white dark:bg-[#181818]">
-      {currentUser && <CreatePost />}
+      {currentUser && (
+        <>
+          <CreatePost />
+          <SnowOverlay />
+        </>
+      )}
 
       {loading && posts.length === 0 ? (
         <div className="flex min-h-screen items-center justify-center py-20">

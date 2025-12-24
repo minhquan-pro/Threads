@@ -9,7 +9,6 @@ import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
 import CreatePostForm from "@/components/Posts/components/CreatePostForm";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const DefaultLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,19 +77,21 @@ const DefaultLayout = () => {
       </div>
 
       {currentUser && (
-        <div className="fixed right-8 bottom-8 z-50 hidden md:block">
-          {!isOpen ? (
-            <Button
-              variant="outline"
-              className="h-16 w-20 border-gray-300 shadow-md dark:bg-black dark:text-white"
-              onClick={() => setIsOpen(true)}
-            >
-              <Plus strokeWidth={2.5} className="size-7" />
-            </Button>
-          ) : (
-            <CreatePostForm open={isOpen} onClose={() => setIsOpen(false)} />
-          )}
-        </div>
+        <>
+          <div className="fixed right-8 bottom-8 z-50 hidden md:block">
+            {!isOpen ? (
+              <Button
+                variant="outline"
+                className="h-16 w-20 border-gray-300 shadow-md dark:bg-black dark:text-white"
+                onClick={() => setIsOpen(true)}
+              >
+                <Plus strokeWidth={2.5} className="size-7" />
+              </Button>
+            ) : (
+              <CreatePostForm open={isOpen} onClose={() => setIsOpen(false)} />
+            )}
+          </div>
+        </>
       )}
     </div>
   );

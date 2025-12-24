@@ -9,7 +9,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
       value={currentTab}
       onValueChange={handleValueChange}
     >
-      <div className="sticky top-0 z-50 w-[700px]">
+      <div className="sticky top-0 z-40 w-[700px]">
         <div className="flex items-center">
           <TabsList className="relative min-h-16 w-full gap-5 rounded-none border-gray-800 bg-white dark:border-gray-800 dark:bg-black">
             <TabsTrigger value="for-you">Dành cho bạn</TabsTrigger>

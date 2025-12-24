@@ -9,7 +9,6 @@ import AppRoute from "./components/navigation/AppRoute";
 function App() {
   return (
     <HashRouter>
-      <SnowOverlay />
       <ToastContainer />
       <AuthProvider />
       <ScrollToTop />
