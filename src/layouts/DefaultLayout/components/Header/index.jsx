@@ -16,7 +16,7 @@ const Header = ({ title }) => {
             variant="outline"
             size="icon"
             className="z-50 mb-2 ml-8 h-6 w-6 rounded-full border border-gray-300 bg-white shadow dark:border-gray-700 dark:bg-[#181818] dark:text-white dark:hover:bg-gray-700"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             aria-label="Go back"
           >
             <ArrowLeft className="h-4 w-4" />

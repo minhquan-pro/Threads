@@ -25,7 +25,7 @@ export default function SnowOverlay({ threshold = 200, speed = [0.6, 0.4] }) {
     >
       <Snowfall
         speed={speed}
-        wind={[0, 0.3]}
+        wind={[-0.5, 0.5]}
         images={snowImages}
         snowflakeCount={20}
         radius={[10, 10]}
