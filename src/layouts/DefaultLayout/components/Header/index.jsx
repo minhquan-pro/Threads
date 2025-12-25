@@ -1,22 +1,16 @@
 import CurvedBorderBottom from "@/components/common/CurvedBorderBottom";
 import { Button } from "@/components/ui/button";
-import { selectList } from "@/features/posts";
 import { ArrowLeft } from "lucide-react";
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 
 const Header = ({ title }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isPagePostDetail = location.pathname.includes("/post/");
-  const posts = useSelector(selectList);
 
   const handleBack = () => {
     navigate("/");
-    const reloaded = sessionStorage.getItem("homeReloaded");
-    if (!reloaded && posts.length <= 1) {
-      window.location.reload();
-    }
+    sessionStorage.removeItem("homeReloaded");
   };
 
   return (

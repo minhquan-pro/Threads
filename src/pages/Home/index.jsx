@@ -11,6 +11,12 @@ const Home = () => {
   const posts = useSelector(selectList);
   const loading = useSelector(selectLoadingAllPost);
 
+  const reloaded = sessionStorage.getItem("homeReloaded") === "true";
+  if (!reloaded && posts.length <= 1) {
+    sessionStorage.setItem("homeReloaded", "true");
+    window.location.reload();
+  }
+
   return (
     <div className="min-h-screen overflow-hidden bg-white dark:bg-[#181818]">
       {currentUser && <CreatePost />}
