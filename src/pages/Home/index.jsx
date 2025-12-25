@@ -1,10 +1,10 @@
-import { useCurrentUser } from "@/features/auth";
-
-import Posts from "@/components/Posts";
-import CreatePost from "@/components/Posts/components/CreatePost";
 import { useSelector } from "react-redux";
+
+import { useCurrentUser } from "@/features/auth";
 import { selectList, selectLoadingAllPost } from "@/features/posts";
+import CreatePost from "@/components/Posts/components/CreatePost";
 import Loading from "@/components/common/Loading";
+import Posts from "@/components/Posts";
 
 const Home = () => {
   const currentUser = useCurrentUser();

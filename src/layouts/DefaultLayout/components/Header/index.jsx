@@ -1,12 +1,23 @@
 import CurvedBorderBottom from "@/components/common/CurvedBorderBottom";
 import { Button } from "@/components/ui/button";
+import { selectList } from "@/features/posts";
 import { ArrowLeft } from "lucide-react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 
 const Header = ({ title }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isPagePostDetail = location.pathname.includes("/post/");
+  const posts = useSelector(selectList);
+
+  const handleBack = () => {
+    navigate("/");
+    const reloaded = sessionStorage.getItem("homeReloaded");
+    if (!reloaded && posts.length <= 1) {
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="sticky top-0 z-50 w-[700px] bg-white pt-4 dark:bg-black">
@@ -16,7 +27,7 @@ const Header = ({ title }) => {
             variant="outline"
             size="icon"
             className="z-50 mb-2 ml-8 h-6 w-6 rounded-full border border-gray-300 bg-white shadow dark:border-gray-700 dark:bg-[#181818] dark:text-white dark:hover:bg-gray-700"
-            onClick={() => navigate("/")}
+            onClick={handleBack}
             aria-label="Go back"
           >
             <ArrowLeft className="h-4 w-4" />
