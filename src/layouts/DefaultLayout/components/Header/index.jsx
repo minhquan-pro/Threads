@@ -9,10 +9,7 @@ const Header = ({ title }) => {
   const isPagePostDetail = location.pathname.includes("/post/");
 
   const handleBack = () => {
-    setTimeout(() => {
-      navigate("/");
-    }, 0);
-    sessionStorage.removeItem("homeReloaded");
+    navigate("/");
   };
 
   return (

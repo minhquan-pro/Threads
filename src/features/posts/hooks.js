@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toast } from "@/utils/toast";
 import { getPostById, getPosts } from "@/services/Posts";
 import { useCurrentUser } from "../auth";
-import { selectList } from "./selectors";
+import { selectList, selectLoadingAllPost } from "./selectors";
+import { resetPosts } from "./postSlice";
 
 export const useFetchPostsList = ({
   type = "for_you",
@@ -67,4 +68,30 @@ export const useFetchPostDetail = (postId) => {
   }, [postId]);
 
   return [currentItem, loading];
+};
+
+export const useRefetchPosts = ({
+  type = "for_you",
+  page = 1,
+  per_page = 10,
+  minLength = 2,
+} = {}) => {
+  const dispatch = useDispatch();
+  const posts = useSelector(selectList);
+  const loading = useSelector(selectLoadingAllPost);
+  const hasRequestedRef = useRef(false);
+
+  useEffect(() => {
+    const needsRefetch = posts.length < minLength;
+
+    if (needsRefetch && !loading && !hasRequestedRef.current) {
+      hasRequestedRef.current = true;
+      dispatch(resetPosts());
+      dispatch(getPosts({ type, page, per_page }));
+    }
+
+    if (!needsRefetch) {
+      hasRequestedRef.current = false;
+    }
+  }, [dispatch, loading, minLength, page, per_page, posts.length, type]);
 };

@@ -14,6 +14,7 @@ const initialState = {
   error: null,
   pagination: {
     last_page: 0,
+    total: 0,
   },
 };
 
@@ -109,6 +110,15 @@ const postsSlice = createSlice({
       if (state.byId[postId]) {
         state.byId[postId].replies_count -= 1;
       }
+    },
+
+    resetPosts: (state) => {
+      state.items = [];
+      state.byId = {};
+      state.loadingById = {};
+      state.loading = false;
+      state.error = null;
+      state.pagination = { last_page: 0, total: 0 };
     },
   },
   extraReducers: (builder) => {
@@ -257,6 +267,7 @@ export const {
   updateQuotePost,
   optimisticUpdateQuotePost,
   rollbackQuotePost,
+  resetPosts,
 } = postsSlice.actions;
 
 export default postsSlice;
