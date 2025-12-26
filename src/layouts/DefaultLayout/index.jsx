@@ -25,25 +25,23 @@ const DefaultLayout = () => {
 
       <div className="mx-auto flex items-start gap-3 pb-3">
         <div className="hidden flex-1 flex-col md:block">
-          <div>
-            {showTabs ? (
-              <HomeTabs
-                currentTab={currentTab}
-                handleValueChange={handleValueChange}
-              >
-                <Outlet />
-              </HomeTabs>
-            ) : (
-              <div>
-                <Header title={title} />
-                <div className="flex min-h-screen justify-center">
-                  <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
-                    <Outlet />
-                  </div>
+          {showTabs ? (
+            <HomeTabs
+              currentTab={currentTab}
+              handleValueChange={handleValueChange}
+            >
+              <Outlet />
+            </HomeTabs>
+          ) : (
+            <div>
+              <Header title={title} />
+              <div className="flex min-h-screen justify-center">
+                <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
+                  <Outlet />
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {!currentUser && (
