@@ -35,8 +35,8 @@ export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-9999 h-[90px] transition-opacity duration-500 ease-in-out ${
-        isVisible ? "opacity-80" : "opacity-0"
+      className={`pointer-events-none fixed inset-0 z-9999 h-[90px] opacity-0 transition-opacity duration-500 ease-in-out ${
+        isVisible && "dark:opacity-80"
       }`}
       style={{
         WebkitMaskImage:
