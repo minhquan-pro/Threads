@@ -8,6 +8,23 @@ export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
   const [snowImages, setSnowImages] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsDarkTheme(document.documentElement.classList.contains("dark"));
+    };
+
+    checkTheme();
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const img = new Image();
@@ -31,12 +48,12 @@ export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
     return () => clearTimeout(timeout);
   }, [showSnow, snowImages]);
 
-  if (!shouldRender || snowImages.length === 0) return null;
+  if (!isDarkTheme || !shouldRender || snowImages.length === 0) return null;
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-9999 h-[90px] opacity-0 transition-opacity duration-500 ease-in-out ${
-        isVisible && "dark:opacity-80"
+      className={`pointer-events-none fixed inset-0 z-9999 h-[90px] opacity-0 transition-all duration-500 ease-in-out ${
+        isVisible && "opacity-80"
       }`}
       style={{
         WebkitMaskImage:
