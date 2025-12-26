@@ -36,8 +36,14 @@ export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
   return (
     <div
       className={`pointer-events-none fixed inset-0 z-9999 h-[90px] transition-opacity duration-500 ease-in-out ${
-        isVisible ? "opacity-70" : "opacity-0"
+        isVisible ? "opacity-80" : "opacity-0"
       }`}
+      style={{
+        WebkitMaskImage:
+          "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+        maskImage:
+          "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+      }}
     >
       <Snowfall
         speed={speed}
