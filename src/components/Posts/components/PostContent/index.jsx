@@ -15,8 +15,8 @@ const PostContent = ({ content, mediaUrls }) => {
       )}
 
       {mediaUrls && mediaUrls.length > 0 && (
-        <div ref={emblaRef} className="embla mb-1 w-full overflow-hidden">
-          <div className="embla__container flex items-center gap-2">
+        <div ref={emblaRef} className="embla mb-1 overflow-hidden">
+          <div className={`flex items-center gap-2`}>
             {mediaUrls.map((url, index) => {
               return (
                 <div
@@ -26,7 +26,7 @@ const PostContent = ({ content, mediaUrls }) => {
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="max-h-80 min-w-40 rounded-md object-cover ring-1 ring-gray-200 dark:ring-gray-800"
+                    className="h-80 rounded-md object-cover"
                     loading="lazy"
                   />
                 </div>
