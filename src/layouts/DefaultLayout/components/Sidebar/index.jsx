@@ -29,6 +29,8 @@ const Sidebar = () => {
   const handleClick = (value) => {
     if (value.action === "create") {
       setIsOpen(true);
+    } else if (value.path === "/") {
+      handleNavigate();
     }
   };
 
