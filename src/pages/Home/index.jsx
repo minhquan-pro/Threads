@@ -14,7 +14,6 @@ const Home = () => {
   const currentUser = useCurrentUser();
   const posts = useSelector(selectList);
   const loading = useSelector(selectLoadingAllPost);
-
   useRefetchPosts({ type: "for_you", page: 1, per_page: 10 });
 
   return (
@@ -30,11 +29,6 @@ const Home = () => {
           <div className={`${!currentUser && "pt-13"}`}>
             <Posts type="for_you" />
           </div>
-          {loading && (
-            <div className="flex items-center justify-center pb-3">
-              <Loading size="w-5 h-5" />
-            </div>
-          )}
         </>
       )}
     </div>
