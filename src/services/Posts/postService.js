@@ -41,7 +41,7 @@ export const deleteComment = createAsyncThunk(
 
 export const getPosts = createAsyncThunk(
   "posts/getList",
-  async ({ type, page = 1, per_page = 10 }) => {
+  async ({ type = "for_you", page = 1, per_page = 10 }) => {
     const response = await http.get(
       `posts/feed?type=${type}&page=${page}&per_page=${per_page}`,
     );
