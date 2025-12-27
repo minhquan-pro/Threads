@@ -23,7 +23,7 @@ const DefaultLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="mx-auto flex items-start gap-3 pb-3">
+      <div className="mx-auto flex items-start gap-3">
         <div className="hidden flex-1 flex-col md:block">
           {showTabs ? (
             <HomeTabs
@@ -36,7 +36,7 @@ const DefaultLayout = () => {
             <div>
               <Header title={title} />
               <div className="flex min-h-screen justify-center">
-                <div className="relative w-[650px] overflow-x-hidden overflow-y-auto border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
+                <div className="relative w-[650px] border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
                   <Outlet />
                 </div>
               </div>
@@ -45,7 +45,7 @@ const DefaultLayout = () => {
         </div>
 
         {!currentUser && (
-          <div className="sticky top-14 z-50 mt-9 hidden max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center md:block dark:border-[#181818] dark:bg-[#181818]">
+          <div className="fixed top-5 right-20 z-50 mt-9 hidden max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center md:block dark:border-[#181818] dark:bg-[#181818]">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">
               Đăng nhập hoặc đăng ký threads
             </h2>

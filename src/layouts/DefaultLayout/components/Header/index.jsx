@@ -17,7 +17,7 @@ const Header = ({ title }) => {
   };
 
   return (
-    <div className="sticky top-0 z-50 w-[700px] bg-white pt-4 dark:bg-black">
+    <div className="fixed right-0 left-0 z-50 m-auto w-[700px] bg-white pt-4 dark:bg-black">
       <div className="flex items-center justify-between">
         {title === "Thread" && (
           <Button

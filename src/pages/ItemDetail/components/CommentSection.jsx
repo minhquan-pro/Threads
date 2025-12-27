@@ -51,7 +51,7 @@ const CommentSection = ({ postId }) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 pb-3">
       {comments?.map((comment, index) => (
         <div
           ref={index === comments.length - 1 ? lastElementRef : null}

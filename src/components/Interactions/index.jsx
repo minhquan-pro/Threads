@@ -30,11 +30,11 @@ const Interactions = ({
       onClick={onClick}
       variant="ghost"
       size="sm"
-      className={`gap-1 border-none text-gray-600 shadow-none dark:text-gray-400 dark:hover:bg-gray-800 ${
+      className={`flex items-center gap-1 border-none text-gray-600 shadow-none dark:text-gray-400 dark:hover:bg-gray-800 ${
         isActive ? activeClass : ""
       }`}
     >
-      {Icon && <Icon className={`h-5 w-5 ${isActive ? "fill-current" : ""}`} />}
+      {Icon && <Icon className={`h-4 w-4 ${isActive ? "fill-current" : ""}`} />}
       {count > 0 && <span className="text-sm">{count}</span>}
     </Button>
   );
