@@ -16,8 +16,15 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      dispatch(resetPosts());
-      dispatch(getPosts());
+      const hasLoadedAfterLogin = sessionStorage.getItem(
+        "postsLoadedAfterLogin",
+      );
+
+      if (!hasLoadedAfterLogin) {
+        dispatch(resetPosts());
+        dispatch(getPosts());
+        sessionStorage.setItem("postsLoadedAfterLogin", "true");
+      }
     }
   }, [currentUser, dispatch]);
 

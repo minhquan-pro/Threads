@@ -36,6 +36,7 @@ const AuthenticatedMenu = () => {
       } catch (error) {
         console.log(error);
       } finally {
+        sessionStorage.clear("postsLoadedAfterLogin");
         localStorage.clear();
         dispatch(setCurrentUser(null));
         navigate("/login");
