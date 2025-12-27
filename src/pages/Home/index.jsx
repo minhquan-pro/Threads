@@ -20,13 +20,15 @@ const Home = () => {
         "postsLoadedAfterLogin",
       );
 
-      if (!hasLoadedAfterLogin) {
+      // Reset nếu chưa đăng nhập hoặc nếu posts <= 1
+      if (!hasLoadedAfterLogin || posts.length <= 1) {
         dispatch(resetPosts());
-        dispatch(getPosts());
         sessionStorage.setItem("postsLoadedAfterLogin", "true");
       }
+
+      dispatch(getPosts());
     }
-  }, [currentUser, dispatch]);
+  }, [currentUser, dispatch, posts.length]);
 
   return (
     <div className="min-h-screen overflow-hidden bg-white pt-16 dark:bg-[#181818]">
