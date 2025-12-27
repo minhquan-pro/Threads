@@ -18,7 +18,7 @@ const DefaultLayout = () => {
   const title = useTitle(currentTab);
 
   return (
-    <div className="flex min-h-screen bg-white dark:bg-black">
+    <div className="flex bg-white dark:bg-black">
       <div className="fixed bottom-0 hidden h-full md:left-0 md:block">
         <Sidebar />
       </div>
