@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Bell, Ellipsis, Fence, Instagram } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -9,65 +9,10 @@ import UserAvatar from "@/components/users/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 
-const DEMO_FOLLOWERS = [
-  {
-    id: 1,
-    name: "Nguyễn Văn A",
-    username: "@nguyenvana",
-    avatar: "https://i.pravatar.cc/150?img=12",
-  },
-  {
-    id: 2,
-    name: "Trần Thị B",
-    username: "@tranthib",
-    avatar: "https://i.pravatar.cc/150?img=45",
-  },
-  {
-    id: 3,
-    name: "Lê Minh C",
-    username: "@leminhc",
-    avatar: "https://i.pravatar.cc/150?img=33",
-  },
-  {
-    id: 4,
-    name: "Phạm Thu D",
-    username: "@phamthud",
-    avatar: "https://i.pravatar.cc/150?img=20",
-  },
-  {
-    id: 5,
-    name: "Hoàng Văn E",
-    username: "@hoangvane",
-    avatar: "https://i.pravatar.cc/150?img=51",
-  },
-];
-
-const DEMO_FOLLOWING = [
-  {
-    id: 6,
-    name: "Design Tips",
-    username: "@designtips",
-    avatar: "https://i.pravatar.cc/150?img=60",
-  },
-  {
-    id: 7,
-    name: "Tech News",
-    username: "@technews",
-    avatar: "https://i.pravatar.cc/150?img=65",
-  },
-  {
-    id: 8,
-    name: "Coffee Lovers",
-    username: "@coffeelovers",
-    avatar: "https://i.pravatar.cc/150?img=70",
-  },
-];
-
 const Profile = () => {
   const { userId } = useParams();
   const currentUser = useCurrentUser();
   const isProfileCurrentUser = userId === "profile";
-  const [open, setOpen] = useState(false);
 
   const displayUser = isProfileCurrentUser
     ? currentUser
@@ -101,10 +46,7 @@ const Profile = () => {
         <p className="mt-6 mb-1">{displayUser.bio || "Chưa có tiểu sử"}</p>
 
         <div className="flex items-center justify-between">
-          <div
-            className="cursor-pointer text-sm text-gray-600 hover:opacity-90 dark:text-gray-400"
-            onClick={() => setOpen(true)}
-          >
+          <div className="cursor-pointer text-sm text-gray-600 hover:opacity-90 dark:text-gray-400">
             {displayUser.followers || 0} người theo dõi
           </div>
 
@@ -161,94 +103,6 @@ const Profile = () => {
         <TabsContent value="media"></TabsContent>
         <TabsContent value="reposts"></TabsContent>
       </Tabs>
-
-      <Modal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        className="flex items-center justify-center"
-      >
-        <ModalContent className="border border-gray-200 p-0 pb-5 dark:border-gray-800">
-          <div>
-            <ModalTitle />
-            <Tabs defaultValue="following">
-              <TabsList className="w-full bg-transparent">
-                <TabsTrigger value="following" className="flex flex-1 flex-col">
-                  <span>Đang theo dõi</span>8
-                </TabsTrigger>
-                <TabsTrigger value="follower" className="flex flex-1 flex-col">
-                  <span>Người theo dõi</span>100
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value={"following"}>
-                {DEMO_FOLLOWERS.map((user) => {
-                  return (
-                    <div
-                      key={user.id}
-                      className="flex items-center justify-between p-4 transition hover:bg-gray-50 dark:hover:bg-gray-900"
-                    >
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={user.avatar}
-                          alt={user.name}
-                          className="h-10 w-10 rounded-full object-cover"
-                        />
-                        <div>
-                          <p className="text-sm font-semibold dark:text-white">
-                            {user.name}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {user.username}
-                          </p>
-                        </div>
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="h-8 rounded-lg border-gray-300 px-4 text-sm font-semibold dark:text-white"
-                      >
-                        Theo dõi
-                      </Button>
-                    </div>
-                  );
-                })}
-              </TabsContent>
-              <TabsContent value={"follower"}>
-                {DEMO_FOLLOWING.map((user) => {
-                  return (
-                    <div
-                      key={user.id}
-                      className="flex items-center justify-between p-4 transition hover:bg-gray-50 dark:hover:bg-gray-900"
-                    >
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={user.avatar}
-                          alt={user.name}
-                          className="h-10 w-10 rounded-full object-cover"
-                        />
-                        <div>
-                          <p className="text-sm font-semibold dark:text-white">
-                            {user.name}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {user.username}
-                          </p>
-                        </div>
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="h-8 rounded-lg border-gray-300 px-4 text-sm font-semibold dark:text-white"
-                      >
-                        Theo dõi
-                      </Button>
-                    </div>
-                  );
-                })}
-              </TabsContent>
-            </Tabs>
-          </div>
-        </ModalContent>
-      </Modal>
     </div>
   );
 };

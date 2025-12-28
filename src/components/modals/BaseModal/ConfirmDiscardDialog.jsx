@@ -1,23 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-// import { Modal, DialogContent, ModalTitle } from "@/components/common/Modal";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { useConfirmDiscardDialog } from "@/hooks/useConfirmDiscardDialog";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
   const { showSaveOption, title, desc } = useConfirmDiscardDialog();
 
   return (
-    <Dialog
-      open={open}
+    <Modal
+      isOpen={open}
       onClose={onCancel}
       className="flex items-center justify-center"
     >
-      <DialogContent className="flex w-[300px] flex-col items-center rounded-2xl p-0 dark:bg-[#181818]">
+      <ModalContent className="flex max-w-xs flex-col items-center rounded-2xl p-0 dark:bg-[#181818]">
         <div className={"p-8 text-center"}>
-          <DialogTitle className="text-center text-gray-900 dark:text-white">
+          <ModalTitle className="text-center text-gray-900 dark:text-white">
             {title || "Bỏ thread?"}
-          </DialogTitle>
+          </ModalTitle>
           {desc && (
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
               {desc}
@@ -70,8 +69,8 @@ const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
             </ButtonGroup>
           </div>
         )}
-      </DialogContent>
-    </Dialog>
+      </ModalContent>
+    </Modal>
   );
 };
 export default ConfirmDiscardDialog;
