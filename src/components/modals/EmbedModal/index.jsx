@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { Input } from "@/components/ui/input";
 import FeedItem from "@/components/Posts/FeedItem";
 import { Link } from "react-router";
@@ -21,9 +21,13 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogTitle />
-      <DialogContent className="max-w-2xl overflow-y-auto dark:bg-[#181818]">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      className="flex items-center justify-center"
+    >
+      <ModalContent className="max-w-2xl overflow-y-auto dark:bg-[#181818]">
+        <ModalTitle />
         <div className="space-y-4">
           <div>
             <div className="relative rounded-lg">
@@ -53,8 +57,8 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </ModalContent>
+    </Modal>
   );
 };
 

@@ -1,21 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+// import { Modal, DialogContent, ModalTitle } from "@/components/common/Modal";
 import { useConfirmDiscardDialog } from "@/hooks/useConfirmDiscardDialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
   const { showSaveOption, title, desc } = useConfirmDiscardDialog();
 
   return (
-    <Dialog open={open}>
+    <Dialog
+      open={open}
+      onClose={onCancel}
+      className="flex items-center justify-center"
+    >
       <DialogContent className="flex w-[300px] flex-col items-center rounded-2xl p-0 dark:bg-[#181818]">
-        <DialogHeader className={"p-8"}>
+        <div className={"p-8 text-center"}>
           <DialogTitle className="text-center text-gray-900 dark:text-white">
             {title || "Bỏ thread?"}
           </DialogTitle>
@@ -24,10 +23,10 @@ const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
               {desc}
             </p>
           )}
-        </DialogHeader>
+        </div>
 
         {showSaveOption ? (
-          <DialogFooter className={"w-full"}>
+          <div className={"w-full"}>
             <ButtonGroup className={"w-full flex-col"}>
               <Button
                 variant="outline"
@@ -50,9 +49,9 @@ const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
                 Hủy
               </Button>
             </ButtonGroup>
-          </DialogFooter>
+          </div>
         ) : (
-          <DialogFooter className={"w-full"}>
+          <div className={"w-full"}>
             <ButtonGroup className={"w-full"}>
               <Button
                 variant="outline"
@@ -69,7 +68,7 @@ const ConfirmDiscardDialog = ({ open, onDiscard, onCancel }) => {
                 Bỏ
               </Button>
             </ButtonGroup>
-          </DialogFooter>
+          </div>
         )}
       </DialogContent>
     </Dialog>

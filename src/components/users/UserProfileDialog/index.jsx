@@ -1,10 +1,6 @@
 import { Plus } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+import { useState } from "react";
 
 import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
 import UserAvatar from "../UserAvatar";
@@ -13,28 +9,36 @@ import { Button } from "../../ui/button";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative">
-      <Dialog>
-        <DialogTrigger className="border-none outline-none">
-          <UserAvatar
-            username={user.name}
-            userId={user.id}
-            src={user.avatar_url}
-            imgSize="h-10 w-10"
-            Icon={Plus}
-          />
-        </DialogTrigger>
-        <DialogContent
-          className="w-80 border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#181818]"
+      <button
+        onClick={() => setIsOpen(true)}
+        className="border-none outline-none"
+      >
+        <UserAvatar
+          username={user.name}
+          userId={user.id}
+          src={user.avatar_url}
+          imgSize="h-10 w-10"
+          Icon={Plus}
+        />
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="flex items-center justify-center"
+      >
+        <ModalContent
+          className="w-80 border border-gray-200 bg-white dark:border-[#2f2f2f] dark:bg-[#181818]"
           aria-describedby="user-dialog-desc"
         >
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <DialogTitle className="text-lg font-bold text-gray-900 dark:text-white">
+              <ModalTitle className="text-lg font-bold text-gray-900 dark:text-white">
                 {user.name}
-              </DialogTitle>
+              </ModalTitle>
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 {user.username}
               </span>
@@ -67,8 +71,8 @@ const UserProfileDialog = ({ user }) => {
               Theo dõi
             </AuthRequiredDialog>
           )}
-        </DialogContent>
-      </Dialog>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

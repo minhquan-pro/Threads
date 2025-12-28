@@ -7,12 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import UserAvatar from "@/components/users/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 
 const DEMO_FOLLOWERS = [
   {
@@ -167,10 +162,14 @@ const Profile = () => {
         <TabsContent value="reposts"></TabsContent>
       </Tabs>
 
-      <Dialog open={open} onOpenChange={() => setOpen(false)}>
-        <DialogContent className="p-0 pb-5 dark:border-gray-800">
-          <DialogHeader>
-            <DialogTitle />
+      <Modal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        className="flex items-center justify-center"
+      >
+        <ModalContent className="border border-gray-200 p-0 pb-5 dark:border-gray-800">
+          <div>
+            <ModalTitle />
             <Tabs defaultValue="following">
               <TabsList className="w-full bg-transparent">
                 <TabsTrigger value="following" className="flex flex-1 flex-col">
@@ -247,9 +246,9 @@ const Profile = () => {
                 })}
               </TabsContent>
             </Tabs>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+          </div>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

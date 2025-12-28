@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { ChevronDown, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
@@ -43,9 +43,13 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 dark:bg-[#181818]">
-        <DialogTitle />
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      className="flex items-center justify-center"
+    >
+      <ModalContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 dark:bg-[#181818]">
+        <ModalTitle />
         <div ref={elementRef} className="relative py-3">
           <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5 dark:bg-[#252424]">
             <FeedItem post={post} showStats={showStats} />
@@ -98,8 +102,8 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </ModalContent>
+    </Modal>
   );
 };
 export default CopyImageDialog;

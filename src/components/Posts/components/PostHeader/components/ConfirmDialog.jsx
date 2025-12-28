@@ -1,11 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 
@@ -35,24 +28,27 @@ const ConfirmDialog = ({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent
+    <Modal
+      isOpen={open}
+      onClose={onOpenChange}
+      className="flex items-center justify-center"
+    >
+      <ModalContent
         onClick={(e) => e.stopPropagation()}
-        onPointerDownOutside={(e) => e.preventDefault()}
-        className="flex max-w-72 flex-col items-center border-gray-200 bg-white p-0 dark:border-[#2f2f2f] dark:bg-[#181818]"
+        className="flex max-w-72 flex-col items-center border border-gray-200 bg-white p-0 dark:border-[#2f2f2f] dark:bg-[#181818]"
       >
-        <DialogHeader className="px-3 py-5">
-          <DialogTitle className="text-center text-gray-900 dark:text-white">
+        <div className="px-3 py-5 text-center">
+          <ModalTitle className="text-center text-gray-900 dark:text-white">
             {title}
-          </DialogTitle>
+          </ModalTitle>
           {description && (
-            <DialogDescription className="text-md mt-3 text-center text-gray-600 dark:text-gray-400">
+            <p className="text-md mt-3 text-center text-gray-600 dark:text-gray-400">
               {description}
-            </DialogDescription>
+            </p>
           )}
-        </DialogHeader>
+        </div>
 
-        <DialogFooter className="w-full">
+        <div className="w-full">
           <ButtonGroup className="w-full">
             <Button
               variant="outline"
@@ -73,9 +69,9 @@ const ConfirmDialog = ({
               {confirmLabel}
             </Button>
           </ButtonGroup>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </ModalContent>
+    </Modal>
   );
 };
 

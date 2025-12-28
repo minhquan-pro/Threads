@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import PostModalFooter from "../../Posts/PostModalFooter";
 import PostModalHeader from "../../Posts/PostModalHeader";
 import UserAvatar from "@/components/users/UserAvatar";
@@ -25,9 +25,13 @@ const BaseThreadModal = ({
     submitDisabled || loading || contentLength > maxLength || !hasContent;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="dark:border-card flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden rounded-2xl! border-gray-200 bg-white p-0 sm:min-w-[500px] dark:bg-[#181818]">
-        <DialogTitle className="sr-only">{title}</DialogTitle>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      className="flex items-center justify-center p-4"
+    >
+      <ModalContent className="flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden border p-0 sm:min-w-[500px]">
+        <ModalTitle className="sr-only">{title}</ModalTitle>
 
         {/* Header */}
         <PostModalHeader
@@ -39,6 +43,7 @@ const BaseThreadModal = ({
         {/* Content */}
         <div className="mt-3 flex-1 overflow-y-auto bg-white px-6 dark:bg-[#181818]">
           {children}
+
           {/* Add to thread button */}
           <button
             type="button"
@@ -59,8 +64,8 @@ const BaseThreadModal = ({
           isSubmitDisabled={isSubmitDisabled}
           loading={loading}
         />
-      </DialogContent>
-    </Dialog>
+      </ModalContent>
+    </Modal>
   );
 };
 
