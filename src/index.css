@@ -111,6 +111,11 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html {
+  scrollbar-gutter: stable; /* modern browsers */
+  overflow-y: scroll; /* keep vertical scrollbar track on Windows */
+}
+
 body {
   font-family:
     system-ui,
