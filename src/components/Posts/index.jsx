@@ -53,7 +53,7 @@ const Posts = ({ type }) => {
         }`}
         aria-hidden={!loading}
       >
-        <Loading size="w-5 h-5" />
+        <Loading size="w-5 h-5" isLoading={loading} />
       </div>
     </div>
   );
