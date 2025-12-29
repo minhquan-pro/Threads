@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const TRANSITION_DURATION = 200;
@@ -7,6 +7,19 @@ export const Modal = ({ isOpen, onClose, children, className = "" }) => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+
+  const handleClose = useCallback(() => {
+    onClose();
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+  }, [onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.documentElement.classList.add("no-scroll");
+      document.body.classList.add("no-scroll");
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -34,7 +47,7 @@ export const Modal = ({ isOpen, onClose, children, className = "" }) => {
 
       const handleEscape = (e) => {
         if (e.key === "Escape") {
-          onClose();
+          handleClose();
         }
       };
       document.addEventListener("keydown", handleEscape);
@@ -56,10 +69,10 @@ export const Modal = ({ isOpen, onClose, children, className = "" }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [isOpen, onClose]);
+  }, [isOpen, handleClose]);
 
   const handleBackdropClick = () => {
-    onClose();
+    handleClose();
   };
 
   if (!shouldRender) return null;
