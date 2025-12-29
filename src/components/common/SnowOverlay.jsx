@@ -1,9 +1,9 @@
 import Snowfall from "react-snowfall";
 import { useEffect, useState } from "react";
 import useSnowfallVisibility from "@/hooks/useSnowfallVisibility";
-import snow from "@/assets/images/snow.png";
+import snow from "@/assets/images/snow.svg";
 
-export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
+export default function SnowOverlay({ threshold = 200, speed = [0.5, 1] }) {
   const { showSnow } = useSnowfallVisibility(threshold);
   const [snowImages, setSnowImages] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
@@ -63,11 +63,12 @@ export default function SnowOverlay({ threshold = 200, speed = [0.4, 1] }) {
       }}
     >
       <Snowfall
+        color="white"
         speed={speed}
         wind={[-0.5, 0.5]}
         images={snowImages}
-        snowflakeCount={15}
-        radius={[10, 10]}
+        snowflakeCount={20}
+        radius={[7, 7]}
       />
     </div>
   );
