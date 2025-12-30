@@ -136,7 +136,7 @@ const ItemDetailPage = () => {
             )}
           </div>
         ) : (
-          <div className="mt-4">
+          <div>
             <FeedItem post={currentItem} disableNavigation />
           </div>
         )}

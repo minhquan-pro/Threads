@@ -5,3 +5,4 @@ export * from "./useImageExport";
 export * from "./useCopyPostUrl";
 export * from "./useScrollRestoration";
 export * from "./useSnowfallVisibility";
+export * from "./useScrollLock";
