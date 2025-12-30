@@ -66,7 +66,7 @@ const UserProfileDialog = ({ user }) => {
               type="button"
               title="Đăng ký để theo dõi"
               description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200 mt-4"
             >
               Theo dõi
             </AuthRequiredDialog>

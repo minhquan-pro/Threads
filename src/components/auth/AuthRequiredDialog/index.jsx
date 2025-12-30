@@ -12,6 +12,7 @@ const AuthRequiredDialog = ({
   count,
   Icon,
   iconSize,
+  buttonClasses,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,6 +21,7 @@ const AuthRequiredDialog = ({
       <Button
         variant="outline"
         className={classNames(
+          buttonClasses,
           "border-none bg-transparent text-gray-600 shadow-none dark:text-gray-400",
           {
             "bg-black text-white hover:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/90":
@@ -40,7 +42,7 @@ const AuthRequiredDialog = ({
         onClose={() => setIsOpen(false)}
         className="flex items-center justify-center"
       >
-        <ModalContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white p-4 dark:bg-[#181818]">
+        <ModalContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white p-5 dark:bg-[#181818]">
           <div className="text-center">
             <ModalTitle className="text-center text-2xl text-gray-900 dark:text-white">
               {title}
