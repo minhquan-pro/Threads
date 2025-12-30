@@ -26,7 +26,7 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
       onClose={onClose}
       className="flex items-center justify-center"
     >
-      <ModalContent className="max-w-2xl overflow-y-auto dark:bg-[#181818]">
+      <ModalContent className="max-w-2xl overflow-y-auto p-6 dark:bg-[#181818]">
         <ModalTitle />
         <div className="space-y-4">
           <div>

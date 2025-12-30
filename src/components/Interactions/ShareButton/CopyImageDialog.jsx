@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { ChevronDown, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+import { Modal, ModalContent } from "@/components/common/Modal";
 import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
@@ -48,15 +48,14 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
       onClose={onClose}
       className="flex items-center justify-center"
     >
-      <ModalContent className="min-h-[40vh] max-w-2xl overflow-y-auto bg-gray-100 p-0 dark:bg-[#181818]">
-        <ModalTitle />
+      <ModalContent className="flex min-h-[40vh] max-w-2xl flex-col justify-center overflow-y-auto py-2">
         <div ref={elementRef} className="relative py-3">
-          <div className="m-auto h-fit w-[90%] rounded-2xl bg-white p-5 dark:bg-[#252424]">
+          <div className="m-auto h-fit w-[90%] rounded-2xl bg-gray-100 p-5 dark:bg-[#252424]">
             <FeedItem post={post} showStats={showStats} />
           </div>
           <div className="absolute inset-0 z-10 bg-transparent"></div>
         </div>
-        <div className="sticky bottom-0 flex min-h-16 items-center justify-between bg-white px-4 py-2 dark:bg-[#181818]">
+        <div className="sticky bottom-0 mt-auto flex min-h-16 items-center justify-between bg-white px-4 py-2 dark:bg-[#181818]">
           <div className="mr-auto flex items-center gap-2">
             <Checkbox
               id="terms"

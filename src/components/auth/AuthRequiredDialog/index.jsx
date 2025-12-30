@@ -40,7 +40,7 @@ const AuthRequiredDialog = ({
         onClose={() => setIsOpen(false)}
         className="flex items-center justify-center"
       >
-        <ModalContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white dark:bg-[#181818]">
+        <ModalContent className="flex max-h-[380px] max-w-[400px] flex-col justify-center border-none bg-white p-4 dark:bg-[#181818]">
           <div className="text-center">
             <ModalTitle className="text-center text-2xl text-gray-900 dark:text-white">
               {title}
@@ -53,7 +53,7 @@ const AuthRequiredDialog = ({
           </div>
           <Button
             asChild
-            className="w-full text-lg font-semibold dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            className="mt-3 w-full text-lg font-semibold dark:bg-white dark:text-black dark:hover:bg-gray-200"
           >
             <Link to="/login">Đăng nhập</Link>
           </Button>
