@@ -4,7 +4,7 @@ const PostContent = ({ content, mediaUrls }) => {
   const [emblaRef] = useEmblaCarousel();
 
   return (
-    <div className="mt-1">
+    <div className="-mt-0.5">
       {content && (
         <p
           className="mb-1 overflow-hidden text-[15px] wrap-break-word whitespace-pre-wrap text-gray-900 dark:text-gray-100"
