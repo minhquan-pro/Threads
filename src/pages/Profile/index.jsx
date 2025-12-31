@@ -24,7 +24,7 @@ const Profile = () => {
       };
 
   useEffect(() => {
-    document.title = `${displayUser.name} (@${displayUser.username}) · Threads`;
+    document.title = `${displayUser.name} (${displayUser.username}) · Threads`;
     return () => {
       document.title = "Threads";
     };
