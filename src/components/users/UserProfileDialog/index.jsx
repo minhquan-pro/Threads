@@ -6,6 +6,7 @@ import UserAvatar from "../UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "../../ui/button";
 import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+import { Link } from "react-router";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
@@ -66,12 +67,14 @@ const UserProfileDialog = ({ user }) => {
             >
               Theo dõi
             </AuthRequiredDialog>
+          ) : currentUser.id !== user.id ? (
+            <Button className="mt-5 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
+              Theo dõi
+            </Button>
           ) : (
-            currentUser.id !== user.id && (
-              <Button className="mt-5 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                Theo dõi
-              </Button>
-            )
+            <Button className="mt-5 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
+              <Link to={"/profile"}>Đi vào trang cá nhân</Link>
+            </Button>
           )}
         </ModalContent>
       </Modal>
