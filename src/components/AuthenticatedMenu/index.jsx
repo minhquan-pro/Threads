@@ -36,8 +36,15 @@ const AuthenticatedMenu = () => {
       } catch (error) {
         console.log(error);
       } finally {
+        const currentTheme = localStorage.getItem("theme");
+
         sessionStorage.clear("postsLoadedAfterLogin");
         localStorage.clear();
+
+        if (currentTheme) {
+          localStorage.setItem("theme", currentTheme);
+        }
+
         dispatch(setCurrentUser(null));
         navigate("/login");
       }
