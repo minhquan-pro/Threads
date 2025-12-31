@@ -8,12 +8,10 @@ const ScrollToTop = () => {
   const posts = useSelector(selectList);
 
   useEffect(() => {
-    // Chỉ cuộn lên khi có đúng 1 post trong store
     if (posts.length === 1) {
       const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "instant" });
 
-        // Scroll main container nếu có
         const mainContainer = document.querySelector("main");
         if (mainContainer) {
           mainContainer.scrollTop = 0;
