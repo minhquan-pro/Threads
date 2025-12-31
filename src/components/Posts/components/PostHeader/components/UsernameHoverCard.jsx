@@ -9,6 +9,7 @@ import verifiedIcon from "@/assets/icons/verifiedIcon.png";
 import defaultImageUser from "@/assets/images/defaultImageUser.png";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
+import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
 
 const UsernameHoverCard = ({ user }) => {
   const currentUser = useCurrentUser();
@@ -114,8 +115,17 @@ const UsernameHoverCard = ({ user }) => {
               </div>
             </div>
           </div>
-          {currentUser && currentUser.id !== user.id && (
+          {currentUser ? (
             <Button className={"h-8 w-full"}>Theo dõi</Button>
+          ) : (
+            <AuthRequiredDialog
+              type="button"
+              title="Đăng ký để theo dõi"
+              description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
+              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200 h-8"
+            >
+              Theo dõi
+            </AuthRequiredDialog>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
