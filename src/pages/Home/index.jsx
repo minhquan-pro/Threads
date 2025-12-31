@@ -30,7 +30,7 @@ const Home = () => {
   }, [currentUser, dispatch, posts.length]);
 
   return (
-    <div className="min-h-screen overflow-hidden bg-white pt-16 dark:bg-[#181818]">
+    <div className="overflow-hidden bg-white pt-16 dark:bg-[#181818]">
       {currentUser && <CreatePost />}
 
       {loading && posts.length <= 1 ? (

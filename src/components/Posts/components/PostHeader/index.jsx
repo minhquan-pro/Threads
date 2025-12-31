@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
-
 import { formatTime } from "@/utils/formatTime";
 import verifiedIcon from "@/assets/icons/verifiedIcon.png";
 import {
@@ -24,6 +22,7 @@ import {
   POST_HEADER_USER_MENU_ITEMS,
 } from "@/constants";
 import ConfirmDialog from "./components/ConfirmDialog";
+import UsernameHoverCard from "./components/UsernameHoverCard";
 
 const PostHeader = ({
   type,
@@ -133,21 +132,7 @@ const PostHeader = ({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <Link
-            to={user.id === currentUser?.id ? "/profile" : `/@${user.username}`}
-            className="flex items-center gap-0.5"
-          >
-            <span className="font-semibold text-gray-900 hover:underline dark:text-white">
-              {user.username}
-            </span>
-            {user.verified && (
-              <img
-                src={verifiedIcon}
-                alt="Verified badge"
-                className="h-4 w-4"
-              />
-            )}
-          </Link>
+          <UsernameHoverCard user={user} />
           {!hideDate && showStats && (
             <span className="text-sm text-gray-500 dark:text-gray-400">
               {formatTime(createdAt)}

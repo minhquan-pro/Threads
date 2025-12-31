@@ -19,12 +19,12 @@ const DefaultLayout = () => {
 
   return (
     <div className="flex bg-white dark:bg-black">
-      <div className="fixed bottom-0 hidden h-full md:left-0 md:block">
+      <div className="fixed bottom-0 h-full">
         <Sidebar />
       </div>
 
       <div className="mx-auto flex items-start gap-3">
-        <div className="hidden flex-1 flex-col md:block">
+        <div className="flex-1 flex-col">
           {showTabs ? (
             <HomeTabs
               currentTab={currentTab}
