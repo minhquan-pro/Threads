@@ -57,11 +57,7 @@ const UserProfileDialog = ({ user }) => {
             10 người theo dõi
           </div>
 
-          {currentUser ? (
-            <Button className="mt-5 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
-              Theo dõi
-            </Button>
-          ) : (
+          {!currentUser ? (
             <AuthRequiredDialog
               type="button"
               title="Đăng ký để theo dõi"
@@ -70,6 +66,12 @@ const UserProfileDialog = ({ user }) => {
             >
               Theo dõi
             </AuthRequiredDialog>
+          ) : (
+            currentUser.id !== user.id && (
+              <Button className="mt-5 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                Theo dõi
+              </Button>
+            )
           )}
         </ModalContent>
       </Modal>

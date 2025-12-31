@@ -115,17 +115,21 @@ const UsernameHoverCard = ({ user }) => {
               </div>
             </div>
           </div>
-          {currentUser ? (
-            <Button className={"h-8 w-full"}>Theo dõi</Button>
-          ) : (
+          {!currentUser ? (
             <AuthRequiredDialog
               type="button"
               title="Đăng ký để theo dõi"
               description="Hãy tham gia Threads để không bỏ lỡ các bài viết của fcbayern."
-              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200 h-8"
+              buttonClasses="w-full bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               Theo dõi
             </AuthRequiredDialog>
+          ) : (
+            currentUser.id !== user.id && (
+              <Button className="w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                Theo dõi
+              </Button>
+            )
           )}
         </DropdownMenuContent>
       </DropdownMenu>
