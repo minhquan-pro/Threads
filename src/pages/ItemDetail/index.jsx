@@ -102,6 +102,11 @@ const ItemDetailPage = () => {
     );
   }
 
+  // Post not found
+  if (!currentItem && !currentItemLoading) {
+    return;
+  }
+
   // Don't render anything if deleted
   if (currentItem?._deleted) {
     return null;
