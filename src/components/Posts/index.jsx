@@ -7,22 +7,16 @@ import {
   selectPagination,
   useFetchPostsList,
   usePostsList,
-  //   usePostsUserList,
 } from "@/features/posts";
 import FeedItem from "./FeedItem";
 import Loading from "../common/Loading";
-// import { useLocation, useParams } from "react-router";
 
 const Posts = ({ type }) => {
   const [page, setPage] = useState(1);
   const lastElementRef = useRef(null);
-  //   const location = useLocation();
-  //   const { userId } = useParams();
-  //   const isPageProfile = location.pathname.includes(userId);
 
   useFetchPostsList({ type, page, per_page: 10 });
   const allPosts = usePostsList({ excludeCurrentUser: false });
-  //   const userPosts = usePostsUserList({ userId });
   const posts = allPosts;
 
   const loading = useSelector(selectLoadingAllPost);

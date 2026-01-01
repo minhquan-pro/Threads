@@ -24,10 +24,17 @@ const ItemDetailPage = () => {
 
   // Fetch current post
   useEffect(() => {
-    if (!currentItem && !currentItemLoading) {
-      dispatch(fetchPostById(postId));
-    }
-  }, [postId, currentItem, currentItemLoading, dispatch]);
+    const fetchData = async () => {
+      if (!currentItem && !currentItemLoading) {
+        const response = await dispatch(fetchPostById(postId));
+        if (!response.payload.success) {
+          navigate("/", { replace: true });
+        }
+      }
+    };
+
+    fetchData();
+  }, [postId, currentItem, currentItemLoading, dispatch, navigate]);
 
   useEffect(() => {
     if (loadingParents) return;
@@ -91,17 +98,6 @@ const ItemDetailPage = () => {
     return (
       <div className="flex justify-center py-10">
         <Loading size="w-6 h-6" />
-      </div>
-    );
-  }
-
-  // Post not found
-  if (!currentItem && !currentItemLoading) {
-    return (
-      <div className="flex justify-center py-10">
-        <p className="text-gray-500 dark:text-gray-400">
-          Không tìm thấy bài viết
-        </p>
       </div>
     );
   }

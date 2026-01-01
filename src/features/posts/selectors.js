@@ -1,7 +1,7 @@
 export const selectLoadingAllPost = (state) => state.posts.loading;
 
 export const selectList = (state) => {
-  return state.posts.items.map((id) => state.posts.byId[id]).filter(Boolean); // Loại bỏ undefined nếu id không tồn tại
+  return state.posts.items.map((id) => state.posts.byId[id]).filter(Boolean);
 };
 
 export const selectItemById = (state, postId) => {
