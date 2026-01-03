@@ -22,4 +22,10 @@ export const AUTH_PAGES = [
     description: "Tạo mật khẩu mới cho tài khoản của bạn",
     route: "/reset-password",
   },
+  {
+    id: "verifyEmail",
+    title: "Xác minh email",
+    description: "Đang xác minh tài khoản của bạn",
+    route: "/verify-email",
+  },
 ];

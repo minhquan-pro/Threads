@@ -95,3 +95,16 @@ export const checkExistUsername = async (username) => {
   const response = await http.post("auth/validate/username", { username });
   return response.data.available;
 };
+
+// Verify email
+export const verifyEmail = createAsyncThunk(
+  "auth/verify-email",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await http.post("/auth/verify-email", data);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  },
+);

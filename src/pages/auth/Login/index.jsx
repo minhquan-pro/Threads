@@ -67,6 +67,13 @@ const Login = () => {
 
   return (
     <>
+      {location.state?.verified && (
+        <div className="mb-4 rounded-lg bg-green-50 p-3 dark:bg-green-900/20">
+          <p className="text-sm font-medium text-green-600 dark:text-green-400">
+            Đã xác minh tài khoản thành công. Vui lòng đăng nhập.
+          </p>
+        </div>
+      )}
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
         <FieldGroup>
           <FormField
