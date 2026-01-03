@@ -19,8 +19,8 @@ const ResetPassword = () => {
   const loading = useSelector(loadingSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [prams] = useSearchParams();
-  const token = prams.get("token");
+  const [params] = useSearchParams();
+  const token = params.get("token");
   const email = localStorage.getItem("resetEmail");
 
   const { handleSubmit, control } = useForm({
@@ -32,26 +32,39 @@ const ResetPassword = () => {
   });
 
   useEffect(() => {
-    (async () => {
-      if (token) {
-        try {
-          await validateToken({ token });
-          setIsValidToken(true);
-          // eslint-disable-next-line no-unused-vars
-        } catch (error) {
-          setIsValidToken(false);
-        } finally {
-          setValidating(false);
-        }
+    const validateResetToken = async () => {
+      if (!token) {
+        setIsValidToken(false);
+        setValidating(false);
+        return;
       }
-    })();
+
+      try {
+        await validateToken({ token });
+        setIsValidToken(true);
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {
+        setIsValidToken(false);
+      } finally {
+        setValidating(false);
+      }
+    };
+
+    validateResetToken();
   }, [token]);
 
   // Submit Form
   const onSubmit = async (data) => {
+    if (!token) {
+      setIsValidToken(false);
+      return;
+    }
+
     try {
       await dispatch(resetPassword({ token, email, ...data })).unwrap();
+
       localStorage.removeItem("resetEmail");
+
       navigate("/login", {
         state: { message: "Tạo mật khẩu mới thành công, vui lòng đăng nhập" },
       });
@@ -63,9 +76,9 @@ const ResetPassword = () => {
 
   if (validating) {
     return (
-      <div className="flex flex-col items-center justify-center py-12">
-        <Spinner className="mb-4" />
-        <p className="text-sm font-semibold text-gray-600">
+      <div className="flex flex-col items-center justify-center gap-4 py-12">
+        <Spinner className="h-8 w-8" />
+        <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
           Đang xác thực liên kết...
         </p>
       </div>
@@ -74,16 +87,21 @@ const ResetPassword = () => {
 
   if (!isValidToken) {
     return (
-      <div className="py-8 text-center">
-        <div className="mb-4 text-5xl">⚠️</div>
-        <h2 className="mb-2 text-xl font-bold text-gray-900">
+      <div className="flex flex-col items-center gap-4 py-8 text-center">
+        <div className="mb-2 text-5xl">⚠️</div>
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
           Liên kết không hợp lệ
         </h2>
-        <p className="mb-6 text-gray-600">
-          Liên kết đã hết hạn hoặc không hợp lệ
+        <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+          Liên kết đã hết hạn hoặc không hợp lệ. Vui lòng yêu cầu liên kết mới.
         </p>
         <Link to="/forgot-password">
-          <Button variant="outline">Yêu cầu liên kết mới</Button>
+          <Button
+            size="lg"
+            className="text-md rounded-lg bg-black px-8 py-6 font-bold text-white dark:bg-white dark:text-black dark:hover:bg-gray-200"
+          >
+            Yêu cầu liên kết mới
+          </Button>
         </Link>
       </div>
     );
