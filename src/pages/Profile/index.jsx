@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserAvatar from "@/components/users/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
-import { truncateWords } from "@/utils";
 
 const Profile = () => {
   const { userId } = useParams();
@@ -44,9 +43,7 @@ const Profile = () => {
           <UserAvatar imgSize="w-20 h-20" />
         </div>
 
-        <p className="mt-6 mb-1">
-          {truncateWords(displayUser.bio) || "Chưa có tiểu sử"}
-        </p>
+        <p className="mt-6 mb-1">{displayUser.bio || "Chưa có tiểu sử"}</p>
 
         <div className="flex items-center justify-between">
           <div className="cursor-pointer text-sm text-gray-600 hover:opacity-90 dark:text-gray-400">
