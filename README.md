@@ -9,24 +9,24 @@
 ![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-Ứng dụng mạng xã hội Threads clone được xây dựng với React, Redux Toolkit, Tailwind CSS và các công nghệ hiện đại.
+A Threads social media clone built with React, Redux Toolkit, Tailwind CSS, and modern technologies.
 
-[Demo](#) · [Báo lỗi](https://github.com/username/threads/issues) · [Yêu cầu tính năng](https://github.com/username/threads/issues)
+[Demo](#) · [Report Bug](https://github.com/username/threads/issues) · [Request Feature](https://github.com/username/threads/issues)
 
 </div>
 
 ---
 
-## 📋 Mục lục
+## 📋 Table of Contents
 
-- [Giới thiệu](#-giới-thiệu)
-- [Tính năng](#-tính-năng)
+- [Introduction](#-introduction)
+- [Features](#-features)
 - [Tech Stack](#️-tech-stack)
-- [Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
-- [Cài đặt](#-cài-đặt)
-- [Cấu hình](#️-cấu-hình)
-- [Chạy dự án](#-chạy-dự-án)
-- [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
+- [System Requirements](#-system-requirements)
+- [Installation](#-installation)
+- [Configuration](#️-configuration)
+- [Running the Project](#-running-the-project)
+- [Project Structure](#-project-structure)
 - [API Documentation](#-api-documentation)
 - [State Management](#-state-management)
 - [Routing](#-routing)
@@ -40,75 +40,75 @@
 
 ---
 
-## 🎯 Giới thiệu
+## 🎯 Introduction
 
-Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, cho phép người dùng chia sẻ suy nghĩ, hình ảnh, và tương tác với cộng đồng thông qua posts, comments, likes, và reposts.
+Threads Clone is a social media application that simulates Meta's Threads, allowing users to share thoughts, images, and interact with the community through posts, comments, likes, and reposts.
 
 ### 🌟 Highlights
 
-- 🚀 **Performance**: Sử dụng Vite cho build time cực nhanh
-- 🎨 **Modern UI**: Thiết kế đẹp mắt với Tailwind CSS và Shadcn UI
-- 📱 **Responsive**: Hoạt động mượt mà trên mọi thiết bị
-- ⚡ **Optimistic Updates**: Cập nhật UI tức thì cho UX tốt nhất
-- 🔐 **Secure**: JWT authentication với refresh token mechanism
-- ♿ **Accessible**: Tuân thủ WCAG 2.1 standards
+- 🚀 **Performance**: Using Vite for blazing fast build times
+- 🎨 **Modern UI**: Beautiful design with Tailwind CSS and Shadcn UI
+- 📱 **Responsive**: Works smoothly on all devices
+- ⚡ **Optimistic Updates**: Instant UI updates for the best UX
+- 🔐 **Secure**: JWT authentication with refresh token mechanism
+- ♿ **Accessible**: Complies with WCAG 2.1 standards
 
 ---
 
-## ✨ Tính năng
+## ✨ Features
 
 ### 🔐 Authentication & Authorization
 
-- [x] Đăng ký tài khoản với email/username
-- [x] Đăng nhập với email/username
-- [x] Đăng nhập bằng Instagram (OAuth)
-- [x] Đăng xuất và xóa session
-- [x] Tự động refresh token khi hết hạn
-- [x] Protected routes cho user đã đăng nhập
-- [x] Guest routes cho user chưa đăng nhập
+- [x] Register account with email/username
+- [x] Login with email/username
+- [x] Instagram login (OAuth)
+- [x] Logout and clear session
+- [x] Auto refresh token when expired
+- [x] Protected routes for authenticated users
+- [x] Guest routes for unauthenticated users
 
 ### 📝 Posts Management
 
-- [x] Tạo post mới với text và media
-- [x] Chỉnh sửa post của mình
-- [x] Xóa post của mình với confirmation dialog
-- [x] Quote post (trích dẫn bài viết)
-- [x] View post detail với full comments
+- [x] Create new post with text and media
+- [x] Edit own posts
+- [x] Delete own posts with confirmation dialog
+- [x] Quote post (cite posts)
+- [x] View post detail with full comments
 - [x] Upload multiple images/videos
-- [x] Preview media trước khi đăng
+- [x] Preview media before posting
 - [x] Optimistic UI updates
 
 ### 💬 Comments & Interactions
 
-- [x] Comment trên post
-- [x] Reply comment (nested comments)
-- [x] Xóa comment của mình
-- [x] Like/Unlike post
+- [x] Comment on posts
+- [x] Reply to comments (nested comments)
+- [x] Delete own comments
+- [x] Like/Unlike posts
 - [x] Repost/Unrepost
-- [x] View số lượng likes, comments, reposts
+- [x] View count of likes, comments, reposts
 - [x] Real-time comment loading
 
 ### 👤 User Profile
 
-- [x] View profile của user khác
+- [x] View other users' profiles
 - [x] Edit profile (avatar, bio, links)
-- [x] View danh sách posts của user
-- [x] View danh sách replies
+- [x] View user's post list
+- [x] View user's replies list
 - [x] View followers/following lists
 - [x] Follow/Unfollow users
-- [x] Verified badge cho users
+- [x] Verified badge for users
 
 ### 🔍 Search & Discovery
 
-- [x] Tìm kiếm users
-- [x] Tìm kiếm posts/threads
-- [x] Gợi ý users để follow
+- [x] Search users
+- [x] Search posts/threads
+- [x] Suggested users to follow
 - [x] Trending topics
 - [x] Activity feed (notifications)
 
 ### 🎨 UI/UX Features
 
-- [x] Infinite scroll cho feed
+- [x] Infinite scroll for feed
 - [x] Skeleton loading states
 - [x] Toast notifications
 - [x] Modal dialogs
@@ -131,7 +131,7 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ### Core Technologies
 
-| Technology                                     | Version | Mô tả                   |
+| Technology                                     | Version | Description             |
 | ---------------------------------------------- | ------- | ----------------------- |
 | [React](https://react.dev/)                    | 18.3.1  | UI Library              |
 | [Vite](https://vitejs.dev/)                    | 5.4.10  | Build Tool & Dev Server |
@@ -141,7 +141,7 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ### UI Components & Styling
 
-| Package                                           | Mô tả                  |
+| Package                                           | Description            |
 | ------------------------------------------------- | ---------------------- |
 | [Shadcn UI](https://ui.shadcn.com/)               | Component library      |
 | [Radix UI](https://www.radix-ui.com/)             | Headless UI primitives |
@@ -150,14 +150,14 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ### HTTP & Data Fetching
 
-| Package                                              | Mô tả                   |
+| Package                                              | Description             |
 | ---------------------------------------------------- | ----------------------- |
 | [Axios](https://axios-http.com/)                     | HTTP client             |
 | [React Query](https://tanstack.com/query) (Optional) | Data fetching & caching |
 
 ### Utilities
 
-| Package                                         | Mô tả                  |
+| Package                                         | Description            |
 | ----------------------------------------------- | ---------------------- |
 | [date-fns](https://date-fns.org/)               | Date manipulation      |
 | [clsx](https://github.com/lukeed/clsx)          | Conditional classnames |
@@ -166,7 +166,7 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ### Development Tools
 
-| Tool       | Mô tả                  |
+| Tool       | Description            |
 | ---------- | ---------------------- |
 | ESLint     | Code linting           |
 | Prettier   | Code formatting        |
@@ -175,14 +175,14 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ---
 
-## 💻 Yêu cầu hệ thống
+## 💻 System Requirements
 
 ### Minimum Requirements
 
 - **Node.js**: >= 18.0.0
-- **npm**: >= 9.0.0 hoặc **yarn**: >= 1.22.0
-- **OS**: Windows 10+, macOS 10.15+, hoặc Linux
-- **RAM**: 4GB (khuyến nghị 8GB)
+- **npm**: >= 9.0.0 or **yarn**: >= 1.22.0
+- **OS**: Windows 10+, macOS 10.15+, or Linux
+- **RAM**: 4GB (recommended 8GB)
 - **Disk**: 500MB free space
 
 ### Recommended
@@ -194,7 +194,7 @@ Threads Clone là ứng dụng mạng xã hội mô phỏng Threads của Meta, 
 
 ---
 
-## 🚀 Cài đặt
+## 🚀 Installation
 
 ### 1️⃣ Clone Repository
 
@@ -211,7 +211,7 @@ gh repo clone username/threads
 cd threads
 ```
 
-### 2️⃣ Cài đặt Dependencies
+### 2️⃣ Install Dependencies
 
 ```bash
 # Using npm
@@ -224,25 +224,25 @@ yarn install
 pnpm install
 ```
 
-### 3️⃣ Cấu hình Environment Variables
+### 3️⃣ Configure Environment Variables
 
 ```bash
-# Copy file env mẫu
+# Copy env example file
 cp .env.example .env
 
-# Chỉnh sửa file .env với editor
+# Edit .env file with your editor
 nano .env
-# hoặc
+# or
 code .env
 ```
 
 ---
 
-## ⚙️ Cấu hình
+## ⚙️ Configuration
 
 ### Environment Variables
 
-Tạo file `.env` trong thư mục root:
+Create a `.env` file in the root directory:
 
 ```env
 # ==========================================
@@ -286,19 +286,19 @@ VITE_SENTRY_DSN=
 VITE_INSTAGRAM_CLIENT_ID=
 ```
 
-### Giải thích các biến môi trường
+### Environment Variables Explanation
 
-| Variable               | Required | Default | Mô tả                                 |
-| ---------------------- | -------- | ------- | ------------------------------------- |
-| `VITE_API_URL`         | ✅       | -       | Base URL của API backend              |
-| `VITE_API_TIMEOUT`     | ❌       | 30000   | Timeout cho API requests (ms)         |
-| `VITE_APP_URL`         | ✅       | -       | URL của frontend app                  |
-| `VITE_ENABLE_DEVTOOLS` | ❌       | false   | Bật Redux DevTools                    |
-| `VITE_MAX_FILE_SIZE`   | ❌       | 5MB     | Kích thước file upload tối đa (bytes) |
+| Variable               | Required | Default | Description                      |
+| ---------------------- | -------- | ------- | -------------------------------- |
+| `VITE_API_URL`         | ✅       | -       | Backend API base URL             |
+| `VITE_API_TIMEOUT`     | ❌       | 30000   | API request timeout (ms)         |
+| `VITE_APP_URL`         | ✅       | -       | Frontend app URL                 |
+| `VITE_ENABLE_DEVTOOLS` | ❌       | false   | Enable Redux DevTools            |
+| `VITE_MAX_FILE_SIZE`   | ❌       | 5MB     | Maximum file upload size (bytes) |
 
 ---
 
-## 🏃 Chạy dự án
+## 🏃 Running the Project
 
 ### Development Mode
 
@@ -306,14 +306,14 @@ VITE_INSTAGRAM_CLIENT_ID=
 # Start dev server
 npm run dev
 
-# Start với custom port
+# Start with custom port
 npm run dev -- --port 3000
 
-# Start với host expose
+# Start with host expose
 npm run dev -- --host
 ```
 
-Ứng dụng sẽ chạy tại: **http://localhost:5173**
+Application will run at: **http://localhost:5173**
 
 ### Production Build
 
@@ -321,7 +321,7 @@ npm run dev -- --host
 # Build production
 npm run build
 
-# Build với analyze bundle
+# Build with bundle analysis
 npm run build -- --mode analyze
 
 # Preview production build
@@ -334,10 +334,10 @@ npm run preview
 # Lint code
 npm run lint
 
-# Lint và auto-fix
+# Lint and auto-fix
 npm run lint:fix
 
-# Format code với Prettier
+# Format code with Prettier
 npm run format
 
 # Check formatting
@@ -346,7 +346,7 @@ npm run format:check
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 📁 Project Structure
 
 ```
 threads/
@@ -460,7 +460,7 @@ threads/
 └── README.md
 ```
 
-### 📂 Quy tắc tổ chức code
+### 📂 Code Organization Rules
 
 #### Components
 
@@ -722,7 +722,7 @@ const state = {
 #### 2. Optimistic Updates
 
 ```javascript
-// Create post với optimistic UI
+// Create post with optimistic UI
 const idFake = `temp-${uuidv4()}`;
 
 dispatch(createPost.pending({ content, idFake, user }));
@@ -738,7 +738,7 @@ try {
 }
 ```
 
-#### 3. Selectors với Reselect
+#### 3. Selectors with Reselect
 
 ```javascript
 import { createSelector } from "@reduxjs/toolkit";
@@ -816,9 +816,9 @@ const commentId = searchParams.get("comment");
 
 ### Shadcn UI Components
 
-Dự án sử dụng [Shadcn UI](https://ui.shadcn.com/) - một component library không phụ thuộc, có thể copy-paste vào project.
+The project uses [Shadcn UI](https://ui.shadcn.com/) - a dependency-free component library that you can copy-paste into your project.
 
-#### Cài đặt component mới
+#### Install new component
 
 ```bash
 npx shadcn-ui@latest add button
@@ -904,7 +904,7 @@ describe("Button", () => {
 
 ## 🚢 Deployment
 
-### Build cho Production
+### Build for Production
 
 ```bash
 # Build
@@ -1136,36 +1136,36 @@ if (!result.success) {
 
 ### Common Issues
 
-#### 1. Vite không khởi động
+#### 1. Vite won't start
 
-**Triệu chứng**: `Error: Cannot find module 'vite'`
+**Symptoms**: `Error: Cannot find module 'vite'`
 
-**Giải pháp**:
+**Solution**:
 
 ```bash
-# Xóa node_modules và cache
+# Remove node_modules and cache
 rm -rf node_modules package-lock.json
 rm -rf .vite
 
-# Cài lại dependencies
+# Reinstall dependencies
 npm install
 
 # Restart
 npm run dev
 ```
 
-#### 2. Tailwind không hoạt động
+#### 2. Tailwind not working
 
-**Triệu chứng**: Classes không có effect
+**Symptoms**: Classes have no effect
 
-**Giải pháp**:
+**Solution**:
 
 ```javascript
-// Kiểm tra tailwind.config.js
+// Check tailwind.config.js
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // ✅ Đảm bảo path đúng
+    "./src/**/*.{js,ts,jsx,tsx}", // ✅ Ensure path is correct
   ],
   // ...
 }
@@ -1174,11 +1174,11 @@ export default {
 npm run dev
 ```
 
-#### 3. Redux state không update
+#### 3. Redux state not updating
 
-**Triệu chứng**: UI không re-render sau dispatch
+**Symptoms**: UI doesn't re-render after dispatch
 
-**Giải pháp**:
+**Solution**:
 
 ```javascript
 // ✅ Always return new state
@@ -1195,9 +1195,9 @@ newState.items.push(action.payload); // ❌ Bad
 
 #### 4. API calls failing
 
-**Triệu chứng**: 401/403 errors
+**Symptoms**: 401/403 errors
 
-**Giải pháp**:
+**Solution**:
 
 ```javascript
 // Check token in request
@@ -1213,9 +1213,9 @@ console.log("Expires:", new Date(decoded.exp * 1000));
 
 #### 5. Infinite re-renders
 
-**Triệu chứng**: Browser hangs, "Maximum update depth exceeded"
+**Symptoms**: Browser hangs, "Maximum update depth exceeded"
 
-**Giải pháp**:
+**Solution**:
 
 ```javascript
 // ❌ Bad - creates new function every render
@@ -1276,7 +1276,7 @@ axios.interceptors.response.use((response) => {
 
 ## 🤝 Contributing
 
-Chúng tôi hoan nghênh mọi đóng góp! Vui lòng đọc hướng dẫn trước khi submit PR.
+We welcome all contributions! Please read the guidelines before submitting a PR.
 
 ### Development Workflow
 
@@ -1299,7 +1299,7 @@ git push origin feature/amazing-feature
 
 ### Commit Convention
 
-Sử dụng [Conventional Commits](https://www.conventionalcommits.org/):
+Using [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 <type>[optional scope]: <description>
@@ -1381,7 +1381,7 @@ SOFTWARE.
 
 - **Your Name** - _Initial work_ - [@username](https://github.com/username)
 
-Xem danh sách [contributors](https://github.com/username/threads/contributors) đã đóng góp cho dự án.
+See the list of [contributors](https://github.com/username/threads/contributors) who participated in this project.
 
 ---
 
@@ -1400,7 +1400,7 @@ Xem danh sách [contributors](https://github.com/username/threads/contributors) 
 
 ## 📞 Support
 
-Nếu bạn gặp vấn đề hoặc có câu hỏi:
+If you encounter issues or have questions:
 
 - 📧 Email: support@threads-clone.com
 - 💬 Discord: [Join our server](https://discord.gg/...)
