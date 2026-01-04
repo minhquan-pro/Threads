@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCurrentUser } from "@/features/auth";
 import { resetPosts, selectList, selectLoadingAllPost } from "@/features/posts";
 import CreatePost from "@/components/Posts/components/CreatePost";
-import Loading from "@/components/common/Loading";
+import PostSkeleton from "@/components/common/PostSkeleton";
 import Posts from "@/components/Posts";
 import { useEffect } from "react";
 import { getPosts } from "@/services/Posts";
@@ -34,9 +34,7 @@ const Home = () => {
       {currentUser && <CreatePost />}
 
       {loading && posts.length <= 1 ? (
-        <div className="flex min-h-screen items-center justify-center py-20">
-          <Loading size="w-8 h-8" />
-        </div>
+        <PostSkeleton count={10} />
       ) : (
         <>
           <div>
