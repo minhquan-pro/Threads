@@ -7,6 +7,7 @@ import { useCurrentUser } from "@/features/auth";
 import { Button } from "../../ui/button";
 import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { Link } from "react-router";
+import { truncateWords } from "@/utils";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
@@ -32,7 +33,7 @@ const UserProfileDialog = ({ user }) => {
         className="fixed inset-0 flex items-center justify-center"
       >
         <ModalContent
-          className="mx-auto w-72 max-w-sm border border-gray-200 bg-white p-3 dark:border-[#2f2f2f] dark:bg-[#181818]"
+          className="mx-auto w-72 max-w-sm border border-gray-200 bg-white p-3 pb-4 dark:border-[#2f2f2f] dark:bg-[#181818]"
           aria-describedby="user-dialog-desc"
         >
           <div className="flex items-center justify-between">
@@ -48,10 +49,10 @@ const UserProfileDialog = ({ user }) => {
           </div>
 
           <p
-            className="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100"
+            className="mt-3 text-sm font-semibold text-gray-900 dark:text-gray-100"
             id="user-dialog-desc"
           >
-            {user.bio}
+            {truncateWords(user.bio)}
           </p>
 
           <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">

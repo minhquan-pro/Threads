@@ -72,7 +72,7 @@ const UsernameHoverCard = ({ user }) => {
 
         <DropdownMenuContent
           align="start"
-          className="w-80 border border-gray-300 p-0 px-2 pb-3 outline-none dark:border-gray-800"
+          className="w-80 border border-gray-300 p-0 px-2 pb-4 outline-none dark:border-gray-800"
           onPointerEnter={handleMenuMouseEnter}
           onPointerLeave={handleMenuMouseLeave}
           onInteractOutside={() => {
