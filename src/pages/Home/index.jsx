@@ -33,7 +33,7 @@ const Home = () => {
     <div className="overflow-hidden bg-white pt-16 dark:bg-[#181818]">
       {currentUser && <CreatePost />}
 
-      {loading && posts.length <= 1 ? (
+      {!loading || posts.length <= 1 ? (
         <PostSkeleton count={10} />
       ) : (
         <>
