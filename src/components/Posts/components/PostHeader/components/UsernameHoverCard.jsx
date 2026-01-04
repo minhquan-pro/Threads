@@ -10,6 +10,7 @@ import defaultImageUser from "@/assets/images/defaultImageUser.png";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
 import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
+import { truncateWords } from "@/utils";
 
 const UsernameHoverCard = ({ user }) => {
   const currentUser = useCurrentUser();
@@ -109,7 +110,7 @@ const UsernameHoverCard = ({ user }) => {
                 </p>
                 {user.bio && (
                   <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                    {user.bio}
+                    {truncateWords(user.bio, 21)}
                   </p>
                 )}
               </div>
