@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
+import { getPosts } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
 import { resetPosts, selectList, selectLoadingAllPost } from "@/features/posts";
+
 import CreatePost from "@/components/Posts/components/CreatePost";
 import PostSkeleton from "@/components/common/PostSkeleton";
 import Posts from "@/components/Posts";
-import { useEffect } from "react";
-import { getPosts } from "@/services/Posts";
 
 const Home = () => {
   const dispatch = useDispatch();

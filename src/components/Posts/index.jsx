@@ -42,7 +42,7 @@ const Posts = ({ type }) => {
         );
       })}
       <div
-        className={`flex items-center justify-center pb-3 transition-opacity duration-300 ease-in-out ${
+        className={`flex items-center justify-center pb-1 transition-opacity duration-300 ease-in-out ${
           loading ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden={!loading}
