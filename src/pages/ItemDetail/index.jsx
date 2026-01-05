@@ -89,7 +89,7 @@ const ItemDetailPage = () => {
     }
 
     return () => {
-      document.title = "Threads";
+      document.title = "Trang chủ • Threads";
     };
   }, [currentItem?.content]);
 
