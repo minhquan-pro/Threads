@@ -9,11 +9,7 @@ const Header = ({ title }) => {
   const isPagePostDetail = location.pathname.includes("/post/");
 
   const handleBack = () => {
-    if (window.history.length <= 2) {
-      navigate("/");
-    } else {
-      navigate(-1);
-    }
+    location.key === "default" ? navigate("/") : navigate(-1);
   };
 
   return (

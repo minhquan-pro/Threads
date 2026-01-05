@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserAvatar from "@/components/users/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
 import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+import FollowerPreview from "@/components/users/FollowerPreview";
 
 const Profile = () => {
   const { userId } = useParams();
@@ -47,7 +48,7 @@ const Profile = () => {
 
         <div className="flex items-center justify-between">
           <div className="cursor-pointer text-sm text-gray-600 hover:opacity-90 dark:text-gray-400">
-            {displayUser.followers || 0} người theo dõi
+            <FollowerPreview followerCount={100} />
           </div>
 
           {isProfileCurrentUser ? (
