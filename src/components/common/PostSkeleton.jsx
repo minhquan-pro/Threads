@@ -2,9 +2,14 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const PostSkeleton = ({ count = 10 }) => {
+  const isDark = document.documentElement.classList.contains("dark");
+
   return (
     <div className="flex min-h-screen flex-col">
-      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+      <SkeletonTheme
+        baseColor={isDark ? "#3a3a3a" : "#e8e8e8"}
+        highlightColor={isDark ? "#4a4a4a" : "#f0f0f0"}
+      >
         {[...Array(count)].map((_, i) => (
           <div key={i} className="p-4">
             <div className="flex gap-3">
