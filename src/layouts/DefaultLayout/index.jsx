@@ -23,56 +23,49 @@ const DefaultLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="mx-auto flex items-start gap-3">
-        <div className="flex-1 flex-col">
-          {showTabs ? (
-            <HomeTabs
-              currentTab={currentTab}
-              handleValueChange={handleValueChange}
-            >
+      {showTabs ? (
+        <HomeTabs currentTab={currentTab} handleValueChange={handleValueChange}>
+          <Outlet />
+        </HomeTabs>
+      ) : (
+        <div>
+          <Header title={title} />
+          <div className="flex min-h-screen justify-center">
+            <div className="relative w-[650px] border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
               <Outlet />
-            </HomeTabs>
-          ) : (
-            <div>
-              <Header title={title} />
-              <div className="flex min-h-screen justify-center">
-                <div className="relative w-[650px] border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
-                  <Outlet />
-                </div>
-              </div>
             </div>
-          )}
-        </div>
-
-        {!currentUser && (
-          <div className="fixed top-5 right-20 z-50 mt-9 hidden max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-3 text-center md:block dark:border-[#181818] dark:bg-[#181818]">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-              Đăng nhập hoặc đăng ký threads
-            </h2>
-            <p className="mt-2 text-gray-500 dark:text-gray-400">
-              Xem mọi người đang nói về điều gì và tham gia cuộc trò chuyện.
-            </p>
-            <Button
-              asChild
-              className="mt-3 mb-4 w-full rounded-xl border-gray-300 py-8 dark:bg-[#181818] dark:text-white dark:hover:bg-gray-700"
-              variant="outline"
-            >
-              <Link to={"/login"} className="flex items-center gap-3">
-                <Instagram />
-                <span className="text-gray-800 dark:text-gray-200">
-                  Tiếp tục bằng instagram
-                </span>
-              </Link>
-            </Button>
-            <Link
-              to={"/login"}
-              className="text-sm font-semibold text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-            >
-              Đăng nhập bằng tên người dùng
-            </Link>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {!currentUser && (
+        <div className="fixed top-5 right-20 z-50 mt-9 hidden max-w-[300px] rounded-2xl border border-gray-300 bg-[#f5f5f5] p-5 text-center md:block dark:border-[#181818] dark:bg-[#181818]">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+            Đăng nhập hoặc đăng ký threads
+          </h2>
+          <p className="mt-2 text-gray-500 dark:text-gray-400">
+            Xem mọi người đang nói về điều gì và tham gia cuộc trò chuyện.
+          </p>
+          <Button
+            asChild
+            className="mt-3 mb-4 w-full rounded-xl border-gray-300 py-8 dark:bg-[#181818] dark:text-white dark:hover:bg-gray-700"
+            variant="outline"
+          >
+            <Link to={"/login"} className="flex items-center gap-3">
+              <Instagram />
+              <span className="text-gray-800 dark:text-gray-200">
+                Tiếp tục bằng instagram
+              </span>
+            </Link>
+          </Button>
+          <Link
+            to={"/login"}
+            className="text-sm font-semibold text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+          >
+            Đăng nhập bằng tên người dùng
+          </Link>
+        </div>
+      )}
 
       {currentUser && (
         <>

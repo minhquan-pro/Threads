@@ -1,13 +1,14 @@
-import { Plus } from "lucide-react";
 import { useState } from "react";
-
-import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
-import UserAvatar from "../UserAvatar";
-import { useCurrentUser } from "@/features/auth";
-import { Button } from "../../ui/button";
-import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
 import { Link } from "react-router";
 import { truncateWords } from "@/utils";
+import { Plus } from "lucide-react";
+
+import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
+import UserAvatar from "../UserAvatar";
+import { Button } from "../../ui/button";
+import { useCurrentUser } from "@/features/auth";
+import FollowerPreview from "../FollowerPreview";
 
 const UserProfileDialog = ({ user }) => {
   const currentUser = useCurrentUser();
@@ -55,9 +56,7 @@ const UserProfileDialog = ({ user }) => {
             {truncateWords(user.bio)}
           </p>
 
-          <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            10 người theo dõi
-          </div>
+          <FollowerPreview followerCount={100} />
 
           {!currentUser ? (
             <AuthRequiredDialog
