@@ -72,7 +72,7 @@ const UsernameHoverCard = ({ user }) => {
 
         <DropdownMenuContent
           align="start"
-          className="w-80 border border-gray-300 p-0 px-2 pb-4 outline-none dark:border-gray-800"
+          className="w-80 border border-gray-300 p-0 px-2 pb-3 outline-none dark:border-[#343232]"
           onPointerEnter={handleMenuMouseEnter}
           onPointerLeave={handleMenuMouseLeave}
           onInteractOutside={() => {
@@ -85,34 +85,60 @@ const UsernameHoverCard = ({ user }) => {
           {/* User Profile Card */}
           <div className="p-3">
             <div className="flex items-start gap-3">
-              {/* Avatar */}
-              <img
-                src={user.avatar_url || defaultImageUser}
-                alt={user.username}
-                className="h-12 w-12 rounded-full object-cover"
-              />
-
               <div className="flex-1">
-                <div className="flex items-center gap-1">
-                  <h3 className="font-semibold text-gray-900 dark:text-white">
-                    {user.name}
-                  </h3>
-                  {user.verified && (
-                    <img
-                      src={verifiedIcon}
-                      alt="Verified badge"
-                      className="h-4 w-4"
-                    />
-                  )}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-1">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {user.name}
+                      </h3>
+                      {user.verified && (
+                        <img
+                          src={verifiedIcon}
+                          alt="Verified badge"
+                          className="h-4 w-4"
+                        />
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-[#c4c4c4]">
+                      {user.username}
+                    </p>
+                  </div>
+                  {/* Avatar */}
+                  <img
+                    src={user.avatar_url || defaultImageUser}
+                    alt={user.username}
+                    className="h-16 w-16 rounded-full object-cover"
+                  />
                 </div>
-                <p className="text-sm text-gray-500 dark:text-[#c4c4c4]">
-                  {user.username}
-                </p>
                 {user.bio && (
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                  <p className="mt-3 text-sm font-semibold">
                     {truncateWords(user.bio, 21)}
                   </p>
                 )}
+                <div className="mt-3 flex gap-1">
+                  {/* Test */}
+                  <div className="flex items-center -space-x-2">
+                    <img
+                      src={defaultImageUser}
+                      alt="Follower 1"
+                      className="h-5 w-5 rounded-full border-2 border-white dark:border-[#181818]"
+                    />
+                    <img
+                      src={defaultImageUser}
+                      alt="Follower 2"
+                      className="h-5 w-5 rounded-full border-2 border-white dark:border-[#181818]"
+                    />
+                    <img
+                      src={defaultImageUser}
+                      alt="Follower 3"
+                      className="h-5 w-5 rounded-full border-2 border-white dark:border-[#181818]"
+                    />
+                  </div>
+                  <p className="text-sm font-semibold dark:text-gray-500">
+                    100 người theo dõi
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -127,7 +153,7 @@ const UsernameHoverCard = ({ user }) => {
             </AuthRequiredDialog>
           ) : (
             currentUser.id !== user.id && (
-              <Button className="w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
+              <Button className="mt-2 w-full dark:bg-white dark:text-black dark:hover:bg-gray-200">
                 Theo dõi
               </Button>
             )
