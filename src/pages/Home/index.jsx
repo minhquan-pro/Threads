@@ -22,7 +22,7 @@ const Home = () => {
 
       // Reset nếu chưa đăng nhập hoặc nếu posts <= 1
       if (!hasLoadedAfterLogin || posts.length <= 1) {
-        sessionStorage.setItem("postsLoadedAfterLogin", "true");
+        sessionStorage.setItem("postsLoadedAfterLogin", true);
         dispatch(resetPosts());
         dispatch(getPosts());
       }
