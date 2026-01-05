@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const Loading = () => {
+const Loading = ({ size, className, isLoading }) => {
+  const isTailwindClass =
+    size &&
+    (size.includes(" ") || size.startsWith("w-") || size.startsWith("h-"));
+
   return (
-    <StyledWrapper>
-      <div className="loader">
+    <StyledWrapper size={!isTailwindClass ? size : undefined}>
+      <div
+        className={`loader ${isTailwindClass ? size : ""} ${className || ""}`}
+      >
         <div className="bar1" />
         <div className="bar2" />
         <div className="bar3" />
@@ -25,8 +31,8 @@ const Loading = () => {
 const StyledWrapper = styled.div`
   .loader {
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: ${(props) => props.size || "28px"};
+    height: ${(props) => props.size || "28px"};
     border-radius: 6px;
   }
 

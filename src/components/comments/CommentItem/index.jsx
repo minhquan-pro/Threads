@@ -51,7 +51,7 @@ const CommentItem = ({ comment, depth = 0 }) => {
         <div className="mt-3">
           {loading ? (
             <div className="flex pl-3">
-              <Loading size="w-3 h-3" />
+              <Loading size="18px" />
             </div>
           ) : (
             replyComments &&
