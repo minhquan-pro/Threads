@@ -6,6 +6,7 @@ import UserAvatar from "@/components/users/UserAvatar";
 import PostHeader from "@/components/Posts/components/PostHeader";
 import PostContent from "@/components/Posts/components/PostContent";
 import { MoveRight } from "lucide-react";
+import { truncateWords } from "@/utils";
 
 const QuoteItem = ({ quotedPostId, quotedPost }) => {
   const originalPostId = quotedPost?.original_post_id;
@@ -51,10 +52,10 @@ const QuoteItem = ({ quotedPostId, quotedPost }) => {
           <PostContent content={content} mediaUrls={quotedPost?.media_urls} />
           {originalPost && (
             <div className="mt-1 flex items-center gap-2 rounded-lg p-2">
-              <MoveRight size={20} color="gray" />
+              <MoveRight size={15} color="gray" />
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 <span> {originalPost?.user.username}</span>
-                {": "} {originalPost?.content}
+                {": "} {truncateWords(originalPost?.content, 25)}
               </span>
             </div>
           )}
