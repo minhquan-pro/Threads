@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
+import dayjs from "dayjs";
 import { formatTime } from "@/utils/formatTime";
 import { formatCountdown } from "@/utils/formatCountdown";
-import verifiedIcon from "@/assets/icons/verifiedIcon.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,7 +50,12 @@ const PostHeader = ({
     type: null,
     open: false,
   });
-  const { exist, secondsLeft } = useElapsedTimeCounter(900);
+  const { exist, secondsLeft } = useElapsedTimeCounter(900, createdAt);
+  const JUST_CREATED_WINDOW_SECONDS = 900;
+  const isJustCreated =
+    Boolean(createdAt) &&
+    Math.abs(dayjs().diff(dayjs(createdAt), "second")) <
+      JUST_CREATED_WINDOW_SECONDS;
   const menuItems = !currentUser
     ? GUEST_MENU_ITEMS
     : currentUser.id === user.id
@@ -67,7 +71,7 @@ const PostHeader = ({
       case "restrict":
         return isRestricted ? "Bỏ hạn chế" : label;
       case "fix":
-        return exist ? label : null;
+        return exist && isJustCreated ? label : null;
     }
 
     return label;
@@ -159,7 +163,7 @@ const PostHeader = ({
               className="border border-gray-300 outline-none dark:border-[#323030]"
             >
               {menuItems.map(({ label, action, type, Icon, danger }, index) => {
-                if (action === "fix" && !exist) return null;
+                if (action === "fix" && (!exist || !isJustCreated)) return null;
 
                 if (type === "separator") {
                   return <DropdownMenuSeparator key={`separator-${index}`} />;
@@ -181,7 +185,7 @@ const PostHeader = ({
                       {Icon ? (
                         <Icon size={18} />
                       ) : (
-                        exist && formatCountdown(secondsLeft)
+                        exist && isJustCreated && formatCountdown(secondsLeft)
                       )}
                     </span>
                   </DropdownMenuItem>
