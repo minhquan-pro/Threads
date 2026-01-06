@@ -34,6 +34,8 @@ export const POST_HEADER_MENU_ITEMS = [
 export const POST_HEADER_USER_MENU_ITEMS = [
   { label: "Thông tin chi tiết", action: "details", Icon: BookUser },
   { type: "separator" },
+  { label: "Chỉnh sửa", action: "fix" },
+  { type: "separator" },
   { label: "Lưu", action: "save", Icon: Save },
   {
     label: "Ẩn số lượt thích và lượt chia sẻ",
