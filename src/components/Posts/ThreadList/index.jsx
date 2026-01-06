@@ -13,7 +13,7 @@ const ThreadList = ({
     <>
       {threads.map((thread, index) => (
         <div key={thread.id} className="relative flex gap-2">
-          <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
+          <ThreadLine show />
           <div className="flex w-full gap-2">
             <UserAvatar user={currentUser} />
             <div className="flex-1">

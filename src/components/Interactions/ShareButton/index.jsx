@@ -54,7 +54,7 @@ const ShareButton = ({ post, hasMenu = false }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="start"
-          className="w-64 border border-gray-300 dark:border-gray-900"
+          className="w-64 border border-gray-300 dark:border-[#323030]"
         >
           <ShareDropdownMenu items={shareMenuItems} />
         </DropdownMenuContent>

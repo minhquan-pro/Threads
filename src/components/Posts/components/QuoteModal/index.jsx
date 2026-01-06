@@ -93,7 +93,7 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
         {threads.map((thread, index) => (
           <div key={thread.id} className="flex gap-3">
             <div className="relative">
-              <ThreadLine show lineStyle="bg-gray-200 dark:bg-gray-700" />
+              <ThreadLine show />
               {index === 0 ? (
                 <UserProfileDialog user={currentUser} />
               ) : (

@@ -91,7 +91,7 @@ const CopyImageDialog = ({ isOpen, post, onClose }) => {
               variant={"outline"}
               onClick={handleDownloadImage}
               className={
-                "w-14 dark:border-gray-600 dark:bg-[#242424] dark:text-gray-200 dark:hover:bg-[#2f2f2f]"
+                "w-14 dark:border-[#323030] dark:bg-[#242424] dark:text-gray-200 dark:hover:bg-[#2f2f2f]"
               }
             >
               {loadingDownload ? <Loading size={"w-4 h-4"} /> : <Download />}

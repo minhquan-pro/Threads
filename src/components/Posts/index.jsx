@@ -30,7 +30,7 @@ const Posts = ({ type }) => {
         return (
           <div
             key={post.id}
-            className="border-t border-gray-300 first-of-type:border-none dark:border-gray-800"
+            className="border-t border-gray-300 first-of-type:border-none dark:border-[#323030]"
           >
             <div
               ref={lastElementRef}

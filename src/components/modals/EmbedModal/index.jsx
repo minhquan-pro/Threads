@@ -31,7 +31,7 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
         <div className="space-y-4">
           <div>
             <div className="relative rounded-lg">
-              <div className="m-auto h-fit max-w-[550px] rounded-2xl border border-gray-400 bg-white p-5 shadow-sm dark:border-gray-600 dark:bg-[#242424]">
+              <div className="m-auto h-fit max-w-[550px] rounded-2xl border border-gray-400 bg-white p-5 shadow-sm dark:border-[#323030] dark:bg-[#242424]">
                 <FeedItem post={post} />
               </div>
               <Link
@@ -46,7 +46,7 @@ const EmbedModal = ({ isOpen, post, onClose }) => {
             <Input
               value={embedCode}
               readOnly
-              className="bg-gray-100 py-7 pr-24 font-mono text-sm shadow-none dark:border-gray-600 dark:bg-[#242424] dark:text-gray-200"
+              className="bg-gray-100 py-7 pr-24 font-mono text-sm shadow-none dark:border-[#323030] dark:bg-[#242424] dark:text-gray-200"
             />
             <Button
               size="sm"

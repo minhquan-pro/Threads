@@ -93,7 +93,7 @@ const Profile = () => {
       </div>
 
       <Tabs defaultValue={"thread"} className="mt-4 border-gray-300 pb-5">
-        <TabsList className="w-full justify-between border-b border-gray-300 bg-transparent px-6 pb-6 dark:border-gray-800">
+        <TabsList className="w-full justify-between border-b border-gray-300 bg-transparent px-6 pb-6 dark:border-[#323030]">
           <TabsTrigger value="thread">Thread</TabsTrigger>
           <TabsTrigger value="replies">Thread trả lời</TabsTrigger>
           <TabsTrigger value="media">File phương tiện</TabsTrigger>

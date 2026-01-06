@@ -24,7 +24,7 @@ const PostModalHeader = ({ title, content, onClose }) => {
   };
   return (
     <>
-      <div className="sticky top-0 right-0 left-0 z-50 min-h-16 border-b border-gray-300 bg-white px-6 pt-5 pb-3 shadow-sm dark:border-gray-800 dark:bg-[#181818]">
+      <div className="sticky top-0 right-0 left-0 z-50 min-h-16 border-b border-gray-300 bg-white px-6 pt-5 pb-3 shadow-sm dark:border-[#323030] dark:bg-[#181818]">
         <div className="flex items-center justify-between">
           <Button
             variant="ghost"

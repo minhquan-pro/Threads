@@ -24,7 +24,7 @@ const UnauthenticatedMenu = () => {
           sideOffset={10}
           align="start"
           alignOffset={20}
-          className="w-64 overflow-hidden border border-gray-300 dark:border-gray-600"
+          className="w-64 overflow-hidden border border-gray-300 dark:border-[#323030]"
         >
           <div
             className={`transition-opacity duration-100 ${

@@ -15,7 +15,7 @@ const PostModalFooter = ({
         className="mr-auto gap-2 border-none p-0 text-gray-500 hover:bg-transparent hover:opacity-70 dark:text-gray-400 dark:hover:text-gray-300"
         aria-label="Các lựa chọn để kiểm soát câu trả lời"
       >
-        <div className="rounded-sm border-2 p-0.5 dark:border-gray-800">
+        <div className="rounded-sm border-2 p-0.5 dark:border-[#323030]">
           <ArrowUpDown size={20} />
         </div>
         <span className="hidden sm:inline">
