@@ -12,7 +12,6 @@ import { loadingSelector, useCurrentUser } from "@/features/auth";
 import { getCurrentUser, login } from "@/services/auth/authService";
 import { loginSchema } from "@/schemas/auth";
 import FormField from "@/components/FormField";
-import { toast } from "@/utils/toast";
 
 const Login = () => {
   const location = useLocation();
@@ -39,9 +38,6 @@ const Login = () => {
       localStorage.setItem("refreshToken", refresh_token);
       dispatch(getCurrentUser());
 
-      toast.success("Đăng nhập thành công", {
-        theme: "colored",
-      });
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setError("password", {
@@ -50,14 +46,6 @@ const Login = () => {
       });
     }
   };
-
-  useEffect(() => {
-    if (location.state) {
-      toast.success(location.state.message, {
-        theme: "colored",
-      });
-    }
-  }, [location]);
 
   useEffect(() => {
     if (currentUser) {
