@@ -1,6 +1,6 @@
 import { Link, Images, Braces } from "lucide-react";
 
-export const getShareMenuItems = (handlers) => {
+export const getShareMenuItems = (handlers, isCurrentUser) => {
   return [
     {
       id: "copy-link",
@@ -19,6 +19,7 @@ export const getShareMenuItems = (handlers) => {
       label: "Lấy mã nhúng",
       Icon: Braces,
       onClick: handlers.onEmbed,
+      visible: isCurrentUser,
     },
   ];
 };

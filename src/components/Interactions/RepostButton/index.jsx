@@ -11,15 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import QuoteModal from "@/components/Posts/components/QuoteModal";
-import { useCurrentUser } from "@/features/auth";
+import { useIsCurrentUsersPost } from "@/hooks";
 
 const RepostButton = ({ post, hasMenu = false }) => {
   const [isOpenQuote, setIsOpenQuote] = useState(false);
   const { toggleRepost } = useOptimisticRepost("post");
-  const currentUser = useCurrentUser();
-  const isCurrentUser = currentUser.id === post?.user.id;
+  const isCurrentUser = useIsCurrentUsersPost(post);
 
   const handleRepost = () => {
+    if (isCurrentUser) return;
+
     try {
       toggleRepost({ postId: post.id, isReposted: post.is_reposted_by_auth });
       toast.default(post.is_reposted_by_auth ? "Đã gỡ" : "Đã đăng lại");
@@ -64,16 +65,32 @@ const RepostButton = ({ post, hasMenu = false }) => {
         >
           <DropdownMenuItem
             disabled={isCurrentUser}
-            onClick={handleRepost}
-            className={`text-md flex justify-between p-3 font-semibold`}
+            onSelect={(e) => {
+              if (isCurrentUser) {
+                e.preventDefault();
+                return;
+              }
+              handleRepost();
+            }}
+            className={`text-md flex justify-between p-3 font-semibold ${
+              isCurrentUser ? "cursor-not-allowed" : ""
+            }`}
           >
             <span>{post.is_reposted_by_auth ? "Bỏ đăng lại" : "Đăng lại"}</span>
             <Repeat className="mr-2 h-4 w-4" />
           </DropdownMenuItem>
           <DropdownMenuItem
             disabled={isCurrentUser}
-            onClick={() => setIsOpenQuote(true)}
-            className={`text-md flex justify-between p-3 font-semibold`}
+            onSelect={(e) => {
+              if (isCurrentUser) {
+                e.preventDefault();
+                return;
+              }
+              setIsOpenQuote(true);
+            }}
+            className={`text-md flex justify-between p-3 font-semibold ${
+              isCurrentUser ? "cursor-not-allowed" : ""
+            }`}
           >
             <span>Trích dẫn</span>
             <MessageSquareQuote className="mr-2 h-4 w-4" />

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useCopyPostUrl, useIsCurrentUsersPost } from "@/hooks";
 import { Send } from "lucide-react";
 
 import {
@@ -6,18 +8,17 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 
+import EmbedModal from "@/components/modals/EmbedModal";
 import Interactions from "..";
 import { getShareMenuItems } from "@/constants/getShareMenuItems";
 import ShareDropdownMenu from "./ShareDropdownMenu";
-import { useState } from "react";
 import CopyImageDialog from "./CopyImageDialog";
-import { useCopyPostUrl } from "@/hooks";
-import EmbedModal from "@/components/modals/EmbedModal";
 
 const ShareButton = ({ post, hasMenu = false }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isEmbedCodeDialogOpen, setIsEmbedCodeDialogOpen] = useState(false);
   const { copyPostUrl } = useCopyPostUrl();
+  const isCurrentUser = useIsCurrentUsersPost(post);
 
   const handleCopy = () => {
     copyPostUrl(post);
@@ -27,11 +28,14 @@ const ShareButton = ({ post, hasMenu = false }) => {
     setIsOpenDialog(false);
   };
 
-  const shareMenuItems = getShareMenuItems({
-    onCopyLink: handleCopy,
-    onCopyImage: () => setIsOpenDialog(true),
-    onEmbed: () => setIsEmbedCodeDialogOpen(true),
-  });
+  const shareMenuItems = getShareMenuItems(
+    {
+      onCopyLink: handleCopy,
+      onCopyImage: () => setIsOpenDialog(true),
+      onEmbed: () => setIsEmbedCodeDialogOpen(true),
+    },
+    isCurrentUser,
+  );
 
   if (!hasMenu) {
     return (
