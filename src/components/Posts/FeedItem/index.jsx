@@ -35,7 +35,9 @@ const FeedItem = ({
   } = post;
 
   const handleClickPost = async (e) => {
-    if (disableNavigation) return;
+    const selection = window.getSelection();
+
+    if (disableNavigation || selection.toString()) return;
 
     e.stopPropagation();
     navigate(`/@${user.username}/post/${id}`, {
