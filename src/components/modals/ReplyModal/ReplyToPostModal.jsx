@@ -67,6 +67,8 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
   };
 
   const onSubmit = async () => {
+    handleClose();
+
     dispatch(optimisticIncrementRepliesCount({ postId: post.id }));
 
     const dataFake = {
@@ -87,7 +89,6 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
       dispatch(optimisticDecrementRepliesCount({ postId: post.id }));
       dispatch(removeOptimisticComment({ postId, idFake }));
     }
-    handleClose();
   };
 
   const lastThreadContent = threads[threads.length - 1]?.content || "";

@@ -6,7 +6,7 @@ const PostModalFooter = ({
   maxLength,
   isSubmitDisabled,
   onSubmit,
-  loading,
+  submitLabel = "Đăng",
 }) => {
   return (
     <div className="sticky right-0 bottom-0 left-0 mt-3 flex items-center justify-between bg-white px-6 py-3 shadow-sm dark:bg-[#181818]">
@@ -34,7 +34,7 @@ const PostModalFooter = ({
           onClick={onSubmit}
           className="min-w-20"
         >
-          {loading ? "Đang đăng..." : "Đăng"}
+          {submitLabel}
         </Button>
       </div>
     </div>

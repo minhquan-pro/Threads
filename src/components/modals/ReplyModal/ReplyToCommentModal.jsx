@@ -66,6 +66,8 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   };
 
   const onSubmit = async () => {
+    handleClose();
+
     const dataFake = {
       id: idFake,
       content: firstThreadContent,
@@ -80,7 +82,6 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     dispatch(addCommentOptimistic(dataFake));
 
     await handleSubmit();
-    handleClose();
   };
 
   return (

@@ -54,6 +54,8 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
   };
 
   const onSubmit = async () => {
+    handleClose();
+
     const dataFake = {
       id: idFake,
       content: firstThreadContent,
@@ -71,7 +73,6 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
     if (!success) {
       dispatch(rollbackQuotePost({ idFake }));
     }
-    handleClose();
   };
 
   const lastThreadContent = threads[threads.length - 1]?.content || "";

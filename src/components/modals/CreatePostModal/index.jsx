@@ -38,8 +38,8 @@ const CreatePostModal = ({ open, onClose }) => {
   } = usePostForm(handleReplySubmit);
 
   const onSubmit = async () => {
-    await handleSubmit();
     handleClose();
+    await handleSubmit();
   };
 
   const handleClose = () => {
