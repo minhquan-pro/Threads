@@ -28,9 +28,9 @@ const BaseThreadModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      className="flex items-center justify-center p-4"
+      className="items-end justify-center p-0! md:items-center md:p-4!"
     >
-      <ModalContent className="flex max-h-[700px] w-full max-w-[600px] flex-col gap-0 overflow-hidden border p-0 sm:min-w-[500px]">
+      <ModalContent className="animate-in slide-in-from-bottom-5 flex h-screen w-screen flex-col gap-0 overflow-hidden rounded-none border-0 p-0 duration-300 sm:min-w-[500px] md:h-auto md:max-h-[700px] md:w-full md:max-w-[600px] md:animate-none md:rounded-lg md:border">
         <ModalTitle className="sr-only">{title}</ModalTitle>
 
         {/* Header */}
@@ -41,7 +41,7 @@ const BaseThreadModal = ({
         />
 
         {/* Content */}
-        <div className="mt-3 flex-1 overflow-y-auto bg-white px-6 dark:bg-[#181818]">
+        <div className="mt-3 flex-1 overflow-y-auto bg-white px-3 md:px-6 dark:bg-[#181818]">
           {children}
 
           {/* Add to thread button */}

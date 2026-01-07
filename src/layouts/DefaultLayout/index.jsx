@@ -8,6 +8,7 @@ import { useNavigation, useTitle } from "@/hooks/useNavigation";
 import HomeTabs from "@/pages/Home/components/HomeTabs";
 import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
+import MobileHeader from "./components/MobileHeader";
 import CreatePostForm from "@/components/Posts/components/CreatePostForm";
 
 const DefaultLayout = () => {
@@ -19,7 +20,8 @@ const DefaultLayout = () => {
 
   return (
     <div className="bg-white dark:bg-black">
-      <div className="fixed bottom-0 h-full">
+      <MobileHeader />
+      <div className="fixed right-0 bottom-0 left-0 z-40 flex h-auto justify-center md:top-0 md:right-auto md:bottom-auto md:left-0 md:flex md:h-full md:w-auto">
         <Sidebar />
       </div>
 
@@ -29,8 +31,10 @@ const DefaultLayout = () => {
         </HomeTabs>
       ) : (
         <div>
-          <Header title={title} />
-          <div className="flex min-h-screen justify-center">
+          <div className="hidden md:block">
+            <Header title={title} />
+          </div>
+          <div className="flex min-h-screen justify-center md:pt-0">
             <div className="relative w-[650px] border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
               <Outlet />
             </div>

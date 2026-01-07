@@ -11,7 +11,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
         value={currentTab}
         onValueChange={handleValueChange}
       >
-        <div className="fixed top-0 right-0 left-0 z-50 m-auto w-[700px]">
+        <div className="fixed top-0 right-0 left-0 z-50 m-auto hidden w-[700px] md:block">
           <div className="flex items-center">
             <TabsList className="relative min-h-16 w-full gap-5 rounded-none border-gray-800 bg-white dark:border-[#323030] dark:bg-black">
               <TabsTrigger value="for-you">Dành cho bạn</TabsTrigger>

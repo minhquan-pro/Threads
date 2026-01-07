@@ -32,19 +32,21 @@ const Profile = () => {
   }, [displayUser.name, displayUser.username]);
 
   return (
-    <div className="pt-10">
-      <div className="p-6 dark:text-white">
+    <div className="pt-16 pb-24 md:pt-10 md:pb-6">
+      <div className="px-4 py-6 md:px-6 dark:text-white">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-3xl font-bold">{displayUser.name}</p>
-            <span className="text-gray-600 dark:text-gray-400">
+            <p className="text-2xl font-bold md:text-3xl">{displayUser.name}</p>
+            <span className="text-sm text-gray-600 md:text-base dark:text-gray-400">
               {displayUser.username}
             </span>
           </div>
           <UserAvatar imgSize="w-20 h-20" />
         </div>
 
-        <p className="mt-6 mb-1">{displayUser.bio || "Chưa có tiểu sử"}</p>
+        <p className="mt-6 mb-1 text-sm md:text-base">
+          {displayUser.bio || "Chưa có tiểu sử"}
+        </p>
 
         <div className="flex items-center justify-between">
           <div className="cursor-pointer text-sm text-gray-600 hover:opacity-90 dark:text-gray-400">
@@ -71,19 +73,22 @@ const Profile = () => {
         </div>
 
         {isProfileCurrentUser ? (
-          <Button className={"mt-6 w-full border-gray-300"} variant={"outline"}>
+          <Button
+            className={"mt-6 w-full border-gray-300 text-sm md:text-base"}
+            variant={"outline"}
+          >
             Chỉnh sửa trang cá nhân
           </Button>
         ) : (
           <div className="flex gap-2">
             <Button
-              className={"mt-6 flex-1 border-gray-300"}
+              className={"mt-6 flex-1 border-gray-300 text-sm md:text-base"}
               variant={"outline"}
             >
               Theo dõi
             </Button>
             <Button
-              className={"mt-6 flex-1 border-gray-300"}
+              className={"mt-6 flex-1 border-gray-300 text-sm md:text-base"}
               variant={"outline"}
             >
               Nhắc đến
@@ -92,12 +97,35 @@ const Profile = () => {
         )}
       </div>
 
-      <Tabs defaultValue={"thread"} className="mt-4 border-gray-300 pb-5">
-        <TabsList className="w-full justify-between border-b border-gray-300 bg-transparent px-6 pb-6 dark:border-[#323030]">
-          <TabsTrigger value="thread">Thread</TabsTrigger>
-          <TabsTrigger value="replies">Thread trả lời</TabsTrigger>
-          <TabsTrigger value="media">File phương tiện</TabsTrigger>
-          <TabsTrigger value="reposts">Bài đăng lại</TabsTrigger>
+      <Tabs
+        defaultValue={"thread"}
+        className="mt-4 border-gray-300 pb-4 md:pb-5"
+      >
+        <TabsList className="w-full justify-between border-b border-gray-300 bg-transparent px-3 pb-3 md:px-6 md:pb-6 dark:border-[#323030]">
+          <TabsTrigger
+            value="thread"
+            className="px-2 py-1 text-xs md:px-3 md:py-2 md:text-base"
+          >
+            Thread
+          </TabsTrigger>
+          <TabsTrigger
+            value="replies"
+            className="px-2 py-1 text-xs md:px-3 md:py-2 md:text-base"
+          >
+            Thread trả lời
+          </TabsTrigger>
+          <TabsTrigger
+            value="media"
+            className="px-2 py-1 text-xs md:px-3 md:py-2 md:text-base"
+          >
+            File phương tiện
+          </TabsTrigger>
+          <TabsTrigger
+            value="reposts"
+            className="px-2 py-1 text-xs md:px-3 md:py-2 md:text-base"
+          >
+            Bài đăng lại
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="thread"></TabsContent>
         <TabsContent value="replies"></TabsContent>
