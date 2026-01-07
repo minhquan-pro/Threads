@@ -18,20 +18,24 @@ import PostComposer from "../../PostComposer";
 import Loading from "@/components/common/Loading";
 import QuoteItem from "@/components/common/QuoteItem";
 import { quotePost } from "@/services/Posts";
+import { usePostViewNavigation } from "@/hooks";
 
 const QuoteModal = ({ post, isOpen, onClose }) => {
   const dispatch = useDispatch();
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
   const currentUser = useCurrentUser();
   const postId = post?.id;
+  const { viewPost } = usePostViewNavigation();
 
-  const handleReplySubmit = useCallback(
+  const handleQuoteSubmit = useCallback(
     async ({ content }) => {
       const response = await quotePost(postId, {
         content,
         reply_permission: post.reply_permission,
       });
       dispatch(updateQuotePost({ response, idFake }));
+
+      return response;
     },
     [postId, post.reply_permission, dispatch, idFake],
   );
@@ -46,7 +50,9 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
     handleThreadContentChange,
     handleRemoveThread,
     resetThreads,
-  } = usePostForm(handleReplySubmit);
+  } = usePostForm(handleQuoteSubmit, {
+    onSuccessView: viewPost,
+  });
 
   const handleClose = () => {
     resetThreads();

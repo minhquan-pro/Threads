@@ -6,7 +6,7 @@ export const createPost = createAsyncThunk(
   async (postData, { rejectWithValue }) => {
     try {
       const response = await http.post("/posts", postData);
-      return response.data;
+      return response?.data;
     } catch (error) {
       return rejectWithValue(error.response?.data);
     }

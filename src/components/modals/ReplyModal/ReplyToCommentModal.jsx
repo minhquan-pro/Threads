@@ -14,6 +14,7 @@ import ThreadLine from "@/components/common/ThreadLine";
 import FeedItem from "@/components/Posts/FeedItem";
 import PostComposer from "@/components/Posts/PostComposer";
 import UserAvatar from "@/components/users/UserAvatar";
+import { usePostViewNavigation } from "@/hooks";
 
 const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   const idFake = useMemo(() => `temp-${uuidv4()}`, []);
@@ -21,6 +22,7 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
   const currentUser = useCurrentUser();
   const commentId = post?.id;
   const originalPostId = post?.parent_id;
+  const { viewPost } = usePostViewNavigation();
 
   const handleReplySubmit = useCallback(
     async ({ content }) => {
@@ -54,8 +56,8 @@ const ReplyToCommentModal = ({ post, isOpen, onClose }) => {
     resetThreads,
     handleSubmit,
   } = usePostForm(handleReplySubmit, {
-    successMessage: "Đã đăng",
     errorMessage: "Không thể đăng bình luận. Vui lòng thử lại!",
+    onSuccessView: viewPost,
   });
 
   const lastThreadContent = threads[threads.length - 1]?.content;
