@@ -25,7 +25,6 @@ const RepostButton = ({ post, hasMenu = false }) => {
       toggleRepost({ postId: post.id, isReposted: post.is_reposted_by_auth });
       toast.default(post.is_reposted_by_auth ? "Đã gỡ" : "Đã đăng lại");
     } catch (error) {
-      console.log(error);
       toast.error("Có lỗi xảy ra! Vui lòng thử lại");
     }
   };

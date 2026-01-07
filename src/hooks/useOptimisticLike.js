@@ -15,7 +15,6 @@ export const useOptimisticLike = (type) => {
       await likePost(postId);
     } catch (error) {
       dispatch(optimisticUpdateLikePost({ postId, isLiked: !isLiked }));
-      console.log(error);
     }
   };
 

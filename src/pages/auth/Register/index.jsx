@@ -50,8 +50,8 @@ const Register = () => {
           autoClose: 1500,
         });
       }
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      console.log(error);
       toast.error("Có lỗi xảy ra! Vui lòng thử lại", {
         theme: "colored",
       });
