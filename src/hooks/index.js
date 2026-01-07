@@ -7,3 +7,4 @@ export * from "./useScrollRestoration";
 export * from "./useSnowfallVisibility";
 export * from "./useScrollLock";
 export * from "./useElapsedTimeCounter";
+export * from "./usePostViewNavigation";
