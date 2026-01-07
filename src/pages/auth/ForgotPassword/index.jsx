@@ -39,6 +39,7 @@ const ForgotPassword = () => {
         localStorage.setItem("resetEmail", data.email);
       }
     } catch (error) {
+      console.log(error);
       toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.", { theme: "colored" });
     }
   };

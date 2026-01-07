@@ -11,6 +11,7 @@ export const useOptimisticRepost = (type) => {
     try {
       await (type === "post" ? repostPost(postId) : repostComment(postId));
     } catch (error) {
+      console.log(error);
       dispatch(optimisticUpdateRepostPost({ postId, isReposted: !isReposted }));
     }
   };

@@ -33,9 +33,8 @@ const AuthenticatedMenu = () => {
     if (action === "logout") {
       try {
         await dispatch(logout()).unwrap();
-        // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        /* empty */
+        console.log(error);
       } finally {
         const currentTheme = localStorage.getItem("theme");
 

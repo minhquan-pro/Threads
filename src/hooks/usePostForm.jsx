@@ -79,6 +79,7 @@ export const usePostForm = (
       resetThreads();
       return result;
     } catch (error) {
+      console.log(error);
       toast.update(toastId, {
         render: errorMessage,
         type: "error",
