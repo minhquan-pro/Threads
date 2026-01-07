@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { ToastSuccess } from "@/components/common/ToastSuccess";
 
 export const usePostForm = (
   submitFunction,
-  options = { successMessage: "Đã đăng", errorMessage: "Đăng thất bại" },
+  options = {
+    successMessage: "Đã đăng",
+    errorMessage: "Đăng thất bại",
+    onSuccessView: null,
+    viewLabel: "Xem",
+  },
 ) => {
-  const { successMessage, errorMessage } = options;
+  const { successMessage, errorMessage, onSuccessView, viewLabel } = options;
   const [loading, setLoading] = useState(false);
+  const [lastResult, setLastResult] = useState(null);
   const isDark = document.documentElement.classList.contains("dark");
   const [threads, setThreads] = useState([
     { id: uuidv4(), content: "", showButton: false },
@@ -55,9 +62,18 @@ export const usePostForm = (
 
     try {
       const result = await submitFunction({ content: firstThreadContent });
+      setLastResult(result);
+
+      const handleView = onSuccessView ? () => onSuccessView(result) : null;
 
       toast.update(toastId, {
-        render: successMessage,
+        render: (
+          <ToastSuccess
+            message={successMessage}
+            onView={handleView}
+            viewLabel={viewLabel}
+          />
+        ),
         type: "default",
         isLoading: false,
         autoClose: 1000,
@@ -84,6 +100,7 @@ export const usePostForm = (
 
   return {
     loading,
+    lastResult,
     threads,
     firstThreadContent,
     hasContent,
