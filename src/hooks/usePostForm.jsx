@@ -6,13 +6,14 @@ import { ToastSuccess } from "@/components/common/ToastSuccess";
 export const usePostForm = (
   submitFunction,
   options = {
-    successMessage: "Đã đăng",
-    errorMessage: "Đăng thất bại",
-    onSuccessView: null,
-    viewLabel: "Xem",
+    onSuccessView: () => {},
   },
 ) => {
-  const { successMessage, errorMessage, onSuccessView, viewLabel } = options;
+  const {
+    successMessage = "Đã đăng",
+    errorMessage = "Đăng thất bại",
+    onSuccessView,
+  } = options;
   const [loading, setLoading] = useState(false);
   const [lastResult, setLastResult] = useState(null);
   const isDark = document.documentElement.classList.contains("dark");
@@ -67,13 +68,7 @@ export const usePostForm = (
       const handleView = onSuccessView ? () => onSuccessView(result) : null;
 
       toast.update(toastId, {
-        render: (
-          <ToastSuccess
-            message={successMessage}
-            onView={handleView}
-            viewLabel={viewLabel}
-          />
-        ),
+        render: <ToastSuccess message={successMessage} onView={handleView} />,
         type: "default",
         isLoading: false,
         autoClose: 1000,
