@@ -4,11 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThreads } from "@fortawesome/free-brands-svg-icons";
 import { useCurrentUser } from "@/features/auth";
 import { useState } from "react";
-import ThemeSubmenu from "@/components/AuthenticatedMenu/components/ThemeSubmenu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { THEMES, MENU_OFFSET } from "@/constants";
 
 const MobileHeader = () => {
   const currentUser = useCurrentUser();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,19 +37,46 @@ const MobileHeader = () => {
             <ArrowLeft size={24} />
           </button>
         ) : (
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-            aria-label="Toggle menu"
-          >
-            <Menu size={24} />
-          </button>
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger className="outline-none">
+              <button
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                aria-label="Open theme menu"
+              >
+                <Menu size={24} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              sideOffset={MENU_OFFSET.side}
+              align="start"
+              alignOffset={MENU_OFFSET.align}
+              className="w-64 overflow-hidden border border-gray-300 dark:border-[#323030]"
+            >
+              <div className="mt-2 flex items-center justify-between rounded-xl bg-gray-50 p-2 dark:bg-[#181818]">
+                {THEMES.map((theme) => {
+                  const Icon = theme.icon;
+                  return (
+                    <DropdownMenuItem
+                      key={theme.value}
+                      className="w-full px-4 py-3 font-semibold text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-600"
+                      onSelect={(e) => {
+                        e.preventDefault();
+                        window.setTheme(theme.value);
+                      }}
+                    >
+                      {Icon && <Icon className="m-auto" />}
+                    </DropdownMenuItem>
+                  );
+                })}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
 
         <Link to="/" onClick={handleLogoClick} className="cursor-pointer">
           <FontAwesomeIcon
             icon={faThreads}
-            className="text-2xl hover:scale-90 dark:text-white"
+            className="text-4xl hover:scale-90 dark:text-white"
           />
         </Link>
 
