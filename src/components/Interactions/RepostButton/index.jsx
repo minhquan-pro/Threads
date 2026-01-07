@@ -11,10 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import QuoteModal from "@/components/Posts/components/QuoteModal";
+import { useCurrentUser } from "@/features/auth";
 
 const RepostButton = ({ post, hasMenu = false }) => {
   const [isOpenQuote, setIsOpenQuote] = useState(false);
   const { toggleRepost } = useOptimisticRepost("post");
+  const currentUser = useCurrentUser();
+  const isCurrentUser = currentUser.id === post?.user.id;
 
   const handleRepost = () => {
     try {
@@ -60,15 +63,17 @@ const RepostButton = ({ post, hasMenu = false }) => {
           className="w-56 border border-gray-300 dark:border-[#323030]"
         >
           <DropdownMenuItem
+            disabled={isCurrentUser}
             onClick={handleRepost}
-            className="text-md flex justify-between p-3 font-semibold"
+            className={`text-md flex justify-between p-3 font-semibold`}
           >
             <span>{post.is_reposted_by_auth ? "Bỏ đăng lại" : "Đăng lại"}</span>
             <Repeat className="mr-2 h-4 w-4" />
           </DropdownMenuItem>
           <DropdownMenuItem
+            disabled={isCurrentUser}
             onClick={() => setIsOpenQuote(true)}
-            className="text-md flex justify-between p-3 font-semibold"
+            className={`text-md flex justify-between p-3 font-semibold`}
           >
             <span>Trích dẫn</span>
             <MessageSquareQuote className="mr-2 h-4 w-4" />
