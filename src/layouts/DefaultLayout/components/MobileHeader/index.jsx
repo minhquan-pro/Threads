@@ -14,26 +14,32 @@ const MobileHeader = () => {
 
   const isHome = location.pathname === "/";
   const isFollowing = location.pathname.startsWith("/following");
+  const isItemDetailPage = location.pathname.includes("/post/");
 
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    if (!isHome) {
+      navigate("/");
+      return;
+    }
 
-  const isItemDetailPage = location.pathname.includes("/post/");
+    window.scrollY === 0
+      ? window.location.reload()
+      : window.scrollTo({ top: 0 });
+  };
 
   return (
     <>
       {/* Mobile Header */}
-      <div className="fixed top-0 right-0 left-0 z-50 flex h-14 items-center justify-between bg-white/80 px-4 backdrop-blur-md md:hidden dark:bg-black/80 dark:shadow-xl">
+      <div className="fixed top-0 right-0 left-0 z-50 flex h-15 items-center justify-between bg-white/80 px-4 backdrop-blur-md md:hidden dark:bg-black/80 dark:shadow-xl">
         {/* Left - Menu/Back Button */}
-        <div>
+        <div className="mb-3 h-6 w-6">
           {isItemDetailPage && (
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+              className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
               aria-label="Go back"
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft />
             </button>
           )}
         </div>
@@ -49,7 +55,7 @@ const MobileHeader = () => {
           {!currentUser ? (
             <Link
               to="/login"
-              className="inline-flex items-center gap-2 rounded-md bg-black px-3 py-2 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+              className="inline-flex items-center gap-2 rounded-md bg-black p-2 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
             >
               <span className="text-sm font-semibold">Đăng nhập</span>
             </Link>
@@ -62,7 +68,7 @@ const MobileHeader = () => {
       </div>
 
       {/* Mobile Tabs: For You / Following */}
-      {currentUser && !isItemDetailPage && (
+      {currentUser && isHome && (
         <div className="border-b border-gray-200 bg-white/80 pt-16 backdrop-blur-md md:hidden dark:border-[#2f2f2f] dark:bg-black/80">
           <div className="mx-auto flex max-w-screen-sm">
             <Link
