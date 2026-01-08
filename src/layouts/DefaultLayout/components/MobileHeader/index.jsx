@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,14 +12,18 @@ const MobileHeader = () => {
   const currentUser = useCurrentUser();
   const location = useLocation();
   const navigate = useNavigate();
+  const [tabActive, setTabActive] = useState(location.pathname);
 
   const isHome = location.pathname === "/";
   const isFollowing = location.pathname.startsWith("/following");
   const isItemDetailPage = location.pathname.includes("/post/");
+  const showTabs = isHome || isFollowing;
 
-  const handleLogoClick = () => {
-    if (!isHome) {
-      navigate("/");
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+
+    if (!showTabs) {
+      navigate(tabActive);
       return;
     }
 
@@ -68,10 +73,13 @@ const MobileHeader = () => {
       </div>
 
       {/* Mobile Tabs: For You / Following */}
-      {currentUser && isHome && (
+      {currentUser && showTabs && (
         <div className="border-b border-gray-200 bg-white/80 pt-16 backdrop-blur-md md:hidden dark:border-[#2f2f2f] dark:bg-black/80">
           <div className="mx-auto flex max-w-screen-sm">
             <Link
+              onClick={() => {
+                setTabActive("/");
+              }}
               to="/"
               className={`${
                 isHome
@@ -79,9 +87,12 @@ const MobileHeader = () => {
                   : "text-gray-500 dark:text-gray-400"
               } flex-1 py-2 text-center font-semibold`}
             >
-              Dành cho bạn
+              <div>Dành cho bạn</div>
             </Link>
             <Link
+              onClick={() => {
+                setTabActive("/following");
+              }}
               to="/following"
               className={`${
                 isFollowing
@@ -89,7 +100,7 @@ const MobileHeader = () => {
                   : "text-gray-500 dark:text-gray-400"
               } flex-1 py-2 text-center font-semibold`}
             >
-              Đang theo dõi
+              <div>Đang theo dõi</div>
             </Link>
           </div>
         </div>
