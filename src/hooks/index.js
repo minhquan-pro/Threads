@@ -9,3 +9,4 @@ export * from "./useScrollLock";
 export * from "./useElapsedTimeCounter";
 export * from "./usePostViewNavigation";
 export * from "./useIsCurrentUsersPost";
+export * from "./useMediaQuery";
