@@ -1,6 +1,7 @@
 import Snowfall from "react-snowfall";
 import { useEffect, useState } from "react";
 import useSnowfallVisibility from "@/hooks/useSnowfallVisibility";
+import { useIsDesktop } from "@/hooks";
 import snow from "@/assets/images/snow.svg";
 
 export default function SnowOverlay({ threshold = 200, speed = [0.5, 1] }) {
@@ -9,6 +10,7 @@ export default function SnowOverlay({ threshold = 200, speed = [0.5, 1] }) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const isDesktop = useIsDesktop();
 
   useEffect(() => {
     const checkTheme = () => {
@@ -67,7 +69,7 @@ export default function SnowOverlay({ threshold = 200, speed = [0.5, 1] }) {
         speed={speed}
         wind={[-0.5, 0.5]}
         images={snowImages}
-        snowflakeCount={20}
+        snowflakeCount={isDesktop ? 20 : 10}
         radius={[7, 7]}
       />
     </div>

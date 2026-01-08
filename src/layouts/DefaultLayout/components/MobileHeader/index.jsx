@@ -12,6 +12,9 @@ const MobileHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isHome = location.pathname === "/";
+  const isFollowing = location.pathname.startsWith("/following");
+
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -21,7 +24,7 @@ const MobileHeader = () => {
   return (
     <>
       {/* Mobile Header */}
-      <div className="fixed top-0 right-0 left-0 z-50 flex h-14 items-center justify-between bg-white px-4 shadow-md md:hidden dark:bg-black dark:shadow-xl">
+      <div className="fixed top-0 right-0 left-0 z-50 flex h-14 items-center justify-between bg-white/80 px-4 backdrop-blur-md md:hidden dark:bg-black/80 dark:shadow-xl">
         {/* Left - Menu/Back Button */}
         <div>
           {isItemDetailPage && (
@@ -57,6 +60,34 @@ const MobileHeader = () => {
           )}
         </div>
       </div>
+
+      {/* Mobile Tabs: For You / Following */}
+      {currentUser && !isItemDetailPage && (
+        <div className="border-b border-gray-200 bg-white/80 pt-16 backdrop-blur-md md:hidden dark:border-[#2f2f2f] dark:bg-black/80">
+          <div className="mx-auto flex max-w-screen-sm">
+            <Link
+              to="/"
+              className={`${
+                isHome
+                  ? "border-b-2 border-black text-black dark:border-white dark:text-white"
+                  : "text-gray-500 dark:text-gray-400"
+              } flex-1 py-2 text-center font-semibold`}
+            >
+              Dành cho bạn
+            </Link>
+            <Link
+              to="/following"
+              className={`${
+                isFollowing
+                  ? "border-b-2 border-black text-black dark:border-white dark:text-white"
+                  : "text-gray-500 dark:text-gray-400"
+              } flex-1 py-2 text-center font-semibold`}
+            >
+              Đang theo dõi
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 };

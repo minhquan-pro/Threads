@@ -13,7 +13,7 @@ import { ArrowRight, Menu } from "lucide-react";
 import { Spinner } from "../ui/spinner";
 
 import { MENU_GROUPS, MENU_ITEMS, MENU_OFFSET } from "@/constants";
-import { useMenuSubmenu } from "@/hooks";
+import { useMenuSubmenu, useIsDesktop } from "@/hooks";
 import {
   loadingSelector as authLoadingSelector,
   setCurrentUser,
@@ -28,6 +28,7 @@ const AuthenticatedMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector(authLoadingSelector);
+  const isDesktop = useIsDesktop();
 
   const handleClickMenuItem = async (action) => {
     if (action === "logout") {
@@ -93,7 +94,7 @@ const AuthenticatedMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         sideOffset={MENU_OFFSET.side}
-        align="start"
+        align={isDesktop ? "start" : "end"}
         className="w-60 overflow-hidden border border-gray-300 bg-white dark:border-[#2f2f2f] dark:bg-[#181818]"
         alignOffset={MENU_OFFSET.align}
       >
