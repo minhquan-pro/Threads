@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div
-      className={`overflow-hidden bg-white ${isShowPadding && "pt-16"} dark:bg-[#181818]`}
+      className={`overflow-hidden bg-white pt-3 ${isShowPadding && "pt-16"} dark:bg-[#181818]`}
     >
       {currentUser && <CreatePost />}
 

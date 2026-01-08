@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import UserAvatar from "@/components/users/UserAvatar";
 import { useCurrentUser } from "@/features/auth";
-import { Modal, ModalContent, ModalTitle } from "@/components/common/Modal";
+
 import FollowerPreview from "@/components/users/FollowerPreview";
 
 const Profile = () => {

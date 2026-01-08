@@ -113,7 +113,7 @@ const ItemDetailPage = () => {
   }
 
   return (
-    <div className="custom-scrollbar min-h-screen pt-17 pb-15 sm:pt-10 md:pt-21 md:pb-0">
+    <div className="custom-scrollbar min-h-screen pt-19 pb-15 sm:pt-10 md:pt-21 md:pb-0">
       {/* Post detail */}
       <div className="ps-6 pe-6">
         {currentItem?.parent_id ? (

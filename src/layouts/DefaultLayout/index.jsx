@@ -35,7 +35,7 @@ const DefaultLayout = () => {
             <Header title={title} />
           </div>
           <div className="flex min-h-screen justify-center md:pt-0">
-            <div className="relative w-[650px] border-x border-gray-200 border-t-transparent shadow-md dark:border-[#181818] dark:bg-[#181818]">
+            <div className="relative w-[650px] border-gray-200 border-t-transparent shadow-md md:border-x dark:border-[#181818] dark:bg-[#181818]">
               <Outlet />
             </div>
           </div>
