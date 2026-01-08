@@ -96,7 +96,7 @@ const ItemDetailPage = () => {
   // Loading state
   if (currentItemLoading) {
     return (
-      <div className="flex justify-center py-10">
+      <div className="flex min-h-screen items-center justify-center py-10">
         <Loading size="w-6 h-6" />
       </div>
     );
