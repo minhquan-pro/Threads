@@ -19,7 +19,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-2 border-b border-gray-300 bg-white p-4 dark:border-[#323030] dark:bg-[#181818]">
+    <div className="hidden items-center justify-between gap-2 border-b border-gray-300 bg-white p-4 md:flex dark:border-[#323030] dark:bg-[#181818]">
       <div className="flex w-full items-center">
         <Link to={"/profile"}>
           <UserAvatar imgSize="w-9 h-9" src={currentUser.avatar_url} />

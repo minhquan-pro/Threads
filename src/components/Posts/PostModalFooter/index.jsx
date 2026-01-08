@@ -9,7 +9,7 @@ const PostModalFooter = ({
   submitLabel = "Đăng",
 }) => {
   return (
-    <div className="sticky right-0 bottom-0 left-0 mt-3 flex items-center justify-between bg-white px-6 py-3 shadow-sm dark:bg-[#181818]">
+    <div className="mt-3 flex items-center justify-between border-t border-[#2f2f2f] bg-white px-6 py-3 md:sticky md:right-0 md:bottom-0 md:left-0 md:border-none md:shadow-sm dark:bg-[#181818]">
       <Button
         variant="ghost"
         className="mr-auto gap-2 border-none p-0 text-gray-500 hover:bg-transparent hover:opacity-70 dark:text-gray-400 dark:hover:text-gray-300"

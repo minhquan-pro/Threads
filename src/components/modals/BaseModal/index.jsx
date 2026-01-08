@@ -41,7 +41,7 @@ const BaseThreadModal = ({
         />
 
         {/* Content */}
-        <div className="mt-3 flex-1 overflow-y-auto bg-white px-3 md:px-6 dark:bg-[#181818]">
+        <div className="mt-3 overflow-y-auto bg-white px-3 md:flex-1 md:px-6 dark:bg-[#181818]">
           {children}
 
           {/* Add to thread button */}
