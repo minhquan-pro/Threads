@@ -21,13 +21,8 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const hasLoadedAfterLogin = sessionStorage.getItem(
-        "postsLoadedAfterLogin",
-      );
-
-      // Reset nếu chưa đăng nhập hoặc nếu posts <= 3
-      if (!hasLoadedAfterLogin || posts.length <= 3) {
-        sessionStorage.setItem("postsLoadedAfterLogin", true);
+      // Reset nếu posts <= 3
+      if (posts.length <= 3) {
         dispatch(resetPosts());
         dispatch(getPosts());
       }
