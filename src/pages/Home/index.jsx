@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 import { getPosts } from "@/services/Posts";
 import { useCurrentUser } from "@/features/auth";
@@ -19,24 +19,11 @@ const Home = () => {
   const isDeskTop = useIsDesktop();
   const isShowPadding = isDeskTop || !currentUser;
 
-  const previousUserRef = useRef(currentUser);
-  const hasLoadedRef = useRef(false);
-
   useEffect(() => {
-    if (currentUser && (!previousUserRef.current || !hasLoadedRef.current)) {
-      if (posts.length > 3) {
-        return;
-      }
-
+    if (currentUser && posts.length <= 3) {
       dispatch(resetPosts());
       dispatch(getPosts());
-      hasLoadedRef.current = true;
     }
-    previousUserRef.current = currentUser;
-
-    return () => {
-      hasLoadedRef.current = false;
-    };
   }, [currentUser, dispatch, posts.length]);
 
   return (
