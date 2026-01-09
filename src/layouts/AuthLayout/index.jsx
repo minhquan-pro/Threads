@@ -13,18 +13,18 @@ const AuthLayout = () => {
   const description = currentPage.description || "";
 
   return (
-    <div className="flex h-screen items-center justify-center bg-white dark:bg-[#181818]">
-      <div className="fixed -top-20 right-0 left-0">
+    <div className="relative flex min-h-screen items-center justify-center bg-white px-4 py-6 sm:items-center sm:px-0 sm:py-0 dark:bg-[#181818]">
+      <div className="pointer-events-none fixed inset-x-0 -top-20 hidden sm:block">
         <AspectRatio ratio={16 / 9}>
-          <img src={decorImg} />
+          <img src={decorImg} alt="decor" />
         </AspectRatio>
       </div>
 
-      <div className="z-50 w-[350px] text-center">
-        <h1 className="mb-3 text-3xl font-bold text-gray-900 dark:text-white">
+      <div className="z-50 w-full max-w-sm rounded-2xl p-4 text-center shadow-lg backdrop-blur sm:w-[350px] sm:backdrop-blur-none">
+        <h1 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
           {title}
         </h1>
-        <p className="mb-3 text-sm font-medium text-gray-600 dark:text-gray-400">
+        <p className="mb-4 text-sm font-medium text-gray-600 sm:mb-3 dark:text-gray-400">
           {description}
         </p>
         <Outlet />
