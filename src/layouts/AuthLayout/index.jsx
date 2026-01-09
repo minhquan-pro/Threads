@@ -20,7 +20,7 @@ const AuthLayout = () => {
         </AspectRatio>
       </div>
 
-      <div className="z-50 w-full max-w-sm rounded-2xl p-4 text-center shadow-lg backdrop-blur sm:w-[350px] sm:backdrop-blur-none">
+      <div className="z-50 w-full max-w-sm rounded-2xl p-4 text-center backdrop-blur sm:w-[350px] sm:backdrop-blur-none">
         <h1 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
           {title}
         </h1>
