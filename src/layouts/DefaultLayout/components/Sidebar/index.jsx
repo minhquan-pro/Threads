@@ -25,8 +25,6 @@ const Sidebar = () => {
     setTabActive(location.pathname);
   }, [location.pathname]);
 
-  console.log(tabActive);
-
   const handleNavigate = () => {
     if (location.pathname === "/") {
       window.scrollY === 0
@@ -109,7 +107,7 @@ const Sidebar = () => {
         <Link to={"/"} onClick={handleNavigate} className="cursor-pointer">
           <FontAwesomeIcon
             icon={faThreads}
-            className="text-4xl hover:scale-90 dark:text-white"
+            className="z-10 text-4xl hover:scale-90 dark:text-white"
           />
         </Link>
         <div className="flex flex-col gap-8">{renderNavItems(false)}</div>

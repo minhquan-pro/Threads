@@ -53,7 +53,7 @@ const PostContent = ({ content, mediaUrls }) => {
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
+                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
                     loading="lazy"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -76,7 +76,7 @@ const PostContent = ({ content, mediaUrls }) => {
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
+                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
                     loading="lazy"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -104,7 +104,7 @@ const PostContent = ({ content, mediaUrls }) => {
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
+                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
                       loading="lazy"
                       onClick={(e) => {
                         e.stopPropagation();

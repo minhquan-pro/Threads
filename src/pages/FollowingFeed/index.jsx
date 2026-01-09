@@ -10,43 +10,28 @@ const DEMO_POSTS = [
     id: 222,
     user: {
       id: 111,
-      username: "not.phwgahnn",
-      name: "Phuong Anh",
+      username: "khanhVy",
+      name: "Khánh Vy",
       avatar_url:
-        "https://app.publer.com/uploads/tmp/1767972619-601575382700753-8086-3442/mini_magick20260109-48008-sjo6u6.jpg",
+        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/453222907_1010838550413842_6211143939307217198_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XWPjQO-wBLkQ7kNvwEekuYf&_nc_oc=AdlJsMf6kef3jowiwR1_tI2R_aRauTRRvzaJKqyprJqLvZU2Dg0QbiDKCtx75RZ5o0k&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=O0s0hufngdDApKBUXTCzZg&oh=00_Afq0Aq_9EFE6z02AajQZm_Y8GVU37dJZ_Yj45_oPCt_pXA&oe=6966F285",
       verified: true,
       isFollowing: true,
     },
-    content: "bạch nguyệt quang qs nên phải up thui",
+    content: `📺 Xem gì để cả năm vui vẻ và luôn có niềm tin? 
+🫶🏻 Top1: "Bản giao hưởng Việt Nam" ✨
+Năm 2026 tới với những thanh âm rộn ràng của một bản giao hưởng đầy tự hào 💕 Hãy cùng Vy theo dõi hành trình của những câu chuyện và khát vọng vươn lên của người Việt được thể hiện qua tiết mục nghệ thuật mãn nhãn chỉ có tại “Chào năm mới 2026 - Bản giao hưởng Việt Nam” 
+📺 Đón xem chương trình vào lúc 20h10 ngày 01/01/2026 trên kênh VTV1 nha 💕`,
     media_urls: [
-      "https://app.publer.com/uploads/tmp/1767972519-557425316256546-9282-6777/mini_magick20260109-47664-iaq68r.jpg",
-      "https://app.publer.com/uploads/tmp/1767972554-376247916110270-8028-3616/mini_magick20260109-48008-yjwonz.jpg",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/605635930_1386510262846667_7732816289108268982_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=8692yEgGkB4Q7kNvwEAeigg&_nc_oc=AdlMri8pCODbxbuXiw5OB9z-OdIlpklNHgYXlFeChZuqtirlJ4yUoDmO4f18n7Jcb4I&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=wuTOgCmaRWUN_Tt4WLzA_w&oh=00_Afor8vR7wMtmUhPl6QdrRYX3-EI1CVpTNFdrBoQIQpYOXw&oe=6966E534",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/608746080_1386510266180000_1903393757452748705_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=u_t2_GS_1w0Q7kNvwHx627W&_nc_oc=Adkjv8uzflCUgIycnRwzdg7h9xfOmnphdYfqBVa4x7Iaw_B2a-OKGVwOBO_T4i9dQKY&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=xPDsGXs7uUf5h-R5e1Z59w&oh=00_Afq5J3RH56GwdHj-iAc0xhKdX5q0TgpW4Lhk1Wk913WH5w&oe=696716CA",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/606871653_1386510289513331_143936856456174911_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=qJs5CzkvVk4Q7kNvwFhElH3&_nc_oc=Adl5xFYm6qYFivwwZ6mCn8ofUHrqTB6OWvqV4AwXc7HUZvy_QAJKtHybJiKqOz8ohjE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=53DWNRMlv4Ba3i_OB60kIA&oh=00_Afpsn9XT1ZXgG67w-S31r_1KTKlrqUWat5pmJPUOULwH2w&oe=69670B7C",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/603856581_1386510246180002_8470671797933348321_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iBUL5vUzrA4Q7kNvwEiOobV&_nc_oc=Adl-HsgehktMoHQh2EKBIDkRg-7ZT9HjaAPAXLji0wpoON4GrmygJ9SI3BcYUS83KNA&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=IA2bGYdGJX_esJVUDnACbw&oh=00_Afr9A6jk0ycW-8aYvMU7TUkuxpGm7neQ_D4Mmy62O99YDw&oe=696709B0",
     ],
-    likes_count: 478,
-    reposts_and_quotes_count: 56,
+    likes_count: 5100,
+    reposts_and_quotes_count: 19,
     replies_count: 77,
     created_at: "2025-11-13T08:02:04.000000Z",
-    is_liked_by_auth: false,
-  },
-  {
-    id: 100,
-    user: {
-      id: 108,
-      username: "DogeDesigner",
-      name: "@cb_doge",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/1498070100393754625/C2V-fbll_400x400.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "BREAKING: xAI is investing more than $20 billion in Mississippi to build a massive data center, called 'MACROHARDRR' This 800,000 sqft facility will host the world’s largest supercomputer & mark the largest investment in state history.xAI is the fastest growing AI company.",
-    media_urls: [],
-    likes_count: 18945,
-    reposts_and_quotes_count: 723,
-    replies_count: 3456,
-    created_at: "2026-01-08T03:17:18.000000Z",
-    is_liked: false,
+    is_liked_by_auth: true,
   },
   {
     id: 11111,
@@ -74,7 +59,7 @@ const DEMO_POSTS = [
     reposts_and_quotes_count: 12,
     replies_count: 67,
     created_at: "30m ago",
-    is_liked_by_auth: false,
+    is_liked_by_auth: true,
   },
   {
     id: 1231,
@@ -101,6 +86,26 @@ Cảm ơn Sài Gòn vì bài học tuổi trẻ này nhé!`,
     replies_count: 19,
     created_at: "2026-01-03T03:17:18.000000Z",
     is_liked_by_auth: true,
+  },
+  {
+    id: 100,
+    user: {
+      id: 108,
+      username: "DogeDesigner",
+      name: "@cb_doge",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1498070100393754625/C2V-fbll_400x400.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content:
+      "BREAKING: xAI is investing more than $20 billion in Mississippi to build a massive data center, called 'MACROHARDRR' This 800,000 sqft facility will host the world’s largest supercomputer & mark the largest investment in state history.xAI is the fastest growing AI company.",
+    media_urls: [],
+    likes_count: 18945,
+    reposts_and_quotes_count: 723,
+    replies_count: 3456,
+    created_at: "2026-01-08T03:17:18.000000Z",
+    is_liked: false,
   },
   {
     id: 12351,
