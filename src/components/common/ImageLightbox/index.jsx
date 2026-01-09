@@ -32,10 +32,7 @@ const ImageLightbox = ({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
-      onClick={(e) => {
-        e.stopPropagation();
-        onClose();
-      }}
+      onClick={onClose}
     >
       {/* Close Button */}
       <button
@@ -43,7 +40,7 @@ const ImageLightbox = ({
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-20 left-8 z-50 rounded-full bg-gray-800/30 p-1 text-white transition-colors hover:bg-white/20"
+        className="absolute top-10 left-5 z-50 rounded-full bg-[#0a0a0a] p-2 text-gray-300 shadow-md transition-colors hover:opacity-80"
         aria-label="Close"
       >
         <X size={28} />
@@ -78,19 +75,17 @@ const ImageLightbox = ({
       )}
 
       {/* Image */}
-      <div
-        className="relative max-h-[90vh] max-w-[90vw]"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="pointer-events-none relative z-10 h-full w-full">
         <img
           src={images[currentIndex]}
           alt={`Image ${currentIndex + 1}`}
-          className="z-9999 max-h-[90vh] max-w-[90vw] object-contain"
+          className="pointer-events-auto z-50 h-full w-full object-contain"
+          onClick={(e) => e.stopPropagation()}
         />
 
         {/* Image Counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
+          <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
             {currentIndex + 1} / {images.length}
           </div>
         )}

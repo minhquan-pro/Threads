@@ -202,9 +202,6 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     },
     content:
       "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
-    media_urls: [
-      "https://cdnphoto.dantri.com.vn/GgZHAK18aTGnr2nMrHIvyt1OIwE=/thumb_w/1470/2023/06/26/elon-muskmark-zuckerberg-2-1687765419228.jpg",
-    ],
     likes_count: 456789,
     reposts_and_quotes_count: 15234,
     replies_count: 23456,
