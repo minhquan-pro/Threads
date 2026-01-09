@@ -37,6 +37,7 @@ const Login = () => {
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("refreshToken", refresh_token);
       dispatch(getCurrentUser());
+      window.location.reload();
 
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
