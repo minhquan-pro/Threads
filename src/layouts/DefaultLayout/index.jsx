@@ -21,7 +21,7 @@ const DefaultLayout = () => {
   return (
     <div className="bg-white dark:bg-black">
       <MobileHeader />
-      <div className="fixed right-0 bottom-0 left-0 z-10 flex h-auto justify-center md:top-0 md:right-auto md:bottom-auto md:left-0 md:flex md:h-full md:w-auto">
+      <div className="fixed right-0 bottom-0 left-0 z-50 flex h-auto justify-center md:top-0 md:right-auto md:bottom-auto md:left-0 md:z-0 md:flex md:h-full md:w-auto">
         <Sidebar />
       </div>
 
