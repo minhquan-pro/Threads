@@ -7,6 +7,78 @@ import { useIsDesktop } from "@/hooks";
 // Dữ liệu demo
 const DEMO_POSTS = [
   {
+    id: 2569,
+    user: {
+      id: 102,
+      username: "sontungmtp",
+      name: "Sơn Tùng M-TP 💋",
+      avatar_url:
+        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
+      verified: true,
+    },
+    content: `Lần đầu tiên trong đời được đi xe buýt 2 tầnggggg
+😌
+Lớ ngớ thế nào lại vớ được 12 anh đại sứ Modern chình ình cái mặt trên xe nữaaaaa 
+😚
+Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
+    media_urls: [
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598984777_1436551717827217_3423448391986974846_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=cPeZeNrPPjIQ7kNvwE6zXdT&_nc_oc=AdlyyrWWwAjJEVvOH9RtaalEDkGvXKAVvWZzl6iNWGJ7tHO2NHztu0Ua5dub8BZQXDA&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=n_qQshq1i-n7J88iKRPkyg&oh=00_AfpnveXlQoJlQsuyKJP3X_OF-BfkVSXBcn0b4GL63XVn8w&oe=6966BD0A",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600320984_1436551787827210_5135817046382819096_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9rjPkA0kCbgQ7kNvwHrWTp3&_nc_oc=Adm5A1HCHLZd1zlkdF6zVF-O3op6OU6ZHX7909hI7jR3ZcXgYxDitu-ufcOOqr8FE9E&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=IRBcvFMxzUEATimmbnXjWA&oh=00_AfpcGCHl1ZSuwGeXGMT-9VHlfZkFL2JSOqhy1TsO84-_tw&oe=6966917B",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600325813_1436551811160541_7543771910930450051_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=dERrdit1W48Q7kNvwGsQKto&_nc_oc=AdmxqkcLgqIOwhXdpSWRdMioHMoS8l1VKBqR913IeCPrOB5X9mxj2i_hw-FXjlnOvUo&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=icukDKRLzD-ihH6EahgCHg&oh=00_AfqTWqYHeWM-eigP_An7ZR84Z2n-jg1WoQorv-F74Dwcng&oe=69669B22",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600212561_1436551741160548_1630051568662297165_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=IFK5cmoVFPIQ7kNvwFgcNwP&_nc_oc=Adk2itziV93lwDVuCNgvz8KDYyAJe2WJPl4q2KdaZCgdrpUUOzb-vYRBfm3EABIp7Rk&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=T9XDhTqFb6Jv35VuTOwycQ&oh=00_AfoEat0-KQ6SAJ64x7-DZzeOO7ZkZGFo_MllhtgpipPhpw&oe=6966A97E",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598296826_1436551837827205_755241436323708756_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=wBsMfnVErZ8Q7kNvwHK3sOQ&_nc_oc=AdlZm8fSLmuwnfgcVuUsx9BWt9grf_A1r-JQVrpAUGJ7eZL-hYgSUb38v35nWCtThvY&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=ODyI6ToXb9yb3OsWdUhxIQ&oh=00_Afr6AqcMFsF7sp4AP4Ncqm7B2APusVJ1RBuFpIVTkaAbbQ&oe=6966AE79",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598685770_1436551807827208_5861125152373456818_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Xhq4hOdCY38Q7kNvwEOtA1j&_nc_oc=AdkwUFEXS3NZE5RXwDQ6hCkJJ3PgHxQ5hcJEefjjx-JvzR-TGsSrby_raAVZAfh_CIw&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=YkRu93MCUqLxonvduZKlbw&oh=00_Afow1nQdWm5ToOCh8PQUhik3LnkghcnRV2SVfWKqhm-tsA&oe=6966B35E",
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600145977_1436551897827199_2513972197701953106_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=OpIio51nmLIQ7kNvwEJlZTE&_nc_oc=AdlVORiewFJOkyrbMmxjYSYEiklNXQLfxvLa4Cm2fsEfaAjm-Gz2J6d0Su9n4fXDOrY&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=NwuZbxQO5McB4LLVwbFvug&oh=00_AfqGVHd3OpXUmETwX7UpzhM9phTYXeWiQmaPtfv5Bp0v0g&oe=6966A6A0",
+    ],
+    likes_count: 58653,
+    reposts_and_quotes_count: 5463,
+    replies_count: 7892,
+    created_at: "5h ago",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 9,
+    user: {
+      id: 109,
+      username: "elonmusk",
+      name: "Elon Musk",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_400x400.jpg",
+      verified: true,
+    },
+    content:
+      "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
+    media_urls: [
+      "https://cdnphoto.dantri.com.vn/GgZHAK18aTGnr2nMrHIvyt1OIwE=/thumb_w/1470/2023/06/26/elon-muskmark-zuckerberg-2-1687765419228.jpg",
+    ],
+    likes_count: 456789,
+    reposts_and_quotes_count: 15234,
+    replies_count: 23456,
+    created_at: "1h ago",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 11,
+    user: {
+      id: 111,
+      username: "minhquan",
+      name: "Minh Quân",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
+      verified: false,
+    },
+    content:
+      "Coding all night, debugging all day 💻☕ Just shipped a new feature and feeling accomplished! Who else is grinding on their projects this weekend?",
+    media_urls: [
+      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/596419442_830445016567414_7196636497847534487_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=9QivKsdiir0Q7kNvwHNORio&_nc_oc=AdlDW2yhn1bQnKHGCCW-BkazFlltrOMc-IwJuSnyPkpw83nTVLWZKoP-R3NSeUrvz6U&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=2w5DqMtdJnKvHAzFs0jUAA&oh=00_Afrkq6xVesDeF5T0SL8_s4WKoCh9cuKCsHFRbupDY9RgKg&oe=6966A6FF",
+    ],
+    likes_count: 342,
+    reposts_and_quotes_count: 12,
+    replies_count: 67,
+    created_at: "30m ago",
+    is_liked_by_auth: false,
+  },
+  {
     id: 100,
     user: {
       id: 108,
@@ -56,7 +128,8 @@ const DEMO_POSTS = [
       id: 104,
       username: "tim_cook",
       name: "Tim Cook",
-      avatar: "https://i.pravatar.cc/150?img=14",
+      avatar_url:
+        "https://static.tuoitre.vn/tto/i/s626/2014/10/31/MEuB5p8I.jpg",
       verified: true,
     },
     content:
@@ -73,36 +146,20 @@ const DEMO_POSTS = [
       id: 107,
       username: "mary_barra",
       name: "Mary Barra",
-      avatar: "https://i.pravatar.cc/150?img=20",
+      avatar_url:
+        "https://globalentrepreneur-mag.com/wp-content/uploads/2024/11/image-8-1536x1024.png",
       verified: true,
     },
     content:
-      "Sustainability and innovation go hand in hand. Proud of our progress toward an all-electric future. Together, we're driving change that matters. 🚗⚡",
-    media_urls: [],
+      "I need a mentor, you need a mentor, we all need a mentor. If you haven’t internalized this message, download any management text written in the past decade.",
+    media_urls: [
+      "https://qz.com/cdn-cgi/image/width=1100,quality=85,format=auto/https://assets.qz.com/media/d020637fd06516b4535db555f7171304.jpg",
+    ],
     likes_count: 6789,
     reposts_and_quotes_count: 198,
     replies_count: 534,
     created_at: "12h ago",
     is_liked: false,
-  },
-  {
-    id: 9,
-    user: {
-      id: 109,
-      username: "elonmusk",
-      name: "Elon Musk",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_400x400.jpg",
-      verified: true,
-    },
-    content:
-      "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
-    media_urls: [],
-    likes_count: 456789,
-    reposts_and_quotes_count: 15234,
-    replies_count: 23456,
-    created_at: "1h ago",
-    is_liked: true,
   },
   {
     id: 1800,
@@ -133,7 +190,8 @@ const DEMO_POSTS = [
       id: 106,
       username: "jensen_huang",
       name: "Jensen Huang",
-      avatar: "https://i.pravatar.cc/150?img=16",
+      avatar_url:
+        "https://cdnphoto.dantri.com.vn/lfQqkM8GzMpLDdAvKSOHS5wH_6s=/thumb_w/1360/2026/01/08/ceo-nvidiaadek-berryafp-via-getty-images-1767852493126.jpg",
       verified: true,
     },
     content:
@@ -198,7 +256,8 @@ const DEMO_POSTS = [
       id: 103,
       username: "satya_nadella",
       name: "Satya Nadella",
-      avatar: "https://i.pravatar.cc/150?img=13",
+      avatar_url:
+        "https://tradeflock.com/wp-content/uploads/2024/09/202400919_1200X800PX_From-the-Streets-Of-Hyderabad-To-The-Throne-Of-Microsoft.webp",
       verified: true,
     },
     content:

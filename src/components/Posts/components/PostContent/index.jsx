@@ -41,14 +41,37 @@ const PostContent = ({ content, mediaUrls }) => {
 
       {mediaUrls && mediaUrls.length > 0 && (
         <>
-          {mediaUrls.length <= 2 ? (
+          {mediaUrls.length === 1 ? (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className="mb-1 flex justify-start"
+            >
+              {mediaUrls.map((url, index) => (
+                <div key={url} className="relative">
+                  <img
+                    src={url}
+                    alt={`Image ${index + 1}`}
+                    className="w-full cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
+                    style={{ maxHeight: "300px" }}
+                    loading="lazy"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openLightbox(index);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : mediaUrls.length === 2 ? (
             <div
               onClick={(e) => {
                 e.stopPropagation();
               }}
               className="mb-1 grid gap-2"
               style={{
-                gridTemplateColumns: `repeat(${mediaUrls.length}, 1fr)`,
+                gridTemplateColumns: `repeat(2, 1fr)`,
               }}
             >
               {mediaUrls.map((url, index) => (
