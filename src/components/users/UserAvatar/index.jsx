@@ -12,6 +12,7 @@ const UserAvatar = ({ username, userId, imgSize, className, src, Icon }) => {
           <AvatarImage
             src={src || defaultImageUser}
             alt={username || "User avatar"}
+            className="h-full w-full object-cover"
           />
         </Avatar>
       </div>

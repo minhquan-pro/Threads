@@ -1,6 +1,7 @@
 import AuthRequiredDialog from "@/components/auth/AuthRequiredDialog";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/features/auth";
+import { formatToK } from "@/utils";
 
 const Interactions = ({
   onClick,
@@ -35,7 +36,7 @@ const Interactions = ({
       }`}
     >
       {Icon && <Icon className={`h-4 w-4 ${isActive ? "fill-current" : ""}`} />}
-      {count > 0 && <span className="text-sm">{count}</span>}
+      {count > 0 && <span className="text-sm">{formatToK(count)}</span>}
     </Button>
   );
 };

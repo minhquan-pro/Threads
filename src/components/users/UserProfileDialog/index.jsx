@@ -24,7 +24,7 @@ const UserProfileDialog = ({ user }) => {
           username={user.name}
           userId={user.id}
           src={user.avatar_url}
-          imgSize="h-10 w-10"
+          imgSize="h-10 w-10 "
           Icon={Plus}
         />
       </button>
