@@ -46,15 +46,14 @@ const PostContent = ({ content, mediaUrls }) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="mb-1 flex justify-start"
+              className="mb-1 flex items-start justify-start"
             >
               {mediaUrls.map((url, index) => (
-                <div key={url} className="relative">
+                <div key={url} className="relative" style={{ height: "200px" }}>
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="w-full cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
-                    style={{ maxHeight: "300px" }}
+                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
                     loading="lazy"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -69,17 +68,15 @@ const PostContent = ({ content, mediaUrls }) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="mb-1 grid gap-2"
-              style={{
-                gridTemplateColumns: `repeat(2, 1fr)`,
-              }}
+              className="mb-1 flex gap-2"
+              style={{ justifyContent: "flex-start" }}
             >
               {mediaUrls.map((url, index) => (
-                <div key={url} className="relative">
+                <div key={url} className="relative" style={{ height: "200px" }}>
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="h-80 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
+                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
                     loading="lazy"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -97,17 +94,17 @@ const PostContent = ({ content, mediaUrls }) => {
               className="mb-1 overflow-hidden"
               ref={emblaRef}
             >
-              <div className="flex touch-pan-y gap-2">
+              <div className="flex touch-pan-y items-start gap-2">
                 {mediaUrls.map((url, index) => (
                   <div
                     key={url}
                     className="relative min-w-0 shrink-0"
-                    style={{ flex: "0 0 calc((100% - 16px) / 2.5)" }}
+                    style={{ height: "200px" }}
                   >
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-64 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
+                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity hover:opacity-90"
                       loading="lazy"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -122,7 +119,6 @@ const PostContent = ({ content, mediaUrls }) => {
         </>
       )}
 
-      {/* Image Lightbox */}
       {lightboxOpen && (
         <ImageLightbox
           images={mediaUrls}

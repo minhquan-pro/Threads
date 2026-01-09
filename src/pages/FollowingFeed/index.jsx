@@ -7,6 +7,153 @@ import { useIsDesktop } from "@/hooks";
 // Dữ liệu demo
 const DEMO_POSTS = [
   {
+    id: 222,
+    user: {
+      id: 111,
+      username: "not.phwgahnn",
+      name: "Phuong Anh",
+      avatar_url:
+        "https://app.publer.com/uploads/tmp/1767972619-601575382700753-8086-3442/mini_magick20260109-48008-sjo6u6.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content: "bạch nguyệt quang qs nên phải up thui",
+    media_urls: [
+      "https://app.publer.com/uploads/tmp/1767972519-557425316256546-9282-6777/mini_magick20260109-47664-iaq68r.jpg",
+      "https://app.publer.com/uploads/tmp/1767972554-376247916110270-8028-3616/mini_magick20260109-48008-yjwonz.jpg",
+    ],
+    likes_count: 478,
+    reposts_and_quotes_count: 56,
+    replies_count: 77,
+    created_at: "2025-11-13T08:02:04.000000Z",
+    is_liked_by_auth: false,
+  },
+  {
+    id: 100,
+    user: {
+      id: 108,
+      username: "DogeDesigner",
+      name: "@cb_doge",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1498070100393754625/C2V-fbll_400x400.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content:
+      "BREAKING: xAI is investing more than $20 billion in Mississippi to build a massive data center, called 'MACROHARDRR' This 800,000 sqft facility will host the world’s largest supercomputer & mark the largest investment in state history.xAI is the fastest growing AI company.",
+    media_urls: [],
+    likes_count: 18945,
+    reposts_and_quotes_count: 723,
+    replies_count: 3456,
+    created_at: "2026-01-08T03:17:18.000000Z",
+    is_liked: false,
+  },
+  {
+    id: 11111,
+    user: {
+      id: 111,
+      username: "minhquan",
+      name: "Minh Quân",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content:
+      "Coding all night, debugging all day 💻☕ Just shipped a new feature and feeling accomplished! Who else is grinding on their projects this weekend?",
+    media_urls: [
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/610288126_25395585366802027_8879659816069396604_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=9f807c&_nc_ohc=UroFJbmv8JIQ7kNvwHlXZ1_&_nc_oc=AdlfD0df2uxW0u3TzJTh9RY-9BTW7jvGLbTI-G_zZ3A91QOZq7BDGnnl4a2p7kpWggw&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QHgZE1SlbkCH-1AFBoDxuaiBmesDJ3Cl-X2RyAVN4PP1Q&oe=698876EF",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/600229015_1628612361832515_7607035518655288901_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_ohc=QLSf1gQ4kpQQ7kNvwEI0Grs&_nc_oc=Adl8BVTpoyszzRvxUDrTzSU8cqllfI9qJAKysvmHiziIUmCJSLSaQxYLUp6gPcHjNjQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGdEfo5t59DtMb2c2f95zgXMzD6xaHVamgHv4Rz-rgRXw&oe=69887975",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/610288126_882913060877448_2135938722632434481_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=pJOuSerM6QsQ7kNvwH0KQdl&_nc_oc=AdlUzdJdwa0iSMJWs6-MknByoJhqg6-7mmYUaHCbq7GL-UrMDA3LLvk6qicB3BVcZ6A&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGZetetR3iJnQvv9PRNT0Qj2auJ9J1TtQgMn4Zd474g5Q&oe=69887858",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/609484622_1652422315726121_4019430930719457277_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2xTH7Dfv8BIQ7kNvwFumWI1&_nc_oc=AdnTY_jiRcYLPrSLVrwr6ybreRgTDIiTynrTw5es_Fd7k0rYJzjwEft4wRgaKo6E3fw&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QFGwv_kafhOO18qUKnGT0KC4USCuLNHLgIUyGicE4473A&oe=69889D1F",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/608815978_1429705425163212_8508674826867730141_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=vf09ObS3e7cQ7kNvwGhDGxO&_nc_oc=AdntvidnxoNwztfblcjeFPgZ3COIsOJWBGt5svJ2zNv1A6o10au7GSEBPwTd22RF2aQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QHJPSt4nRwXvO2Wpz4c2LMAZ_cX2s3iKWEF7FWOu9p-tg&oe=6988741B",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/613867010_891869573240280_1769752868929167690_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=lA6IQCxg30cQ7kNvwGcj3-v&_nc_oc=AdkJsVNoiSGnQ89P7zoI-k7pzN3vZsEzsn0mrpqukaQK1yScqVlSlRzTsYfU2FRUDho&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QHrCsI1kkBnxu6CDIELoLU52ZRt2cEpuCEG_LyiH2YGjw&oe=69889800",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/594390824_1486040555794212_4790623262768663546_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=4Uox5-4-IJsQ7kNvwGLYBGj&_nc_oc=AdnTPJFK_aRvlOw7u_g1Z8YcLeZY-f0wDh1l6-_31q0lZ6GNWa5jKtTo49C3mjW9dwo&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGvxD2-H1HZfkMeNefM-oACZYUv0gdJLEG2ph35vAll_Q&oe=6988A325",
+    ],
+    likes_count: 342,
+    reposts_and_quotes_count: 12,
+    replies_count: 67,
+    created_at: "30m ago",
+    is_liked_by_auth: false,
+  },
+  {
+    id: 1231,
+    user: {
+      id: 102,
+      username: "ThePresentWriter",
+      name: "The Present Writer",
+      avatar_url:
+        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/431339708_979983020158373_7980601288300704641_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=g5EJAKjJDG0Q7kNvwFr2eXL&_nc_oc=AdlBWX4exd8ZrgNDSXQ65omzAzYNDlUS4ebYOUewskl6cWowHZjojPiRQgRSlzKK6tA&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=cg341Bzbi5CoTKc47t2SHQ&oh=00_AfoeK4lz2MhGh2ZFX9KxTtUZ476hfMvjqrpsB-r_TnwgGQ&oe=6966CE2A",
+      verified: true,
+      isFollowing: true,
+    },
+    content: `Hai lần đầu tiên tới Sài Gòn dạy cho mình rằng: Không có gì trên đời là tuyệt đối, là duy nhất, là một đi không trở lại. Nếu mình nỗ lực cố gắng, từng bước đi lên, làm hết khả năng của mình, cộng với một chút may mắn và ủng hộ từ những người thân yêu, mình sẽ đạt được điều mà mình mong muốn. 
+
+Cảm ơn Sài Gòn vì bài học tuổi trẻ này nhé!`,
+    media_urls: [
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/597075298_1420638689426135_8723927384913540251_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=hHm8XhxH4BUQ7kNvwF59A8A&_nc_oc=AdnDAQb3JM4eXzOaoxuVBA57E57OtLXRqK79MSF1vZHKnUvngXfofW624aWziReYP5c&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=po1T1XdwQjfSzAJeFR3rCQ&oh=00_Afo3OhA7kNw96rJLt6Sew1dZPXKSrbauih7ZD1dd_RaIJA&oe=6966E9E8",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/597554482_1420638652759472_2347356773546397577_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=-hirFtaXMuwQ7kNvwFKjhOp&_nc_oc=AdkdRQ4QFiuODIQsocgwUv0T5b9o58DrZLGV5tNaAJGZgjqtk_TKGuPLtxmL5D5FAFg&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=JO5uCmobo9onQ2p8-DEc8w&oh=00_AfozngfHRrtOBpPMnCwDoNEb8H9hezkXxRm1lFmT-qAwJA&oe=6966F193",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/595232847_1420638709426133_8101040095090563629_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=cZHZ45ImYXEQ7kNvwGvAFHo&_nc_oc=AdlXhaTJgU_RRsxCbrEPIQAa4rpj_uXAg0Z-CKnmclnUcnbEetEo7YeX5mnJf41JCXE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=bRRb83coVDK-f45PKRuM1g&oh=00_Afpjb9z666VM19_Jf5Z3IPtjImStBVBvj513Pwt5anHscA&oe=6966E795",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/596798741_1420638809426123_302319853754569111_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=lT8sKhP5qloQ7kNvwFUKJNM&_nc_oc=AdmO5F_7Ge64QMhRVK0cTJuxTewHxtBwl-I-IYKImd9I3oZ3dc4G2watlxN88SqTyNs&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=cehofCDhmBvUQpgea8gTnQ&oh=00_AfotEc1YTDbK_o8Q-sI247vWazvtGF211XnsFlXs10TQKg&oe=6966ED66",
+    ],
+    likes_count: 1300,
+    reposts_and_quotes_count: 25,
+    replies_count: 19,
+    created_at: "2026-01-03T03:17:18.000000Z",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 12351,
+    user: {
+      id: 102,
+      username: "gilly.nah",
+      name: "nguyen quynh anh",
+      avatar_url:
+        "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.75761-15/485011407_18054813161471259_8388842248772277725_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=110&ig_cache_key=MzU4OTQ5ODkzOTcyMjU5MDI1Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=syW730curPMQ7kNvwFvPIvw&_nc_oc=Adl-qacLI77DujzDlPwViS_AhWuxELiXEBald5VW-XKQm-hoM6A12_vnNo_AadDjE2Q&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_Afo8VuXyQAnTaoIScLLuaTARcPlQfjeWsBzIcUA1jA5Vvg&oe=6966E298",
+      isFollowing: true,
+    },
+    content: `xem xong “Chúng ta của 8 năm sau” thấy yêu Hà Nội quá nên quyết tâm sang bên TT Thành Công xem nó có giống như trong phim không.
+may sao rủ được cạ cứng đi cùng`,
+    media_urls: [
+      "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.82787-15/583145827_18080746646471259_617465477237827889_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ig_cache_key=Mzc2NzA2NzgyMzMxNjI5MjEwNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxMC5zZHIuQzMifQ%3D%3D&_nc_ohc=rFOVlxZNUAMQ7kNvwErc6z3&_nc_oc=AdngCXscO-zI9dfYmxisWI3PPGWLC1F_5h-qSSdftPij_4bK71hLPOtr98Ubm4RabqM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_AfpjyB2LpMarg-b0ouHmerMJI4Ku7ciOWGLIaozdJAo_1Q&oe=6966C1E9",
+      "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.82787-15/581097436_18080746655471259_3911729327776037949_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=106&ig_cache_key=Mzc2NzA2NzgyMzQ0MjE1NzIwNA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxMC5zZHIuQzMifQ%3D%3D&_nc_ohc=dH4dqFz_rasQ7kNvwHJophr&_nc_oc=AdnGW6Ikr3gsxyZL6hRTnrYQ-iRVypk_lk9YFJXTHd83DgXyzToJg78d8brFiINH9XQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_AfqB_RcJg___85JYclH5arhBon7Zd85EnQCs_DhFwqDxtA&oe=6966DAE7",
+      "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.82787-15/583197128_18080746664471259_5463650762918122673_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=110&ig_cache_key=Mzc2NzA2NzgyMzMyNDY4MzEyMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxMC5zZHIuQzMifQ%3D%3D&_nc_ohc=fUSJ8GrCRLkQ7kNvwE9a-Iw&_nc_oc=AdlSG79fIrOu2orHJZPrlmoT1ZPWPOnK3ryWcZCSv1Ok7eJslj1LzWW97iehwcSpWbM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_Afod9GjZjZvCtOfiQ7AU3olGG_1PHbOFeaPO46sTRFFvCQ&oe=6966D813",
+      "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.82787-15/583705172_18080746682471259_599856935436099776_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=105&ig_cache_key=Mzc2NzA2NzgyMzYyNjY3NzMxOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxMC5zZHIuQzMifQ%3D%3D&_nc_ohc=CnR2tJpsvZYQ7kNvwGvrKB7&_nc_oc=AdlX1lpt0Ly97Alipl05V9___Zpv8fJ6xnIhLYtukSu7KvgAZMf-IeArpMCeHnAv4-c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_AfpFP6GR_DDnDDJ8vz01WAUEcacb70pUzrnpLtQQK1Awew&oe=6966F45F",
+      "https://instagram.fhan18-1.fna.fbcdn.net/v/t51.82787-15/582870855_18080746691471259_467208734127455070_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=101&ig_cache_key=Mzc2NzA2NzgyMzMyNDY3Njk5MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxMC5zZHIuQzMifQ%3D%3D&_nc_ohc=pHcbVJeLA_0Q7kNvwEx0cqM&_nc_oc=AdkbyUPiOqyFLKLrbFPDj36Foh0EM7hTrJjUSgiPZKtWx2ZWM6gH_-f8IN-sgRXy_G4&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan18-1.fna&_nc_gid=MyJgRtbXoFRWnktwQXG_Ww&oh=00_Afq53DsxiL3U01iLj9B1adlhQsYqYB_xcSnC9EGb-eEe_w&oe=6966C715",
+    ],
+    likes_count: 189,
+    reposts_and_quotes_count: 4,
+    replies_count: 26,
+    created_at: "2025-12-05T03:17:18.000000Z",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 102,
+    user: {
+      id: 102,
+      username: "j97",
+      name: "J97",
+      avatar_url:
+        "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
+      verified: true,
+      isFollowing: true,
+    },
+    content:
+      "Lào công tử xin cảm ơn tình cảm của Hà Nội, hẹn gặp lại và mong mọi người thật nhiều sức khỏe, những điều may mắn …",
+    media_urls: [
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564802361_1391135545916783_2163136307293540918_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=YzDVSqUuXjoQ7kNvwGOH8RW&_nc_oc=AdnVaNIxhXcl7JIHbNL3Q2FgSzZ2qUCwKAm3Bg5YxQHd_qMk2Fp-UAJXXnl8hAgqjHQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=ti3NVk415SCmS0ypKsOPuQ&oh=00_AfpmTPOfLNKi4QswR1ZsMCLZqh7oJSzCFr-8taAGfwcAQg&oe=6966CAFC",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565306875_1391135615916776_8520132962845346660_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BJPhTENXN4YQ7kNvwGjZUm6&_nc_oc=AdlPxVtfK4LGB7XwhEo10MfmYK2_i1B5L1-85PKvWH6EWHCsqsBFe1ktirCn_aWmTTw&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=oc4Bpq4ZLxYxs-IeVBDyew&oh=00_AfqpPV2eaiONt8C2RCeogrhtbgqjz_aybZRR_03C8X1foA&oe=6966E05C",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/561341994_1391135589250112_928078359846137243_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=xP9NLS-5kF8Q7kNvwHeS2Xz&_nc_oc=AdnlWjEEtub7XPAVxHE_yJQRNb-StmtSmykss-4Cw37KdZSqQQivkEUrQx49nnsQN50&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=oEBx4B8nB7X4ND_QONT62w&oh=00_AfpbSPvmsrrZaJZFEA-5jg1tMpXa_auXB7nQ9pwmP6ThqQ&oe=6966F4F5",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/561249153_1391135555916782_4513158517439930054_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=m-ASePaKzrIQ7kNvwErqoUE&_nc_oc=Adka_zZtzgeqNsw9I9kvwQ5Dc9fRN3vw4NDhB4HVrecaUEOhXVIfRavkuChPDQXfl_s&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=7RKsI8x2gYds9p7WPeKaVg&oh=00_AfpYwna_sTlbCUyAcAxb6tV7pHalVkrUwow6L9RixnT70g&oe=6966DACC",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/562364319_1391135575916780_7626419104961249322_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pJcKIyY5jVwQ7kNvwF6L7YM&_nc_oc=Admawv75wVc05XhPMVj3Y0WuW1m6jhS4Fy1nNe6m2sAGdutV0jm60Q0lx9tE1nZPu0A&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=1Ut4zFQ-eZ_TcbfS2F8RpQ&oh=00_AfoQKgnX0T-SujI0frI4mE1iT-Uylch290cnqluPFQ0rWg&oe=6966DCBF",
+    ],
+    likes_count: 30000,
+    reposts_and_quotes_count: 600,
+    replies_count: 1800,
+    created_at: "5h ago",
+    is_liked_by_auth: true,
+  },
+  {
     id: 2569,
     user: {
       id: 102,
@@ -15,6 +162,7 @@ const DEMO_POSTS = [
       avatar_url:
         "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
       verified: true,
+      isFollowing: true,
     },
     content: `Lần đầu tiên trong đời được đi xe buýt 2 tầnggggg
 😌
@@ -45,6 +193,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_400x400.jpg",
       verified: true,
+      isFollowing: true,
     },
     content:
       "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
@@ -58,46 +207,6 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     is_liked_by_auth: true,
   },
   {
-    id: 11,
-    user: {
-      id: 111,
-      username: "minhquan",
-      name: "Minh Quân",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
-      verified: false,
-    },
-    content:
-      "Coding all night, debugging all day 💻☕ Just shipped a new feature and feeling accomplished! Who else is grinding on their projects this weekend?",
-    media_urls: [
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/596419442_830445016567414_7196636497847534487_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=9QivKsdiir0Q7kNvwHNORio&_nc_oc=AdlDW2yhn1bQnKHGCCW-BkazFlltrOMc-IwJuSnyPkpw83nTVLWZKoP-R3NSeUrvz6U&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=2w5DqMtdJnKvHAzFs0jUAA&oh=00_Afrkq6xVesDeF5T0SL8_s4WKoCh9cuKCsHFRbupDY9RgKg&oe=6966A6FF",
-    ],
-    likes_count: 342,
-    reposts_and_quotes_count: 12,
-    replies_count: 67,
-    created_at: "30m ago",
-    is_liked_by_auth: false,
-  },
-  {
-    id: 100,
-    user: {
-      id: 108,
-      username: "DogeDesigner",
-      name: "@cb_doge",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/1498070100393754625/C2V-fbll_400x400.jpg",
-      verified: true,
-    },
-    content:
-      "BREAKING: xAI is investing more than $20 billion in Mississippi to build a massive data center, called 'MACROHARDRR' This 800,000 sqft facility will host the world’s largest supercomputer & mark the largest investment in state history.xAI is the fastest growing AI company.",
-    media_urls: [],
-    likes_count: 18945,
-    reposts_and_quotes_count: 723,
-    replies_count: 3456,
-    created_at: "4h ago",
-    is_liked: false,
-  },
-  {
     id: 8,
     user: {
       id: 108,
@@ -106,6 +215,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/549396203_10116914317863211_2996843027695932475_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=08TEsBh9w0sQ7kNvwFtHMb7&_nc_oc=AdmnWrS-Xb8rGB3_sPv07dEah26o8mQIWEQLScvj4pkCKWsNmBz09o34hcAqniVjLBA&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=J2T9XmCLIDx-l7S1mbLN3A&oh=00_AfqAe6ZygYdue8he4-PYcSMS2DF9NCzMul-EN8hLheqwdw&oe=69668914",
       verified: true,
+      isFollowing: true,
     },
     content: "It's been a year!",
     media_urls: [
@@ -123,45 +233,6 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     is_liked: false,
   },
   {
-    id: 4,
-    user: {
-      id: 104,
-      username: "tim_cook",
-      name: "Tim Cook",
-      avatar_url:
-        "https://static.tuoitre.vn/tto/i/s626/2014/10/31/MEuB5p8I.jpg",
-      verified: true,
-    },
-    content:
-      "Great meeting with our teams today. Proud of the incredible work happening across the company. Our commitment to innovation and privacy remains stronger than ever. 🍎",
-    likes_count: 12453,
-    reposts_and_quotes_count: 567,
-    replies_count: 1203,
-    created_at: "6h ago",
-    is_liked: true,
-  },
-  {
-    id: 7,
-    user: {
-      id: 107,
-      username: "mary_barra",
-      name: "Mary Barra",
-      avatar_url:
-        "https://globalentrepreneur-mag.com/wp-content/uploads/2024/11/image-8-1536x1024.png",
-      verified: true,
-    },
-    content:
-      "I need a mentor, you need a mentor, we all need a mentor. If you haven’t internalized this message, download any management text written in the past decade.",
-    media_urls: [
-      "https://qz.com/cdn-cgi/image/width=1100,quality=85,format=auto/https://assets.qz.com/media/d020637fd06516b4535db555f7171304.jpg",
-    ],
-    likes_count: 6789,
-    reposts_and_quotes_count: 198,
-    replies_count: 534,
-    created_at: "12h ago",
-    is_liked: false,
-  },
-  {
     id: 1800,
     user: {
       id: 102,
@@ -170,6 +241,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
       verified: true,
+      isFollowing: true,
     },
     content:
       "Chẳng hiểu sao họ gọi em là thiếu nữ.Mà sự thật em thiếu một nam nhân",
@@ -185,25 +257,6 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     is_liked_by_auth: true,
   },
   {
-    id: 6,
-    user: {
-      id: 106,
-      username: "jensen_huang",
-      name: "Jensen Huang",
-      avatar_url:
-        "https://cdnphoto.dantri.com.vn/lfQqkM8GzMpLDdAvKSOHS5wH_6s=/thumb_w/1360/2026/01/08/ceo-nvidiaadek-berryafp-via-getty-images-1767852493126.jpg",
-      verified: true,
-    },
-    content:
-      "The future of computing is accelerated. Thrilled to see developers around the world building incredible applications with our platform. This is just the beginning! 🎮💚",
-    media_urls: [],
-    likes_count: 9234,
-    reposts_and_quotes_count: 312,
-    replies_count: 756,
-    created_at: "8h ago",
-    is_liked: true,
-  },
-  {
     id: 18,
     user: {
       id: 102,
@@ -212,6 +265,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
       verified: true,
+      isFollowing: true,
     },
     content:
       "Nhiều ông bà đến tận giờ này vẫn còn thắc mắc … Sao ông Tùng hứa đi chạy bộ HỒ GƯƠM mà không thấy đâuuu … 🙂Đây … đây này … Đã muốn cất giấu kí ức này đi mà cứ bắt người ta phải moi lên mới chịuuuu … 🙃Có biết hôm đấy chạy bộ một mình quanh hồ lạnh lẽo thế nào khôngggg 🥲🥲🥲",
@@ -235,39 +289,21 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
       verified: true,
+      isFollowing: true,
     },
     content: "Này gió ơi, đừng vội vàng, lắng nghe được không?",
     media_urls: [
-      "https://trixie.com.vn/media/images/article/54801627/jack.jpeg",
-      "https://thanhnien.mediacdn.vn/Uploaded/haoph/2021_10_21/jack-va-thien-an-5805.jpeg",
-      "https://nguonluc.com.vn/uploads/images/2025/01/26/jack-1-1737903814.jpg",
-      "https://photo.znews.vn/w660/Uploaded/wpdhnwhnw/2025_05_30/495032291_1260938672269805_4994651888818453651_n.jpg",
-      "https://gocnhobecon.com/wp-content/uploads/2025/09/jack-97-meme.webp",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565130803_1391985292498475_6043639841704060327_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=B0aWWhc-zbsQ7kNvwESurIQ&_nc_oc=AdlKeJxpT_hK0or8FX06A9qKIKf9xQpwm_1-6xrysDL_DvhkKOhgWhvJGM2RLGcin10&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=6QqCmzPkP5Z-d9jddrm4Pg&oh=00_Afo1F_CUzt5gbpH-6JIcdHnGoakAKYWbKOicYvL9GcnkZw&oe=6966CE91",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564064404_1391985405831797_4175982739405730250_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=zbtLENQ-4AMQ7kNvwGQNYw-&_nc_oc=AdmBcCMDRrKBN_PwAhtxGQNBz4WL0du9-4PkM5z2dioBoCuM8x6iNh2_w8v_WtoIFnE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=bcFHg2BPs_hXi2u-FO_3TQ&oh=00_Afo4VE3NNmwky4w9QfzxTtQ7_g-3XbtA0fdkHDmJ5daxSg&oe=6966C67F",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564611207_1391985315831806_912513560557787120_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hb4kc7vY3mgQ7kNvwEyJQ6_&_nc_oc=AdlU9-ovMXrAM9V1ECLycD8JYvulctXAPmTtDy9ZJiajsFI56DxIeV5vauDHVA95bEE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=ubKIE-DX_HA3uqgSF8lhUw&oh=00_Afp6HZbepYrTKVkh4iNEEwxsETP-JKUEz-Q7JeJ7NJ6u-A&oe=6966F419",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/559180889_1391985399165131_1091933022511941871_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=rkT6pUAg4BIQ7kNvwFXiouP&_nc_oc=AdmWXvhEFE20Ze3GsNUzfSoVgb8zXR9RreFziYp_mT5Gw6A7ITI_KkgVxL4NF5gLLNo&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=c9_pjyS8u2qLxDV4M7Kl7g&oh=00_AfpAwcndwOq54rHOwFxSMZVsp6ifrbWZ10N0fTPSahdcUg&oe=6966E231",
+      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565750468_1391985432498461_2860272309386303870_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=NFyPTGNIgg4Q7kNvwFg8bgq&_nc_oc=Adm2rxyEyB2jk9jFi9uf8PANw51UemtmiT9P14cmCOfGLqzkdL9TMBtQQ_u1pV2Tj5I&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=yR6CU-LPuboCMmC2FlTUaA&oh=00_Afr_P4kXdafK7X42auGLFxVT4zKbhCB_1bNB7adb68cR3w&oe=6966E9DA",
     ],
     likes_count: 3247,
     reposts_and_quotes_count: 89,
     replies_count: 456,
     created_at: "5h ago",
     is_liked_by_auth: true,
-  },
-  {
-    id: 3,
-    user: {
-      id: 103,
-      username: "satya_nadella",
-      name: "Satya Nadella",
-      avatar_url:
-        "https://tradeflock.com/wp-content/uploads/2024/09/202400919_1200X800PX_From-the-Streets-Of-Hyderabad-To-The-Throne-Of-Microsoft.webp",
-      verified: true,
-    },
-    content:
-      "Innovation distinguishes between a leader and a follower. Excited about what we're building for the future of technology. The best is yet to come! 🚀",
-    media_urls: [],
-    likes_count: 8942,
-    reposts_and_quotes_count: 234,
-    replies_count: 891,
-    created_at: "3h ago",
-    is_liked: false,
   },
   {
     id: 20,
@@ -278,6 +314,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
       verified: true,
+      isFollowing: true,
     },
     content:
       "Hôm nay có người nắm tay trong tàu, còn tôi nắm… thanh vịn và nỗi cô đơn 🙂Không sao … Tôi ổn hôm mê ạ 🥲",
@@ -303,6 +340,7 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
       avatar_url:
         "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
       verified: true,
+      isFollowing: true,
     },
     content: "những chuyến đi cuối năm ",
     media_urls: [

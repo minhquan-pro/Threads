@@ -11,8 +11,6 @@ const ImageLightbox = ({
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft" && onPrevious) onPrevious();
-      if (e.key === "ArrowRight" && onNext) onNext();
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -38,39 +36,11 @@ const ImageLightbox = ({
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+        className="absolute top-18 left-6 z-50 rounded-full bg-gray-500 p-1 text-white transition-colors hover:opacity-80"
         aria-label="Close"
       >
-        <X size={24} />
+        <X size={28} />
       </button>
-
-      {/* Previous Button */}
-      {images.length > 1 && currentIndex > 0 && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrevious();
-          }}
-          className="absolute left-4 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
-          aria-label="Previous image"
-        >
-          <ChevronLeft size={32} />
-        </button>
-      )}
-
-      {/* Next Button */}
-      {images.length > 1 && currentIndex < images.length - 1 && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          className="absolute right-4 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
-          aria-label="Next image"
-        >
-          <ChevronRight size={32} />
-        </button>
-      )}
 
       {/* Image */}
       <div

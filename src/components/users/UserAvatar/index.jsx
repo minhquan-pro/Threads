@@ -3,7 +3,15 @@ import { useCurrentUser } from "@/features/auth";
 import defaultImageUser from "@/assets/images/defaultImageUser.png";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
-const UserAvatar = ({ username, userId, imgSize, className, src, Icon }) => {
+const UserAvatar = ({
+  username,
+  userId,
+  imgSize,
+  className,
+  src,
+  Icon,
+  isFollowing,
+}) => {
   const currentUser = useCurrentUser();
   return (
     <div className="relative overflow-hidden">
@@ -16,7 +24,7 @@ const UserAvatar = ({ username, userId, imgSize, className, src, Icon }) => {
           />
         </Avatar>
       </div>
-      {Icon && currentUser?.id !== userId && (
+      {Icon && currentUser?.id !== userId && !isFollowing && (
         <div className="absolute right-0 bottom-0 flex h-4 w-4 items-center justify-center rounded-full bg-black hover:scale-125">
           <Icon size={10} strokeWidth={3} color="white" />
         </div>
