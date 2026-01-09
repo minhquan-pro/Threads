@@ -7,6 +7,168 @@ import { useIsDesktop } from "@/hooks";
 // Dữ liệu demo
 const DEMO_POSTS = [
   {
+    id: 100,
+    user: {
+      id: 108,
+      username: "DogeDesigner",
+      name: "@cb_doge",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1498070100393754625/C2V-fbll_400x400.jpg",
+      verified: true,
+    },
+    content:
+      "BREAKING: xAI is investing more than $20 billion in Mississippi to build a massive data center, called 'MACROHARDRR' This 800,000 sqft facility will host the world’s largest supercomputer & mark the largest investment in state history.xAI is the fastest growing AI company.",
+    media_urls: [],
+    likes_count: 18945,
+    reposts_and_quotes_count: 723,
+    replies_count: 3456,
+    created_at: "4h ago",
+    is_liked: false,
+  },
+  {
+    id: 8,
+    user: {
+      id: 108,
+      username: "zuck",
+      name: "Mark Zuckerberg",
+      avatar_url:
+        "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/549396203_10116914317863211_2996843027695932475_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=08TEsBh9w0sQ7kNvwFtHMb7&_nc_oc=AdmnWrS-Xb8rGB3_sPv07dEah26o8mQIWEQLScvj4pkCKWsNmBz09o34hcAqniVjLBA&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=J2T9XmCLIDx-l7S1mbLN3A&oh=00_AfqAe6ZygYdue8he4-PYcSMS2DF9NCzMul-EN8hLheqwdw&oe=69668914",
+      verified: true,
+    },
+    content: "It's been a year!",
+    media_urls: [
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/607143828_10117193155535281_857738908976341292_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=V7EUClpmfngQ7kNvwF649AS&_nc_oc=AdkSBUd1J7GuNvZ7_BoUctpDf9qHkR5irL8bKVa1PJ-eCu28Hjw0yPqdoy6nUA9-Yfo&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=m9ssrWD1idX4Ciq90jZG8g&oh=00_Afo3OH1e5C2mQODQcfB6-uHtxf3c34bGLT1FavT805cngg&oe=69668506",
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/605753247_10117193155545261_4079878770191241980_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Xl4A-x2HnXEQ7kNvwGZnw_q&_nc_oc=AdmSJTrDQLQn8TWMMGFacSvma0c1MxT6UGa5uuLPOc7iFQiNpPccVcYtjrhfDV6VOZQ&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=yML89jFcmfXX4VrZEAfarA&oh=00_Afph1woONugcv8FClUtBgrXpktFKoHbzIqshK4SYAV1mZg&oe=69667927",
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/605535918_10117193155585181_6519629786245588559_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=s-bRVmNKc7sQ7kNvwG4T-Lp&_nc_oc=Adm8VgVHP4zsz9TL0j1kj0wzYNh-TZig3OL4AaHcn0v5YhC5LDuNuSmDsmKr9M5TAWc&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=wFNNzSLBCOVUaLdoIX16eA&oh=00_AfoQeRP0lfHHxATbFQd9aDpGf_E1bhpJ5deS2jbLQ_4IhA&oe=69667D01",
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/605572486_10117193155729891_2571595701808142445_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=6pLscnOnoUoQ7kNvwEPZ45D&_nc_oc=AdnjdtvRnxLTuAq6wpb-AaFQLXTpOeHz_3nf9FJxvtlgYeirU9EGD1Zt-Mkm15XjH7o&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=nWKsQzF9IjtPtGxkNhb28A&oh=00_AfpwJUFbTKe_2u6kB2olNaPBbEEZbAVUv3-_hnF1-dhKVQ&oe=696699FE",
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/607636527_10117193155969411_1373042340575521808_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=7VyXEEfgNWcQ7kNvwFNK4Is&_nc_oc=AdkeIZEekyklkyRCngWyipisiivcLVvepf3vfw69_vAzaZx3kZW_ELX084duwwJvJc4&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=Wpl302alFI16UIugA1eKDQ&oh=00_AfpCeSnZuOhEduhKopbirJd5V9wfcCokumjmwS7nDQJ1Hw&oe=69666BAE",
+      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/606351129_10117193156228891_6076421798090189753_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=SbeTJb8irikQ7kNvwHNdDNA&_nc_oc=AdmvduTVchHlp7k4XDjwx6bBGmZ8wjsgP7FmGTO_2v07wAWEpXuk7knqzOQUhdkxWSQ&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=Ua_gus-Zj7v4yppM1LapRA&oh=00_AfqB7puMbVFzqbJdO6tGqYy7cSQehi4e7KHFEoEIgfIq3w&oe=69669642",
+    ],
+    likes_count: 18945,
+    reposts_and_quotes_count: 723,
+    replies_count: 3456,
+    created_at: "4h ago",
+    is_liked: false,
+  },
+  {
+    id: 4,
+    user: {
+      id: 104,
+      username: "tim_cook",
+      name: "Tim Cook",
+      avatar: "https://i.pravatar.cc/150?img=14",
+      verified: true,
+    },
+    content:
+      "Great meeting with our teams today. Proud of the incredible work happening across the company. Our commitment to innovation and privacy remains stronger than ever. 🍎",
+    likes_count: 12453,
+    reposts_and_quotes_count: 567,
+    replies_count: 1203,
+    created_at: "6h ago",
+    is_liked: true,
+  },
+  {
+    id: 7,
+    user: {
+      id: 107,
+      username: "mary_barra",
+      name: "Mary Barra",
+      avatar: "https://i.pravatar.cc/150?img=20",
+      verified: true,
+    },
+    content:
+      "Sustainability and innovation go hand in hand. Proud of our progress toward an all-electric future. Together, we're driving change that matters. 🚗⚡",
+    media_urls: [],
+    likes_count: 6789,
+    reposts_and_quotes_count: 198,
+    replies_count: 534,
+    created_at: "12h ago",
+    is_liked: false,
+  },
+  {
+    id: 9,
+    user: {
+      id: 109,
+      username: "elonmusk",
+      name: "Elon Musk",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_400x400.jpg",
+      verified: true,
+    },
+    content:
+      "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
+    media_urls: [],
+    likes_count: 456789,
+    reposts_and_quotes_count: 15234,
+    replies_count: 23456,
+    created_at: "1h ago",
+    is_liked: true,
+  },
+  {
+    id: 1800,
+    user: {
+      id: 102,
+      username: "sontungmtp",
+      name: "Sơn Tùng M-TP 💋",
+      avatar_url:
+        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
+      verified: true,
+    },
+    content:
+      "Chẳng hiểu sao họ gọi em là thiếu nữ.Mà sự thật em thiếu một nam nhân",
+    media_urls: [
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/587805017_18545566837042044_2897950443748016094_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=Mzc4NjUwMzMwMzU5NDE3ODM0OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=6R64sZFmu8QQ7kNvwFln1mb&_nc_oc=Adny-msrl0mc3RWh9bVMJgZtpz-_yypdm_Ke6pDgknyFP6-RI5dIuPK0gPQ6sb5tpHE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfrfHdQ8_vaO8xO6HnKk9XChz_-YAZsXPgWgCOtgR3Wppw&oe=69667FC1",
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/591169815_18545566855042044_7161084111520503781_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=108&ig_cache_key=Mzc4NjUwMzMwMzQxNzk2NzY0MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=qcYH7EPW_GoQ7kNvwECe5yL&_nc_oc=Adlqik3PWI4Leznq_MoROwBghhfZQLi3RNwesHsAC0wta1d1cLK5d-DZjQoew4PkXEE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfqS7VPkiBUqiYvaQDfaV1UhF79Q4AbgSZJJGDJ42Pb49Q&oe=69666B27",
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/588635834_18545566873042044_941038866361006949_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=105&ig_cache_key=Mzc4NjUwMzMwMzU5NDEyNjU5Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=gPUlibQHvS0Q7kNvwFkH8Ui&_nc_oc=AdlVjaZtWF9lHObxT8lcSVRmPdmchhqEkTLqtQaLC2Q9m1chO9vSLTQu1j4oyIW_dn0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_Afp_cSi3EMmNEhLpdtTUTEZ1CrMA72Fq_z0fBbfAxF64tw&oe=69667A4D",
+    ],
+    likes_count: 295000,
+    reposts_and_quotes_count: 1600,
+    replies_count: 1900,
+    created_at: "5h ago",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 6,
+    user: {
+      id: 106,
+      username: "jensen_huang",
+      name: "Jensen Huang",
+      avatar: "https://i.pravatar.cc/150?img=16",
+      verified: true,
+    },
+    content:
+      "The future of computing is accelerated. Thrilled to see developers around the world building incredible applications with our platform. This is just the beginning! 🎮💚",
+    media_urls: [],
+    likes_count: 9234,
+    reposts_and_quotes_count: 312,
+    replies_count: 756,
+    created_at: "8h ago",
+    is_liked: true,
+  },
+  {
+    id: 18,
+    user: {
+      id: 102,
+      username: "sontungmtp",
+      name: "Sơn Tùng M-TP 💋",
+      avatar_url:
+        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
+      verified: true,
+    },
+    content:
+      "Nhiều ông bà đến tận giờ này vẫn còn thắc mắc … Sao ông Tùng hứa đi chạy bộ HỒ GƯƠM mà không thấy đâuuu … 🙂Đây … đây này … Đã muốn cất giấu kí ức này đi mà cứ bắt người ta phải moi lên mới chịuuuu … 🙃Có biết hôm đấy chạy bộ một mình quanh hồ lạnh lẽo thế nào khôngggg 🥲🥲🥲",
+    media_urls: [
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/583535882_18541006435042044_7868208800947324188_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzc2NjkyMDgyODIyODM3MzM3Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=qYfg57qzB6sQ7kNvwH4iLYS&_nc_oc=AdmHiNEQbv3ruH1HxeTQV-Dt0K-ROPDJLISHx4oAJcV5XN7ZE3E35jk0FPUwjb6GKmQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_Afosy4FdXit74BIN1kF0C8tT4hyQm-27DAmdgBofz3-hZg&oe=69668874",
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/581435984_18541006444042044_2102571369351295835_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=109&ig_cache_key=Mzc2NjkyMDgyODE3ODAyOTk2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=Ec3iH89s78YQ7kNvwHwwHvk&_nc_oc=Adm2aBPd0mV41asqCnPIRTICesId4h5hitzO08iLJ6BMYzf8E15MOrUPxSzrYS1dkl8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_AfqHukTb5dPEAJY526KituDUlti_4USXOos9cbWZX-zgLw&oe=69667047",
+      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/581725970_18541006453042044_1118421191812529200_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ig_cache_key=Mzc2NjkyMDgyODE3ODA1MTA0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=OijlxBiEUMwQ7kNvwE86RAI&_nc_oc=Admj5r8lNQPURZTtx8bOTo8ogv8-0-A3D1HU0mOnpm-SkdPr_WynhSHVtZ0hsgfWz-0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_AfoTQayyX2YtiMQQrxS8XBE0Iwik_kh2r1ZFyuDd22K4jA&oe=69669393",
+    ],
+    likes_count: 175000,
+    reposts_and_quotes_count: 2500,
+    replies_count: 1254,
+    created_at: "5h ago",
+    is_liked_by_auth: true,
+  },
+  {
     id: 10,
     user: {
       id: 102,
@@ -31,27 +193,22 @@ const DEMO_POSTS = [
     is_liked_by_auth: true,
   },
   {
-    id: 18,
+    id: 3,
     user: {
-      id: 102,
-      username: "sontungmtp",
-      name: "Sơn Tùng M-TP 💋",
-      avatar_url:
-        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
+      id: 103,
+      username: "satya_nadella",
+      name: "Satya Nadella",
+      avatar: "https://i.pravatar.cc/150?img=13",
       verified: true,
     },
     content:
-      "Nhiều ông bà đến tận giờ này vẫn còn thắc mắc … Sao ông Tùng hứa đi chạy bộ HỒ GƯƠM mà không thấy đâuuu … 🙂Đây … đây này … Đã muốn cất giấu kí ức này đi mà cứ bắt người ta phải moi lên mới chịuuuu … 🙃Có biết hôm đấy chạy bộ một mình quanh hồ lạnh lẽo thế nào khôngggg 🥲🥲🥲",
-    media_urls: [
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/583535882_18541006435042044_7868208800947324188_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzc2NjkyMDgyODIyODM3MzM3Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=qYfg57qzB6sQ7kNvwH4iLYS&_nc_oc=AdmHiNEQbv3ruH1HxeTQV-Dt0K-ROPDJLISHx4oAJcV5XN7ZE3E35jk0FPUwjb6GKmQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_Afosy4FdXit74BIN1kF0C8tT4hyQm-27DAmdgBofz3-hZg&oe=69668874",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/581435984_18541006444042044_2102571369351295835_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=109&ig_cache_key=Mzc2NjkyMDgyODE3ODAyOTk2Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=Ec3iH89s78YQ7kNvwHwwHvk&_nc_oc=Adm2aBPd0mV41asqCnPIRTICesId4h5hitzO08iLJ6BMYzf8E15MOrUPxSzrYS1dkl8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_AfqHukTb5dPEAJY526KituDUlti_4USXOos9cbWZX-zgLw&oe=69667047",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/581725970_18541006453042044_1118421191812529200_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ig_cache_key=Mzc2NjkyMDgyODE3ODA1MTA0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=OijlxBiEUMwQ7kNvwE86RAI&_nc_oc=Admj5r8lNQPURZTtx8bOTo8ogv8-0-A3D1HU0mOnpm-SkdPr_WynhSHVtZ0hsgfWz-0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=qNoLOBfVycuQmYKBwoE-Ew&oh=00_AfoTQayyX2YtiMQQrxS8XBE0Iwik_kh2r1ZFyuDd22K4jA&oe=69669393",
-    ],
-    likes_count: 7569,
-    reposts_and_quotes_count: 4897,
-    replies_count: 1254,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
+      "Innovation distinguishes between a leader and a follower. Excited about what we're building for the future of technology. The best is yet to come! 🚀",
+    media_urls: [],
+    likes_count: 8942,
+    reposts_and_quotes_count: 234,
+    replies_count: 891,
+    created_at: "3h ago",
+    is_liked: false,
   },
   {
     id: 20,
@@ -100,29 +257,6 @@ const DEMO_POSTS = [
     reposts_and_quotes_count: 507,
     replies_count: 1800,
     created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 6,
-    user: {
-      id: 105,
-      username: "minhquanvippro",
-      bio: "Do you have that dream if one of your favourite artist  would collab  with another. today it finally happened🥰",
-      name: "Quân Minh",
-    },
-    content:
-      "I have been holding my tears back for a while, trying my best to stay strong after so much has happened in my life lately. I feel stuck and on the edge of giving up. I heard this, and it expressed my feelings so well that I burst into tears. It really touched me and made me feel understood. Thank you sincerely for this heartfelt piece.",
-    media_urls: [
-      "https://picsum.photos/600/400?random=5",
-      "https://picsum.photos/600/400?random=6",
-      "https://picsum.photos/600/400?random=7",
-      "https://picsum.photos/600/400?random=8",
-      "https://picsum.photos/600/400?random=9",
-    ],
-    likes_count: 173,
-    reposts_and_quotes_count: 34,
-    replies_count: 67,
-    created_at: "1d ago",
     is_liked_by_auth: true,
   },
 ];

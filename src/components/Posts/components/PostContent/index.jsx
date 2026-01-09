@@ -84,7 +84,7 @@ const PostContent = ({ content, mediaUrls }) => {
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-56 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
+                      className="h-64 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
                       loading="lazy"
                       onClick={(e) => {
                         e.stopPropagation();

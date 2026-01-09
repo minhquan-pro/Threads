@@ -17,12 +17,12 @@ const MobileHeader = () => {
   const isHome = location.pathname === "/";
   const isFollowing = location.pathname.startsWith("/following");
   const isItemDetailPage = location.pathname.includes("/post/");
-  const showTabs = isHome || isFollowing;
+  const isPageHome = isHome || isFollowing;
 
   const handleLogoClick = (e) => {
     e.preventDefault();
 
-    if (!showTabs) {
+    if (!isPageHome) {
       navigate(tabActive);
       return;
     }
@@ -73,7 +73,7 @@ const MobileHeader = () => {
       </div>
 
       {/* Mobile Tabs: For You / Following */}
-      {currentUser && showTabs && (
+      {currentUser && isPageHome && (
         <div className="border-b border-gray-200 bg-white/80 pt-16 backdrop-blur-md md:hidden dark:border-[#2f2f2f] dark:bg-black/80">
           <div className="mx-auto flex max-w-screen-sm">
             <Link

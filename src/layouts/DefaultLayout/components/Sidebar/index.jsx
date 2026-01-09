@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import classNames from "classnames";
 
 import { NAV_ITEMS } from "@/constants/sidebar";
@@ -8,7 +8,7 @@ import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import { useCurrentUser } from "@/features/auth";
 import { Button } from "@/components/ui/button";
 import { useScrollRestoration } from "@/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreatePostModal from "@/components/modals/CreatePostModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThreads } from "@fortawesome/free-brands-svg-icons";
@@ -16,21 +16,32 @@ import { faThreads } from "@fortawesome/free-brands-svg-icons";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const currentUser = useCurrentUser();
+  const [tabActive, setTabActive] = useState(location.pathname);
   useScrollRestoration();
+
+  useEffect(() => {
+    setTabActive(location.pathname);
+  }, [location.pathname]);
+
+  console.log(tabActive);
 
   const handleNavigate = () => {
     if (location.pathname === "/") {
-      window.scrollTo({ top: 0 });
+      window.scrollY === 0
+        ? window.location.reload()
+        : window.scrollTo({ top: 0 });
       return;
     }
   };
 
-  const handleClick = (value) => {
+  const handleClick = (e, value) => {
     if (value.action === "create") {
       setIsOpen(true);
     } else if (value.path === "/") {
-      handleNavigate();
+      navigate(tabActive);
+      handleNavigate(e);
     }
   };
 
@@ -58,7 +69,7 @@ const Sidebar = () => {
 
       return (
         <NavLink
-          onClick={() => handleClick(nav)}
+          onClick={(e) => handleClick(e, nav)}
           key={nav.id}
           to={nav.path}
           className={classNames(
@@ -70,11 +81,16 @@ const Sidebar = () => {
           )}
         >
           {({ isActive }) => {
+            const isHomeActive =
+              nav.id === "for-you" &&
+              (location.pathname === "/" || location.pathname === "/following");
+
             return (
               <Button variant="outline border-none shadow-none">
                 <Icon
                   className={classNames({
-                    "text-foreground fill-current dark:text-gray-100": isActive,
+                    "text-foreground fill-current dark:text-gray-100":
+                      isActive || isHomeActive,
                   })}
                   style={{ width: iconSize, height: iconSize }}
                 />
