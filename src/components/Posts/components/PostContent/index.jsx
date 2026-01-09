@@ -1,4 +1,6 @@
 import useEmblaCarousel from "embla-carousel-react";
+import { useState } from "react";
+import ImageLightbox from "@/components/common/ImageLightbox";
 
 const PostContent = ({ content, mediaUrls }) => {
   const [emblaRef] = useEmblaCarousel({
@@ -6,6 +8,25 @@ const PostContent = ({ content, mediaUrls }) => {
     slidesToScroll: 1,
     containScroll: "trimSnaps",
   });
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const goToPrevious = () => {
+    setCurrentImageIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => Math.min(mediaUrls.length - 1, prev + 1));
+  };
 
   return (
     <div className="-mt-0.5">
@@ -21,8 +42,10 @@ const PostContent = ({ content, mediaUrls }) => {
       {mediaUrls && mediaUrls.length > 0 && (
         <>
           {mediaUrls.length <= 2 ? (
-            // Grid layout cho 1-2 ảnh
             <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
               className="mb-1 grid gap-2"
               style={{
                 gridTemplateColumns: `repeat(${mediaUrls.length}, 1fr)`,
@@ -33,15 +56,24 @@ const PostContent = ({ content, mediaUrls }) => {
                   <img
                     src={url}
                     alt={`Image ${index + 1}`}
-                    className="h-80 w-full rounded-md object-cover"
+                    className="h-80 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
                     loading="lazy"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openLightbox(index);
+                    }}
                   />
                 </div>
               ))}
             </div>
           ) : (
-            // Embla Carousel cho 3+ ảnh - Hiển thị 2.5 ảnh
-            <div className="mb-1 overflow-hidden" ref={emblaRef}>
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className="mb-1 overflow-hidden"
+              ref={emblaRef}
+            >
               <div className="flex touch-pan-y gap-2">
                 {mediaUrls.map((url, index) => (
                   <div
@@ -52,8 +84,12 @@ const PostContent = ({ content, mediaUrls }) => {
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-56 w-full rounded-md object-cover"
+                      className="h-56 w-full cursor-pointer rounded-md object-cover transition-opacity hover:opacity-90"
                       loading="lazy"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openLightbox(index);
+                      }}
                     />
                   </div>
                 ))}
@@ -61,6 +97,17 @@ const PostContent = ({ content, mediaUrls }) => {
             </div>
           )}
         </>
+      )}
+
+      {/* Image Lightbox */}
+      {lightboxOpen && (
+        <ImageLightbox
+          images={mediaUrls}
+          currentIndex={currentImageIndex}
+          onClose={closeLightbox}
+          onPrevious={goToPrevious}
+          onNext={goToNext}
+        />
       )}
     </div>
   );
