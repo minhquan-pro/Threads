@@ -7,12 +7,14 @@ import { useCurrentUser } from "@/features/auth";
 
 import AuthenticatedMenu from "@/components/AuthenticatedMenu";
 import UnauthenticatedMenu from "@/components/UnauthenticatedMenu";
+import { useBodyClass } from "@/hooks/useBodyClass";
 
 const MobileHeader = () => {
   const currentUser = useCurrentUser();
   const location = useLocation();
   const navigate = useNavigate();
   const [tabActive, setTabActive] = useState(location.pathname);
+  const imageOverlay = useBodyClass("imageOverlay");
 
   const isHome = location.pathname === "/";
   const isFollowing = location.pathname.startsWith("/following");
@@ -35,7 +37,9 @@ const MobileHeader = () => {
   return (
     <>
       {/* Mobile Header */}
-      <div className="fixed top-0 right-0 left-0 z-50 flex h-15 items-center justify-between bg-white/80 px-4 backdrop-blur-md md:hidden dark:bg-black/80 dark:shadow-xl">
+      <div
+        className={`fixed top-0 right-0 left-0 ${!imageOverlay && "z-50"} flex h-15 items-center justify-between bg-white/80 px-4 backdrop-blur-md md:hidden dark:bg-black/80 dark:shadow-xl`}
+      >
         {/* Left - Menu/Back Button */}
         <div className="mb-3 h-6 w-6">
           {isItemDetailPage && (

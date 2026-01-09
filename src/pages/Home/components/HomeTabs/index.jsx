@@ -2,34 +2,10 @@ import CurvedBorderBottom from "@/components/common/CurvedBorderBottom";
 import SnowOverlay from "@/components/common/SnowOverlay";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TAB_VALUES } from "@/constants";
-import { useEffect, useState } from "react";
+import { useBodyClass } from "@/hooks/useBodyClass";
 
 const HomeTabs = ({ children, currentTab, handleValueChange }) => {
-  const [imageOverlay, setImageOverlay] = useState(
-    document.body.classList.contains("imageOverlay"),
-  );
-
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const hasImageOverlay =
-            document.body.classList.contains("imageOverlay");
-          setImageOverlay(hasImageOverlay);
-          console.log("imageOverlay class:", hasImageOverlay);
-        }
-      });
-    });
-
-    observer.observe(document.body, {
-      attributes: true, // Theo dõi thay đổi attributes
-      attributeFilter: ["class"], // Chỉ theo dõi attribute "class"
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const imageOverlay = useBodyClass("imageOverlay");
 
   return (
     <>
@@ -39,7 +15,7 @@ const HomeTabs = ({ children, currentTab, handleValueChange }) => {
         onValueChange={handleValueChange}
       >
         <div
-          className={`fixed top-0 right-0 left-0 ${imageOverlay ? "z-10" : "z-50"} m-auto hidden w-[700px] md:block`}
+          className={`fixed top-0 right-0 left-0 ${!imageOverlay && "z-50"} m-auto hidden w-[700px] md:block`}
         >
           <div className="flex items-center">
             <TabsList className="relative min-h-16 w-full gap-5 rounded-none border-gray-800 bg-white dark:border-[#323030] dark:bg-black">

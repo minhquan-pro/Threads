@@ -10,18 +10,22 @@ import { useCurrentUser } from "@/features/auth";
 import Header from "./components/Header";
 import MobileHeader from "./components/MobileHeader";
 import CreatePostForm from "@/components/Posts/components/CreatePostForm";
+import { useBodyClass } from "@/hooks/useBodyClass";
 
 const DefaultLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = useCurrentUser();
   const { currentTab, handleValueChange, isHomeFeedRoute } = useNavigation();
+  const imageOverlay = useBodyClass("imageOverlay");
   const showTabs = isHomeFeedRoute && currentUser;
   const title = useTitle(currentTab);
 
   return (
     <div className="bg-white dark:bg-black">
       <MobileHeader />
-      <div className="fixed right-0 bottom-0 left-0 z-50 flex h-auto justify-center md:top-0 md:right-auto md:bottom-auto md:left-0 md:z-0 md:flex md:h-full md:w-auto">
+      <div
+        className={`fixed right-0 bottom-0 left-0 ${!imageOverlay && "z-50"} flex h-auto justify-center md:top-0 md:right-auto md:bottom-auto md:left-0 md:z-0 md:flex md:h-full md:w-auto`}
+      >
         <Sidebar />
       </div>
 
