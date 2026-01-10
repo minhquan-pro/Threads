@@ -106,7 +106,7 @@ const PostContent = ({ content, mediaUrls }) => {
                       <video
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={url}
-                        className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
+                        className="h-full w-auto cursor-pointer rounded-lg object-cover transition-opacity select-none hover:opacity-90"
                         autoPlay
                         muted
                         loop
@@ -135,7 +135,7 @@ const PostContent = ({ content, mediaUrls }) => {
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                      className="h-full w-auto cursor-pointer rounded-md object-cover transition-opacity select-none hover:opacity-90"
                       loading="lazy"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -165,7 +165,7 @@ const PostContent = ({ content, mediaUrls }) => {
                       <video
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={url}
-                        className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
+                        className="h-full w-auto cursor-pointer rounded-lg object-cover transition-opacity select-none hover:opacity-90"
                         autoPlay
                         muted
                         loop
@@ -194,7 +194,7 @@ const PostContent = ({ content, mediaUrls }) => {
                     <img
                       src={url}
                       alt={`Image ${index + 1}`}
-                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                      className="h-full w-auto cursor-pointer rounded-md object-cover transition-opacity select-none hover:opacity-90"
                       loading="lazy"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -225,7 +225,7 @@ const PostContent = ({ content, mediaUrls }) => {
                         <video
                           ref={(el) => (videoRefs.current[index] = el)}
                           src={url}
-                          className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
+                          className="h-full w-auto cursor-pointer rounded-lg object-cover transition-opacity select-none hover:opacity-90"
                           autoPlay
                           muted
                           loop
@@ -253,7 +253,7 @@ const PostContent = ({ content, mediaUrls }) => {
                       <img
                         src={url}
                         alt={`Image ${index + 1}`}
-                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        className="h-full w-auto cursor-pointer rounded-md object-cover transition-opacity select-none hover:opacity-90"
                         loading="lazy"
                         onClick={(e) => {
                           e.stopPropagation();
