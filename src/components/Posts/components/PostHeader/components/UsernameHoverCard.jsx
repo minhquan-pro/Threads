@@ -87,31 +87,34 @@ const UsernameHoverCard = ({ user }) => {
           <div className="p-3">
             <div className="flex items-start gap-3">
               <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        {user.name}
-                      </h3>
-                      {user.verified && (
-                        <img
-                          src={verifiedIcon}
-                          alt="Verified badge"
-                          className="h-4 w-4"
-                        />
-                      )}
+                <Link to={"/profile"} className="hover:opacity-80">
+                  {" "}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-1">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                          {user.name}
+                        </h3>
+                        {user.verified && (
+                          <img
+                            src={verifiedIcon}
+                            alt="Verified badge"
+                            className="h-4 w-4"
+                          />
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-500 dark:text-[#c4c4c4]">
+                        {user.username}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-500 dark:text-[#c4c4c4]">
-                      {user.username}
-                    </p>
+                    {/* Avatar */}
+                    <img
+                      src={user.avatar_url || defaultImageUser}
+                      alt={user.username}
+                      className="h-16 w-16 rounded-full object-cover"
+                    />
                   </div>
-                  {/* Avatar */}
-                  <img
-                    src={user.avatar_url || defaultImageUser}
-                    alt={user.username}
-                    className="h-16 w-16 rounded-full object-cover"
-                  />
-                </div>
+                </Link>
                 {user.bio && (
                   <p className="mt-3 text-sm font-semibold">
                     {truncateWords(user.bio, 21)}

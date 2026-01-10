@@ -5,11 +5,32 @@ import { useIsDesktop } from "@/hooks";
 
 // DemoVideo
 import videoDemo1 from "/videosDemo/video-1.mp4";
-import videoDemo2 from "/videosDemo/video-2.mp4";
 import videoDemo3 from "/videosDemo/video-3.mp4";
+import videoDemo4 from "/videosDemo/video-4.mp4";
+import videoDemo5 from "/videosDemo/video-5.mp4";
+import videoDemo6 from "/videosDemo/video-6.mp4";
 
 // Dữ liệu demo
 const DEMO_POSTS = [
+  {
+    id: 26589,
+    user: {
+      id: 116,
+      username: "ygt1016",
+      name: "Quý Đặng",
+      avatar_url:
+        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/612455415_122283125516036290_1325764938759042572_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=833d8c&_nc_ohc=JG6QAg7_9SQQ7kNvwFWGKny&_nc_oc=AdkvHw1fune71ciWZo6_B9DYec38X0eEQ-K9r3gzdEMGpgEwfYVYNcG7JIm4i6DjpIA&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=hFPrwyO2p1FpWCLq9nJCaw&oh=00_AfpqbX44186FQ6ZnU6JMcXrfflG-vthVB_skkQ85JUlMYw&oe=696825F0",
+      isFollowing: true,
+      verified: true,
+    },
+    content: "大阪必吃美乃滋大阪燒！店員每個都好會噴！",
+    media_urls: [videoDemo5, videoDemo6],
+    likes_count: 2500,
+    reposts_and_quotes_count: 50,
+    replies_count: 37,
+    created_at: "4h ago",
+    is_liked_by_auth: true,
+  },
   {
     id: 25789,
     user: {
@@ -87,16 +108,14 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     id: 8515451,
     user: {
       id: 116,
-      username: "travel_vn",
-      name: "Du Lịch Việt Nam",
+      username: "ngyn_qh.17",
+      name: "Nguyen Quoc Huy",
       avatar_url:
-        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
-      verified: true,
+        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/612321912_1318497126985026_371561552607835650_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vRD_u1Nx1igQ7kNvwESv9SX&_nc_oc=AdnPjPtL1xMRNH-ZBXppoihk5wehOESvMK7QcHv8roJV0HKvcwInKAE_rqG3yNtvi20&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=EfsxolQmXiruYCc7P3_1hg&oh=00_AfpfKIR-ZRPuoIbOFVaMjxHq74v_ShejhIduUj-LT63k2g&oe=69681887",
       isFollowing: true,
     },
-    content: `Quá khứ của Việt Kiều Boy:
-“Đăng quang là gì?” 🤣🤣🤣🤣🤣`,
-    media_urls: [videoDemo2],
+    content: "Mn ơi nay mình dc th bạn cho xem chim to",
+    media_urls: [videoDemo4],
     likes_count: 1200,
     reposts_and_quotes_count: 14,
     replies_count: 56,
