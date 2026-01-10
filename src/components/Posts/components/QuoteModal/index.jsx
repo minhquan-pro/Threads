@@ -102,9 +102,13 @@ const QuoteModal = ({ post, isOpen, onClose }) => {
             <div className="relative">
               <ThreadLine show />
               {index === 0 ? (
-                <UserProfileDialog user={currentUser} />
+                <div>
+                  <UserProfileDialog user={currentUser} />
+                </div>
               ) : (
-                <UserAvatar user={currentUser} />
+                <div>
+                  <UserAvatar user={currentUser} />
+                </div>
               )}
             </div>
             <div className="w-full">

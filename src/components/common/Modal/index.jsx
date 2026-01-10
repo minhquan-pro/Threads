@@ -72,7 +72,7 @@ export const Modal = ({ isOpen, onClose, children, className = "" }) => {
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-50 transition-all duration-200 ${
+      className={`fixed inset-0 z-50 overflow-x-hidden transition-all duration-200 ${
         isVisible ? "bg-black/80" : "bg-black/0"
       }`}
       onClick={handleBackdropClick}

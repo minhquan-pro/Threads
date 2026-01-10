@@ -15,7 +15,9 @@ const ThreadList = ({
         <div key={thread.id} className="relative flex gap-2">
           <ThreadLine show />
           <div className="flex w-full gap-2">
-            <UserAvatar user={currentUser} />
+            <div>
+              <UserAvatar user={currentUser} />
+            </div>
             <div className="flex-1">
               <PostComposer
                 content={thread.content}

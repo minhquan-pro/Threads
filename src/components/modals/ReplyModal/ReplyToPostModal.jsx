@@ -122,7 +122,9 @@ const ReplyToPostModal = ({ post, isOpen, onClose }) => {
           <div key={thread.id} className="relative mt-2 flex">
             <ThreadLine show lineStyle="bg-gray-200" />
             <div className="flex w-full gap-2">
-              <UserAvatar user={currentUser} />
+              <div>
+                <UserAvatar user={currentUser} />
+              </div>
               <div className="flex-1">
                 <PostComposer
                   content={thread.content}
