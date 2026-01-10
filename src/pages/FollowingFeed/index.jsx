@@ -2,6 +2,8 @@ import { useCurrentUser } from "@/features/auth";
 
 import FeedItem from "@/components/Posts/FeedItem";
 import { useIsDesktop } from "@/hooks";
+
+// DemoVideo
 import videoDemo1 from "/videosDemo/video-1.mp4";
 import videoDemo2 from "/videosDemo/video-2.mp4";
 import videoDemo3 from "/videosDemo/video-3.mp4";
