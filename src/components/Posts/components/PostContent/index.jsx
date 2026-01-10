@@ -53,7 +53,10 @@ const PostContent = ({ content, mediaUrls }) => {
         entries.forEach((entry) => {
           const video = entry.target;
           if (entry.isIntersecting) {
-            video.play();
+            // Chỉ tự động play nếu có autoplay attribute hoặc là video duy nhất
+            if (video.hasAttribute("autoplay") || mediaUrls.length === 1) {
+              video.play();
+            }
           } else {
             video.pause();
           }
@@ -99,7 +102,7 @@ const PostContent = ({ content, mediaUrls }) => {
                 <div
                   key={url}
                   className="relative"
-                  style={{ height: isVideo(url) ? "350px" : "200px" }}
+                  style={{ height: isVideo(url) ? "350px" : "320px" }}
                 >
                   {isVideo(url) ? (
                     <div className="relative h-full">
@@ -166,7 +169,7 @@ const PostContent = ({ content, mediaUrls }) => {
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={url}
                         className="h-full w-auto cursor-pointer rounded-lg object-cover transition-opacity select-none hover:opacity-90"
-                        autoPlay
+                        autoPlay={index === 0}
                         muted
                         loop
                         playsInline
@@ -226,7 +229,7 @@ const PostContent = ({ content, mediaUrls }) => {
                           ref={(el) => (videoRefs.current[index] = el)}
                           src={url}
                           className="h-full w-auto cursor-pointer rounded-lg object-cover transition-opacity select-none hover:opacity-90"
-                          autoPlay
+                          autoPlay={index === 0}
                           muted
                           loop
                           playsInline
