@@ -96,13 +96,17 @@ const PostContent = ({ content, mediaUrls }) => {
               className="mb-1 flex items-start justify-start"
             >
               {mediaUrls.map((url, index) => (
-                <div key={url} className="relative" style={{ height: "200px" }}>
+                <div
+                  key={url}
+                  className="relative"
+                  style={{ height: isVideo(url) ? "350px" : "200px" }}
+                >
                   {isVideo(url) ? (
                     <div className="relative h-full">
                       <video
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={url}
-                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
                         autoPlay
                         muted
                         loop
@@ -151,13 +155,17 @@ const PostContent = ({ content, mediaUrls }) => {
               style={{ justifyContent: "flex-start" }}
             >
               {mediaUrls.map((url, index) => (
-                <div key={url} className="relative" style={{ height: "200px" }}>
+                <div
+                  key={url}
+                  className="relative"
+                  style={{ height: isVideo(url) ? "350px" : "200px" }}
+                >
                   {isVideo(url) ? (
                     <div className="relative h-full">
                       <video
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={url}
-                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
                         autoPlay
                         muted
                         loop
@@ -210,14 +218,14 @@ const PostContent = ({ content, mediaUrls }) => {
                   <div
                     key={url}
                     className="relative min-w-0 shrink-0"
-                    style={{ height: "200px" }}
+                    style={{ height: isVideo(url) ? "350px" : "200px" }}
                   >
                     {isVideo(url) ? (
                       <div className="relative">
                         <video
                           ref={(el) => (videoRefs.current[index] = el)}
                           src={url}
-                          className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                          className="h-full w-auto cursor-pointer rounded-lg object-contain transition-opacity select-none hover:opacity-90"
                           autoPlay
                           muted
                           loop

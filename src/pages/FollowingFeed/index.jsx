@@ -2,11 +2,37 @@ import { useCurrentUser } from "@/features/auth";
 
 import FeedItem from "@/components/Posts/FeedItem";
 import { useIsDesktop } from "@/hooks";
+import videoDemo1 from "/videosDemo/video-1.mp4";
+import videoDemo2 from "/videosDemo/video-2.mp4";
+import videoDemo3 from "/videosDemo/video-3.mp4";
 
 // Dữ liệu demo
 const DEMO_POSTS = [
   {
-    id: 8888,
+    id: 25789,
+    user: {
+      id: 116,
+      username: "quydang2905",
+      name: "Quý Đặng",
+      avatar_url:
+        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/292600939_115228927905082_8122933722667759685_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vM9lr8VO4noQ7kNvwE_4-Rq&_nc_oc=AdnjBKBtTOymDBNdZctEw56tBCNddKAjvBSQesLj9dIvPa7uHzYnox2qQM6QvnxbE64&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=IS_iobiOuneJ6YTL06_Zgg&oh=00_AfppcwB0xDRJ3_l3vakZXNix6d8sb7R0aGHcfpNAyFJnmQ&oe=6967AE9A",
+      isFollowing: true,
+      bio: `HUE - TOKYO
+Mindset – Healing – Growth`,
+    },
+    content: `Nghe này...
+Chỉ có duy nhất 1 con đường
+dẫn bạn tới TỰ DO,
+Chính là HỌC TẶP!`,
+    media_urls: [videoDemo3],
+    likes_count: 160,
+    reposts_and_quotes_count: 14,
+    replies_count: 23,
+    created_at: "4h ago",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 25789,
     user: {
       id: 116,
       username: "travel_vn",
@@ -16,18 +42,14 @@ const DEMO_POSTS = [
       verified: true,
       isFollowing: true,
     },
-    content:
-      "Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Find out more at google.com/chromecast.",
-    media_urls: [
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    ],
+    content: "Cách nhận diện sinh viên",
+    media_urls: [videoDemo1],
     likes_count: 12340,
     reposts_and_quotes_count: 456,
     replies_count: 890,
     created_at: "4h ago",
     is_liked_by_auth: true,
   },
-
   {
     id: 2569,
     user: {
@@ -57,6 +79,26 @@ Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
     reposts_and_quotes_count: 5463,
     replies_count: 7892,
     created_at: "5h ago",
+    is_liked_by_auth: true,
+  },
+  {
+    id: 8515451,
+    user: {
+      id: 116,
+      username: "travel_vn",
+      name: "Du Lịch Việt Nam",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content: `Quá khứ của Việt Kiều Boy:
+“Đăng quang là gì?” 🤣🤣🤣🤣🤣`,
+    media_urls: [videoDemo2],
+    likes_count: 1200,
+    reposts_and_quotes_count: 14,
+    replies_count: 56,
+    created_at: "4h ago",
     is_liked_by_auth: true,
   },
   {
