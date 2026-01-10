@@ -12,6 +12,11 @@ const ImageLightbox = ({
   const isDeskTop = useIsDesktop();
   const [isClosing, setIsClosing] = useState(false);
 
+  const isVideo = (url) => {
+    const videoExtensions = [".mp4", ".webm", ".ogg", ".mov"];
+    return videoExtensions.some((ext) => url.toLowerCase().endsWith(ext));
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();
@@ -96,18 +101,28 @@ const ImageLightbox = ({
         </button>
       )}
 
-      {/* Image */}
+      {/* Media (Image or Video) */}
       <div
         className={`pointer-events-none relative z-10 h-full w-full transition-all duration-300 ${
           isClosing ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
         }`}
       >
-        <img
-          src={images[currentIndex]}
-          alt={`Image ${currentIndex + 1}`}
-          className="pointer-events-auto z-50 h-full w-full object-contain transition-opacity duration-300"
-          onClick={(e) => e.stopPropagation()}
-        />
+        {isVideo(images[currentIndex]) ? (
+          <video
+            src={images[currentIndex]}
+            className="pointer-events-auto z-50 h-full w-full object-contain"
+            controls
+            autoPlay
+            onClick={(e) => e.stopPropagation()}
+          />
+        ) : (
+          <img
+            src={images[currentIndex]}
+            alt={`Image ${currentIndex + 1}`}
+            className="pointer-events-auto z-50 h-full w-full object-contain transition-opacity duration-300"
+            onClick={(e) => e.stopPropagation()}
+          />
+        )}
 
         {/* Image Counter */}
         {images.length > 1 && (

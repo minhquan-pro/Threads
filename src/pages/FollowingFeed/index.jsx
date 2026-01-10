@@ -1,11 +1,33 @@
 import { useCurrentUser } from "@/features/auth";
 
-import CreatePost from "@/components/Posts/components/CreatePost";
 import FeedItem from "@/components/Posts/FeedItem";
 import { useIsDesktop } from "@/hooks";
 
 // Dữ liệu demo
 const DEMO_POSTS = [
+  {
+    id: 8888,
+    user: {
+      id: 116,
+      username: "travel_vn",
+      name: "Du Lịch Việt Nam",
+      avatar_url:
+        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
+      verified: true,
+      isFollowing: true,
+    },
+    content:
+      "Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Find out more at google.com/chromecast.",
+    media_urls: [
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    ],
+    likes_count: 12340,
+    reposts_and_quotes_count: 456,
+    replies_count: 890,
+    created_at: "4h ago",
+    is_liked_by_auth: true,
+  },
+
   {
     id: 2569,
     user: {
@@ -314,8 +336,6 @@ const FollowingFeed = () => {
     <div
       className={`overflow-hidden bg-white pt-3 pb-14 ${isShowPadding && "pt-16"} dark:bg-[#181818]`}
     >
-      {currentUser && <CreatePost />}
-
       <div className="bg-white dark:bg-[#181818]">
         {DEMO_POSTS.map((post) => (
           <div

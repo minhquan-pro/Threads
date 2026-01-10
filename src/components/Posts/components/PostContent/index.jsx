@@ -1,6 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import ImageLightbox from "@/components/common/ImageLightbox";
+import { Volume2, VolumeX } from "lucide-react";
 
 const PostContent = ({ content, mediaUrls }) => {
   const [emblaRef] = useEmblaCarousel({
@@ -10,6 +11,24 @@ const PostContent = ({ content, mediaUrls }) => {
   });
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mutedVideos, setMutedVideos] = useState({});
+  const videoRefs = useRef({});
+
+  const isVideo = (url) => {
+    const videoExtensions = [".mp4", ".webm", ".ogg", ".mov"];
+    return videoExtensions.some((ext) => url.toLowerCase().endsWith(ext));
+  };
+
+  const toggleMute = (index) => {
+    const videoElement = videoRefs.current[index];
+    if (videoElement) {
+      videoElement.muted = !videoElement.muted;
+      setMutedVideos((prev) => ({
+        ...prev,
+        [index]: videoElement.muted,
+      }));
+    }
+  };
 
   const openLightbox = (index) => {
     setCurrentImageIndex(index);
@@ -27,6 +46,34 @@ const PostContent = ({ content, mediaUrls }) => {
   const goToNext = () => {
     setCurrentImageIndex((prev) => Math.min(mediaUrls.length - 1, prev + 1));
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+
+    Object.values(videoRefs.current).forEach((video) => {
+      if (video) {
+        observer.observe(video);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [mediaUrls]);
 
   return (
     <div className="-mt-0.5">
@@ -50,16 +97,48 @@ const PostContent = ({ content, mediaUrls }) => {
             >
               {mediaUrls.map((url, index) => (
                 <div key={url} className="relative" style={{ height: "200px" }}>
-                  <img
-                    src={url}
-                    alt={`Image ${index + 1}`}
-                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
-                    loading="lazy"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openLightbox(index);
-                    }}
-                  />
+                  {isVideo(url) ? (
+                    <div className="relative h-full">
+                      <video
+                        ref={(el) => (videoRefs.current[index] = el)}
+                        src={url}
+                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openLightbox(index);
+                        }}
+                      />
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMute(index);
+                        }}
+                        className="absolute right-2 bottom-2 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+                        aria-label="Toggle mute"
+                      >
+                        {mutedVideos[index] !== false ? (
+                          <VolumeX size={16} />
+                        ) : (
+                          <Volume2 size={16} />
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <img
+                      src={url}
+                      alt={`Image ${index + 1}`}
+                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                      loading="lazy"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openLightbox(index);
+                      }}
+                    />
+                  )}
                 </div>
               ))}
             </div>
@@ -73,16 +152,48 @@ const PostContent = ({ content, mediaUrls }) => {
             >
               {mediaUrls.map((url, index) => (
                 <div key={url} className="relative" style={{ height: "200px" }}>
-                  <img
-                    src={url}
-                    alt={`Image ${index + 1}`}
-                    className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
-                    loading="lazy"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openLightbox(index);
-                    }}
-                  />
+                  {isVideo(url) ? (
+                    <div className="relative h-full">
+                      <video
+                        ref={(el) => (videoRefs.current[index] = el)}
+                        src={url}
+                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openLightbox(index);
+                        }}
+                      />
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleMute(index);
+                        }}
+                        className="absolute right-2 bottom-2 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+                        aria-label="Toggle mute"
+                      >
+                        {mutedVideos[index] !== false ? (
+                          <VolumeX size={16} />
+                        ) : (
+                          <Volume2 size={16} />
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <img
+                      src={url}
+                      alt={`Image ${index + 1}`}
+                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                      loading="lazy"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openLightbox(index);
+                      }}
+                    />
+                  )}
                 </div>
               ))}
             </div>
@@ -101,16 +212,47 @@ const PostContent = ({ content, mediaUrls }) => {
                     className="relative min-w-0 shrink-0"
                     style={{ height: "200px" }}
                   >
-                    <img
-                      src={url}
-                      alt={`Image ${index + 1}`}
-                      className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
-                      loading="lazy"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openLightbox(index);
-                      }}
-                    />
+                    {isVideo(url) ? (
+                      <div className="relative">
+                        <video
+                          ref={(el) => (videoRefs.current[index] = el)}
+                          src={url}
+                          className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleMute(index);
+                          }}
+                          className="absolute right-2 bottom-2 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70"
+                          aria-label="Toggle mute"
+                        >
+                          {mutedVideos[index] !== false ? (
+                            <VolumeX size={16} />
+                          ) : (
+                            <Volume2 size={16} />
+                          )}
+                        </button>
+                      </div>
+                    ) : (
+                      <img
+                        src={url}
+                        alt={`Image ${index + 1}`}
+                        className="h-full w-auto cursor-pointer rounded-md object-contain transition-opacity select-none hover:opacity-90"
+                        loading="lazy"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openLightbox(index);
+                        }}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
