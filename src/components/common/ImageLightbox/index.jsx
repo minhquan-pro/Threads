@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { useIsDesktop } from "@/hooks";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect } from "react";
 
 const ImageLightbox = ({
   images,
@@ -10,6 +10,7 @@ const ImageLightbox = ({
   onNext,
 }) => {
   const isDeskTop = useIsDesktop();
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -19,19 +20,40 @@ const ImageLightbox = ({
     };
 
     document.addEventListener("keydown", handleKeyDown);
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     document.body.classList.add("imageOverlay");
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.documentElement.style.overflow = "unset";
       document.body.style.overflow = "unset";
       document.body.classList.remove("imageOverlay");
     };
   }, [onClose, onPrevious, onNext]);
 
+  useEffect(() => {
+    const handleEvent = (event) => {
+      if (event.deltaY <= -100) {
+        setIsClosing(true);
+        setTimeout(() => {
+          onClose();
+        }, 300);
+      }
+    };
+
+    window.addEventListener("wheel", handleEvent, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleEvent);
+    };
+  }, [onClose]);
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity duration-900 ${
+        isClosing ? "opacity-0" : "opacity-100"
+      }`}
       onClick={onClose}
     >
       {/* Close Button */}
@@ -75,11 +97,15 @@ const ImageLightbox = ({
       )}
 
       {/* Image */}
-      <div className="pointer-events-none relative z-10 h-full w-full">
+      <div
+        className={`pointer-events-none relative z-10 h-full w-full transition-all duration-300 ${
+          isClosing ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
+        }`}
+      >
         <img
           src={images[currentIndex]}
           alt={`Image ${currentIndex + 1}`}
-          className="pointer-events-auto z-50 h-full w-full object-contain"
+          className="pointer-events-auto z-50 h-full w-full object-contain transition-opacity duration-300"
           onClick={(e) => e.stopPropagation()}
         />
 
