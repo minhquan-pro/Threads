@@ -56,7 +56,7 @@ const ImageLightbox = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 transition-opacity duration-900 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-900 ${
         isClosing ? "opacity-0" : "opacity-100"
       }`}
       onClick={onClose}
