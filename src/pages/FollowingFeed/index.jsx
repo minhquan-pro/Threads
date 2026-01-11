@@ -4,9 +4,7 @@ import FeedItem from "@/components/Posts/FeedItem";
 import { useIsDesktop } from "@/hooks";
 
 // DemoVideo
-import videoDemo1 from "/videosDemo/video-1.mp4";
 import videoDemo3 from "/videosDemo/video-3.mp4";
-import videoDemo4 from "/videosDemo/video-4.mp4";
 import videoDemo5 from "/videosDemo/video-5.mp4";
 import videoDemo6 from "/videosDemo/video-6.mp4";
 
@@ -52,101 +50,6 @@ Chính là HỌC TẶP!`,
     reposts_and_quotes_count: 14,
     replies_count: 23,
     created_at: "4h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 25789,
-    user: {
-      id: 116,
-      username: "travel_vn",
-      name: "Du Lịch Việt Nam",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content: "Cách nhận diện sinh viên",
-    media_urls: [videoDemo1],
-    likes_count: 12340,
-    reposts_and_quotes_count: 456,
-    replies_count: 890,
-    created_at: "4h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 2569,
-    user: {
-      id: 102,
-      username: "sontungmtp",
-      name: "Sơn Tùng M-TP 💋",
-      avatar_url:
-        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content: `Lần đầu tiên trong đời được đi xe buýt 2 tầnggggg
-😌
-Lớ ngớ thế nào lại vớ được 12 anh đại sứ Modern chình ình cái mặt trên xe nữaaaaa 
-😚
-Nó phải gọi là … BÓC TRÚNG SÍT RỊTTTTTTTTTTTTT 🤫`,
-    media_urls: [
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598984777_1436551717827217_3423448391986974846_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=cPeZeNrPPjIQ7kNvwE6zXdT&_nc_oc=AdlyyrWWwAjJEVvOH9RtaalEDkGvXKAVvWZzl6iNWGJ7tHO2NHztu0Ua5dub8BZQXDA&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=n_qQshq1i-n7J88iKRPkyg&oh=00_AfpnveXlQoJlQsuyKJP3X_OF-BfkVSXBcn0b4GL63XVn8w&oe=6966BD0A",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600320984_1436551787827210_5135817046382819096_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=9rjPkA0kCbgQ7kNvwHrWTp3&_nc_oc=Adm5A1HCHLZd1zlkdF6zVF-O3op6OU6ZHX7909hI7jR3ZcXgYxDitu-ufcOOqr8FE9E&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=IRBcvFMxzUEATimmbnXjWA&oh=00_AfpcGCHl1ZSuwGeXGMT-9VHlfZkFL2JSOqhy1TsO84-_tw&oe=6966917B",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600325813_1436551811160541_7543771910930450051_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=dERrdit1W48Q7kNvwGsQKto&_nc_oc=AdmxqkcLgqIOwhXdpSWRdMioHMoS8l1VKBqR913IeCPrOB5X9mxj2i_hw-FXjlnOvUo&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=icukDKRLzD-ihH6EahgCHg&oh=00_AfqTWqYHeWM-eigP_An7ZR84Z2n-jg1WoQorv-F74Dwcng&oe=69669B22",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600212561_1436551741160548_1630051568662297165_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=IFK5cmoVFPIQ7kNvwFgcNwP&_nc_oc=Adk2itziV93lwDVuCNgvz8KDYyAJe2WJPl4q2KdaZCgdrpUUOzb-vYRBfm3EABIp7Rk&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=T9XDhTqFb6Jv35VuTOwycQ&oh=00_AfoEat0-KQ6SAJ64x7-DZzeOO7ZkZGFo_MllhtgpipPhpw&oe=6966A97E",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598296826_1436551837827205_755241436323708756_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=wBsMfnVErZ8Q7kNvwHK3sOQ&_nc_oc=AdlZm8fSLmuwnfgcVuUsx9BWt9grf_A1r-JQVrpAUGJ7eZL-hYgSUb38v35nWCtThvY&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=ODyI6ToXb9yb3OsWdUhxIQ&oh=00_Afr6AqcMFsF7sp4AP4Ncqm7B2APusVJ1RBuFpIVTkaAbbQ&oe=6966AE79",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/598685770_1436551807827208_5861125152373456818_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Xhq4hOdCY38Q7kNvwEOtA1j&_nc_oc=AdkwUFEXS3NZE5RXwDQ6hCkJJ3PgHxQ5hcJEefjjx-JvzR-TGsSrby_raAVZAfh_CIw&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=YkRu93MCUqLxonvduZKlbw&oh=00_Afow1nQdWm5ToOCh8PQUhik3LnkghcnRV2SVfWKqhm-tsA&oe=6966B35E",
-      "https://scontent.fhan12-1.fna.fbcdn.net/v/t39.30808-6/600145977_1436551897827199_2513972197701953106_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=OpIio51nmLIQ7kNvwEJlZTE&_nc_oc=AdlVORiewFJOkyrbMmxjYSYEiklNXQLfxvLa4Cm2fsEfaAjm-Gz2J6d0Su9n4fXDOrY&_nc_zt=23&_nc_ht=scontent.fhan12-1.fna&_nc_gid=NwuZbxQO5McB4LLVwbFvug&oh=00_AfqGVHd3OpXUmETwX7UpzhM9phTYXeWiQmaPtfv5Bp0v0g&oe=6966A6A0",
-    ],
-    likes_count: 58653,
-    reposts_and_quotes_count: 5463,
-    replies_count: 7892,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 8515451,
-    user: {
-      id: 116,
-      username: "ngyn_qh.17",
-      name: "Nguyen Quoc Huy",
-      avatar_url:
-        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/612321912_1318497126985026_371561552607835650_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=vRD_u1Nx1igQ7kNvwESv9SX&_nc_oc=AdnPjPtL1xMRNH-ZBXppoihk5wehOESvMK7QcHv8roJV0HKvcwInKAE_rqG3yNtvi20&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=EfsxolQmXiruYCc7P3_1hg&oh=00_AfpfKIR-ZRPuoIbOFVaMjxHq74v_ShejhIduUj-LT63k2g&oe=69681887",
-      isFollowing: true,
-    },
-    content: "Mn ơi nay mình dc th bạn cho xem chim to",
-    media_urls: [videoDemo4],
-    likes_count: 1200,
-    reposts_and_quotes_count: 14,
-    replies_count: 56,
-    created_at: "4h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 11111,
-    user: {
-      id: 111,
-      username: "minhquan",
-      name: "Minh Quân",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/1918837316363460608/HxopZPPG_400x400.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "Coding all night, debugging all day 💻☕ Just shipped a new feature and feeling accomplished! Who else is grinding on their projects this weekend?",
-    media_urls: [
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/600229015_1628612361832515_7607035518655288901_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9f807c&_nc_ohc=QLSf1gQ4kpQQ7kNvwEI0Grs&_nc_oc=Adl8BVTpoyszzRvxUDrTzSU8cqllfI9qJAKysvmHiziIUmCJSLSaQxYLUp6gPcHjNjQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGdEfo5t59DtMb2c2f95zgXMzD6xaHVamgHv4Rz-rgRXw&oe=69887975",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/610288126_882913060877448_2135938722632434481_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=pJOuSerM6QsQ7kNvwH0KQdl&_nc_oc=AdlUzdJdwa0iSMJWs6-MknByoJhqg6-7mmYUaHCbq7GL-UrMDA3LLvk6qicB3BVcZ6A&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGZetetR3iJnQvv9PRNT0Qj2auJ9J1TtQgMn4Zd474g5Q&oe=69887858",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/609484622_1652422315726121_4019430930719457277_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=2xTH7Dfv8BIQ7kNvwFumWI1&_nc_oc=AdnTY_jiRcYLPrSLVrwr6ybreRgTDIiTynrTw5es_Fd7k0rYJzjwEft4wRgaKo6E3fw&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QFGwv_kafhOO18qUKnGT0KC4USCuLNHLgIUyGicE4473A&oe=69889D1F",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/608815978_1429705425163212_8508674826867730141_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=vf09ObS3e7cQ7kNvwGhDGxO&_nc_oc=AdntvidnxoNwztfblcjeFPgZ3COIsOJWBGt5svJ2zNv1A6o10au7GSEBPwTd22RF2aQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QHJPSt4nRwXvO2Wpz4c2LMAZ_cX2s3iKWEF7FWOu9p-tg&oe=6988741B",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/613867010_891869573240280_1769752868929167690_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=lA6IQCxg30cQ7kNvwGcj3-v&_nc_oc=AdkJsVNoiSGnQ89P7zoI-k7pzN3vZsEzsn0mrpqukaQK1yScqVlSlRzTsYfU2FRUDho&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QHrCsI1kkBnxu6CDIELoLU52ZRt2cEpuCEG_LyiH2YGjw&oe=69889800",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t1.15752-9/594390824_1486040555794212_4790623262768663546_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9f807c&_nc_ohc=4Uox5-4-IJsQ7kNvwGLYBGj&_nc_oc=AdnTPJFK_aRvlOw7u_g1Z8YcLeZY-f0wDh1l6-_31q0lZ6GNWa5jKtTo49C3mjW9dwo&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&oh=03_Q7cD4QGvxD2-H1HZfkMeNefM-oACZYUv0gdJLEG2ph35vAll_Q&oe=6988A325",
-    ],
-    likes_count: 342,
-    reposts_and_quotes_count: 12,
-    replies_count: 67,
-    created_at: "30m ago",
     is_liked_by_auth: true,
   },
   {
@@ -220,75 +123,6 @@ may sao rủ được cạ cứng đi cùng`,
     is_liked_by_auth: true,
   },
   {
-    id: 102,
-    user: {
-      id: 102,
-      username: "j97",
-      name: "J97",
-      avatar_url:
-        "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "Lào công tử xin cảm ơn tình cảm của Hà Nội, hẹn gặp lại và mong mọi người thật nhiều sức khỏe, những điều may mắn …",
-    media_urls: [
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564802361_1391135545916783_2163136307293540918_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=YzDVSqUuXjoQ7kNvwGOH8RW&_nc_oc=AdnVaNIxhXcl7JIHbNL3Q2FgSzZ2qUCwKAm3Bg5YxQHd_qMk2Fp-UAJXXnl8hAgqjHQ&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=ti3NVk415SCmS0ypKsOPuQ&oh=00_AfpmTPOfLNKi4QswR1ZsMCLZqh7oJSzCFr-8taAGfwcAQg&oe=6966CAFC",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565306875_1391135615916776_8520132962845346660_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BJPhTENXN4YQ7kNvwGjZUm6&_nc_oc=AdlPxVtfK4LGB7XwhEo10MfmYK2_i1B5L1-85PKvWH6EWHCsqsBFe1ktirCn_aWmTTw&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=oc4Bpq4ZLxYxs-IeVBDyew&oh=00_AfqpPV2eaiONt8C2RCeogrhtbgqjz_aybZRR_03C8X1foA&oe=6966E05C",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/561341994_1391135589250112_928078359846137243_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=xP9NLS-5kF8Q7kNvwHeS2Xz&_nc_oc=AdnlWjEEtub7XPAVxHE_yJQRNb-StmtSmykss-4Cw37KdZSqQQivkEUrQx49nnsQN50&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=oEBx4B8nB7X4ND_QONT62w&oh=00_AfpbSPvmsrrZaJZFEA-5jg1tMpXa_auXB7nQ9pwmP6ThqQ&oe=6966F4F5",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/561249153_1391135555916782_4513158517439930054_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=m-ASePaKzrIQ7kNvwErqoUE&_nc_oc=Adka_zZtzgeqNsw9I9kvwQ5Dc9fRN3vw4NDhB4HVrecaUEOhXVIfRavkuChPDQXfl_s&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=7RKsI8x2gYds9p7WPeKaVg&oh=00_AfpYwna_sTlbCUyAcAxb6tV7pHalVkrUwow6L9RixnT70g&oe=6966DACC",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/562364319_1391135575916780_7626419104961249322_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pJcKIyY5jVwQ7kNvwF6L7YM&_nc_oc=Admawv75wVc05XhPMVj3Y0WuW1m6jhS4Fy1nNe6m2sAGdutV0jm60Q0lx9tE1nZPu0A&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=1Ut4zFQ-eZ_TcbfS2F8RpQ&oh=00_AfoQKgnX0T-SujI0frI4mE1iT-Uylch290cnqluPFQ0rWg&oe=6966DCBF",
-    ],
-    likes_count: 30000,
-    reposts_and_quotes_count: 600,
-    replies_count: 1800,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 9,
-    user: {
-      id: 109,
-      username: "elonmusk",
-      name: "Elon Musk",
-      avatar_url:
-        "https://pbs.twimg.com/profile_images/2008546467615580160/57KcqsTA_400x400.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "Ready for that cage match yet, Zuck? 🥊 Still waiting. Anytime, anywhere. Let's settle this like real men. No excuses!",
-    likes_count: 456789,
-    reposts_and_quotes_count: 15234,
-    replies_count: 23456,
-    created_at: "1h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 1800,
-    user: {
-      id: 102,
-      username: "sontungmtp",
-      name: "Sơn Tùng M-TP 💋",
-      avatar_url:
-        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "Chẳng hiểu sao họ gọi em là thiếu nữ.Mà sự thật em thiếu một nam nhân",
-    media_urls: [
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/587805017_18545566837042044_2897950443748016094_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=Mzc4NjUwMzMwMzU5NDE3ODM0OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=6R64sZFmu8QQ7kNvwFln1mb&_nc_oc=Adny-msrl0mc3RWh9bVMJgZtpz-_yypdm_Ke6pDgknyFP6-RI5dIuPK0gPQ6sb5tpHE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfrfHdQ8_vaO8xO6HnKk9XChz_-YAZsXPgWgCOtgR3Wppw&oe=69667FC1",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/591169815_18545566855042044_7161084111520503781_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=108&ig_cache_key=Mzc4NjUwMzMwMzQxNzk2NzY0MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=qcYH7EPW_GoQ7kNvwECe5yL&_nc_oc=Adlqik3PWI4Leznq_MoROwBghhfZQLi3RNwesHsAC0wta1d1cLK5d-DZjQoew4PkXEE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfqS7VPkiBUqiYvaQDfaV1UhF79Q4AbgSZJJGDJ42Pb49Q&oe=69666B27",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/588635834_18545566873042044_941038866361006949_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=105&ig_cache_key=Mzc4NjUwMzMwMzU5NDEyNjU5Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzMifQ%3D%3D&_nc_ohc=gPUlibQHvS0Q7kNvwFkH8Ui&_nc_oc=AdlVjaZtWF9lHObxT8lcSVRmPdmchhqEkTLqtQaLC2Q9m1chO9vSLTQu1j4oyIW_dn0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_Afp_cSi3EMmNEhLpdtTUTEZ1CrMA72Fq_z0fBbfAxF64tw&oe=69667A4D",
-    ],
-    likes_count: 295000,
-    reposts_and_quotes_count: 1600,
-    replies_count: 1900,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
     id: 18,
     user: {
       id: 102,
@@ -309,82 +143,6 @@ may sao rủ được cạ cứng đi cùng`,
     likes_count: 175000,
     reposts_and_quotes_count: 2500,
     replies_count: 1254,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 10,
-    user: {
-      id: 102,
-      username: "j97",
-      name: "J97",
-      avatar_url:
-        "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
-      verified: true,
-      isFollowing: true,
-    },
-    content: "Này gió ơi, đừng vội vàng, lắng nghe được không?",
-    media_urls: [
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565130803_1391985292498475_6043639841704060327_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=B0aWWhc-zbsQ7kNvwESurIQ&_nc_oc=AdlKeJxpT_hK0or8FX06A9qKIKf9xQpwm_1-6xrysDL_DvhkKOhgWhvJGM2RLGcin10&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=6QqCmzPkP5Z-d9jddrm4Pg&oh=00_Afo1F_CUzt5gbpH-6JIcdHnGoakAKYWbKOicYvL9GcnkZw&oe=6966CE91",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564064404_1391985405831797_4175982739405730250_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=zbtLENQ-4AMQ7kNvwGQNYw-&_nc_oc=AdmBcCMDRrKBN_PwAhtxGQNBz4WL0du9-4PkM5z2dioBoCuM8x6iNh2_w8v_WtoIFnE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=bcFHg2BPs_hXi2u-FO_3TQ&oh=00_Afo4VE3NNmwky4w9QfzxTtQ7_g-3XbtA0fdkHDmJ5daxSg&oe=6966C67F",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/564611207_1391985315831806_912513560557787120_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=hb4kc7vY3mgQ7kNvwEyJQ6_&_nc_oc=AdlU9-ovMXrAM9V1ECLycD8JYvulctXAPmTtDy9ZJiajsFI56DxIeV5vauDHVA95bEE&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=ubKIE-DX_HA3uqgSF8lhUw&oh=00_Afp6HZbepYrTKVkh4iNEEwxsETP-JKUEz-Q7JeJ7NJ6u-A&oe=6966F419",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/559180889_1391985399165131_1091933022511941871_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=rkT6pUAg4BIQ7kNvwFXiouP&_nc_oc=AdmWXvhEFE20Ze3GsNUzfSoVgb8zXR9RreFziYp_mT5Gw6A7ITI_KkgVxL4NF5gLLNo&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=c9_pjyS8u2qLxDV4M7Kl7g&oh=00_AfpAwcndwOq54rHOwFxSMZVsp6ifrbWZ10N0fTPSahdcUg&oe=6966E231",
-      "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/565750468_1391985432498461_2860272309386303870_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=NFyPTGNIgg4Q7kNvwFg8bgq&_nc_oc=Adm2rxyEyB2jk9jFi9uf8PANw51UemtmiT9P14cmCOfGLqzkdL9TMBtQQ_u1pV2Tj5I&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=yR6CU-LPuboCMmC2FlTUaA&oh=00_Afr_P4kXdafK7X42auGLFxVT4zKbhCB_1bNB7adb68cR3w&oe=6966E9DA",
-    ],
-    likes_count: 3247,
-    reposts_and_quotes_count: 89,
-    replies_count: 456,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 20,
-    user: {
-      id: 102,
-      username: "sontungmtp",
-      name: "Sơn Tùng M-TP 💋",
-      avatar_url:
-        "https://5sfashion.vn/storage/upload/images/ckeditor/4KG2VgKFDJWqdtg4UMRqk5CnkJVoCpe5QMd20Pf7.jpg",
-      verified: true,
-      isFollowing: true,
-    },
-    content:
-      "Hôm nay có người nắm tay trong tàu, còn tôi nắm… thanh vịn và nỗi cô đơn 🙂Không sao … Tôi ổn hôm mê ạ 🥲",
-    media_urls: [
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/573816746_18538110040042044_5077681824760427552_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=Mzc1ODk2NzE3MTIyMjUzNTQzMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5OS5zZHIuQzMifQ%3D%3D&_nc_ohc=6YiznkXarKEQ7kNvwFw5lEl&_nc_oc=AdntNWz2HD00ccLKNV3ENbydDsaIX9if8OAZ0WJY8QlpbM7hL6n3zeoBof-x3hKcAWM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_Afo7GkBn1cc2lzbEV01i1PceO5r_q1hgJ7SVMH6ORVAOpg&oe=696660E4",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/573256861_18538110049042044_5209306352241962224_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=102&ig_cache_key=Mzc1ODk2NzE3MTIyMjUzMzczNw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwNC5zZHIuQzMifQ%3D%3D&_nc_ohc=En6Xndk4phUQ7kNvwEj2qbN&_nc_oc=AdmGvahePLRfqge0bTq8UnY_Z4-SF8TBA7UmrIXbQvMEOqKdPOSI7U83RJ-bRopdME4&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfrWPl1O-bukOpdD7u8KAn5uGoeMn2s1YsklhW66UC8z5w&oe=69668FE7",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/573149481_18538110058042044_361099006297395066_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=108&ig_cache_key=Mzc1ODk2NzE3MTM0ODMxNzg2MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwNC5zZHIuQzMifQ%3D%3D&_nc_ohc=8EorhQZVuGsQ7kNvwGnLO7o&_nc_oc=AdkhjwiR8bt91ceHmNpoMnmiIp13vM2lTpio7Pp6Fq8DQESPQ_wSZiv5Zo1FUQFwF-E&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfqLH6DyPM9_COxVXF4C-szPCtvgsoa-3-rw64YmampPkA&oe=69669691",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/572422775_18538110067042044_4566027708678000349_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=104&ig_cache_key=Mzc1ODk2NzE3MTUwNzY5MzcwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5OS5zZHIuQzMifQ%3D%3D&_nc_ohc=XZ_s_nUrCBAQ7kNvwHtsNO1&_nc_oc=AdnaD0Z6Ri4meQIs9ZahmZKQkTJP9OkPgK_QFz7MuySCEjrwAh_kRwpQjZl-HdoZ4TI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_AfoFCI-g8kdW_vedaZXKhiWjXoLLItkBBDx2aiNssVJ6bw&oe=6966761D",
-      "https://instagram.fhan19-1.fna.fbcdn.net/v/t51.82787-15/572911235_18538110076042044_4599486899891520278_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ig_cache_key=Mzc1ODk2NzE3MTMzOTk3MDE5OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5OS5zZHIuQzMifQ%3D%3D&_nc_ohc=Uq3V8qHHEbgQ7kNvwGB9RaP&_nc_oc=AdmAjRfiGWirQoDiqh5squYeji2WXz7wTUfGfgFyNMr_pxk3eTgnGuyYJHyimn3XZ_s&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fhan19-1.fna&_nc_gid=aBeDni0xvtgr2i8SKEVkAA&oh=00_Afpc_rlifqCacmeLk5PpIcUhmbnanl2c1bx5BxgfB9YFuA&oe=69669526",
-    ],
-    likes_count: 58653,
-    reposts_and_quotes_count: 5463,
-    replies_count: 7892,
-    created_at: "5h ago",
-    is_liked_by_auth: true,
-  },
-  {
-    id: 1000,
-    user: {
-      id: 102,
-      username: "j97",
-      name: "J97",
-      avatar_url:
-        "https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/1/20/ngan-ngam-thay-ca-si-jack-j97-72911.jpg?width=0&s=OQaz1tZ-7uFLA8UTXffWFQ",
-      verified: true,
-      isFollowing: true,
-    },
-    content: "những chuyến đi cuối năm ",
-    media_urls: [
-      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/608980779_1450343203329350_8024623454936993880_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=U6o7svY9Vv4Q7kNvwHWewyk&_nc_oc=Adl9XcZXXJe-mxQMrmOVcS5mwcPYlAfW9yg3gInmsAzg0g3rATPpzMUJCxU7RCkCZE0&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=UxClzX1v4ykULjx5LoFBQQ&oh=00_Afp5lOFptW98K5idmMzwSqMRXlkMktd9v3PNmDVmhN2zeg&oe=696665E3",
-      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/606911618_1450343276662676_5551293605458156102_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=4FLlNuBOkt4Q7kNvwHxx9_R&_nc_oc=AdmYVHfBY6F-usw0Rz_Mnrj7mVVvGysLBoe8aPNLJz5l1XKP3NI8pqnTNsjV1QrIOcE&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=fsKWjGFO1i6Y_KSNs_9eWA&oh=00_AfqGJ1EINkvnFECW67D3F44oSigiEa4jHp9qVRMzRrHqzQ&oe=69668B9B",
-      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/607084634_1450343259996011_2250989238484732319_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=0GLih_AON2MQ7kNvwH7-gYh&_nc_oc=AdlIaVGRih4WIG88rUbL23vkcOdpbOrinnvXipFgwbFSY6VhehsTGXTPloxOhZOTyrw&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=iklLWXGcoCX55uv1jzub2Q&oh=00_Afq2854wsYc3u_BKQW0805yfHqf39TxlX-NaVv5tGMBhVg&oe=696671F1",
-      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/606810530_1450343213329349_1105215072825464542_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Y0CpoWzOcSwQ7kNvwFzfS8A&_nc_oc=AdnFO-4cqWnWPniex_VFUKKvtjXzAqNvIdwKVmmIkab0GJAsy1Cf5Ibut6L6awqGtK4&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=5bWvA7WFz0YRnUuvT0LR3Q&oh=00_Afpa-VFNrEgj99pNngQKnGFY_tciS4lngDKo45sl7Hbr0w&oe=69666D61",
-      "https://scontent.fhan19-1.fna.fbcdn.net/v/t39.30808-6/605523880_1450343293329341_2663147345940031068_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=tAo7chNj19cQ7kNvwEh8r-T&_nc_oc=Adn19eMC7ZanydX_8R96n8Wi_xFZBK34K72CrSGMa2m2Nu6HZaKNLcIoQI8_hUr5NbA&_nc_zt=23&_nc_ht=scontent.fhan19-1.fna&_nc_gid=CpXeeguoJjL8Vnw2a_IOMg&oh=00_AfoviTaOZedIgufs1auMqOG0KsZt8iXGlXieWsIqJFlYDA&oe=696665BF",
-    ],
-    likes_count: 38000,
-    reposts_and_quotes_count: 507,
-    replies_count: 1800,
     created_at: "5h ago",
     is_liked_by_auth: true,
   },

@@ -53,7 +53,6 @@ const PostContent = ({ content, mediaUrls }) => {
         entries.forEach((entry) => {
           const video = entry.target;
           if (entry.isIntersecting) {
-            // Chỉ tự động play nếu có autoplay attribute hoặc là video duy nhất
             if (video.hasAttribute("autoplay") || mediaUrls.length === 1) {
               video.play();
             }
