@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import ImageLightbox from "@/components/common/ImageLightbox";
 import { Volume2, VolumeX } from "lucide-react";
 
-const PostContent = ({ content, mediaUrls }) => {
+const PostContent = ({ content, mediaUrls = [] }) => {
   const [emblaRef] = useEmblaCarousel({
     align: "start",
     slidesToScroll: 1,
