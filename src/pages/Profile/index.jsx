@@ -157,7 +157,7 @@ const Profile = () => {
   }, [displayUser.name, displayUser.username]);
 
   return (
-    <div className="pt-16 pb-24 md:pt-10 md:pb-6">
+    <div className="pt-16 md:pt-10">
       <div className="px-4 py-6 md:px-6 dark:text-white">
         <div className="flex items-center justify-between">
           <div>
