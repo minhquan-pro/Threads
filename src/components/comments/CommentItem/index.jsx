@@ -9,8 +9,9 @@ import {
 import ThreadLine from "../../common/ThreadLine";
 import Loading from "../../common/Loading";
 
+const MAX_DEPTH = 3;
+
 const CommentItem = ({ comment, depth = 0 }) => {
-  const MAX_DEPTH = 3;
   const dispatch = useDispatch();
   const hasReplies = comment.replies_count > 0;
   const hasOnlyOneReply = comment.replies_count === 1;
@@ -39,7 +40,7 @@ const CommentItem = ({ comment, depth = 0 }) => {
   }, [comment.id, depth, dispatch, hasOnlyOneReply, loading, replyComments]);
 
   return (
-    <>
+    <div className="ps-6 pe-6 pt-3">
       <div className="relative">
         {hasReplies && hasOnlyOneReply && depth < MAX_DEPTH && (
           <ThreadLine show />
@@ -61,7 +62,7 @@ const CommentItem = ({ comment, depth = 0 }) => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

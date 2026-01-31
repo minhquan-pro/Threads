@@ -16,7 +16,7 @@ const ActivityHeader = ({ showActivity = true }) => {
   };
 
   return (
-    <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-300 text-sm dark:border-gray-700">
+    <div className="mt-3 flex h-14 items-center justify-between border-t border-gray-300 ps-6 pe-6 text-sm dark:border-gray-700">
       {Boolean(showActivity) && (
         <DropdownMenu>
           <DropdownMenuTrigger className="border-none outline-none focus:ring-0">

@@ -8,14 +8,22 @@ import videoDemo5 from "/videosDemo/video-5.mp4";
 import videoDemo6 from "/videosDemo/video-6.mp4";
 
 const demoImages = [
-  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
-  "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800",
-  "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
-  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
-  "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800",
-  "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800",
-  "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800",
-  "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=800",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800", // Tech/AI
+  "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800", // Coding
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800", // Laptop/workspace
+  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800", // Technology
+  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800", // Data/circuits
+  "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800", // Code on screen
+  "https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800", // Developer
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800", // Digital world
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800", // Coding workspace
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800", // Code editor
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800", // Programming
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800", // Robot/AI
+  "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800", // Tech setup
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800", // Team coding
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800", // Office tech
+  "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800", // AI concept
 ];
 
 // Dữ liệu demo
@@ -27,7 +35,7 @@ const DEMO_POSTS = [
       username: "ygt1016",
       name: "ygt1016",
       avatar_url:
-        "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/612455415_122283125516036290_1325764938759042572_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=833d8c&_nc_ohc=JG6QAg7_9SQQ7kNvwFWGKny&_nc_oc=AdkvHw1fune71ciWZo6_B9DYec38X0eEQ-K9r3gzdEMGpgEwfYVYNcG7JIm4i6DjpIA&_nc_zt=23&_nc_ht=scontent.fhan18-1.fna&_nc_gid=hFPrwyO2p1FpWCLq9nJCaw&oh=00_AfpqbX44186FQ6ZnU6JMcXrfflG-vthVB_skkQ85JUlMYw&oe=696825F0",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
       isFollowing: true,
       verified: true,
     },
@@ -40,62 +48,101 @@ const DEMO_POSTS = [
     is_liked_by_auth: true,
   },
   {
+    id: 26589,
+    user: {
+      id: 116,
+      username: "tech_insider",
+      name: "Tech Insider VN",
+      avatar_url:
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200",
+      isFollowing: true,
+      verified: true,
+    },
+    content:
+      "Apple vừa ra mắt chip M4 Ultra - hiệu năng gấp 3 lần M3! AI xử lý nhanh hơn bao giờ hết 🚀💻",
+    media_urls: [demoImages[0], demoImages[4], demoImages[11], demoImages[15]],
+    likes_count: 8500,
+    reposts_and_quotes_count: 420,
+    replies_count: 156,
+    created_at: "2h ago",
+    is_liked_by_auth: true,
+  },
+  {
     id: 26590,
     user: {
       id: 117,
-      username: "foodie_saigon",
-      name: "Sài Gòn Ăn Vặt",
+      username: "code_master",
+      name: "Nguyễn Văn Dev",
       avatar_url:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
       isFollowing: false,
       verified: true,
     },
     content:
-      "Phở bò Hà Nội chuẩn vị! Nước dùng trong vắt, thịt mềm tan trong miệng 🍜✨",
-    media_urls: [demoImages[0], demoImages[1], demoImages[2]],
-    likes_count: 3420,
-    reposts_and_quotes_count: 128,
-    replies_count: 89,
-    created_at: "2h ago",
+      "Mới học xong React 19! Server Components thật sự thay đổi cách mình code. Tutorial đầy đủ tại 👇",
+    media_urls: [
+      demoImages[1],
+      demoImages[5],
+      demoImages[6],
+      demoImages[9],
+      demoImages[10],
+    ],
+    likes_count: 5420,
+    reposts_and_quotes_count: 280,
+    replies_count: 203,
+    created_at: "4h ago",
     is_liked_by_auth: false,
   },
   {
     id: 26591,
     user: {
       id: 118,
-      username: "chef_minh",
-      name: "Chef Minh Nguyen",
+      username: "ai_researcher",
+      name: "Dr. Minh AI Lab",
       avatar_url:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
       isFollowing: true,
       verified: true,
     },
     content:
-      "Hôm nay thử làm sushi tại nhà! Không ngon bằng tiệm nhưng cũng ổn 😅🍣",
-    media_urls: [demoImages[3], demoImages[4], demoImages[5], demoImages[6]],
-    likes_count: 1890,
-    reposts_and_quotes_count: 45,
-    replies_count: 52,
-    created_at: "5h ago",
+      "ChatGPT-5 có thể suy luận logic phức tạp như con người! Kỷ nguyên AGI đang đến gần hơn bao giờ hết 🤖✨",
+    media_urls: [
+      demoImages[0],
+      demoImages[7],
+      demoImages[11],
+      demoImages[15],
+      demoImages[4],
+      demoImages[3],
+    ],
+    likes_count: 12890,
+    reposts_and_quotes_count: 1045,
+    replies_count: 687,
+    created_at: "6h ago",
     is_liked_by_auth: true,
   },
   {
     id: 26592,
     user: {
       id: 119,
-      username: "travel_eats",
-      name: "Travel & Eats",
+      username: "startup_vn",
+      name: "Vietnam Startup News",
       avatar_url:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
       isFollowing: true,
       verified: false,
     },
     content:
-      "Pizza Napoli ở Ý quả là khác hẳn! Vỏ mỏng giòn, phô mai chảy tràn 🍕🇮🇹",
-    media_urls: [demoImages[7], demoImages[0]],
-    likes_count: 5620,
-    reposts_and_quotes_count: 234,
-    replies_count: 156,
+      "Startup fintech Việt vừa gọi vốn thành công 50 triệu USD! Chuẩn bị mở rộng ra thị trường Đông Nam Á 🇻🇳💰",
+    media_urls: [
+      demoImages[2],
+      demoImages[3],
+      demoImages[12],
+      demoImages[13],
+      demoImages[14],
+    ],
+    likes_count: 6720,
+    reposts_and_quotes_count: 534,
+    replies_count: 234,
     created_at: "8h ago",
     is_liked_by_auth: true,
   },
@@ -103,39 +150,52 @@ const DEMO_POSTS = [
     id: 26593,
     user: {
       id: 120,
-      username: "banh_mi_queen",
-      name: "Bánh Mì Sài Gòn",
+      username: "cyber_security",
+      name: "CyberSec Vietnam",
       avatar_url:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
       isFollowing: false,
       verified: true,
     },
     content:
-      "Bánh mì thịt nướng ngon xuất sắc! Bánh giòn rụm, nhân đầy ắp 🥖🔥",
-    media_urls: [demoImages[2], demoImages[3], demoImages[4]],
-    likes_count: 4120,
-    reposts_and_quotes_count: 167,
-    replies_count: 93,
-    created_at: "1d ago",
+      "⚠️ Cảnh báo: Lỗ hổng zero-day trên Windows mới phát hiện! Cập nhật hệ thống ngay để tránh bị tấn công 🛡️",
+    media_urls: [
+      demoImages[4],
+      demoImages[5],
+      demoImages[7],
+      demoImages[8],
+      demoImages[10],
+    ],
+    likes_count: 9120,
+    reposts_and_quotes_count: 2167,
+    replies_count: 445,
+    created_at: "12h ago",
     is_liked_by_auth: false,
   },
   {
     id: 26594,
     user: {
       id: 121,
-      username: "dessert_lover",
-      name: "Sweet Tooth",
+      username: "gadget_review",
+      name: "Tech Review VN",
       avatar_url:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200",
       isFollowing: true,
       verified: false,
     },
     content:
-      "Matcha tiramisu tự làm! Vị đắng nhẹ hòa quyện với kem cheese béo ngậy 🍰💚",
-    media_urls: [demoImages[5], demoImages[6], demoImages[7], demoImages[1]],
-    likes_count: 2890,
-    reposts_and_quotes_count: 98,
-    replies_count: 71,
+      "Đánh giá iPhone 16 Pro Max sau 1 tháng sử dụng: Pin trâu, camera đỉnh, nhưng giá... 📱💸",
+    media_urls: [
+      demoImages[3],
+      demoImages[6],
+      demoImages[2],
+      demoImages[1],
+      demoImages[12],
+      demoImages[8],
+    ],
+    likes_count: 7890,
+    reposts_and_quotes_count: 398,
+    replies_count: 512,
     created_at: "1d ago",
     is_liked_by_auth: true,
   },

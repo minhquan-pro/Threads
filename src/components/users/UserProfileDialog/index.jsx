@@ -15,7 +15,7 @@ const UserProfileDialog = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative" onClick={(e) => e.stopPropagation()}>
       <button
         onClick={() => setIsOpen(true)}
         className="border-none outline-none"

@@ -88,12 +88,7 @@ const PostContent = ({ content, mediaUrls = [] }) => {
         </p>
       )}
       {mediaUrls.length === 1 ? (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="mb-1 flex items-start justify-start"
-        >
+        <div className="mb-1 flex items-start justify-start">
           {mediaUrls.map((url, index) => (
             <div
               key={url}
@@ -147,9 +142,6 @@ const PostContent = ({ content, mediaUrls = [] }) => {
         </div>
       ) : mediaUrls.length === 2 ? (
         <div
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
           className="mb-1 flex gap-2"
           style={{ justifyContent: "flex-start" }}
         >
@@ -205,13 +197,7 @@ const PostContent = ({ content, mediaUrls = [] }) => {
           ))}
         </div>
       ) : (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="mb-1 overflow-hidden"
-          ref={emblaRef}
-        >
+        <div className="mb-1 overflow-hidden" ref={emblaRef}>
           <div className="flex touch-pan-y items-start gap-2">
             {mediaUrls.map((url, index) => (
               <div

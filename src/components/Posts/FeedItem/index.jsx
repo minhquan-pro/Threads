@@ -10,8 +10,10 @@ import LikeButton from "@/components/Interactions/LikeButton";
 import CommentButton from "@/components/comments/CommentButton";
 import RepostButton from "@/components/Interactions/RepostButton";
 import ShareButton from "@/components/Interactions/ShareButton";
+import { useCallback, useImperativeHandle } from "react";
 
 const FeedItem = ({
+  ref,
   type = "post",
   post,
   variant,
@@ -34,21 +36,33 @@ const FeedItem = ({
     original_post_id,
   } = post;
 
-  const handleClickPost = async (e) => {
-    const selection = window.getSelection();
+  const handleClickPost = useCallback(
+    async (e, id) => {
+      const selection = window.getSelection();
 
-    if (disableNavigation || selection.toString()) return;
+      if (disableNavigation || selection.toString()) return;
 
-    e.stopPropagation();
-    navigate(`/@${user.username}/post/${id}`, {
-      state: {
-        parentId: parent_id,
-      },
-    });
-  };
+      e.stopPropagation();
+      navigate(`/@${user.username}/post/${id}`, {
+        state: {
+          parentId: parent_id,
+        },
+      });
+    },
+    [disableNavigation, navigate, parent_id, user.username],
+  );
+
+  useImperativeHandle(ref, () => {
+    return {
+      handleClickPost,
+    };
+  }, [handleClickPost]);
 
   return (
-    <div className={`w-full ${!disableNavigation && "cursor-pointer"}`}>
+    <div
+      className={`w-full ${!disableNavigation && "cursor-pointer"} `}
+      onClick={(e) => handleClickPost(e, id)}
+    >
       <div className="flex items-start gap-2">
         <UserProfileDialog user={user} />
         <div className="w-full">
@@ -62,11 +76,12 @@ const FeedItem = ({
           />
           {variant !== "quote" && (
             <>
-              <div onClick={handleClickPost} className="wrap-break-word">
+              <div className="wrap-break-word">
                 <PostContent
                   content={content}
                   mediaUrls={media_urls}
                   original_post={original_post}
+                  handleClickPost={handleClickPost}
                 />
 
                 {original_post && (

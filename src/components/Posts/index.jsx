@@ -12,6 +12,7 @@ import FeedItem from "./FeedItem";
 import Loading from "../common/Loading";
 
 const Posts = ({ type }) => {
+  const postRef = useRef();
   const [page, setPage] = useState(1);
   const lastElementRef = useRef(null);
 
@@ -24,6 +25,8 @@ const Posts = ({ type }) => {
   const onEnd = useCallback(() => setPage((prevState) => prevState + 1), []);
   useInfiniteScroll({ lastElementRef, page, loading, pagination, onEnd });
 
+  const handleClickPost = postRef.current?.handleClickPost;
+
   return (
     <div className="bg-white dark:bg-[#181818]">
       {posts.map((post) => {
@@ -34,9 +37,10 @@ const Posts = ({ type }) => {
           >
             <div
               ref={lastElementRef}
-              className="flex max-w-[640px] flex-col items-start overflow-hidden bg-white px-4 py-3 dark:bg-[#181818]"
+              className="flex max-w-[640px] cursor-pointer flex-col items-start overflow-hidden bg-white px-4 py-3 dark:bg-[#181818]"
+              onClick={(e) => handleClickPost(e, post.id)}
             >
-              <FeedItem post={post} />
+              <FeedItem ref={postRef} post={post} />
             </div>
           </div>
         );

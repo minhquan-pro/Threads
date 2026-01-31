@@ -135,7 +135,7 @@ const PostHeader = ({
   const currentDialogConfig = getCurrentDialogConfig();
 
   return (
-    <div>
+    <div onClick={(e) => e.stopPropagation()}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">

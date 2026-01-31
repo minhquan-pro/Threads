@@ -56,7 +56,7 @@ const CommentSection = ({ postId }) => {
         <div
           ref={index === comments.length - 1 ? lastElementRef : null}
           key={comment.id}
-          className="border-t border-gray-300 ps-6 pe-6 pt-3 dark:border-[#2f2f2f]"
+          className="border-t border-gray-300 dark:border-[#2f2f2f]"
         >
           <CommentItem comment={comment} />
         </div>
